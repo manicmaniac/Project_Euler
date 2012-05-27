@@ -43,16 +43,15 @@ def FindLargestPrimeFactor(num):
 def IsPalindromicNumber(num):
     s = list(str(num))
     t = 1
-    for i in range(1, len(s) / 2):
-        if s[i - 1] == s[-i]:
+    for i in range(len(s) / 2):
+        if s[i] == s[-(i + 1)]:
             t += 1
-        if t > 2:
+        if t > len(s) / 2:
             return True
 
 def FindPalindromicNumber(num):
-    digitnumbers = reversed(range(10 ** (num - 1), 10 ** num))
-    for i in digitnumbers:
-        for j in digitnumbers:
+    for i in reversed(range(10 ** (num - 1), 10 ** num)):
+        for j in reversed(range(10 ** (num - 1), 10 ** num)):
             if IsPalindromicNumber(i * j) == True:
                 return i * j
 
