@@ -6,7 +6,7 @@
 
 def SumMultiple(num):
     result = set([])
-    for i in range(1, num + 1):
+    for i in range(1, num):
         if i % 3.0 == 0:
             result.add(i)
         if i % 5.0 == 0:
@@ -21,7 +21,7 @@ def SumFibonacci(num):
     result = [1,1]
     i = 1
     while True:
-        if result[-1] > 4000000:
+        if result[-1] > num:
             return(sum(result[1:-1]))
         result.append(result[i] + result[i -1])
         i += 1
@@ -50,14 +50,50 @@ def IsPalindromicNumber(num):
             return True
 
 def FindPalindromicNumber(num):
+    candidates = []
     for i in reversed(range(10 ** (num - 1), 10 ** num)):
         for j in reversed(range(10 ** (num - 1), 10 ** num)):
             if IsPalindromicNumber(i * j) == True:
-                return i * j
+                candidates.append(i * j)
+    return max(candidates)
 
+#2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+#What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+def IsDevisibleNumber(num, dnum):
+    c = 1
+    for i in range(2, dnum + 1):
+        if num % i == 0:
+            c += 1
+        if c == dnum:
+            return True
+    return False
+
+def FindDevisibleNumber(num):
+    i = num
+    while True:
+        if IsDevisibleNumber(i, num):
+            return i
+        else:
+            i += 1
+
+#def FindFactor(num):
+#    res = []
+#    for i in range(2, num / 2):
+#        if num % i == 0:
+#            res.append(i)
+#    return res
+#
+#def FindDevisibleNumber(num):
+#    s = range(2, num + 1)
+#    for i in range(num - 1):
+#        for j in range(num - 1):
+#            if s[i] % s[j] == 0:
+#                print s[j]
 
 if __name__ == '__main__':
     #print(SumMultiple(1000))
-    #print(SumFibonacci(1000))
-    #print(FindLargestPrimeFactor(600851475143))
+    #print(SumFibonacci(4000000))
+    #print(FindLargestPrimeFactor(600851475143)) #print(FindPalindromicNumber(6))
     print(FindPalindromicNumber(3))
+    #print (FindDevisibleNumber(10))
