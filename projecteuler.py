@@ -17,14 +17,26 @@ def SumMultiple(num):
 #1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 #By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-def SumFibonacci(num):
-    result = [1,1]
-    i = 1
-    while True:
-        if result[-1] > num:
-            return(sum(result[1:-1]))
-        result.append(result[i] + result[i -1])
-        i += 1
+def Fibonacci(num):
+    a, b = 0, 1
+    while b < num:
+        yield a + b
+        a, b = b, a + b
+
+def IsEven(num):
+    return not (num % 2)
+
+def SumEvenFibonacci(num):
+    next(Fibonacci(num) for i in range(num))
+
+#def SumEvenFibonacci(num):
+#    result = [1,1]
+#    i = 1
+#    while result[-1] > num:
+#        print(result[1:-1])
+#        return result[1:-1]
+#    result.append(result[i] + result[i -1])
+#    i += 1
 
 #The prime factors of 13195 are 5, 7, 13 and 29.
 #What is the largest prime factor of the number 600851475143 ?
@@ -92,8 +104,8 @@ def FindDevisibleNumber(num):
 #                print s[j]
 
 if __name__ == '__main__':
-    #print(SumMultiple(1000))
-    #print(SumFibonacci(4000000))
+    print(SumMultiple(1000))
+    #print(SumEvenFibonacci(4000000))
     #print(FindLargestPrimeFactor(600851475143)) #print(FindPalindromicNumber(6))
-    print(FindPalindromicNumber(3))
+    #print(FindPalindromicNumber(3))
     #print (FindDevisibleNumber(10))
