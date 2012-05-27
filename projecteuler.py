@@ -40,10 +40,25 @@ def FindLargestPrimeFactor(num):
 #A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91  99.
 #Find the largest palindrome made from the product of two 3-digit numbers.
 
+def IsPalindromicNumber(num):
+    s = list(str(num))
+    t = 1
+    for i in range(1, len(s) / 2):
+        if s[i - 1] == s[-i]:
+            t += 1
+        if t > 2:
+            return True
+
 def FindPalindromicNumber(num):
-    i = reversed(range(num))
+    digitnumbers = reversed(range(10 ** (num - 1), 10 ** num))
+    for i in digitnumbers:
+        for j in digitnumbers:
+            if IsPalindromicNumber(i * j) == True:
+                return i * j
+
 
 if __name__ == '__main__':
     #print(SumMultiple(1000))
     #print(SumFibonacci(1000))
-    print(FindLargestPrimeFactor(600851475143))
+    #print(FindLargestPrimeFactor(600851475143))
+    print(FindPalindromicNumber(3))
