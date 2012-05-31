@@ -22,7 +22,7 @@ class Pythagorean(object):
         If "max" is not a natural number, it returns TypeError.
         If "max" is set 0, this method pretends infinity generator.
         '''
-        if max < 0: raise TypeError
+        if max < 0: raise ValueError
         m, n = self.m, self.n
         while m < max or not max:
             n = 1
