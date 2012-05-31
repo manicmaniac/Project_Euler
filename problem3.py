@@ -6,11 +6,15 @@
 
 def FindLargestPrimeFactor(num):
     i = 2
+    res = 1
     while True:
-        if num % i == 0:
-            return num / i
+        if not num % i:
+            yield i, num / i
+            num /= i
+        if i > 60085: break
         i += 1
-    return 'Error'
 
 if __name__ == '__main__':
     print(FindLargestPrimeFactor(600851475143))
+    for i in FindLargestPrimeFactor(600851475143):
+        print i
