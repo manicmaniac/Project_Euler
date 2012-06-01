@@ -19,7 +19,7 @@ class Pythagorean(object):
         This method generates three natural numbers in tupples.
 
         Repeats until variant "m" inside this method reaches argument "max".
-        If "max" is not a natural number, it returns TypeError.
+        If "max" is not a natural number, it returns ValueError.
         If "max" is set 0, this method pretends infinity generator.
         '''
         if max < 0: raise ValueError
