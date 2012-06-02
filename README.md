@@ -11,3 +11,4 @@
 + [Problem7](http://projecteuler.net/problem=7) hasn't been solved yet.
 + [Problem8](http://projecteuler.net/problem=8) has been solved on 5/29.
 + [Problem9](http://projecteuler.net/problem=9) has been solved on 5/31.
++ [Problem10](http://projecteuler.net/problem=10) has been solved on 6/2.
