@@ -3,7 +3,7 @@
 
 object Problem1 {
   def fizzbuzz(max:Int):IndexedSeq[Int] = {
-    return (for(i <- 1 until max if((i % 3) * (i % 5) == 0)) yield i)
+    for(i <- 1 until max if i % 3 * i % 5 == 0) yield i
     }
   def main(args:Array[String]) {
     println((for(i <- fizzbuzz(1000)) yield i).sum)
