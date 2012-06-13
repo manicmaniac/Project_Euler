@@ -13,15 +13,23 @@
 #We can see that 28 is the first triangle number to have over five divisors.
 #What is the value of the first triangle number to have over five hundred divisors?
 
+import math
+
 def gentriangle():
     s, t = 1, 2
     while True:
         yield s
         s, t = s + t, t + 1
 
+def divisors(num):
+    res = []
+    if not num % 120: return res
+    for i in range(1, int(math.sqrt(num) + 1)):
+        if not num % i:
+            res.append(i)
+            res.append(num / i)
+    return res
+
 if __name__ == '__main__':
     for i in gentriangle():
-        if i > 100000: break
-        print i
-
-
+        if len(divisors(i)) >= 500: print i,len(divisors(i)),divisors(i); break
