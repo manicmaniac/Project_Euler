@@ -11,12 +11,12 @@ object Problem5 {
   }
   def solution(lst:List[Int], seq:Int = 0, acc:List[Int] = Nil):List[Int] = {
     if(lst.length <= seq) acc
-    else {
+    else { 
       solution(lst, seq + 1, (factorize(lst(seq)) diff acc) ::: acc)
     }
   }
   def main(args:Array[String]) {
-    println(solution((1 to 20).toList).fold(1){_ * _})
+    println(solution((1 to 10).toList).fold(1){(x, y) => x * y})
   }
 }
 

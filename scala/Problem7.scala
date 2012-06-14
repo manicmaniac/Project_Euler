@@ -1,22 +1,33 @@
-//2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
-//What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+/*
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
 
-object Problem5 {
-  def factorize(num:Int, div:Int = 2, res:List[Int] = Nil):List[Int] = {
-    if(num < 2 || num < div) res.reverse
+What is the 10 001st prime number?
+*/
+
+object Problem7 {
+  def isPrime(num:Int, div:Int = 2):Boolean = {
+    if(num < 2) false
     else {
-      if(num % div == 0) factorize(num / div, div, div :: res)
-      else factorize(num, div + 1, res)
+      if(div * div >= num + 1) true
+      else {
+        if(num % div == 0) false
+        else isPrime(num, div + 1)
+      }
     }
   }
-  def solution(lst:List[Int], seq:Int = 0, acc:List[Int] = Nil):List[Int] = {
-    if(lst.length <= seq) acc
-    else { 
-      solution(lst, seq + 1, (factorize(lst(seq)) diff acc) ::: acc)
+  def genPrime(max:Int, num:Int = 1, count:Int = 1, res:Int = 2):Int = {
+    if(count > max) res
+    else {
+      if(isPrime(num)) {
+        genPrime(max, num + 1, count + 1, num)
+      }
+      else {
+        genPrime(max, num + 1, count, res)
+      }
     }
   }
   def main(args:Array[String]) {
-    println(solution((1 to 10).toList).fold(1){(x, y) => x * y})
+    println(genPrime(10001))
   }
 }
 
