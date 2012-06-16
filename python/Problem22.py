@@ -20,7 +20,6 @@ class Name(object):
         csvfile = [i for i in csv.reader(open(filename))]
         self.namelist = sorted(csvfile[0])
 
-
 if __name__ == '__main__':
     n = Name('names.txt')
     print n.score()
