@@ -12,17 +12,31 @@ def isprime(num):
             return False
     return True
 
-def genprime():
-    yield 2
-    yield 3
-    yield 5
-    i = 1
-    while True:
-        res = 6 * i + 1
-        if isprime(res): yield res
-        res = 6 * i + 5
-        if isprime(res): yield res
-        i += 1
+def genprime(n = 0):
+    if not n:
+        yield 2
+        yield 3
+        yield 5
+        i = 1
+        while True:
+            res = 6 * i + 1
+            if isprime(res): yield res
+            res = 6 * i + 5
+            if isprime(res): yield res
+            i += 1
+    else:
+        if n > 2: yield 2
+        if n > 3: yield 3
+        if n > 5: yield 5
+        i = 1
+        while True:
+            res = 6 * i + 1
+            if n < res: return
+            if isprime(res): yield res
+            res = 6 * i + 5
+            if n < res: return
+            if isprime(res): yield res
+            i += 1
 
 def factorize(num):
     res = []
