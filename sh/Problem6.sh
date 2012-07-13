@@ -24,3 +24,29 @@ function pow() {
     echo $res
 }
 
+function sum_square() {
+    local i=1
+    local res=0
+    while [ $i -le $1 ]
+    do
+        tmp=`pow $i 2`
+        res=`expr $res + $tmp`
+        i=`expr $i + 1`
+    done
+    echo $res
+}
+
+function square_sum() {
+    local i=1
+    local res=0
+    while [ $i -le $1 ]
+    do
+        res=`expr $res + $i`
+        i=`expr $i + 1`
+    done
+    echo `pow $res 2`
+}
+
+a=`square_sum 100`
+b=`sum_square 100`
+echo `expr $a - $b`
