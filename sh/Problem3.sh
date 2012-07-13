@@ -4,18 +4,18 @@
 #What is the largest prime factor of the number 600851475143 ?
 
 function factorize() {
-    _n=$1
-    _i=2
-    while [ `expr $_n - $_i \* $_i` -gt 0 ]
+    local n=$1
+    local i=2
+    while [ `expr $n - $i \* $i` -gt 0 ]
     do
-        if [ `expr $_n % $_i` -eq 0 ]; then
-            _n=`expr $_n / $_i`
-            echo $_i
+        if [ `expr $n % $i` -eq 0 ]; then
+            n=`expr $n / $i`
+            echo $i
         else
-            _i=`expr $_i + 1`
+            i=`expr $i + 1`
         fi
     done
-    echo $_n
+    echo $n
 }
 
 factorize 600851475143
