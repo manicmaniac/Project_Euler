@@ -5,34 +5,12 @@
 #1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 #By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-# Usual way
-class Solution1():
-    def GenFibonacci(self):
-        s, t = 0, 1
-        while True:
-            yield s + t
-            s, t = t, s + t
+from itertools import takewhile
 
-    def IsEven(self, num):
-        return not (num % 2)
+def fib():
+    s, t = 0, 1
+    while True:
+        s, t = t, s + t
+        yield s
 
-    def __init__(self):
-        res = 0
-        for i in self.GenFibonacci():
-            if i > 4000000: break
-            res += i * self.IsEven(i)
-        print res
-
-# Using recursive loop
-class Solution2():
-    def GenFibonacci(self, res = 0, s = 0, t = 1):
-        if t > 4000000: print res; return
-        res += (lambda x: (not x % 2) * x)(t)
-        return self.GenFibonacci(res, t, s + t)
-
-    def __init__(self):
-        self.GenFibonacci()
-
-if __name__ == '__main__':
-    S1 = Solution1()
-    S2 = Solution2()
+print sum(i for i in takewhile(lambda x: x < 4000000, fib()) if not i % 2)
