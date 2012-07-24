@@ -4,22 +4,17 @@
 #A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91  99.
 #Find the largest palindrome made from the product of two 3-digit numbers.
 
-def IsPalindromicNumber(num):
-    s = list(str(num))
-    t = 1
-    for i in range(len(s) / 2):
-        if s[i] == s[-(i + 1)]:
-            t += 1
-        if t > len(s) / 2:
-            return True
+from math import sqrt
 
-def FindPalindromicNumber(num):
-    candidates = []
-    for i in reversed(range(10 ** (num - 1), 10 ** num)):
-        for j in reversed(range(10 ** (num - 1), 10 ** num)):
-            if IsPalindromicNumber(i * j) == True:
-                candidates.append(i * j)
-    return max(candidates)
+def is_palindromic(num):
+    return str(num) == str(num)[::-1]
+
+def is_3digits_product(n):
+    for i in range(100, int(sqrt(n) + 1)):
+        if not n % i and n / i < 1000: return True
+    return False
 
 if __name__ == '__main__':
-    print(FindPalindromicNumber(3))
+    for i in reversed(range(10000, 998001)):
+        if is_palindromic(i) and is_3digits_product(i):
+            print i; break
