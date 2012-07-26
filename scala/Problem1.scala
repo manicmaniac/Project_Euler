@@ -2,10 +2,7 @@
 //Find the sum of all the multiples of 3 or 5 below 1000.
 
 object Problem1 {
-  def fizzbuzz(max:Int):IndexedSeq[Int] = {
-    for(i <- 1 until max if i % 3 * i % 5 == 0) yield i
-    }
   def main(args:Array[String]) {
-    println((for(i <- fizzbuzz(1000)) yield i).sum)
+    println((1 until 1000).filter(p => p%3==0||p%5==0).sum)
   }
 }
