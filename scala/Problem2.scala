@@ -3,17 +3,8 @@
 //By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 object Problem2 {
-  def fibonacci(max:Int, s:Int = 0, t:Int = 1, acc:Int = 0):Int = {
-    if(s > max) acc else {
-      if(s % 2 == 0) {
-      fibonacci(max, t, s + t, acc + s)
-      }
-      else {
-      fibonacci(max, t, s + t, acc)
-      }
-    }
-  }
   def main(args:Array[String]) {
-    println(fibonacci(4000000))
+    lazy val fib:Stream[Int] = Stream.cons(0, Stream.cons(1, fib.zip(fib.tail).map(p => p._1 + p._2)))
+    println(fib.takeWhile(_<4000000).filter(_%2==0).sum)
   }
 }
