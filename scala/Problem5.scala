@@ -2,21 +2,13 @@
 //What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
 object Problem5 {
-  def factorize(num:Int, div:Int = 2, res:List[Int] = Nil):List[Int] = {
-    if(num < 2 || num < div) res.reverse
-    else {
-      if(num % div == 0) factorize(num / div, div, div :: res)
-      else factorize(num, div + 1, res)
-    }
+  def gcd(m:Long, n:Long):Long = n match {
+    case 0 => m
+    case _ if(m < n) => gcd(n, m)
+    case _ => gcd(n, m % n)
   }
-  def solution(lst:List[Int], seq:Int = 0, acc:List[Int] = Nil):List[Int] = {
-    if(lst.length <= seq) acc
-    else { 
-      solution(lst, seq + 1, (factorize(lst(seq)) diff acc) ::: acc)
-    }
-  }
+  def lcm(m:Long, n:Long) = m * n / gcd(m, n)
   def main(args:Array[String]) {
-    println(solution((1 to 10).toList).fold(1){(x, y) => x * y})
+    println((1L to 20L).reduce(lcm))
   }
 }
-
