@@ -13,10 +13,6 @@ import scala.math.pow
 
 object Problem6 {
   def main(args:Array[String]) {
-    println{
-      {
-        pow((for(i <- 1 to 100) yield i).sum, 2) - (for(i <- 1 to 100) yield pow(i , 2)).sum
-      }.toLong
-    }
+    println((pow((1 to 100).sum, 2) - (1 to 100).map(pow(_, 2)).sum).toLong)
   }
 }
