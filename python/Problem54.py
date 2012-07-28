@@ -65,7 +65,14 @@ class Player(object):
         self.score = 0
 
     def check(self):
-        if self.cards: raise AttributeError
+        if not self.cards:
+            raise AttributeError
+        def is_flush():
+            return len(set(i[0] for i in self.cards)) == 1
+        def is_for_of_a_kind():
+            return len(set(i[1] for i in self.cards)) == 2
+        return is_for_of_a_kind()
+        
             
 
 class Dealer(object):
@@ -81,10 +88,16 @@ class Dealer(object):
     def deal(self, player1, player2):
         rawcards = self.rawdata.pop(0).split(' ')
         def replace_mark(rawcard_mark):
+            '''
+            'S', 'H'などのマークをわかりやすい言葉'Spade', 'Heart'などに変換します。
+            '''
             marks = {'S': 'Spade', 'H': 'Heart', 'D': 'Diamond', 'C': 'Club'}
             return [marks[i] for i in rawcard_mark]
 
         def replace_number(rawcard_number):
+            '''
+            'A', 'Q'などの記号をわかりやすい数字 1, 12などに変換します。
+            '''
             numbers = {
                     'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
                     '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13
@@ -92,6 +105,10 @@ class Dealer(object):
             return [numbers[i] for i in rawcard_number]
         dealing_cards = zip(replace_mark([rawcard[1] for rawcard in rawcards]),
                 replace_number([rawcard[0] for rawcard in rawcards]))
+
+        '''
+        Playerオブジェクトにカードを配ります。
+        '''
         player1.cards = dealing_cards[:5]
         player2.cards = dealing_cards[5:]
 
@@ -102,5 +119,7 @@ if __name__ == '__main__':
     player1 = Player()
     player2 = Player()
     dealer = Dealer(rawdata)
-    dealer.deal(player1, player2)
-    print player1.cards, player2.cards
+    for i in range(900):
+        dealer.deal(player1, player2)
+        if player1.check(): print player1.cards
+        if player2.check(): print player2.cards
