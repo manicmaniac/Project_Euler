@@ -11,7 +11,7 @@ object Problem7 {
     2 #:: Stream.from(2).filter(n => !((2::(3 to sqrt(n).toInt by 2).toList).exists(n%_==0)))
   }
   def main(args:Array[String]) {
+    print(primes(10000))
   }
-  println(primes(10000))
 }
 
