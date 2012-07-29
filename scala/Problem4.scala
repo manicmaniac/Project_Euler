@@ -5,15 +5,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
 object Problem4 {
-  def isPalindrome(n:Int) = {
-    val s = n.toString
-    s == s.reverse
-  }
   def main(args:Array[String]) {
-    println{
-      {for(i <- 100 to 999;
-        j <- 100 to 999;
-        if(isPalindrome(i * j))) yield {i * j}}.max
-    }
+    print(998001 to 10000 by -1 find(n => n.toString==n.toString.reverse && (100 to 999 exists(x => n%x==0 && n/x<1000))))
   }
 }
