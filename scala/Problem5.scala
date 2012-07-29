@@ -9,6 +9,6 @@ object Problem5 {
   }
   def lcm(m:Long, n:Long) = m * n / gcd(m, n)
   def main(args:Array[String]) {
-    println((1L to 20L).reduce(lcm))
+    print(1L to 20 reduce lcm)
   }
 }
