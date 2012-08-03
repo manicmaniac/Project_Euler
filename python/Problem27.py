@@ -44,6 +44,5 @@ def test(m):
 
 if __name__ == '__main__':
     res = max(test(1000))
-    print res
     print res[1] * res[2]
     print time.time() - start
