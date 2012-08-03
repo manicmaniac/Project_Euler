@@ -32,4 +32,4 @@ def divisors(num):
 
 if __name__ == '__main__':
     for i in gentriangle():
-        if len(divisors(i)) >= 500: print i,len(divisors(i)),divisors(i); break
+        if len(divisors(i)) >= 500: print i; break
