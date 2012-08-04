@@ -15,20 +15,14 @@ The first three consecutive numbers to have three distinct prime factors are:
 Find the first four consecutive integers to have four distinct primes factors. What is the first of these numbers?
 '''
 
-from prime import factorize, genprime
+from sympy import *
 
-def check_factors(n, c):
-    acc = set()
-    for i in range(c):
-        tmp = set(factorize(n + i))
-        print tmp
-        if acc.isdisjoint(tmp) and len(tmp) == c:
-            acc.update(tmp)
-        else: return False
-    return True
-
-
+def find(n):
+    i = 1
+    while True:
+        if all(map(lambda x: len(factorint(x)) == n, range(i, i+n))):
+            return i
+        i += 1
 
 if __name__ == '__main__':
-    print check_factors(644, 3)
-    for i in genprime(100): print i
+    print find(4)
