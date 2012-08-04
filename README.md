@@ -2,7 +2,7 @@
 
 ---
 ## What is this?
-Answers of problems in [Project Euler](http://projecteuler.net)
+Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
 
 ## Environment
 <table>
@@ -13,7 +13,7 @@ Answers of problems in [Project Euler](http://projecteuler.net)
   </tr>
   <tr>
     <td>Java</td>
-    <td>1.6.0_24 on OpenJDK 64-Bit Server VM</td>
+    <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
     <td>-</td>
   </tr>
   <tr>
