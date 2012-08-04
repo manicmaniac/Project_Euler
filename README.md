@@ -18,7 +18,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   </tr>
   <tr>
     <td>Javascript</td>
-    <td>node.js v0.4.9</td>
+    <td>Node.js v0.4.9</td>
     <td>-</td>
   </tr>
   <tr>
