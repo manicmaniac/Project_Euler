@@ -2,13 +2,11 @@
 
 ---
 
-+ [Problem1](http://projecteuler.net/problem=1) has been solved on 5/27.
-+ [Problem2](http://projecteuler.net/problem=2) has been solved on 5/28.
-+ [Problem3](http://projecteuler.net/problem=3) has been solved on 6/2.
-+ [Problem4](http://projecteuler.net/problem=4) has been solved on 5/28.
-+ [Problem5](http://projecteuler.net/problem=5) hasn't been solved yet.
-+ [Problem6](http://projecteuler.net/problem=6) has been solved on 5/29.
-+ [Problem7](http://projecteuler.net/problem=7) has been solved on 6/2.
-+ [Problem8](http://projecteuler.net/problem=8) has been solved on 5/29.
-+ [Problem9](http://projecteuler.net/problem=9) has been solved on 5/31.
-+ [Problem10](http://projecteuler.net/problem=10) has been solved on 6/2.
+## Environment
++ Java: 1.6.0_24 on OpenJDK 64-Bit Server VM
++ Javascript: node.js v0.4.9
++ PHP: v5.3.6 Suhosin-Patch
++ Perl: v5.12.4
++ Python: CPython v2.7.2
++ Scala: v2.9.0.1 (running as a script)
++ sh: dash v0.5.5.1-7.4
