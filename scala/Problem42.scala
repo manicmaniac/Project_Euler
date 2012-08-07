@@ -24,7 +24,7 @@ object Problem42 {
     val source = Source.fromFile(filename)
     source.mkString.replace("\"", "").split(",").toList
   }
-  def wordValue(word:String) = word.toString.toList.map(_.toInt-64).sum
+  def wordValue(word:String) = word.toString.map(_.toInt-64).sum
 
   def main(args:Array[String]) {
     println(input(FILE).map(wordValue).filter(triangle.takeWhile(_<200).contains(_)).length)
