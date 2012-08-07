@@ -8,10 +8,8 @@ Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 */
 
 object Problem34 {
-  def factorial(n:Int) = (1 to n).product
-  def digits(n:Int) = n.toString.toList.map(_.toString.toInt)
-  def isCurious(n:Int) = n == digits(n).map(factorial).sum
+  def isCurious(n:Int) = n == n.toString.map(_.asDigit).map(1 to _ product).sum
   def main(args:Array[String]) {
-    println(((3 to 2540160).filter(isCurious)).sum)
+    print((3 to 2540160).filter(isCurious) sum)
   }
 }
