@@ -17,7 +17,7 @@ import scala.math.pow
 object Problem92 {
   def chain(n:Int, res:List[Int]=Nil):List[Int] = {
     if(res.contains(n)) n::res
-    else chain(n.toString.toList.map(n => pow(n.toString.toInt, 2)).sum.toInt, n::res)
+    else chain(n.toString.map(n => pow(n.asDigit, 2)).sum.toInt, n::res)
   }
   def isChainLast89(n:Int):Boolean = n match {
     case 1 => false
