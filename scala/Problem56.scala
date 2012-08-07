@@ -9,6 +9,6 @@ maximum digital sum?
 
 object Problem56 {
   def main(args:Array[String]) {
-    println((for(i <- BigInt(1) to BigInt(99); j <- 1 to 99) yield i.pow(j).toString.toList.map(_.toString.toInt).sum).max)
+    println((for(i <- BigInt(1) to 99; j <- 1 to 99) yield i.pow(j).toString.map(_.asDigit).sum).max)
   }
 }
