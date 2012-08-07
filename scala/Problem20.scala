@@ -9,7 +9,7 @@ object Problem20 {
     (1 to n).map(p => BigInt(p)).product
   }
   def sumDigits(n:BigInt) = {
-    n.toString.toList.map(_.toString.toInt).sum
+    n.toString.map(_.asDigit).sum
   }
   def main(args:Array[String]) {
     println(sumDigits(fact(100)))
