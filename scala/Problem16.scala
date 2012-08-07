@@ -10,10 +10,10 @@ object Problem16 {
     case _ => pow(base, n-1, res*base)
   }
   def sumDigits(n:BigInt) = {
-    n.toString.toList.map(_.toString.toInt).sum
+    n.toString.map(_.asDigit).sum
   }
   def main(args:Array[String]) {
-    println(sumDigits(pow(2,1000)))
+    print(sumDigits(pow(2,1000)))
   }
 }
 
