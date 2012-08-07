@@ -10,7 +10,8 @@ leading zeros.)
 
 object Problem36 {
   def isPalindromic(n:String) = n == n.reverse
+
   def main(args:Array[String]) {
-    println((1 to 999999).filter(n => isPalindromic(n.toString) && isPalindromic(Integer.toBinaryString(n))).sum)
+    print((1 to 999999).filter(n => isPalindromic(n.toString) && isPalindromic(Integer.toBinaryString(n))).sum)
   }
 }
