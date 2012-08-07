@@ -18,7 +18,7 @@ import scala.math.pow
 object Problem30 {
   def main(args:Array[String]) {
     println(
-      ((2 to 354294).filter(p => p == p.toString.toList.map(q => pow(q.toString.toInt, 5).toInt).sum)).sum
+      ((2 to 354294).filter(p => p == p.toString.map(q => pow(q.asDigit, 5)).sum)).sum
     )
   }
 }
