@@ -5,14 +5,8 @@ Find the sum of the digits in the number 100!
 */
 
 object Problem20 {
-  def fact(n:Int) = {
-    (1 to n).map(p => BigInt(p)).product
-  }
-  def sumDigits(n:BigInt) = {
-    n.toString.map(_.asDigit).sum
-  }
   def main(args:Array[String]) {
-    println(sumDigits(fact(100)))
+    print((BigInt(1) to 100 product).toString.map(_.asDigit) sum)
   }
 }
 
