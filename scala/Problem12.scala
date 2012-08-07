@@ -24,19 +24,14 @@ divisors?
 import scala.math.sqrt
 
 object Problem12 {
-  lazy val triangle = {
-    def genTriangle(a:Int, b:Int):Stream[Int] = {
-      a #:: genTriangle(a + b + 1, b + 1)
-    }
-    genTriangle(1, 1)
-  }
+  lazy val triangle = Stream.from(1).map(n => n*(n+1)/2)
 
   def numberOfDivisors(n:Int) = n match {
     case 1 => 1
-    case _ => {for(i <- 1 to (sqrt(n)).toInt if(n % i == 0)) yield i}.length * 2
+    case _ => (1 to sqrt(n).toInt).filter(n%_==0).length*2
   }
 
   def main(args:Array[String]) {
-    println(triangle.find(numberOfDivisors(_) > 500))
+    println(triangle.find(numberOfDivisors(_) > 500).get)
   }
 }
