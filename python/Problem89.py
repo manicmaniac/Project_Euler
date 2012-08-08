@@ -30,24 +30,49 @@ than four consecutive identical units.
 '''
 import string
 
+FILE = './roman.txt'
+
 class Roman(int):
-    def __init__(self, input, minimal=True):
-        self.__input = input
-        self.__minimal = bool(minimal)
+    roman_dict = {1000: 'M', 900: 'CM', 500: 'D', 400: 'CD', 100: 'C', 90: 'XC',
+            50: 'L', 40: 'XL', 10: 'X', 9: 'IX', 5: 'V', 4: 'IV', 1: 'I'}
+
+    @classmethod
+    def cons(cls, literal):
+        def to_int(s, n=0):
+            if not s:
+                return n
+            else:
+                for i in cls.roman_dict.items():
+                    if len(i[1]) == 2:
+                        if s.startswith(i[1]):
+                            return to_int(s[2:], n + i[0])
+                for i in cls.roman_dict.items():
+                    if len(i[1]) == 1:
+                        if s.startswith(i[1]):
+                            return to_int(s[1:], n + i[0])
+        return Roman(to_int(literal))
+
+    def __init__(self, env):
+        int.__init__(self, env)
 
     def __str__(self):
-        def int_to_roman(n, res=''):
-            roman_dict = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
-            minimal_dict = {900: 'CM', 400: 'CD', 90: 'XC', 40: 'XL', 9: 'IX', 4: 'IV'}
-            if self.__minimal: roman_dict = dict(roman_dict, **minimal_dict)
-            if n > 0:
-                for i in reversed(sorted(roman_dict.iterkeys())):
-                    if n >= i: return int_to_roman(n-i, res+roman_dict[i])
-            else:
+        def to_roman(n, res=''):
+            if not n:
                 return res
-        return int_to_roman(self.__input)
-
+            else:
+                for i in sorted(self.roman_dict.keys())[::-1]:
+                    if n >= i: return to_roman(n - i, res + self.roman_dict[i])
+        return to_roman(self)
 
 
 if __name__ == '__main__':
-    print Roman(234, False)
+    with open(FILE) as f:
+        data = f.read().splitlines()
+    original_length = len(''.join(i for i in data))
+    translated_length = len(''.join(str(Roman.cons(i)) for i in data))
+
+    print original_length - translated_length
+
+    for i in data:
+        print int(Roman.cons(i)), i, Roman.cons(i)
+
