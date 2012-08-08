@@ -15,11 +15,13 @@ include it once in your sum.
 
 object Problem32 {
   val perms = (1 to 9).permutations.toList.map(_.mkString)
-  def isThroughPandigital(string:String) = {
-      string.slice(0, 1).toInt * string.slice(1, 5).toInt == string.slice(5, 9).toInt ||
-      string.slice(0, 2).toInt * string.slice(2, 5).toInt == string.slice(5, 9).toInt
+
+  def isThroughPandigital(str:String) = {
+      str.slice(0, 1).toInt * str.slice(1, 5).toInt == str.slice(5, 9).toInt ||
+      str.slice(0, 2).toInt * str.slice(2, 5).toInt == str.slice(5, 9).toInt
   }
+
   def main(args:Array[String]) {
-    println(perms.filter(isThroughPandigital).map(_.slice(5, 9).toInt).distinct.sum)
+    print(perms.filter(isThroughPandigital).map(_.slice(5, 9).toInt).distinct.sum)
   }
 }

@@ -16,10 +16,10 @@ object Problem9 {
     }
     case _ if(m <= n) => findPythagoreanTripret(sum, m+1, 0)
     case _ if(m > n) => findPythagoreanTripret(sum, m, n+1)
-    case _ => null
+    case _ => Nil
 
   }
   def main(args:Array[String]) {
-    println(findPythagoreanTripret(1000).reduce(_*_))
+    print(findPythagoreanTripret(1000) product)
   }
 }

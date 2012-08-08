@@ -16,8 +16,7 @@ and 2 ≤ b ≤ 100?
 */
 
 object Problem29 {
-  val list = for(i <- BigInt(2) to 100; j <- 2 to 100) yield i.pow(j)
   def main(args:Array[String]) {
-    println(list.distinct.length)
+    print((for(i <- BigInt(2) to 100; j <- 2 to 100) yield i pow j).distinct.length)
   }
 }
