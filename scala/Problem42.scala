@@ -13,20 +13,17 @@ Using words.txt (right click and 'Save Link/Target As...'), a 16K text file
 containing nearly two-thousand common English words, how many are triangle
 words?
 */
+
 import scala.io.Source
 
 object Problem42 {
   val FILE = "./words.txt"
 
-  val triangle:Stream[Int] = Stream.from(1).map(n => n * (n + 1) / 2)
+  val data = Source.fromFile(FILE).mkString.replace("\"", "").split(",").toList
 
-  def input(filename:String) = {
-    val source = Source.fromFile(filename)
-    source.mkString.replace("\"", "").split(",").toList
-  }
-  def wordValue(word:String) = word.toString.map(_.toInt-64).sum
+  def isTriangle(x:Int) = ((math.sqrt(8*x+1)-1) / 2) % 1 == 0
 
   def main(args:Array[String]) {
-    println(input(FILE).map(wordValue).filter(triangle.takeWhile(_<200).contains(_)).length)
+    print(data.map(_.toString.map(_.toInt-64).sum).filter(isTriangle).length)
   }
 }
