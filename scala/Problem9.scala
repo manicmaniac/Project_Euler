@@ -10,16 +10,7 @@ Find the product abc.
 */
 
 object Problem9 {
-  def findPythagoreanTripret(sum:Long, m:Long=0, n:Long=0):List[Long] = m match {
-    case _ if(m*m-n*n + 2*m*n + m*m+n*n == sum) => {
-      List(m*m-n*n, 2*m*n, m*m+n*n)
-    }
-    case _ if(m <= n) => findPythagoreanTripret(sum, m+1, 0)
-    case _ if(m > n) => findPythagoreanTripret(sum, m, n+1)
-    case _ => Nil
-
-  }
   def main(args:Array[String]) {
-    print(findPythagoreanTripret(1000) product)
+    print((1 to 23).flatMap(m => (1 to m).map(n => List(m*m-n*n, 2*m*n, m*m+n*n))).find(_.sum == 1000).get.product)
   }
 }
