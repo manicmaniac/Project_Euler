@@ -19,7 +19,7 @@ greater than one-million?
 object Problem53 {
   def c(n:BigInt, r:BigInt) = {
     if(n <= r) BigInt(1)
-    else (BigInt(1) to n reduce(_*_)) / (BigInt(1) to r reduce(_*_)) / (BigInt(1) to n-r reduce(_*_))
+    else (BigInt(1) to n product) / (BigInt(1) to r product) / (BigInt(1) to n-r product)
   }
 
   def main(args:Array[String]) {
