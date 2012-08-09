@@ -9,10 +9,9 @@ Hence the difference between the sum of the squares of the first ten natural num
 
 Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 */
-import scala.math.pow
 
 object Problem6 {
   def main(args:Array[String]) {
-    println((pow((1 to 100).sum, 2) - (1 to 100).map(pow(_, 2)).sum).toLong)
+    print((math.pow((1 to 100).sum, 2) - (1 to 100).map(math.pow(_, 2)).sum).toInt)
   }
 }
