@@ -14,7 +14,6 @@ object Problem14 {
     case 1 => length+1
     case _ if(n % 2 == 0) => collatz(n/2, length+1)
     case _ if(n % 2 != 0) => collatz(3*n+1, length+1)
-    case _ => 0
   }
   def main(args:Array[String]) {
     val list = (1 to 1000000).map(collatz(_, 0))
