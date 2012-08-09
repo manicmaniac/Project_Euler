@@ -15,14 +15,10 @@ import scala.io.Source
 
 object Problem22 {
   val FILE = "./names.txt"
-  def input(file:String) = {
-    val source = Source.fromFile(file)
-    source.mkString.replace("\"", "").split(",").toList.sorted
-  }
-  def nameScore(name:String) = {
-    name.map(_.toInt - 64).sum
-  }
+
+  val data = Source.fromFile(FILE).mkString.replace("\"", "").split(",").toList.sorted
+
   def main(args:Array[String]) {
-    println((((input(FILE).map(nameScore)).zip(1 to input(FILE).length)).map(p => p._1 * p._2)).sum)
+    print(data.map(_.map(_.toInt-64) sum).zipWithIndex.map(p => p._1 * (p._2+1)) sum)
   }
 }
