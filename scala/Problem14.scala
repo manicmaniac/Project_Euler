@@ -17,8 +17,8 @@ object Problem14 {
     case _ => 0
   }
   def main(args:Array[String]) {
-    val list = (1 to 1000000).map(collatz(_, 0)).toList
-    println(list.indexOf(list.max) + 1)
+    val list = (1 to 1000000).map(collatz(_, 0))
+    print(list.indexOf(list.max) + 1)
   }
 }
 
