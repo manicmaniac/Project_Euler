@@ -4,7 +4,7 @@
 
 object Problem2 {
   def main(args:Array[String]) {
-    lazy val fib:Stream[Int] = Stream.cons(0, Stream.cons(1, fib.zip(fib.tail) map(p => p._1 + p._2)))
+    lazy val fib:Stream[Int] = 0 #:: 1 #:: fib.zip(fib.tail).map(p => p._1 + p._2)
     print(fib takeWhile(4000000>) filter(_%2==0) sum)
   }
 }
