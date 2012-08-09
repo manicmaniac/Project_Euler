@@ -16,9 +16,9 @@ include it once in your sum.
 object Problem32 {
   val perms = (1 to 9).permutations.toList.map(_.mkString)
 
-  def isThroughPandigital(str:String) = {
-      str.slice(0, 1).toInt * str.slice(1, 5).toInt == str.slice(5, 9).toInt ||
-      str.slice(0, 2).toInt * str.slice(2, 5).toInt == str.slice(5, 9).toInt
+  def isThroughPandigital(s:String) = {
+      s.take(1).toInt * s.slice(1, 5).toInt == s.slice(5, 9).toInt ||
+      s.take(2).toInt * s.slice(2, 5).toInt == s.slice(5, 9).toInt
   }
 
   def main(args:Array[String]) {
