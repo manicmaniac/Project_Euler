@@ -18,7 +18,14 @@ object Problem44 {
   def isPentagonal(x:Int) = ((math.sqrt(1+24*x)+1)/6) % 1 == 0
 
   def main(args:Array[String]) {
-    val answer = pentagonal.find(x => pentagonal.takeWhile(x>).exists(y => isPentagonal(x-y) && isPentagonal(x+y))).get
-    print(answer)
+    val (k, j) = pentagonal
+      .flatMap(x => pentagonal.takeWhile(x>)
+        .map(_ match {
+          case y if(isPentagonal(x+y) && (isPentagonal(x-y))) => (x, y)
+          case y => null
+          }
+        )
+      ).filter(null!=).head
+    print(k - j)
   }
 }
