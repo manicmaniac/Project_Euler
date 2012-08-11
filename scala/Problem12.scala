@@ -21,14 +21,12 @@ What is the value of the first triangle number to have over five hundred
 divisors?
 */
 
-import scala.math.sqrt
-
 object Problem12 {
   lazy val triangle = Stream.from(1).map(n => n*(n+1)/2)
 
   def numberOfDivisors(n:Int) = n match {
     case 1 => 1
-    case _ => (1 to sqrt(n).toInt).filter(n%_==0).length*2
+    case _ => (1 to math.sqrt(n).toInt).filter(n%_==0).length*2
   }
 
   def main(args:Array[String]) {
