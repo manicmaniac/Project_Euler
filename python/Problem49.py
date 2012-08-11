@@ -13,7 +13,7 @@ from operator import add
 def genseq():
     for i in genprime(3333):
         if i > 1000:
-            for j in range(2, 3333, 2):
+            for j in range(1000, 3333, 2):
                 if isprime(i + j) and isprime(i + j * 2):
                     seq = [i, i + j, i + j * 2]
                     yield seq
