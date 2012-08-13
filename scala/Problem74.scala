@@ -27,18 +27,15 @@ sixty non-repeating terms?
 */
 
 object Problem74 {
-  def factorial(n:Int) = 2 to n product
-
   def digitFactorial(n:Int) = {
-    n.toString.map(_.asDigit).map(factorial) sum
+    n.toString.map(_.asDigit).map(2 to _ product) sum
   }
 
-  def chain(n:Int, res:List[Int]=Nil):List[Int] = res.contains(n) match {
-    case true => res
-    case false => chain(digitFactorial(n), n :: res)
+  def chain(n:Int, res:List[Int]=Nil):List[Int] = {
+    if(res.contains(n)) res else chain(digitFactorial(n), n :: res)
   }
 
   def main(args:Array[String]) {
-    print((1 to 1000000).map(chain(_, Nil).length).count(60==))
+    print((1 to 1000000).par.map(chain(_, Nil).length).count(60==))
   }
 }
