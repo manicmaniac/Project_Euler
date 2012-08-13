@@ -50,76 +50,182 @@ winner.
 How many hands does Player 1 win?
 '''
 
-TALON = "./poker.txt"
+FILE = './poker.txt'
+
+class PlayingCard(object):
+    SUITS = {'Club': '♣', 'Diamond': '♢',
+            'Heart': '♡', 'Spade': '♠'}
+
+    RANKS = {1: 'A', 2: '2', 3: '3', 4: '4',
+            5: '5', 6: '6', 7: '7', 8: '8',
+            9: '9', 10: '10', 11: 'J', 12: 'Q',
+            13: 'K'}
+
+    @classmethod
+    def fullset(self):
+        fullset = [PlayingCard(s, r)
+                for s in self.SUITS
+                for r in self.RANKS]
+        return fullset
+
+    def __init__(self, suit, rank):
+        if suit in self.SUITS and rank in self.RANKS:
+            self.suit = suit
+            self.rank = rank
+        else:
+            raise ValueError
+
+    def __repr__(self):
+        return "%s%s" % (self.SUITS[self.suit], self.RANKS[self.rank])
+
+    def __int__(self):
+        return self.rank
+
+    def __cmp__(self, other):
+        if self.rank * other.rank == 1:
+            return 0
+        elif self.rank == 1:
+            return 1
+        elif other.rank == 1:
+            return -1
+        else:
+            return self.rank - other.rank
+
+
+class Hand(object):
+    @classmethod
+    def __str__(cls):
+        return cls.__name__
+
+    def __init__(self, first_ranks, *cards):
+        if cards:
+            self.__high_ranks = [first_ranks] + sorted(cards)[::-1]
+
+    def __cmp__(self, other):
+        if self.score == other.score:
+            if self.__high_ranks > other.__high_ranks:
+                return 1
+            elif self.__high_ranks < other.__high_ranks:
+                return -1
+            else:
+                return 0
+        else:
+            return self.score - other.score
+
+
+class RoyalFlush(Hand): score = 10
+
+
+class StraightFlush(Hand): score = 9
+
+
+class FourOfAKind(Hand): score = 8
+
+
+class FullHouse(Hand): score = 7
+
+
+class Flush(Hand): score = 6
+
+
+class Straight(Hand): score = 5
+
+
+class ThreeOfAKind(Hand): score = 4
+
+
+class TwoPairs(Hand): score = 3
+
+
+class OnePair(Hand): score = 2
+
+
+class HighCard(Hand): score = 1
+
+
+def hand(*cards):
+    ranks = sorted(i.rank for i in cards)
+    suits = [i.suit for i in cards]
+
+    def is_flush():
+        return len(set(suits)) == 1
+    def is_straight():
+        return [i - min(ranks) for i in ranks] in [range(5), [0, 9, 10, 11, 12]]
+
+    def group_by_ranks(rest=ranks, res=[]):
+        if not rest:
+            return dict(sorted(res))
+        else:
+            return group_by_ranks(rest[1:], res + [(rest[0], 1 + rest[1:].count(rest[0]))])
+
+    if is_straight() and is_flush() and min(ranks) == 1:
+        return RoyalFlush(PlayingCard('Spade', 1), *cards)
+    elif is_straight() and is_flush():
+        return StraightFlush(max(cards), *cards)
+    elif sorted(group_by_ranks().values()) == [1, 4]:
+        first_rank = PlayingCard('Spade', max(i for i in group_by_ranks().items() if i[1] == 4))
+        return FourOfAKind(first_rank, *cards)
+    elif sorted(group_by_ranks().values()) == [2, 3]:
+        return FullHouse(max(cards), *cards)
+    elif is_flush():
+        return Flush(max(cards), *cards)
+    elif is_straight():
+        return Straight(max(cards), *cards)
+    elif sorted(group_by_ranks().values()) == [1, 1, 3]:
+        first_rank = PlayingCard('Spade', max(i[0] for i in group_by_ranks().items() if i[1] == 3))
+        return ThreeOfAKind(first_rank, *cards)
+    elif sorted(group_by_ranks().values()) == [1, 2, 2]:
+        first_rank = PlayingCard('Spade', max(i[0] for i in group_by_ranks().items() if i[1] == 2))
+        return TwoPairs(first_rank, *cards)
+    elif sorted(group_by_ranks().values()) == [1, 1, 1, 2]:
+        first_rank = PlayingCard('Spade', max(i[0] for i in group_by_ranks().items() if i[1] == 2))
+        return OnePair(first_rank, *cards)
+    else:
+        return HighCard(max(cards), *cards)
 
 
 class Player(object):
-    '''
-    引数なしでインスタンス生成できます。
-    Dealerオブジェクトからカードを受け取り、checkメソッドで役(self.hand)とスコア(self.score)を計算します。
-    不等号により別のPlayerオブジェクトとスコアを比較できます。
-    '''
     def __init__(self):
         self.cards = []
         self.hand = ''
-        self.score = 0
 
     def check(self):
-        if not self.cards:
-            raise AttributeError
-        def is_flush():
-            return len(set(i[0] for i in self.cards)) == 1
-        def is_for_of_a_kind():
-            return len(set(i[1] for i in self.cards)) == 2
-        return is_for_of_a_kind()
-        
-            
+        self.hand = hand(*self.cards)
+
 
 class Dealer(object):
-    '''
-    インスタンス生成時にカードの山(rawdata)を受け取ります。
-    dealメソッドはカードの山から２人のプレイヤーに５枚ずつ配ります。
-    Dealerが配るカードは５つの要素からなるリストで、リストの各要素はマークと数字からなるタプルでできています。
-    例：dict('Heart': 5, 'Club': 5, 'Spade': 6, 'Spade': 7, 'Diamond': 13)
-    '''
-    def __init__(self, rawdata):
-        self.rawdata = rawdata
+    def __init__(self, talon):
+        self.talon = talon
 
-    def deal(self, player1, player2):
-        rawcards = self.rawdata.pop(0).split(' ')
-        def replace_mark(rawcard_mark):
-            '''
-            'S', 'H'などのマークをわかりやすい言葉'Spade', 'Heart'などに変換します。
-            '''
-            marks = {'S': 'Spade', 'H': 'Heart', 'D': 'Diamond', 'C': 'Club'}
-            return [marks[i] for i in rawcard_mark]
+    def deal(self, *players):
+        for i in players:
+            i.cards = self.talon[:5]
+            del self.talon[:5]
 
-        def replace_number(rawcard_number):
-            '''
-            'A', 'Q'などの記号をわかりやすい数字 1, 12などに変換します。
-            '''
-            numbers = {
-                    'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
-                    '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13
-                    }
-            return [numbers[i] for i in rawcard_number]
-        dealing_cards = zip(replace_mark([rawcard[1] for rawcard in rawcards]),
-                replace_number([rawcard[0] for rawcard in rawcards]))
 
-        '''
-        Playerオブジェクトにカードを配ります。
-        '''
-        player1.cards = dealing_cards[:5]
-        player2.cards = dealing_cards[5:]
+def make_talon(data):
+    suits = {'C': 'Club', 'D': 'Diamond', 'H': 'Heart', 'S': 'Spade'}
+    ranks = {'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
+            '7': 7, '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13}
+    return [PlayingCard(suits[i[1]], ranks[i[0]]) for i in data[:-1]]
 
 
 if __name__ == '__main__':
-    with open(TALON) as f:
-        rawdata = f.read().splitlines()
+    with open(FILE) as f:
+        data = f.read().replace('\r\n', ' ').split(' ')
+    TALON =  make_talon(data)
+
+    dealer = Dealer(TALON)
     player1 = Player()
     player2 = Player()
-    dealer = Dealer(rawdata)
-    for i in range(900):
+    res = 0
+    for i in range(len(TALON) / 10):
         dealer.deal(player1, player2)
-        if player1.check(): print player1.cards
-        if player2.check(): print player2.cards
+        player1.check()
+        player2.check()
+        if player1.hand > player2.hand:
+            print "o",
+            res += 1
+        else: print "x",
+        print player1.cards, player1.hand, player2.cards, player2.hand
+    print res
