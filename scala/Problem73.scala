@@ -17,20 +17,11 @@ Note: The upper limit has been changed recently.
 */
 
 object Problem73 {
-  def gcd(s:Int, d:Int) = {
-    BigInt(s).gcd(d).toInt
-  }
+  def gcd(s:Int, d:Int) = BigInt(s).gcd(d).toInt
 
-  def ranged(n:Int, d:Int) = {
-    0.3333334 < (n.toDouble / d) &&
-    0.5 > (n.toDouble / d)
-  }
+  def ranged(n:Int, d:Int) = 0.3333334 < (n.toDouble / d) && 0.5 > (n.toDouble / d)
 
   def main(args:Array[String]) {
-    var res = 0
-    for(d <- 1 to 12000; n <- d/3-1 to d/2; if(gcd(d, n)==1 && ranged(n, d))) {
-      res += 1
-    }
-    print(res)
+    print((1 to 12000).map(d => (d/3-1 to d/2).count(n => gcd(d, n)==1 && ranged(n, d))) sum)
   }
 }
