@@ -14,7 +14,7 @@ find the value of the denominator.
 
 object Problem33 {
 // ij / jk
-  def gcd(s:Double, t:Double):Int = BigInt(s.toInt).gcd(t.toInt).toInt
+  def gcd(s:Double, t:Double):Int = if(s == 0) 1 else gcd(t, s % t)
   val conditionalFractions = {
     for(i <- 1 to 9; j <- 1 to 9; k <- 1 to 9) yield {
       val denominator = (i.toString + j.toString).toDouble
