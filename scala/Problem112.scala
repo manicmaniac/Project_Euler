@@ -20,34 +20,28 @@ Find the least number for which the proportion of bouncy numbers is exactly
 */
 
 object Problem112 {
+  def digitize(n:Int) = n.toString.map(_.asDigit)
+
   def isIncreasing(n:Int) = {
-    val digits = n.toString.toList.map(_.toString.toInt)
-    def check(l:List[Int], p:Int=0):Boolean = p match {
-      case _ if(l.isEmpty) => true
-      case _ if(l.head < p) => false
-      case _ if(l.head > p) => check(l.tail, l.head)
-      case _ => true
-    }
-    check(digits)
+    val digits = digitize(n)
+    digits == digits.sorted
   }
+
   def isDecreasing(n:Int) = {
-    val digits = n.toString.toList.map(_.toString.toInt)
-    def check(l:List[Int], p:Int=9):Boolean = p match {
-      case _ if(l.isEmpty) => true
-      case _ if(l.head > p) => false
-      case _ if(l.head < p) => check(l.tail, l.head)
-      case _ => true
-    }
-    check(digits)
+    val digits = digitize(n)
+    digits == digits.sorted.reverse
   }
-  def isBouncy(n:Int) = n match {
-    case _ if(isIncreasing(n) || isDecreasing(n)) => false
-    case _ => true
+
+  def isBouncy(n:Int) = {
+    !isIncreasing(n) && !isDecreasing(n)
   }
-  def bouncity(n:Int) = {
-    (1 to n).filter(isBouncy).length / n.toDouble
-  }
+
   def main(args:Array[String]) {
-    println(bouncity(21780))
+    var bouncies:Double = 0
+    var i = 1
+    while(bouncies / i < 0.99) {
+      i += 1
+      if(isBouncy(i)) bouncies += 1
+    }
+    print(i)
   }
-}
