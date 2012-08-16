@@ -23,13 +23,13 @@ object Problem112 {
   def digitize(n:Int) = n.toString.map(_.asDigit)
 
   def isIncreasing(n:Int) = {
-    val digits = digitize(n)
-    digits == digits.sorted
+    val d = digitize(n)
+    d == d.sorted
   }
 
   def isDecreasing(n:Int) = {
-    val digits = digitize(n)
-    digits == digits.sorted.reverse
+    val d = digitize(n)
+    d == d.sorted.reverse
   }
 
   def isBouncy(n:Int) = {
@@ -45,3 +45,4 @@ object Problem112 {
     }
     print(i)
   }
+}
