@@ -19,12 +19,7 @@ Note: The upper limit has been changed recently.
 '''
 
 from __future__ import division
-
-def gcd(s, t):
-    if s < t: s, t = t, s
-    while t: s, t = t, s % t
-    return s
-
+from fractions import gcd
 
 if __name__ == '__main__':
     res = 0
