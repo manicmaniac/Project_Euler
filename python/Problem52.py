@@ -9,7 +9,7 @@ contain the same digits.
 '''
 
 def digits(n):
-    return sorted(int(i) for i in str(n))
+    return sorted(map(int, str(n)))
 
 def has_same_digits(n):
     res = digits(n) == digits(n*2) == digits(n*3) == digits(n*4) == digits(n*5) == digits(n*6)
@@ -17,5 +17,6 @@ def has_same_digits(n):
 
 if __name__ == '__main__':
     res = 1
-    while not has_same_digits(res): res += 1
+    while not has_same_digits(res):
+        res += 1
     print res
