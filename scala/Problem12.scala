@@ -22,14 +22,11 @@ divisors?
 */
 
 object Problem12 {
-  lazy val triangle = Stream.from(1).map(n => n*(n+1)/2)
+  val triangle = Stream.from(1).map(n => n * (n + 1) / 2)
 
-  def numberOfDivisors(n:Int) = n match {
-    case 1 => 1
-    case _ => (1 to math.sqrt(n).toInt).filter(n%_==0).length*2
-  }
+  def numberOfDivisors(n:Int) = if(n == 1) 1 else (1 to math.sqrt(n).toInt).filter(n % _ == 0).length * 2
 
   def main(args:Array[String]) {
-    println(triangle.find(numberOfDivisors(_) > 500).get)
+    print(triangle.find(numberOfDivisors(_) > 500).get)
   }
 }
