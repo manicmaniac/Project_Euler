@@ -31,16 +31,24 @@ object Problem11 {
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48""".split("\\n").toList.map(_.split("\\ ").toList.map(_.toInt))
 
   def scan4Product(line:List[Int]) = {
-    for(i <- 0 until line.length-4) yield {
-      line.slice(i, i+3).product
-    }
+    for(i <- 0 until line.length-4) yield line.slice(i, i+3).product
   }
-  def pivot_matrix(matrix:List[List[Int]]) = {
+  def pivot90(matrix:List[List[Int]]) = {
+    for(i <- 0 until matrix.length) yield {
+      for(j <- 0 until matrix.length) yield {
+        matrix(j)(i)
+      }
+    }.toList
+  }.toList
+  def pivot45(matrix:List[List[Int]]) = {
   }
   def main(args:Array[String]) {
     // horizonal
     println(data_matrix.map(scan4Product(_).max).max)
     // vertical
+    println(pivot90(data_matrix).map(scan4Product(_).max).max)
+    //diagonal
+    println(pivot45(data_matrix))
 
   }
 }
