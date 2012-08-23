@@ -12,21 +12,20 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 object Problem37 {
   def trunc(n:Int) = {
-    (n.toString.tails.toList.init ++ n.toString.inits.toList.tail)
-    .filter(""!=).map(_.toInt)
+    val s = n.toString
+    (s.tails.toList.init ++ s.inits.toList.tail).filter(""!=).map(_.toInt)
   }
 
-  def isProbablePrime(n:Int) = BigInt(n).isProbablePrime(10)
+  def isPrime(n:Int) = BigInt(n).isProbablePrime(10)
 
-  lazy val candidates = (9 to 1000000 by 2).toList
-    .filter(x => (x.toString.head.asDigit, x.toString.last.asDigit) match {
+  lazy val candidates = (9 to 999999 by 2).filter(x => (x.toString.head.asDigit, x.toString.last.asDigit) match {
       case _ if(x<100) => true
       case (0|2|4|6|8, _) => false
       case (_, 0|2|4|6|8) => false
       case _ => true
   })
 
-    def main(args:Array[String]) {
-      print(candidates.filter(trunc(_).forall(isProbablePrime)).take(11).sum)
-    }
+  def main(args:Array[String]) {
+    print(candidates.filter(trunc(_).forall(isPrime)).take(11).sum)
+  }
 }
