@@ -17,8 +17,13 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>-</td>
   </tr>
   <tr>
+    <td>CoffeeScript</td>
+    <td>CoffeeScript v1.3.3 on Node.js v0.8.7</td>
+    <td>-</td>
+  </tr>
+  <tr>
     <td>Javascript</td>
-    <td>Node.js v0.4.9</td>
+    <td>Node.js v0.8.7</td>
     <td>-</td>
   </tr>
   <tr>

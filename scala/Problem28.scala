@@ -23,9 +23,9 @@ object Problem28 {
     Stream(2, 2, 2, 2) #::: tmp.map(_+2)
   }
   val diagons:Stream[Int] = {
-    cycle((1 to 4).toStream).zip(tmp).map(p => p._1 * p._2 + 1)
+    1 #:: cycle((1 to 4).toStream).zip(tmp).map(p => p._1 * p._2 + 1)
   }
   def main(args:Array[String]) {
-    println(diagons.takeWhile(_<=1001*1001).sum + 1)
+    print(diagons.takeWhile(_<=1001*1001).sum)
   }
 }

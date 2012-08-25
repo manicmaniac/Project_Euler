@@ -26,11 +26,7 @@ starting with n = 0.
 import scala.math.sqrt
 
 object Problem27 {
-  def isPrime(n:Int) = n match {
-    case 2|3|5 => true
-    case _ if(n<2) => false
-    case _ => !(2 to sqrt(n).toInt).exists(n%_==0)
-  }
+  def isPrime(n:Int) = BigInt(n).isProbablePrime(10)
 
   def f(n:Int, a:Int, b:Int) = n*n+a*n+b
 
@@ -40,6 +36,6 @@ object Problem27 {
         ((1 to 1000).map(f(_, a, b)).takeWhile(isPrime).length, a, b)
       }
     }.max
-    println(res._2 * res._3)
+    print(res._2 * res._3)
   }
 }

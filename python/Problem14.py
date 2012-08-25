@@ -33,5 +33,5 @@ if __name__ == '__main__':
         tmp = len(collatz(i))
         if res[0] < tmp: res = (tmp, i)
         i += 1
-    print res
+    print res[1]
 

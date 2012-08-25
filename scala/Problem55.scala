@@ -30,7 +30,10 @@ theoretical nature of Lychrel numbers.
 */
 
 object Problem55 {
-  def isPalindrome(n:BigInt) = n.toString == n.toString.reverse
+  def isPalindrome(n:BigInt) = {
+    val s = n.toString
+    s == s.reverse
+  }
 
   def isLychrel(n:BigInt, limit:Int=50, i:Int=0):Boolean = i match {
     case `limit` => true
@@ -39,6 +42,6 @@ object Problem55 {
   }
 
   def main(args:Array[String]) {
-    print(BigInt(1) until 10000 filter(isLychrel(_, 50, 0)) length)
+    print(BigInt(1) to 9999 filter(isLychrel(_, 50, 0)) length)
   }
 }

@@ -9,19 +9,18 @@ The longest sum of consecutive primes below one-thousand that adds to a prime, c
 Which prime, below one-million, can be written as the sum of the most consecutive primes?
 '''
 
-from prime import genprime, isprime
+from prime import isprime
+from sympy import sieve
+from itertools import islice
 
-primelist = [i for i in genprime(3943)]
-max_index = len(primelist) - 1
+# sum(i for i in islice(sieve, 1, 547))
 
-for i in reversed(range(max_index)):
-    for j in range(max_index - i):
-        print j, i
+def f():
+    for i in reversed(range(1, 547)):
+        for j in range(1, 549-i):
+            print j, i
+            if isprime(sum(islice(sieve, j, i))):
+                print j-i+1
+                return sum(islice(sieve, j, i))
 
-'''
-for j in reversed(range(max_index)):
-    for i in range(max_index - j):
-        res = sum(primelist[i:j])
-        if isprime(res):
-            print res, j -i
-'''
+print f()
