@@ -20,7 +20,7 @@ var FILE = './words.txt';
 
 function isTriangle(n) {
   if (typeof n === 'number') {
-    return (Math.sqrt(8*n + 1) - 1) / 2 % 1 == 0;
+    return (Math.sqrt(8 * n + 1) - 1) / 2 % 1 == 0;
   }
   else if (typeof n === 'string') {
     var res = 0;
@@ -29,15 +29,14 @@ function isTriangle(n) {
     }
     return isTriangle(res);
   }
+  else return false;
 }
 
 fs.readFile(FILE, 'ascii', function(err, data) {
   var wordList = data.replace(/"/g, '').split(',');
   var res = 0;
   for (var i=0; i<wordList.length; i++) {
-    if (isTriangle(wordList[i])) {
-      res++;
-    }
+    if (isTriangle(wordList[i])) res++;
   }
   console.log(res);
 })
