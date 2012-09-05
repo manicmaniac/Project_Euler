@@ -9,16 +9,5 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 */
 
-var m = n = 1;
-var a = b = c = 1;
-while(a+b+c!=1000) {
-	a = m*m - n*n;
-	b = 2*m*n;
-	c = m*m + n*n;
-	if(m>n) n++;
-	else {
-		m++;
-		n = 1;
-	}
-}
-console.log(a*b*c)
+for(m=n=1;m*m+m*n!=500;)if(m>n){n++}else{m++,n=1}console.log((m*m*m*m-n*n*n*n)*2*m*n)
+
