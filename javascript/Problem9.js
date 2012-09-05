@@ -9,5 +9,5 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 */
 
-for(m=n=1;m*m+m*n!=500;)if(m>n){n++}else{m++,n=1}console.log((m*m*m*m-n*n*n*n)*2*m*n)
+for(m=n=1;m*(m+n)!=500;n++)if(m<n)m++,n=1;console.log((m*m*m*m-n*n*n*n)*2*m*n)
 
