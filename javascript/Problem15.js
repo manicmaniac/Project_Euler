@@ -7,20 +7,5 @@ backtracking) to the bottom right corner.
 How many routes are there through a 20×20 grid?
 */
 
-function factorial(n) {
-  var res = 1;
-  for(var i=2; i<=n; i++) {
-    res *= i;
-  }
-  return res;
-}
+for(x=1,i=41;i-->21;)x*=i;for(y=1,j=21;j-->1;)y*=j;console.log(x/y/1-x/y%1)
 
-function c(a, b) {
-  var res = 1;
-  for(var i=a; i>b; i--) {
-    res *= i;
-  }
-  return Math.floor(res / factorial(b));
-}
-
-console.log(c(40, 20));
