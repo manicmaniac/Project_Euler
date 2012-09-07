@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 If we take 47, reverse and add, 47 + 74 = 121, which is palindromic.
