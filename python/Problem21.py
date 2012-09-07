@@ -8,24 +8,18 @@ For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 a
 
 Evaluate the sum of all the amicable numbers under 10000.
 '''
-import math
+from math import sqrt
 
-def showdevisor(num):
+def show_devisor(num):
     res = [1]
-    for i in range(2, int(math.sqrt(num)) + 1):
+    for i in range(2, int(sqrt(num)) + 1):
         if not num % i:
-            res.append(i)
-            res.append(num / i)
+            res += [i, num / i]
     return sorted(res)
 
-def hasAmicable(num):
-    i = sum(showdevisor(num))
-    if (i != num) and(sum(showdevisor(i)) == num): return True
-    return False
+def has_amicable(n):
+    s = sum(show_devisor(n))
+    return s != n and sum(show_devisor(s)) == n
 
 if __name__ == '__main__':
-    ans = 0
-    for i in range(2, 10000):
-        if hasAmicable(i):
-            ans += i
-    print ans
+    print sum(filter(has_amicable, range(2, 10000)))
