@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF
@@ -30,3 +30,4 @@ if __name__ == '__main__':
             elif 0.333333333334 < (n / d) < 0.5:
                 res += 1
     print res
+
