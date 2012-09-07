@@ -25,4 +25,5 @@ def felm(n):
 
 if __name__ == '__main__':
     res = dict(felm(1001))
-    print res[max(res.keys())]
+    print res[max(res)]
+
