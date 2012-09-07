@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
