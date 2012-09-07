@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 Comparing two numbers written in index form like 2^11 and 3^7 is not difficult,
@@ -23,3 +23,4 @@ if __name__ == '__main__':
     with open(FILE) as f:
         data = [map(int, i.split(",")) for i in f.read().splitlines()]
     print max((exponent * log(base, 10), i+1) for i, (base, exponent) in enumerate(data))[1]
+
