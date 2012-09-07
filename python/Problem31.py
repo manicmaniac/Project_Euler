@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 In England the currency is made up of pound, Â£, and pence, p, and there are eight coins in general circulation:
@@ -16,4 +16,6 @@ def calc(n):
     pass
 
 if __name__ == '__main__':
-    for i in calc(10): print i
+    for i in calc(10):
+        print i
+
