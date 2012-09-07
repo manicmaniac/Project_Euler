@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 The decimal number, 585 = 10010010012 (binary), is palindromic in both bases.
