@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 Starting in the top left corner of a 2×2 grid, there are 6 routes (without
@@ -13,7 +13,8 @@ from operator import mul
 from math import factorial
 
 def c(a, b):
-    return reduce(mul, (i for i in range(b + 1, a + 1))) / factorial(b)
+    return reduce(mul, range(b + 1, a + 1)) / factorial(b)
 
 if __name__ == '__main__':
     print c(40, 20)
+
