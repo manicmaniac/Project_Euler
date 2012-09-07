@@ -13,12 +13,5 @@ The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 '''
 
-i = 1000
-res = []
-acc = 0
-while i < 354294:
-    lst = map(int, str(i))
-    if sum(map(lambda x: x ** 5, lst)) == i:
-        acc += i
-    i += 1
-print acc
+print sum(filter(lambda x: sum(i**5 for i in map(int, str(x))) == x, range(2, 9**5 * 6)))
+
