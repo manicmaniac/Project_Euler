@@ -10,22 +10,21 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 '''
 
-import math
+from math import sqrt
 
-def isAbundant(num):
+def isAbundant(n):
     res = [1]
-    for i in range(2, int(math.sqrt(num)) + 1):
-        if not num % i:
-            res.append(i)
-            res.append(num / i)
-    return sum(set(res)) > num
+    for i in range(2, int(sqrt(n)) + 1):
+        if not n % i:
+            res += [i, n / i]
+    return sum(set(res)) > n
 
 if __name__ == '__main__':
-    abundants = list(set(map(lambda x: x * isAbundant(x), [i for i in range(1, 28124)])))[1:]
+    abundants = list(set(i * isAbundant(i) for i in range(1, 28124)))[1:]
     twoabundants = []
     for i in abundants:
         for j in abundants:
-            if j > i: break
-            if i + j > 28123: break
+            if j > i or i + j > 28123: break
             twoabundants.append(i + j)
     print sum(set(twoabundants) ^ set(range(1, 28124)))
+
