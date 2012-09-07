@@ -16,10 +16,14 @@ class Name(object):
             for k in j:
                 score += (ord(k) - 64) * (i + 1)
         return score
+
     def __init__(self, filename):
         csvfile = [i for i in csv.reader(open(filename))]
         self.namelist = sorted(csvfile[0])
 
+    score = property(score)
+
+
 if __name__ == '__main__':
-    n = Name('names.txt')
-    print n.score()
+    print Name('names.txt').score
+
