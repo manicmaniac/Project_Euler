@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 Take the number 192 and multiply it by each of 1, 2, and 3:
@@ -15,10 +15,14 @@ What is the largest 1 to 9 pandigital 9-digit number that can be formed as the c
 
 def is_pandigital(n):
     s = str(n)
-    if len(s) != 9: return False
-    if '0' in s: return False
-    if len(set(s)) != 9: return False
-    else: return True
+    if len(s) != 9:
+        return False
+    if '0' in s:
+        return False
+    if len(set(s)) != 9:
+        return False
+    else:
+        return True
 
 if __name__ == '__main__':
     res = []
@@ -28,6 +32,7 @@ if __name__ == '__main__':
             acc += str(i * j)
             if len(acc) >= 9:
                 break
-        if is_pandigital(acc): res.append(acc)
+        if is_pandigital(acc):
+            res.append(acc)
     print max(res)
 
