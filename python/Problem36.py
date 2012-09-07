@@ -15,9 +15,5 @@ def base2(n):
     return int(format(n, 'b'))
 
 if __name__ == '__main__':
-    acc = 0
-    for i in range(1000000):
-        if is_palindromic(i) and is_palindromic(base2(i)):
-            acc += i
-    print acc
+    print sum(i for i in range(10**6) if is_palindromic(i) and is_palindromic(base2(i)))
 
