@@ -7,16 +7,14 @@
 #By considering the terms in the Fibonacci sequence whose values do not exceed
 #four million, find the sum of the even-valued terms.
 
-ans=0
-s=0
-t=1
+ans=0; s=0; t=1
 while [ $t -lt 4000000 ]
 do
     tmp=$s
     s=$t
-    t=`expr $t + $tmp`
-    if [ `expr $s % 2` -eq 0 ]; then
-        ans=`expr $ans + $s`
+    let t=$t+$tmp
+    if [ $(($s % 2)) -eq 0 ]; then
+        let ans=$ans+$s
     fi
 done
 
