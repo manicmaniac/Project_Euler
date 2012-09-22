@@ -21,8 +21,7 @@
 #divisors?
 
 function divisors() {
-    local x=$1
-    local res=0
+    local {x=$1,res=0}
     for i in `seq $x`
     do
         if [ $(($x % $i)) -eq 0 ]; then
