@@ -25,10 +25,8 @@
 s=0; t=1; ans=1
 while [ `echo "$t < 10 ^ 999" | bc` -eq 1 ]
 do
-    tmp=$s
-    s=$t
-    t=`echo "$s + $tmp" | bc`
-    let ans=$ans+1
+    tmp=$s; s=$t; t=`echo "$s + $tmp" | bc`
+    let ans++
 done
 
 echo $ans
