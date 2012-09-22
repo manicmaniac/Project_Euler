@@ -15,9 +15,9 @@ function is_curious() {
         res=`echo $res + ${factorial[$i]} | bc`
     done
     if [ $res -eq $x ]; then
-        echo true
+        return 0
     else
-        echo false
+        return 1
     fi
 }
 
@@ -25,7 +25,7 @@ let limit=${factorial[9]}*7
 i=3; ans=0
 while [ $i -lt $limit ]
 do
-    if [ `is_curious $i` = 'true' ]; then
+    if `is_curious $i`; then
         let ans+=$i
     fi
     let i++
