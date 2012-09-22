@@ -22,15 +22,13 @@
 #
 #What is the first term in the Fibonacci sequence to contain 1000 digits?
 
-s=0
-t=1
-ans=1
+s=0; t=1; ans=1
 while [ `echo "$t < 10 ^ 999" | bc` -eq 1 ]
 do
     tmp=$s
     s=$t
     t=`echo "$s + $tmp" | bc`
-    ans=`expr $ans + 1`
+    let ans=$ans+1
 done
 
 echo $ans
