@@ -25,19 +25,18 @@ function divisors() {
     local res=0
     for i in `seq $x`
     do
-        if [ `expr $x % $i` -eq 0 ]; then
-            res=`expr $res + 1`
+        if [ $(($x % $i)) -eq 0 ]; then
+            let res=$res+1
         fi
     done
     echo $res
 }
 
-ans=0
-i=1
+ans=0; i=1
 while [ `divisors $ans` -lt 500 ]
 do
-    ans=`expr $ans + $i`
-    i=`expr $i + 1`
+    let ans=$ans+$i
+    let i=$i+1
 done
 
 echo $ans
