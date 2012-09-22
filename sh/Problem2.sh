@@ -7,21 +7,18 @@
 #By considering the terms in the Fibonacci sequence whose values do not exceed
 #four million, find the sum of the even-valued terms.
 
-function sum_fib_even() {
-    local res=0
-    local s=0
-    local t=1
-    local tmp=0
-    while [ $t -lt 4000000 ]
-    do
-        tmp=$s
-        s=$t
-        t=`expr $t + $tmp`
-        if [ `expr $s % 2` -eq 0 ]; then
-            res=`expr $res + $s`
-        fi
-    done
-    echo $res
-}
+ans=0
+s=0
+t=1
+while [ $t -lt 4000000 ]
+do
+    tmp=$s
+    s=$t
+    t=`expr $t + $tmp`
+    if [ `expr $s % 2` -eq 0 ]; then
+        ans=`expr $ans + $s`
+    fi
+done
 
-sum_fib_even
+echo $ans
+
