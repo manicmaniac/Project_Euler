@@ -4,15 +4,14 @@
 #What is the largest prime factor of the number 600851475143 ?
 
 function factorize() {
-    local n=$1
-    local i=2
+    local {n=$1,i=2}
     while [ $(($n - $i * $i)) -gt 0 ]
     do
         if [ $(($n % $i)) -eq 0 ]; then
             let n=$n/$i
             echo -n "$i "
         else
-            let i=$i+1
+            let i++
         fi
     done
     echo -n $n
