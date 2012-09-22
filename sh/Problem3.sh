@@ -10,12 +10,15 @@ function factorize() {
     do
         if [ `expr $n % $i` -eq 0 ]; then
             n=`expr $n / $i`
-            echo $i
+            echo -n "$i "
         else
             i=`expr $i + 1`
         fi
     done
-    echo $n
+    echo -n $n
 }
 
-factorize 600851475143
+ans=(`factorize 600851475143`)
+last=`expr ${#ans[*]} - 1`
+echo ${ans[$last]}
+
