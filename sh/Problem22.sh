@@ -21,8 +21,7 @@ function ord() {
 }
 
 function score() {
-    local name=$1
-    local res=0
+    local {name=$1,res=0}
     for i in `echo $name | sed -e 's/./& /g'`
     do
         tmp=`ord $i`
