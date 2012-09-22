@@ -5,12 +5,10 @@
 #
 #Find the sum of all the multiples of 3 or 5 below 1000.
 
-for i in `seq 999`
+for i in {1..999}
 do
-    if [ `expr $i % 3` -eq 0 ]; then
-        res=`expr $res + $i`
-    elif [ `expr $i % 5` -eq 0 ]; then
-        res=`expr $res + $i`
+    if [ $(($i % 3)) -eq 0 ] || [ $(($i % 5)) -eq 0 ]; then
+        let res=$res+$i
     fi
 done
 echo $res
