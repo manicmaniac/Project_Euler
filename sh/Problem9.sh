@@ -12,11 +12,9 @@ for m in {1..23}
 do
     for n in {1..23}
     do
-        let a=$m*$m-$n*$n
-        let b=2*$m*$n
-        let c=$m*$m+$n*$n
+        let {a=$m*$m-$n*$n,b=2*$m*$n,c=$m*$m+$n*$n}
         if [ $(($a + $b + $c)) -eq 1000 ]; then
-            echo $(($a * $b * $c))
+            echo $(($a * $b * $c)); break
         fi
     done
 done
