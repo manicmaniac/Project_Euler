@@ -17,7 +17,7 @@ FILE='./names.txt'
 data=`cat $FILE | sed -e 's/"//g' | tr -cs '[A-Z]' '[\n*]' | sort`
 
 function ord() {
-    echo `expr $(printf "%d" \'$1) - 64`
+    echo $((`printf "%d" \'$1` - 64))
 }
 
 function score() {
@@ -26,7 +26,7 @@ function score() {
     for i in `echo $name | sed -e 's/./& /g'`
     do
         tmp=`ord $i`
-        res=`expr $res + $tmp`
+        let res=$res+$tmp
     done
     echo $res
 }
@@ -37,8 +37,8 @@ do
     ans=0
     score_by_name=`score $name`
     final_score=`echo "$score_by_name * $i" | bc`
-    ans=`expr $ans + $final_score`
-    i=`expr $i + 1`
+    let ans=$ans+$final_score
+    let i=$i+1
 done
 
 echo $ans
