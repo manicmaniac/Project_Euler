@@ -12,9 +12,9 @@ while [ $t -lt 4000000 ]
 do
     tmp=$s
     s=$t
-    let t=$t+$tmp
+    let t+=$tmp
     if [ $(($s % 2)) -eq 0 ]; then
-        let ans=$ans+$s
+        let ans+=$s
     fi
 done
 
