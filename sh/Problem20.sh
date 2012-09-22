@@ -12,12 +12,12 @@ do
     res=`echo "$res * $i" | bc`
 done
 
-digits=(`echo $res | sed -e 's/[\\\\\ ]//g' | sed -e 's/./& /g'`)
+digits=(`echo $res | sed -e 's/\\\\//g; s/./& /g'`)
 
 ans=0
 for i in ${digits[@]}
 do
-    let ans=$ans+$i
+    let ans+=$i
 done
 
 echo $ans
