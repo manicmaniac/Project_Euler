@@ -6,12 +6,30 @@
 
 function is_palindromic() {
     x=$1
-    xs=`echo $x | sed -e 's/./& /g'`
-    for i in $xs
-    do
-        echo $i
-    done
+    reversed=$(echo "$x" | sed '/\n/!G;s/\(.\)\(.*\n\)/&\2\1/;//D;s/.//')
+    if [ $x = $reversed ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
-is_palindromic 9001
+function is_product_of_3digit() {
+    x=$1
+    for i in {100..999}
+    do
+        if [ $(($x % $i)) -eq 0 ] && [ $(($x / $i)) -lt 1000 ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+for i in {998001..10000..-1}
+do
+    if `is_palindromic $i` && `is_product_of_3digit $i`; then
+        echo $i
+        break
+    fi
+done
 
