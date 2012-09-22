@@ -19,16 +19,16 @@ function day() {
     local y=$1
     local m=$2
     local d=$3
-    echo `env LANG=C date --date=$1$2$3 | cut -c -3`
+    echo `env LANG=C date --date=$y$m$d | cut -c -3`
 }
 
 ans=0
-for year in `seq 1901 2000`
+for year in {1901..2000}
 do
     for month in `seq 12 | sed -e 's/\<.\>/0&/g'`
     do
         if [ `day $year $month 01` = 'Sun' ]; then
-            ans=`expr $ans + 1`
+            let ans=$ans+1
         fi
     done
 done
