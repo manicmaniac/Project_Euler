@@ -18,7 +18,7 @@ FILE='./words.txt'
 data=`cat $FILE | sed -e 's/"//g' | tr -cs '[A-Z]' '[\n*]'`
 
 function ord() {
-    echo `expr $(printf "%d" \'$1) - 64`
+    echo $(($(printf "%d" \'$1) - 64))
 }
 
 function score() {
@@ -27,27 +27,25 @@ function score() {
     for i in `echo $word | sed -e 's/./& /g'`
     do
         tmp=`ord $i`
-        res=`expr $res + $tmp`
+        let res+=$tmp
     done
     echo $res
 }
 
 function is_triangle() {
     local x=$1
-    scale=1
-    if [ `echo "scale=1; ((sqrt(8 * $x + 1) - 1) / 2)" | bc -l | sed -e 's/.*\.//g'` -eq 0 ]; then
-        echo true
+    if [ `echo "scale=1; ((sqrt(8 * $x + 1) - 1) / 2)" | bc | sed -e 's/.*\.//g'` -eq 0 ]; then
+        return 0
     else
-        echo false
+        return 1
     fi
 }
 
 ans=0
 for i in $data
 do
-    if [ `is_triangle $(score $i)` = 'true' ]; then
-        echo $i
-        ans=`expr $ans + 1`
+    if `is_triangle $(score $i)`; then
+        let ans++
     fi
 done
 
