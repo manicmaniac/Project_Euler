@@ -8,7 +8,7 @@ res=(`echo '2^1000' | bc | sed -e 's/[\\]//g' | sed -e 's/./& /g' | sed -e 's/ $
 ans=0
 for i in ${res[@]}
 do
-    ans=`expr $ans + $i`
+    let ans=$ans+$i
 done
 echo $ans
 
