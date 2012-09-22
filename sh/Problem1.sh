@@ -7,8 +7,8 @@
 
 for i in {1..999}
 do
-    if [ $(($i % 3)) -eq 0 ] || [ $(($i % 5)) -eq 0 ]; then
-        let res=$res+$i
+    if [ $(($i % 3 * $i % 5)) -eq 0 ]; then
+        let res+=$i
     fi
 done
 echo $res
