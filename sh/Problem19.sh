@@ -16,19 +16,22 @@
 #Jan 1901 to 31 Dec 2000)?
 
 function day() {
+    LANG=C
     local {y=$1,m=$2,d=$3}
-    echo `env LANG=C date --date=$y$m$d | cut -c -3`
+    echo `date --date=$y$m$d`
 }
 
-ans=0
+res() {
 for year in {1901..2000}
 do
     for month in `seq 12 | sed -e 's/\<.\>/0&/g'`
     do
-        if [ `day $year $month 01` = 'Sun' ]; then
-            let ans=$ans+1
-        fi
+        echo `day $year $month 01`
     done
 done
+}
+
+ans=`res | grep "Sun" | wc -l`
+
 echo $ans
 
