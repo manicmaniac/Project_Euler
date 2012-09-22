@@ -22,15 +22,14 @@ function is_curious() {
     fi
 }
 
-limit=`expr ${factorial[9]} \* 7`
-i=3
-ans=0
+let limit=${factorial[9]}*7
+i=3; ans=0
 while [ $i -lt $limit ]
 do
     if [ `is_curious $i` = 'true' ]; then
-        ans=`expr $ans + $i`
+        let ans=$ans+$i
     fi
-    i=`expr $i + 1`
+    let i=$i+1
 done
 
 echo $ans
