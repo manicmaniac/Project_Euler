@@ -110,7 +110,7 @@ numbers=`echo $rawdata | sed -e 's/\ /\n/g' | cut -c -16 | sed -e 's/\n/\ /g'`
 res=0
 for i in $numbers
 do
-    res=`expr $res + $i`
+    let res=$res+$i
 done
 echo $res | cut -c -10
 
