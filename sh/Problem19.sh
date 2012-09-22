@@ -16,9 +16,7 @@
 #Jan 1901 to 31 Dec 2000)?
 
 function day() {
-    local y=$1
-    local m=$2
-    local d=$3
+    local {y=$1,m=$2,d=$3}
     echo `env LANG=C date --date=$y$m$d | cut -c -3`
 }
 
