@@ -9,8 +9,7 @@
 factorial=(0 1 2 6 24 120 720 5040 40320 362880)
 
 function is_curious() {
-    local x=$1
-    local res=0
+    local {x=$1,res=0}
     for i in `echo $x | sed 's/./& /g'`
     do
         res=`echo $res + ${factorial[$i]} | bc`
@@ -27,9 +26,9 @@ i=3; ans=0
 while [ $i -lt $limit ]
 do
     if [ `is_curious $i` = 'true' ]; then
-        let ans=$ans+$i
+        let ans+=$i
     fi
-    let i=$i+1
+    let i++
 done
 
 echo $ans
