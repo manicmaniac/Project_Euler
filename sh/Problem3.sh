@@ -8,7 +8,7 @@ function factorize() {
     while [ $(($n - $i * $i)) -gt 0 ]
     do
         if [ $(($n % $i)) -eq 0 ]; then
-            let n=$n/$i
+            let n/=$i
             echo -n "$i "
         else
             let i++
