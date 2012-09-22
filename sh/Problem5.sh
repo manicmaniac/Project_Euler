@@ -8,7 +8,6 @@
 function gcd() {
     local x=0
     local y=0
-    local tmp=0
     if [ `expr $1 - $2` -gt 0 ]; then
         x=$1
         y=$2
@@ -26,9 +25,7 @@ function gcd() {
 }
 
 function lcm() {
-    local xy=`expr $1 \* $2`
-    local gcdxy=`gcd $1 $2`
-    echo `expr $xy / $gcdxy`
+    echo `expr $(expr $1 \* $2) / $(gcd $1 $2)`
 }
 
 i=2
@@ -36,7 +33,7 @@ res=2
 while [ $i -lt 21 ]
 do
     i=`expr $i + 1`
-
     res=`lcm $i $res`
 done
 echo $res
+
