@@ -7,11 +7,8 @@
 #How many routes are there through a 20×20 grid?
 
 function c() {
-    local a=$1
-    local b=$2
+    local {a=$1,b=$2,multi=1,fact=1}
     local start=$(($b + 1))
-    local multi=1
-    local fact=1
     for i in `seq $start $a`
     do
         multi=`echo "$multi * $i" | bc`
