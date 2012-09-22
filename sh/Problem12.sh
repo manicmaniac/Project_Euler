@@ -25,7 +25,7 @@ function divisors() {
     for i in `seq $x`
     do
         if [ $(($x % $i)) -eq 0 ]; then
-            let res=$res+1
+            let res++
         fi
     done
     echo $res
@@ -34,8 +34,8 @@ function divisors() {
 ans=0; i=1
 while [ `divisors $ans` -lt 500 ]
 do
-    let ans=$ans+$i
-    let i=$i+1
+    let ans+=$i
+    let i++
 done
 
 echo $ans
