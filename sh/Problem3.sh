@@ -6,19 +6,19 @@
 function factorize() {
     local n=$1
     local i=2
-    while [ `expr $n - $i \* $i` -gt 0 ]
+    while [ $(($n - $i * $i)) -gt 0 ]
     do
-        if [ `expr $n % $i` -eq 0 ]; then
-            n=`expr $n / $i`
+        if [ $(($n % $i)) -eq 0 ]; then
+            let n=$n/$i
             echo -n "$i "
         else
-            i=`expr $i + 1`
+            let i=$i+1
         fi
     done
     echo -n $n
 }
 
 ans=(`factorize 600851475143`)
-last=`expr ${#ans[*]} - 1`
+let last=${#ans[*]}-1
 echo ${ans[$last]}
 
