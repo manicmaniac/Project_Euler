@@ -7,7 +7,7 @@
 #Find the sum of the digits in the number 100!
 
 res=1
-for i in `seq 2 100`
+for i in {2..100}
 do
     res=`echo "$res * $i" | bc`
 done
@@ -17,7 +17,7 @@ digits=(`echo $res | sed -e 's/[\\\\\ ]//g' | sed -e 's/./& /g'`)
 ans=0
 for i in ${digits[@]}
 do
-    ans=`expr $ans + $i`
+    let ans=$ans+$i
 done
 
 echo $ans
