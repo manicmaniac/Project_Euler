@@ -17,7 +17,7 @@ for i in {1..100}
 do
     let {s+=$i,t+=$i*$i}
 done
-let s*=$s
+let ans=$s*$s-$t
 
-echo $(($s - $t))
+echo $ans
 
