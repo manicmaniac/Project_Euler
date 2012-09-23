@@ -20,7 +20,7 @@ function is_prime() {
 }
 
 i=1; cnt=2; limit=10001
-while true 
+while : 
 do
     if `is_prime $(($i * 6 - 1))`; then
         let cnt++
