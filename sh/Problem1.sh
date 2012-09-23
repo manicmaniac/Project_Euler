@@ -8,8 +8,9 @@
 for i in {1..999}
 do
     if [ $(($i % 3 * $i % 5)) -eq 0 ]; then
-        let res+=$i
+        let ans+=$i
     fi
 done
-echo $res
+
+echo $ans
 
