@@ -13,11 +13,5 @@
 #Find the difference between the sum of the squares of the first one hundred
 #natural numbers and the square of the sum.
 
-for i in {1..100}
-do
-    let {s+=$i,t+=$i*$i}
-done
-let ans=$s*$s-$t
-
-echo $ans
+echo "`echo {1..100} | sed -e 's/\s/+/g;s/^/(/;s/$/)^2/'` - `echo {1..100} | sed -e 's/\s/^2-/g;s/$/^2/'`" | bc
 
