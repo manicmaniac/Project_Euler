@@ -5,12 +5,5 @@
 #
 #Find the sum of all the multiples of 3 or 5 below 1000.
 
-for i in {1..999}
-do
-    if [ $(($i % 3 * $i % 5)) -eq 0 ]; then
-        let ans+=$i
-    fi
-done
-
-echo $ans
+echo {3..999..3} {5..999..5} | sed -e 's/\s/\n/g' | sort -nu | paste -s | sed -e 's/\s/+/g' | bc
 
