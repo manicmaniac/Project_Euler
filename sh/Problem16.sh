@@ -3,9 +3,5 @@
 #
 #What is the sum of the digits of the number 2^1000?
 
-for i in `echo '2^1000' | bc | sed -e 's/\\\\//g; s/./& /g'`
-do
-    let ans+=$i
-done
-echo $ans
+echo '2^1000' | bc | paste -s | sed -e 's/\\\s*//g;s/./&+/g;s/+$//' | bc
 
