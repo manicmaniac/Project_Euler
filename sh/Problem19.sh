@@ -24,7 +24,7 @@ function day() {
 res() {
 for year in {1901..2000}
 do
-    for month in `seq 12 | sed -e 's/\<.\>/0&/g'`
+    for month in $(printf '%02d ' `seq 12`)
     do
         echo `day $year $month 01`
     done
