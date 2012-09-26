@@ -6,19 +6,5 @@
 #
 #Find the sum of the digits in the number 100!
 
-res=1
-for i in {2..100}
-do
-    res=`echo "$res * $i" | bc`
-done
-
-digits=(`echo $res | sed -e 's/\\\\//g; s/./& /g'`)
-
-ans=0
-for i in ${digits[@]}
-do
-    let ans+=$i
-done
-
-echo $ans
+echo `printf '%d*' {2..100}`1 | bc | paste -s | sed -e 's/\\\s*//g;s/./&+/g;s/+$//' | bc
 
