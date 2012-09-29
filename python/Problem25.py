@@ -25,15 +25,15 @@ The 12th term, F[12], is the first term to contain three digits.
 What is the first term in the Fibonacci sequence to contain 1000 digits?
 '''
 
-def gen_fib():
+def fib():
     s, t = 0, 1
     while True:
         s, t = t, s + t
         yield s
 
 if __name__ == '__main__':
-    for i, j in enumerate(gen_fib()):
-        if j >= 10**999:
-            print i + 1
+    for i, n in enumerate(fib(), 1):
+        if n >= 10**999:
+            print i
             break
 
