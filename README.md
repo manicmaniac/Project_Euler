@@ -48,7 +48,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   </tr>
   <tr>
     <td>sh</td>
-    <td>dash v0.5.5.1-7.4</td>
+    <td>bash v4.2.10(1)</td>
     <td>-</td>
   </tr>
 </table>
