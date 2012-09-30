@@ -16,7 +16,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>Java</td>
     <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
     <td>-</td>
-    <td colspan="8">Ubuntu 11.10</td>
+    <td rowspan="8">Ubuntu 11.10</td>
   </tr>
   <tr>
     <td>CoffeeScript</td>
