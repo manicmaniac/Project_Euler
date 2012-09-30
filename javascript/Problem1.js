@@ -4,5 +4,5 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
-for(x=i=999;i-->0;)i%3*i%5?0:x+=i;console.log(x)
+for(x=i=999;i-->0;)i%3*i%5?0:x+=i;console.log(x);
 
