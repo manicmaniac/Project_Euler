@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.

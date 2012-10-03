@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 A common security method used for online banking is to ask the user for three
@@ -37,3 +37,4 @@ if __name__ == '__main__':
         keylog = [int(i) for i in f.read().splitlines()]
     ks = KeySolver(keylog)
     print ks.solve()
+

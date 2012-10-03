@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 It is possible to show that the square root of two can be expressed as an
@@ -39,3 +39,4 @@ def conditional(n):
 
 if __name__ == '__main__':
     print len(filter(conditional, sqrt2(1000)))
+

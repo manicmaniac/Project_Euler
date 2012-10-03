@@ -6,16 +6,18 @@ We shall say that an n-digit number is pandigital if it makes use of all the dig
 What is the largest n-digit pandigital prime that exists?
 '''
 
-from prime import isprime
 from itertools import permutations
+from sympy import *
 
-def gen_pandigital(d):
-    for i in permutations(range(1,d + 1)):
-        l = map(str, list(i[:]))
-        yield int(''.join(l))
+def pandigitals(digits):
+    for i in permutations(range(1, digits + 1)):
+        yield int(''.join(map(str, i)))
+
 
 if __name__ == '__main__':
     for i in range(1, 10):
-        for j in gen_pandigital(i):
-            if isprime(j): res = j
-    print res
+        for n in pandigitals(i):
+            if isprime(n):
+                ans = n
+    print ans
+

@@ -14,29 +14,29 @@ It turns out that the conjecture was false.
 
 What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 '''
-from prime import genprime, isprime
-from itertools import count
 
-def gen_square(max):
+from sympy import *
+from itertools import *
+
+def squares(limit):
     res = i = 0
-    while res <= max:
+    while res <= limit:
         i += 1
         res = 2 * i ** 2
         yield res
 
-
-def is_composite_of_prime_and_square(n):
-    if isprime(n): return True
-    for i in genprime(n):
-        for j in gen_square(n):
-            if i + j == n:
+def is_goldbach_composite(n):
+    if isprime(n):
+        return True
+    for prime in sieve.primerange(1, n):
+        for square in squares(n):
+            if prime + square == n:
                 return True
     return False
 
-
 if __name__ == '__main__':
     for i in count(5, 2):
-        if not is_composite_of_prime_and_square(i):
+        if not is_goldbach_composite(i):
             print i
             break
 

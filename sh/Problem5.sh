@@ -6,37 +6,29 @@
 #numbers from 1 to 20?
 
 function gcd() {
-    local x=0
-    local y=0
-    local tmp=0
-    if [ `expr $1 - $2` -gt 0 ]; then
-        x=$1
-        y=$2
+    local {x,y}=0
+    if [ $(($1 - $2)) -gt 0 ]; then
+        x=$1; y=$2
     else
-        x=$2
-        y=$1
+        x=$2; y=$1
     fi
-    while [ `expr $x % $y` -ne 0 ]
+    while [ $(($x % $y)) -ne 0 ]
     do
-        tmp=$x
-        x=$y
-        y=`expr $tmp % $y`
+        tmp=$x; x=$y
+        let y=$tmp%$y
     done
     echo $y
 }
 
 function lcm() {
-    local xy=`expr $1 \* $2`
-    local gcdxy=`gcd $1 $2`
-    echo `expr $xy / $gcdxy`
+    echo $(($(($1 * $2)) / $(gcd $1 $2)))
 }
 
-i=2
-res=2
-while [ $i -lt 21 ]
+ans=1
+for i in {1..20}
 do
-    i=`expr $i + 1`
-
-    res=`lcm $i $res`
+    ans=`lcm $i $ans`
 done
-echo $res
+
+echo $ans
+

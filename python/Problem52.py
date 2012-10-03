@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''
 It can be seen that the number, 125874, and its double, 251748, contain exactly
@@ -20,3 +20,4 @@ if __name__ == '__main__':
     while not has_same_digits(res):
         res += 1
     print res
+

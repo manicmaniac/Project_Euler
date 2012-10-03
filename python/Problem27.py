@@ -18,31 +18,34 @@ e.g. |11| = 11 and |4| = 4
 Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
 '''
 
-from prime import *
-import time
+from sympy import *
 
-start = time.time()
+class Formula(object):
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
 
-def genodd(max):
-    return [i for i in range(-max + 1, max) if i % 2]
+    def formula(self, n=Symbol('n')):
+        return n * (n + self.a) + self.b
 
-def formula(n, a, b):
-    return n * (n + a) + b
+    def __repr__(self):
+        return str(expand(self.formula()))
 
-def test(m):
-    acc = []
-    for a in [i for i in genodd(m)]:
-        for b in genprime(m):
-            length = 0
-            for n in range(m):
-                if n * (n + a) % 2: break
-                if isprime(formula(n, a, b)):
-                    length += 1
-                else: break
-            yield length, a, b
+    @property
+    def length(self):
+        n = 0
+        while isprime(self.formula(n)):
+            n += 1
+        return n
 
 
 if __name__ == '__main__':
-    res = max(test(1000))
-    print res[1] * res[2]
-    print time.time() - start
+    max_length = 0
+    for a in range(-999, 999, 2):
+        for b in sieve.primerange(2, 999):
+            formula = Formula(a, b)
+            if max_length < formula.length:
+                max_length = formula.length
+                ans = a * b
+    print ans
+

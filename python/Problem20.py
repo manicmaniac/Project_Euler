@@ -1,11 +1,15 @@
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
+'''
+n! means n × (n − 1) × ... × 3 × 2 × 1
 
-def factorial(num):
-    return reduce(lambda x, y: x * y, [i for i in range(2, num + 1)])
-def sumDigits(num):
-    lst = str(num)
-    return reduce(lambda x, y: x + y, [int(i) for i in lst])
+For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
+and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 
-if __name__ == '__main__':
-    print(sumDigits(factorial(100)))
+Find the sum of the digits in the number 100!
+'''
+
+from math import factorial
+
+print(sum(map(int, str(factorial(100)))))
 

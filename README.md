@@ -7,11 +7,13 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
 ## Environment
 <table>
   <tr>
+    <th>Operating System</th>
     <th>Language</th>
     <th>Environment</th>
     <th>Installed Libraries</th>
   </tr>
   <tr>
+    <td rowspan="8">Ubuntu 11.10<br>Oneiric Ocelot</td>
     <td>Java</td>
     <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
     <td>-</td>
@@ -48,7 +50,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   </tr>
   <tr>
     <td>sh</td>
-    <td>dash v0.5.5.1-7.4</td>
+    <td>bash v4.2.10(1)</td>
     <td>-</td>
   </tr>
 </table>

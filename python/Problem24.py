@@ -11,3 +11,4 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 
 from itertools import permutations, islice
 
 print ''.join(map(str, (islice(permutations(range(10)), 10**6-1, 10**6).next())))
+

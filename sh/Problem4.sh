@@ -4,3 +4,32 @@
 #
 #Find the largest palindrome made from the product of two 3-digit numbers.
 
+function is_palindromic() {
+    local x=$1
+    local reversed=$(echo "$x" | sed '/\n/!G;s/\(.\)\(.*\n\)/&\2\1/;//D;s/.//')
+    if [ $x = $reversed ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function is_product_of_3digit() {
+    local x=$1
+    for i in {100..999}
+    do
+        if [ $(($x % $i)) -eq 0 ] && [ $(($x / $i)) -lt 1000 ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+for i in {998001..10000..-1}
+do
+    if `is_palindromic $i` && `is_product_of_3digit $i`; then
+        echo $i
+        break
+    fi
+done
+
