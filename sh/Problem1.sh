@@ -5,5 +5,5 @@
 #
 #Find the sum of all the multiples of 3 or 5 below 1000.
 
-cat <(seq 3 3 999) <(seq 5 5 999) | sort -u | paste -s | sed -e 's/\s/+/g' | bc
+echo `sort -mnu <(seq 3 3 999) <(seq 5 5 999)` | sed -e 's/\s/+/g' | bc
 
