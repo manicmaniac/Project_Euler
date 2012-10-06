@@ -9,17 +9,7 @@ How many routes are there through a 20×20 grid?
 ###
 
 function c() {
-    local {a=$1,b=$2,multi=1,fact=1}
-    local start=$(($b + 1))
-    for i in `seq $start $a`
-    do
-        multi=`bc <<<"$multi * $i"`
-    done
-    for j in `seq $b`
-    do
-        fact=`bc <<<"$fact * $j"`
-    done
-    echo `bc <<<"$multi / $fact"`
+    bc <<<$(seq -s '*' $(($2 + 1)) $1 | bc)/$(seq -s '*' $2 | bc)
 }
 
 c 40 20
