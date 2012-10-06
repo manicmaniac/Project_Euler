@@ -4,5 +4,5 @@
 #
 #Find the sum of all the multiples of 3 or 5 below 1000.
 
-echo `sort -mnu <(seq 3 3 999) <(seq 5 5 999)` | tr ' ' + | bc
+tr ' ' + <<<`sort -mnu <(seq 3 3 999) <(seq 5 5 999)` | bc
 
