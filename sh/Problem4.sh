@@ -5,9 +5,7 @@
 #Find the largest palindrome made from the product of two 3-digit numbers.
 
 function is_palindromic() {
-    local x=$1
-    local reversed=$(echo "$x" | sed '/\n/!G;s/\(.\)\(.*\n\)/&\2\1/;//D;s/.//')
-    if [ $x = $reversed ]; then
+    if [ $1 = `rev <(echo $1)` ]; then
         return 0
     else
         return 1
