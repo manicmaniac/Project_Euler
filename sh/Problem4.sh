@@ -5,11 +5,7 @@
 #Find the largest palindrome made from the product of two 3-digit numbers.
 
 function is_palindromic() {
-    if [ $1 = `rev <(echo $1)` ]; then
-        return 0
-    else
-        return 1
-    fi
+    test $1 = `rev <<<$1`
 }
 
 function is_product_of_3digit() {
