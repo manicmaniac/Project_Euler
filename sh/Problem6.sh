@@ -13,5 +13,5 @@
 #Find the difference between the sum of the squares of the first one hundred
 #natural numbers and the square of the sum.
 
-echo $(echo "(`seq -s + 1 100`)^2" | bc) - $(echo "`seq -s ^2+ 1 100`^2" | bc) | bc
+bc <<<"(`seq -s + 1 100`)^2-`seq -s ^2- 1 100`^2"
 
