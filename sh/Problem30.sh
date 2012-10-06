@@ -15,28 +15,6 @@ Find the sum of all the numbers that can be written as the sum of fifth powers
 of their digits.
 ###
 
-:<<'###'
-function is_conditional() {
-    local x=$1
-    if [ `echo $x | sed -e 's/./&^4+/g;s/.$//g' | bc` -eq $x ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-limit=`echo '9^5*6' | bc`
-
-for i in `seq 2 $limit`
-do
-    if `is_conditional $i`; then
-        let ans+=$i
-    fi
-done
-
-echo $ans
-###
-
 function is_conditional() {
     test $1 = `bc <(sed -e 's/./&^5+/g;s/.$//' <<<$1)`
 }
