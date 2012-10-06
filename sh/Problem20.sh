@@ -6,5 +6,5 @@
 #
 #Find the sum of the digits in the number 100!
 
-echo `printf '%d*' {2..100}`1 | bc | paste -s | sed -e 's/\\\s*//g;s/./&+/g;s/+$//' | bc
+echo `seq -s '*' 2 100 | bc` | tr -d '\\ ' | sed -e 's/./&+/g;s/+$//' | bc
 
