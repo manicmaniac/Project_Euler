@@ -23,12 +23,11 @@ divisors?
 ###
 
 function divisors() {
-    local {x=$1,res=0}
-    for i in `seq $x`
+    local limit=`bc <<<"sqrt($1)"`
+    local res=0
+    for i in `seq $limit`
     do
-        if [ $(($x % $i)) -eq 0 ]; then
-            let res++
-        fi
+        [ $(($1 % $i)) -eq 0 ] && let res+=2
     done
     echo $res
 }
@@ -36,7 +35,7 @@ function divisors() {
 ans=0; i=1
 while [ `divisors $ans` -lt 500 ]
 do
-    let ans+=$i
+    ans=$(($i*($i+1)/2))
     let i++
 done
 
