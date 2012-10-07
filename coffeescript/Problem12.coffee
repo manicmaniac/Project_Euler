@@ -24,13 +24,13 @@ divisors?
 divisors = (n) ->
 	res = 0
 	for i in [1..Math.sqrt(n)]
-		if n % i == 0
-			res +=2
+		if !(n % i) then res += 2
 	res
 
-triangle = (n) -> n * (n + 1) / 2
+_tri = (i=0) ->
+	-> i++; i * (i + 1) / 2
+tri = _tri()
 
-i = 0
-i++ while divisors(triangle(i)) < 500
-console.log(triangle(i))
+x while divisors((x = tri())) < 500
+console.log(x)
 
