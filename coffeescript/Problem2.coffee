@@ -8,14 +8,9 @@ By considering the terms in the Fibonacci sequence whose values do not exceed
 four million, find the sum of the even-valued terms.
 ###
 
-fibonacci = ->
-	[i, j] = [0, 1]
+_fib = (i=0, j=1) ->
 	-> ([_, i, j] = [i, j, i + j])[0]
-fib = fibonacci()
+fib = _fib()
 
-ans = 0
-while (i = fib()) < 4000000
-	ans += i; fib(); fib()
-
-console.log(ans)
+console.log((while (x = fib()) < 4e6 then fib(); fib(); x).reduce((x, y) -> x + y))
 
