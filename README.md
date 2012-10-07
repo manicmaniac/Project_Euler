@@ -21,12 +21,12 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   <tr>
     <td>CoffeeScript</td>
     <td>CoffeeScript v1.3.3 on Node.js v0.8.7</td>
-    <td>[node-bigint](http://github.com/substack/node-bigint)</td>
+    <td><a href="http://github.com/substack/node-bigint">node-bigint</a></td>
   </tr>
   <tr>
     <td>Javascript</td>
     <td>Node.js v0.8.7</td>
-    <td>[node-bigint](http://github.com/substack/node-bigint)</td>
+    <td><a href="http://github.com/substack/node-bigint">node-bigint</a></td>
   </tr>
   <tr>
     <td>PHP</td>
