@@ -7,12 +7,7 @@ numbers from 1 to 20?
 ###
 
 gcd = (m, n) ->
-	if n == 0
-		m
-	else if m < n
-		gcd(n, m)
-	else
-		gcd(n, m % n)
+	if n == 0 then m else if m < n then gcd(n, m) else gcd(n, m % n)
 
 lcm = (m, n) -> m * n / gcd(m, n)
 
