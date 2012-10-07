@@ -13,9 +13,9 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <th>Installed Libraries</th>
   </tr>
   <tr>
-    <td rowspan="8">Ubuntu 11.10<br>Oneiric Ocelot</td>
-    <td>Java</td>
-    <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
+    <td rowspan="9">Ubuntu 11.10<br>Oneiric Ocelot</td>
+    <td>C++</td>
+    <td>g++ v4.6.1</td>
     <td>-</td>
   </tr>
   <tr>
@@ -24,18 +24,23 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td><a href="http://github.com/substack/node-bigint">node-bigint</a></td>
   </tr>
   <tr>
+    <td>Java</td>
+    <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
+    <td>-</td>
+  </tr>
+  <tr>
     <td>Javascript</td>
     <td>Node.js v0.8.7</td>
     <td><a href="http://github.com/substack/node-bigint">node-bigint</a></td>
   </tr>
   <tr>
-    <td>PHP</td>
-    <td>v5.3.6 Suhosin-Patch</td>
+    <td>Perl</td>
+    <td>v5.12.4</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>Perl</td>
-    <td>v5.12.4</td>
+    <td>PHP</td>
+    <td>v5.3.6 Suhosin-Patch</td>
     <td>-</td>
   </tr>
   <tr>
