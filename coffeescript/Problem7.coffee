@@ -6,15 +6,15 @@ What is the 10 001st prime number?
 ###
 
 is_prime = (n) ->
-	if n == 2 then return true
+	return true if n == 2
 	for i in [2..Math.sqrt(n)]
-		if n % i == 0 then return false
-	return true
+		return false if n % i == 0
+	true
 
 _primes = (i=2) ->
 	-> i++ until is_prime(i); i++
 primes = _primes()
 
-for i in [1..10000] then primes()
+primes() for i in [1..10000]
 console.log(primes())
 
