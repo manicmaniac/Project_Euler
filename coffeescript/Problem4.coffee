@@ -14,7 +14,7 @@ product_of_3digits = (n) ->
 	for i in [100..999]
 		if n % i == 0 and 99 < n / i < 1000
 			return true
-	return false
+	false
 
 for i in [999..100]
 	if product_of_3digits(gen_palindrome(i))
