@@ -6,13 +6,15 @@ What is the 10 001st prime number?
 ###
 
 is_prime = (n) ->
+	if n == 2 then return true
 	for i in [2..Math.sqrt(n)]
 		if n % i == 0 then return false
 	return true
 
-i = c = 1
-while c < 10001
-	i+=2
-	if is_prime(i) then c++
-console.log(i)
+_primes = (i=2) ->
+	-> i++ until is_prime(i); i++
+primes = _primes()
+
+for i in [1..10000] then primes()
+console.log(primes())
 
