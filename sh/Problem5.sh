@@ -23,13 +23,12 @@ function gcd() {
 }
 
 function lcm() {
-    echo $(($(($1 * $2)) / $(gcd $1 $2)))
+    bc <<<$1*$2/`gcd $1 $2`
 }
 
-ans=1
 for i in {1..20}
 do
-    ans=`lcm $i $ans`
+    ans=`lcm $i ${ans:-1}`
 done
 
 echo $ans
