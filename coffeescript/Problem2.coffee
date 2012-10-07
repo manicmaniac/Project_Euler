@@ -12,5 +12,5 @@ _fib = (i=0, j=1) ->
 	-> ([_, i, j] = [i, j, i + j])[0]
 fib = _fib()
 
-console.log((while (x = fib()) < 4e6 then fib(); fib(); x).reduce((x, y) -> x + y))
+console.log((i for i in (x while (x = fib()) < 4e6) by 3).reduce((x, y) -> x + y))
 
