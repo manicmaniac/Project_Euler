@@ -11,8 +11,8 @@ factorial = (n) -> if n > 1 then [1..n].reduce((x, y) -> x * y) else 1
 
 factorial[0..9] = [0..9].map(factorial)
 
-is_curious = (n) ->
+isCurious = (n) ->
 	(factorial[Number(i)] for i in n.toString()).reduce((x, y) -> x + y) == n
 
-console.log([3..(factorial[9] * 7)].filter(is_curious).reduce((x, y) -> x + y))
+console.log([3..(factorial[9] * 7)].filter(isCurious).reduce((x, y) -> x + y))
 

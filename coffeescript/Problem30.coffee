@@ -14,8 +14,8 @@ Find the sum of all the numbers that can be written as the sum of fifth powers
 of their digits.
 ###
 
-is_conditional = (n) ->
+isConditional = (n) ->
 	(Math.pow(Number(i), 5) for i in n.toString()).reduce((x, y) -> x + y) == n
 
-console.log([2..354294].filter(is_conditional).reduce((x, y) -> x + y))
+console.log([2..354294].filter(isConditional).reduce((x, y) -> x + y))
 

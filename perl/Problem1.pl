@@ -6,13 +6,14 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 =cut
 
 sub fizzBuzz() {
-	while($i < 1000) {
-		if ($i % 3 == 0 or $i % 5 == 0) {
-			$res += $i
-		}
-		$i += 1
-	}
-	return $res
+    while($i < 1000) {
+        if ($i % 3 == 0 or $i % 5 == 0) {
+            $res += $i
+        }
+        $i += 1
+    }
+    return $res
 }
 
 print fizzBuzz
+

@@ -45,7 +45,7 @@ dic = {
 		1000:'onethousand'
 	}
 
-num_to_en = (n, res='') ->
+numToEn = (n, res='') ->
 	if n == 0
 		res
 	else if n == 1000
@@ -55,9 +55,9 @@ num_to_en = (n, res='') ->
 	else if n <= 20
 		res + dic[n]
 	else if 20 < n < 100
-		num_to_en(n % 10, res + dic[n - n % 10])
+		numToEn(n % 10, res + dic[n - n % 10])
 	else if n >= 100
-		num_to_en(n % 100, res + dic[Math.floor(n / 100)] + dic[100] + 'and')
+		numToEn(n % 100, res + dic[Math.floor(n / 100)] + dic[100] + 'and')
 
-console.log((num_to_en(i) for i in [1..1000]).join('').length)
+console.log((numToEn(i) for i in [1..1000]).join('').length)
 
