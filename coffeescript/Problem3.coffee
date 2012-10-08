@@ -10,5 +10,5 @@ factorize = (n) ->
 		if n % d then d++ else [n, res] = [n / d, res.concat(d)]
 	res
 
-console.log(Math.max.apply(null, factorize(600851475143)))
+console.log(Math.max(factorize(600851475143)...))
 
