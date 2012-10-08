@@ -27,5 +27,5 @@ for a in [2..100]
 	for b in [2..100]
 		arr.push(bigint(a).pow(b).toString())
 
-console.log(arr.unique().length)
+console.log arr.unique().length
 

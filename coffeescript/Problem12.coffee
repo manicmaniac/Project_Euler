@@ -32,5 +32,5 @@ _tri = (i=0) ->
 tri = _tri()
 
 x while divisors((x = tri())) < 500
-console.log(x)
+console.log x
 

@@ -59,5 +59,5 @@ numToEn = (n, res='') ->
 	else if n >= 100
 		numToEn(n % 100, res + dic[Math.floor(n / 100)] + dic[100] + 'and')
 
-console.log((numToEn(i) for i in [1..1000]).join('').length)
+console.log (numToEn(i) for i in [1..1000]).join('').length
 

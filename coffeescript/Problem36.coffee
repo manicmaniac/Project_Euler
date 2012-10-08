@@ -12,5 +12,5 @@ isPalindromic = (n) ->
 	d= (Number(i) for i in String(n))
 	d.join()== d.reverse().join()
 
-console.log(([1..1e6].filter((x) -> isPalindromic(x) and isPalindromic(x.toString(2)))).reduce((x, y) -> x + y))
+console.log ([1..1e6].filter((x) -> isPalindromic(x) and isPalindromic(x.toString(2)))).reduce((x, y) -> x + y)
 

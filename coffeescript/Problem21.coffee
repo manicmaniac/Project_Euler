@@ -18,5 +18,5 @@ hasAmicable = (n) ->
 	spd = properDivisors(n).reduce((x, y) -> x + y)
 	spd != n and properDivisors(spd).reduce((x, y) -> x + y) == n
 
-console.log([2..9999].filter(hasAmicable).reduce((x, y) -> x + y))
+console.log [2..9999].filter(hasAmicable).reduce((x, y) -> x + y)
 

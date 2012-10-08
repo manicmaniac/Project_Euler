@@ -13,6 +13,6 @@ for m in [1..23]
 	for n in [1..m]
 		triplet = [m*m-n*n, 2*m*n, m*m+n*n]
 		if triplet.reduce((x, y) -> x + y) == 1000
-			console.log(triplet.reduce((x, y) -> x * y))
+			console.log triplet.reduce((x, y) -> x * y)
 			break
 

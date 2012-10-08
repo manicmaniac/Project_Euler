@@ -17,5 +17,5 @@ of their digits.
 isConditional = (n) ->
 	(Math.pow(Number(i), 5) for i in n.toString()).reduce((x, y) -> x + y) == n
 
-console.log([2..354294].filter(isConditional).reduce((x, y) -> x + y))
+console.log [2..354294].filter(isConditional).reduce((x, y) -> x + y)
 

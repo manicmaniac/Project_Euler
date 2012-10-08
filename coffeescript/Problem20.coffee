@@ -9,13 +9,7 @@ Find the sum of the digits in the number 100!
 
 bigint = require('bigint')
 
-factorial = (x) ->
-	[n, res] = [bigint(x), bigint(1)]
-	while n.gt(1)
-		res = res.mul(n)
-		n = n.sub(1)
-	res.toString()
+factorial = (x) -> [1..x].map(String).reduce(bigint.mul).toString()
 	
-
-console.log((Number(i) for i in factorial(100)).reduce((x, y) -> x + y))
+console.log (Number(i) for i in factorial(100)).reduce((x, y) -> x + y)
 

@@ -31,5 +31,5 @@ while i < 1000000
 		max = current
 		ans = i
 	i+=2
-console.log(ans)
+console.log ans
 

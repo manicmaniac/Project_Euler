@@ -29,7 +29,7 @@ _fib = (i=bigint(0), j=bigint(1)) ->
 	-> ([_, i, j] = [i, j, i.add(j)])[0]
 fib = _fib()
 
-i = 0
-i++ while (x = fib().toString()).length < 1000
-console.log(i)
+ans = 0
+ans++ while (x = fib().toString()).length < 1000
+console.log ans
 

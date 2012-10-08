@@ -19,5 +19,5 @@ d = (n) ->
 		i++
 	res[n]
 
-console.log(d(1) * d(10) * d(1e2) * d(1e3) * d(1e4) * d(1e5) * d(1e6))
+console.log d(1) * d(10) * d(1e2) * d(1e3) * d(1e4) * d(1e5) * d(1e6)
 

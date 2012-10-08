@@ -14,5 +14,5 @@ sieve = (limit) ->
 		if Math.pow(primes[primes.length - 1], 2) > search[search.length - 1]
 			return primes.concat(search)
 
-console.log(sieve(2000000).reduce((x, y) -> x + y))
+console.log sieve(2000000).reduce((x, y) -> x + y)
 

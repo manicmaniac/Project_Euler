@@ -22,5 +22,5 @@ names = data.replace(/"/g, '').split(',').sort()
 score = (name) ->
 	(i.charCodeAt() - 64 for i in name).reduce((x, y) -> x + y)
 
-console.log((score(name) * (index + 1) for name, index in names).reduce((x, y) -> x + y))
+console.log (score(name) * (index + 1) for name, index in names).reduce((x, y) -> x + y)
 

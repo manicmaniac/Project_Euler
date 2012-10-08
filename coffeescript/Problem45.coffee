@@ -26,5 +26,5 @@ isPentagonal = (n) ->
 
 hexagonal()
 (x until isTriangle(x = hexagonal()) and isPentagonal(x)) for i in [0, 1]
-console.log(x)
+console.log x
 

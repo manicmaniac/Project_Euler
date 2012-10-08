@@ -18,6 +18,6 @@ productOf3Digits = (n) ->
 
 for i in [999..100]
 	if productOf3Digits(genPalindrome(i))
-		console.log(genPalindrome(i))
+		console.log genPalindrome(i)
 		break
 

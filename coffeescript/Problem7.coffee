@@ -16,5 +16,5 @@ _primes = (i=2) ->
 primes = _primes()
 
 primes() for i in [1..10000]
-console.log(primes())
+console.log primes()
 

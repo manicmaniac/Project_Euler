@@ -10,5 +10,5 @@ How many routes are there through a 20×20 grid?
 c = (n, r) ->
 	Math.floor([n...r].reduce((x, y) -> x * y) / [1..r].reduce((x, y) -> x * y))
 
-console.log(c(40, 20))
+console.log c(40, 20)
 
