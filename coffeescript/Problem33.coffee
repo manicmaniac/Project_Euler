@@ -12,24 +12,23 @@ If the product of these four fractions is given in its lowest common terms,
 find the value of the denominator.
 ###
 
-class Rational extends Number
-	constructor: (@numer, @denom) ->
+gcd = (x, y) ->
+	return gcd(y, x) if x < y
+	return x if y == 0
+	gcd(y, x % y)
 
-	toString: ->
-		div = gcd(@numer, @denom)
-		[numer, denom] = [@numer / div, @denom / div]
-		if denom == 1
-			"#{numer}"
-		else
-			"#{numer}/#{denom}"
+# ij / jk
+res = []
+for i in [1..9]
+	for j in [1..9]
+		for k in [1..9]
+			nume = Number("#{i}#{j}")
+			deno = Number("#{j}#{k}")
+			if nume < deno and nume / deno == i / k
+				res.push([Number("#{i}#{j}"), Number("#{j}#{k}")])
 
-	toDouble: -> @numer / @denom
-	valueOf: -> @numer / @denom
+nume = (i[0] for i in res).reduce((x, y) -> (x * y))
+deno = (i[1] for i in res).reduce((x, y) -> (x * y))
 
-	gcd = (s, t) ->
-		return gcd(t, s) if s < t
-		if t == 0 then s else gcd(t, s % t)
-
-console.log new Rational(12, 1).toString()
-console.log new Rational(12, 21) + 1
+console.log Math.max(nume, deno) / gcd(nume, deno)
 
