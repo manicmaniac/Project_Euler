@@ -16,16 +16,12 @@ and 2 ≤ b ≤ 100?
 ###
 
 bigint = require('bigint')
-
-Array::unique = ->
-  output = {}
-  output[@[key]] = @[key] for key in [0...@length]
-  value for key, value of output
+_ = require('underscore')
 
 arr = []
 for a in [2..100]
 	for b in [2..100]
-		arr.push(bigint(a).pow(b).toString())
+		arr.push(String(bigint.pow(a, b)))
 
-console.log arr.unique().length
+console.log _.uniq(arr).length
 
