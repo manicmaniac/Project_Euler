@@ -6,12 +6,6 @@ get 3, 5, 6 and 9. The sum of these multiples is 23.
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
-$res = 0;
-for ($i=1; $i<1000; $i++) {
-	if ($i % 3 == 0 || $i % 5 == 0) {
-		$res += $i;
-	}
-}
-echo $res;
+echo array_sum(array_unique(array_merge(range(0, 999, 3), range(0, 999, 5))));
 
 ?>
