@@ -50,11 +50,20 @@ decrypt = (buffer, key) ->
 	arr.map((x) -> String.fromCharCode(x)).join('')
 
 isText = (string) ->
+	[lower, amount] = [0, 0]
 	for char in string
 		return false unless char in ASCII
-	true
+		if char in LOWERS
+			lower++
+		amount++
+	lower / amount > 0.7
 
+candidates = []
 for key in keys
 	res = decrypt(data, key)
-	console.log(res) if isText(res)
+	candidates.push(res) if isText(res)
+original = candidates.filter((x) -> x.match(/\ the\ /))[0]
+ans = (char.charCodeAt() for char in original).reduce((x, y) -> x + y)
+console.log(ans)
+
 
