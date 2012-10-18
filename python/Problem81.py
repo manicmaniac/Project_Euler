@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
 '''
 In the 5 by 5 matrix below, the minimal path sum from the top left to the
 bottom right, by only moving to the right and down, is indicated in bold red
