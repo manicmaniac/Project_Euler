@@ -17,13 +17,5 @@ How many Sundays fell on the first of the month during the twentieth century (1
 Jan 1901 to 31 Dec 2000)?
 ###
 
-{
-for year in {1901..2000}
-do
-    for month in `printf '%02d ' {1..12}`
-    do
-        env LANG=C date --date=${year}${month}01 +%a
-    done
-done
-} | grep -c 'Sun'
+{ for i in {1901..2000}{01..12}01; do env LANG=C date -d$i +%a; done } | grep -c 'Sun'
 
