@@ -11,12 +11,14 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <th>Language</th>
     <th>Environment</th>
     <th>Installed Libraries</th>
+    <th>Progress</th>
   </tr>
   <tr>
     <td rowspan="11">Ubuntu 11.10<br>Oneiric Ocelot</td>
     <td>C++</td>
     <td>g++ v4.6.1</td>
     <td>-</td>
+    <td>★</td>
   </tr>
   <tr>
     <td>CoffeeScript</td>
@@ -26,6 +28,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
         <a href="http://github.com/substack/node-bigint">node-bigint</a><br>
         <a href="https://github.com/thegoleffect/node-itertools">node-itertools</a>
     </td>
+    <td>★★★★</td>
   </tr>
   <tr>
     <td>Java</td>
@@ -40,16 +43,19 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
         <a href="http://github.com/substack/node-bigint">node-bigint</a><br>
         <a href="https://github.com/thegoleffect/node-itertools">node-itertools</a>
     </td>
+    <td>★★★</td>
   </tr>
   <tr>
     <td>Perl</td>
     <td>v5.12.4</td>
     <td>-</td>
+    <td>☆</td>
   </tr>
   <tr>
     <td>PHP</td>
     <td>v5.3.6 Suhosin-Patch</td>
     <td>-</td>
+    <td>★</td>
   </tr>
   <tr>
     <td>Python</td>
@@ -58,25 +64,30 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
         <a href="http://sympy.org">Sympy</a><br>
         <a href="http://numpy.scipy.org">Numpy</a>
     </td>
+    <td>★★★★☆</td>
   </tr>
   <tr>
     <td>Scala</td>
     <td>v2.9.0.1</td>
     <td>-</td>
+    <td>★★★★☆</td>
   </tr>
   <tr>
     <td>Scheme</td>
     <td>Gauche v0.9.1</td>
     <td>-</td>
+    <td>★</td>
   </tr>
   <tr>
     <td>sh</td>
     <td>bash v4.2.10(1)</td>
     <td>-</td>
+    <td>★★★</td>
   </tr>
   <tr>
     <td>Vimscript</td>
     <td>Vi IMproved 7.3</td>
     <td>-</td>
+    <td>☆</td>
   </tr>
 </table>
