@@ -33,8 +33,7 @@ Number::reverse = ->
 	Number((char for char in @.toString()).reverse().join(''))
 
 isPalindromic = (n) ->
-	d = (Number(i) for i in String(n))
-	d.join() == d.reverse().join()
+	(d = ((Number i) for i in (String n))).join() == d.reverse().join()
 
 isLychrel = (n) -> ((n, i) ->
 		res = n + n.reverse()

@@ -15,7 +15,7 @@ How many starting numbers below ten million will arrive at 89?
 ###
 
 sumOfSquareDigits = (n) ->
-	(Math.pow(Number(i), 2) for i in String(n)).reduce((x, y) -> x + y)
+	(Math.pow((Number i), 2) for i in (String n)).reduce((x, y) -> x + y)
 
 chain = (n, proc=[]) ->
 	if n in proc

@@ -15,8 +15,7 @@ d[1] × d[10] × d[100] × d[1000] × d[10000] × d[100000] × d[1000000]
 d = (n) ->
 	[i, res] = [0, '']
 	while res.length <= n
-		res = res + i.toString()
-		i++
+		res += String i++
 	res[n]
 
 console.log d(1) * d(10) * d(1e2) * d(1e3) * d(1e4) * d(1e5) * d(1e6)

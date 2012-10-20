@@ -7,15 +7,15 @@ Considering natural numbers of the form, a^b, where a, b < 100, what is the
 maximum digital sum?
 ###
 
-bigint = require('bigint')
+Bigint = require('bigint')
 
 sumDigits = (n) ->
-	(Number(i) for i in n.toString()).reduce((x, y) -> x + y)
+	((Number i) for i in (String n)).reduce((x, y) -> x + y)
 
 max = 0
 for a in [1..99]
 	for b in [1..99]
-		current = sumDigits(bigint(a).pow(b))
+		current = sumDigits Bigint.pow(a, b)
 		max = current if max < current
 console.log max
 
