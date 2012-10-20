@@ -65,8 +65,18 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>-</td>
   </tr>
   <tr>
+    <td>Scheme</td>
+    <td>Gauche v0.9.1</td>
+    <td>-</td>
+  </tr>
+  <tr>
     <td>sh</td>
     <td>bash v4.2.10(1)</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>Vimscript</td>
+    <td>Vi IMproved 7.3</td>
     <td>-</td>
   </tr>
 </table>
