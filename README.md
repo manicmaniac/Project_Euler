@@ -54,7 +54,10 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   <tr>
     <td>Python</td>
     <td>CPython v2.7.2</td>
-    <td><a href="http://sympy.org">Sympy</a>, <a href="http://numpy.scipy.org">Numpy</a></td>
+    <td>
+        <a href="http://sympy.org">Sympy</a><br>
+        <a href="http://numpy.scipy.org">Numpy</a>
+    </td>
   </tr>
   <tr>
     <td>Scala</td>
