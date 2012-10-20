@@ -6,9 +6,9 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 ###
 
 genPalindrome = (n) ->
-	str = for i in String(n) then i
-	rev = (for i in String(n) then i).reverse()
-	Number(str.concat(rev).join(''))
+	str = (i for i in (String n))
+	rev = (i for i in (String n)).reverse()
+	Number str.concat(rev).join('')
 
 productOf3Digits = (n) ->
 	for i in [100..999]

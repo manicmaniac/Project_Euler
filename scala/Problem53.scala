@@ -23,6 +23,7 @@ object Problem53 {
   }
 
   def main(args:Array[String]) {
-    print(1 to 100 map(n => (1 to n).count(c(n, _) > 1000000)) sum)
+    println(1 to 100 map(n => (1 to n).count(c(n, _) > 1000000)) sum)
   }
 }
+

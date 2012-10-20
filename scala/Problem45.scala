@@ -22,3 +22,4 @@ object Problem48 {
     println(triangle.filter(p => pentagonal.takeWhile(_<=p).exists(_==p) && hexagonal.takeWhile(_<=p).exists(_==p))(2))
   }
 }
+

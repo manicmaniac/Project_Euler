@@ -33,6 +33,7 @@ object Problem43 {
         (List(i, a, b%100%10, c%100%10, d%100%10, e%100%10, f%100%10, g%100%10).mkString).toLong
       }
     }
-    print(conditional sum)
+    println(conditional sum)
   }
 }
+

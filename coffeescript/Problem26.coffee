@@ -19,11 +19,11 @@ Find the value of d < 1000 for which ^1/[d] contains the longest recurring
 cycle in its decimal fraction part.
 ###
 
-bigint = require('bigint')
+Bigint = require('bigint')
 
 felm = (d) ->
 	for length in [1..d]
-		if bigint(10).pow(length).mod(d).eq(1)
+		if (Bigint 10).pow(length).mod(d).eq 1
 			return length
 	return 0
 		

@@ -24,6 +24,7 @@ object Problem42 {
   def isTriangle(x:Int) = ((math.sqrt(8*x+1)-1) / 2) % 1 == 0
 
   def main(args:Array[String]) {
-    print(data.map(_.toString.map(_.toInt-64).sum).filter(isTriangle).length)
+    println(data.map(_.toString.map(_.toInt-64).sum).filter(isTriangle).length)
   }
 }
+

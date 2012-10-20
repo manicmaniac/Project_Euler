@@ -9,6 +9,7 @@ Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 object Problem34 {
   def main(args:Array[String]) {
-    print((3 to 2540160).filter(n => n == n.toString.map(_.asDigit).map(1 to _ product).sum) sum)
+    println((3 to 2540160).filter(n => n == n.toString.map(_.asDigit).map(1 to _ product).sum) sum)
   }
 }
+

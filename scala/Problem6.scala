@@ -12,6 +12,7 @@ Find the difference between the sum of the squares of the first one hundred natu
 
 object Problem6 {
   def main(args:Array[String]) {
-    print((math.pow((1 to 100).sum, 2) - (1 to 100).map(math.pow(_, 2)).sum).toInt)
+    println((math.pow((1 to 100).sum, 2) - (1 to 100).map(math.pow(_, 2)).sum).toInt)
   }
 }
+

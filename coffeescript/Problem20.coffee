@@ -7,9 +7,9 @@ and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 Find the sum of the digits in the number 100!
 ###
 
-bigint = require('bigint')
+Bigint = require('bigint')
 
-factorial = (x) -> [1..x].map(String).reduce(bigint.mul).toString()
+factorial = (x) -> String [1..x].map(String).reduce(Bigint.mul)
 	
-console.log (Number(i) for i in factorial(100)).reduce((x, y) -> x + y)
+console.log ((Number i) for i in factorial 100).reduce((x, y) -> x + y)
 

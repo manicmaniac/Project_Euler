@@ -32,6 +32,7 @@ object Problem17 {
   }
 
   def main(args:Array[String]) {
-    print(((1 to 1000).map(numToEn(_, "")).mkString).length)
+    println(((1 to 1000) map(numToEn(_, "")) mkString) length)
   }
 }
+

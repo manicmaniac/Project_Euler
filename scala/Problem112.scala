@@ -43,6 +43,6 @@ object Problem112 {
       i += 1
       if(isBouncy(i)) bouncies += 1
     }
-    print(i)
+    println(i)
   }
 }

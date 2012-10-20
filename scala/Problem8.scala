@@ -26,6 +26,7 @@ object Problem8 {
 71636269561882670428252483600823257530420752963450""".split("\r\n").mkString
 
   def main(args:Array[String]) {
-    print(data.sliding(5).map(_.map(_.asDigit).product).max)
+    println(data.sliding(5).map(_.map(_.asDigit).product).max)
   }
 }
+

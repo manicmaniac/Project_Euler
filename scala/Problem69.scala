@@ -34,6 +34,7 @@ Find the value of n ≤ 1,000,000 for which n/φ(n) is a maximum.
 object Problem69 {
   val primes = Stream.from(2) filter(n => !(2 until n).exists(n%_==0))
   def main(args:Array[String]) {
-    print(primes.take(7) product)
+    println(primes.take(7) product)
   }
 }
+

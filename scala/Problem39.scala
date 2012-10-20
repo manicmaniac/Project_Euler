@@ -12,6 +12,7 @@ object Problem39 {
     (1 to perimeter-1).flatMap(a => (1 to a).map(b => List(b, a, math.sqrt(a*a+b*b))).filter(_.sum == perimeter))
   }
   def main(args:Array[String]) {
-    print((1 to 1000).map(n => (findPytagorean(n).length, n)).max._2)
+    println((1 to 1000).map(n => (findPytagorean(n).length, n)).max._2)
   }
 }
+

@@ -19,6 +19,7 @@ object Problem76 {
     else partition(k + 1, n) + partition(k, n - k)
   }
   def main(args:Array[String]) {
-    print(partition(1L, 100L) - 1)
+    println(partition(1L, 100L) - 1)
   }
 }
+

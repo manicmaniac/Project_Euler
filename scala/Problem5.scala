@@ -3,6 +3,7 @@
 
 object Problem5 {
   def main(args:Array[String]) {
-    print(BigInt(1) to 20 reduce((m, n) => m*n/m.gcd(n)))
+    println(BigInt(1) to 20 reduce((m, n) => m * n / m.gcd(n)))
   }
 }
+

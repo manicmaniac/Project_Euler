@@ -29,6 +29,7 @@ object Problem46 {
   }
 
   def main(args:Array[String]) {
-    print(oddComposites.dropWhile(isPrimeAndSquare).head)
+    println(oddComposites.dropWhile(isPrimeAndSquare).head)
   }
 }
+

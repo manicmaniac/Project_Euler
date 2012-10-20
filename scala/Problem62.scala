@@ -25,6 +25,7 @@ object Problem62 {
   }
 
   def main(args:Array[String]) {
-    print(filterAnagram((1L to 9999).map(cube)).filter(_._1 == 4).min._2)
+    println(filterAnagram((1L to 9999).map(cube)).filter(_._1 == 4).min._2)
   }
 }
+

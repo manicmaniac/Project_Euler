@@ -16,6 +16,7 @@ object Problem97 {
     case _ => f(n-1, res.toString.takeRight(10).toLong << 1)
   }
   def main(args:Array[String]) {
-    print((28433 * f(7830457) + 1).toString.takeRight(10))
+    println((28433 * f(7830457) + 1).toString.takeRight(10))
   }
 }
+
