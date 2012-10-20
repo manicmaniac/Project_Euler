@@ -18,7 +18,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>C++</td>
     <td>g++ v4.6.1</td>
     <td>-</td>
-    <td>★</td>
+    <td>☆</td>
   </tr>
   <tr>
     <td>CoffeeScript</td>
@@ -34,6 +34,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>Java</td>
     <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
     <td>-</td>
+    <td>★</td>
   </tr>
   <tr>
     <td>Javascript</td>
@@ -76,7 +77,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>Scheme</td>
     <td>Gauche v0.9.1</td>
     <td>-</td>
-    <td>★</td>
+    <td>★☆</td>
   </tr>
   <tr>
     <td>sh</td>
