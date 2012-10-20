@@ -28,3 +28,4 @@ object Problem92 {
     println((1 to 9999999 filter(isChainLast89)).length)
   }
 }
+

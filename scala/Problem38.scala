@@ -26,6 +26,7 @@ object Problem38 {
   }
 
   def main(args:Array[String]) {
-    print((1 to 9876).map(concatProduct(_, 1, 0)).filter(isPandigital) max)
+    println((1 to 9876).map(concatProduct(_, 1, 0)).filter(isPandigital) max)
   }
 }
+

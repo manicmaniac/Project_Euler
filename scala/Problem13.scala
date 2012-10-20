@@ -106,6 +106,7 @@ object Problem13 {
 53503534226472524250874054075591789781264330331690""" ).lines
 
   def main(args:Array[String]) {
-    print(data.map(BigInt(_)).sum.toString.take(10))
+    println(data.map(BigInt(_)).sum.toString.take(10))
   }
 }
+

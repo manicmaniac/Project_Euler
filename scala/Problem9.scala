@@ -11,6 +11,6 @@ Find the product abc.
 
 object Problem9 {
   def main(args:Array[String]) {
-    print((1 to 23).flatMap(m => (1 to m).map(n => List(m*m-n*n, 2*m*n, m*m+n*n))).find(_.sum == 1000).get.product)
+    println((1 to 23).flatMap(m => (1 to m).map(n => List(m*m-n*n, 2*m*n, m*m+n*n))).find(_.sum == 1000).get.product)
   }
 }

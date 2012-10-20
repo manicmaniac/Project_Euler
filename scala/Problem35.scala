@@ -20,6 +20,7 @@ object Problem35 {
   val circularPrimes = candidates.filter(rotations(_).forall(isPrime))
 
   def main(args:Array[String]) {
-    print(circularPrimes.length)
+    println(circularPrimes.length)
   }
 }
+

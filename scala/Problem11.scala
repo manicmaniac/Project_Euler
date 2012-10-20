@@ -34,6 +34,6 @@ object Problem11 {
   val data = rawdata.lines.map(_.split(" "))
 
   def main(args:Array[String]) {
-    print(data)
+    println(data)
   }
 }

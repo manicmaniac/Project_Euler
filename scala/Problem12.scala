@@ -27,6 +27,7 @@ object Problem12 {
   def numberOfDivisors(n:Int) = if(n == 1) 1 else (1 to math.sqrt(n).toInt).filter(n % _ == 0).length * 2
 
   def main(args:Array[String]) {
-    print(triangle.find(numberOfDivisors(_) > 500).get)
+    println(triangle.find(numberOfDivisors(_) > 500).get)
   }
 }
+

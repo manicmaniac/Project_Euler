@@ -42,6 +42,7 @@ object Problem55 {
   }
 
   def main(args:Array[String]) {
-    print(BigInt(1) to 9999 filter(isLychrel(_, 50, 0)) length)
+    println(BigInt(1) to 9999 filter(isLychrel(_, 50, 0)) length)
   }
 }
+

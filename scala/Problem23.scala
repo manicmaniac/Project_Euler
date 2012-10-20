@@ -38,3 +38,4 @@ object Problem23 {
     println((1 to max).filter(isSumOf2Abundants(_, abundants)))
   }
 }
+

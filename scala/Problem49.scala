@@ -23,7 +23,7 @@ object Problem49 {
 
   def main(args:Array[String]) {
     val fourDigitPrimes = primes.dropWhile(999>).takeWhile(3333>).toList
-    print(fourDigitPrimes.flatMap(x => (1000 to 3333 by 2).map(y => mkSeq(x, y))).filter(z => sameDigits(z) && z.forall(isPrime)).apply(1).mkString)
+    println(fourDigitPrimes.flatMap(x => (1000 to 3333 by 2).map(y => mkSeq(x, y))).filter(z => sameDigits(z) && z.forall(isPrime)).apply(1).mkString)
   }
 }
 

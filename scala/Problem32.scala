@@ -22,6 +22,7 @@ object Problem32 {
   }
 
   def main(args:Array[String]) {
-    print(perms.filter(isThroughPandigital).map(_.slice(5, 9).toInt).distinct.sum)
+    println(perms.filter(isThroughPandigital).map(_.slice(5, 9).toInt).distinct.sum)
   }
 }
+

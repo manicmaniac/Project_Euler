@@ -19,6 +19,7 @@ object Problem22 {
   val data = Source.fromFile(FILE).mkString.replace("\"", "").split(",").toList.sorted
 
   def main(args:Array[String]) {
-    print(data.map(_.map(_.toInt-64) sum).zipWithIndex.map(p => p._1 * (p._2+1)) sum)
+    println(data.map(_.map(_.toInt-64) sum).zipWithIndex.map(p => p._1 * (p._2+1)) sum)
   }
 }
+

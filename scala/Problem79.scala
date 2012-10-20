@@ -26,3 +26,4 @@ object Problem79 {
     data foreach println
   }
 }
+

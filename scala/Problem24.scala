@@ -12,6 +12,7 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5,
 
 object Problem24 {
   def main(args:Array[String]) {
-    print((0 to 9).permutations.slice(999999,10000000).next.mkString)
+    println((0 to 9).permutations.slice(999999,10000000).next.mkString)
   }
 }
+

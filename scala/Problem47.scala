@@ -26,6 +26,7 @@ object Problem47 {
     else findConditional(n, i+1)
   }
   def main(args:Array[String]) {
-    print(findConditional(4))
+    println(findConditional(4))
   }
 }
+

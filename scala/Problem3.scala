@@ -10,7 +10,7 @@ object Problem3 {
     case _ => factorize(n, d+1, res)
   }
   def main(args:Array[String]) {
-    print(factorize(600851475143L) max)
+    println(factorize(600851475143L) max)
   }
 }
 
