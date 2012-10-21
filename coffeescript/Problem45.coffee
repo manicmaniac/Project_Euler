@@ -15,16 +15,12 @@ _hexagonal = (n=0) ->
 	-> n++; n * (2 * n - 1)
 hexagonal = _hexagonal()
 
-isTriangle = (n) ->
-	res = (Math.sqrt(8 * n + 1) - 1) / 2
-	res == Math.floor(res)
-
 isPentagonal = (n) ->
 	res = (Math.sqrt(24 * n + 1) + 1) / 6
 	res == Math.floor(res)
 
 
 hexagonal()
-(x until isTriangle(x = hexagonal()) and isPentagonal(x)) for i in [0, 1]
+(x until (x = hexagonal()) and isPentagonal(x)) for i in [0, 1]
 console.log x
 
