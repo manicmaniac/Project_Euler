@@ -26,5 +26,5 @@ for i in permutations
 	if (Number i[0..1]) * (Number i[2..4]) == current
 		res.push(current)
 
-console.log _.unique(res).reduce((x, y) -> x + y)
+console.log _.uniq(res).reduce((x, y) -> x + y)
 
