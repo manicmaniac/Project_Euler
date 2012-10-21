@@ -26,7 +26,7 @@ factorize = (n) ->
             d++
     res
 
-distinctFactors = (n) -> _.unique(factorize(n)).length
+distinctFactors = (n) -> _.uniq(factorize(n), true).length
 
 i = 0
 while true
