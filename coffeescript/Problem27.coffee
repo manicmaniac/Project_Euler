@@ -39,9 +39,8 @@ isPrime = (n) ->
 		return false if n % i == 0
 	true
 
-_primes = (i=2) -> -> i++ until isPrime(i); i++
-primes = _primes()
-primeList = (x while (x = primes()) < 1000)
+primes = do (i=2) -> -> i++ until isPrime(i); i++
+primeList = (x while (x = primes()) < 1e3)
 
 MAX = 999; MIN = -MAX
 maxLength = 0
@@ -52,3 +51,4 @@ for a in [MIN..MAX]
 			maxLength = current
 			ans = a * b
 console.log ans
+
