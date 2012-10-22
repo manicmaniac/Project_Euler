@@ -11,5 +11,5 @@ Bigint = require('bigint')
 
 factorial = (x) -> String [1..x].map(String).reduce(Bigint.mul)
 	
-console.log ((Number i) for i in factorial 100).reduce((x, y) -> x + y)
+console.log (Number i for i in factorial 100).reduce((x, y) -> x + y)
 
