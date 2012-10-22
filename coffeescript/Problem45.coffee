@@ -11,13 +11,10 @@ It can be verified that T[285] = P[165] = H[143] = 40755.
 Find the next triangle number that is also pentagonal and hexagonal.
 ###
 
-_hexagonal = (n=0) ->
-	-> n++; n * (2 * n - 1)
-hexagonal = _hexagonal()
+hexagonal = do (n=0) -> -> ++ n * (2 * n - 1)
 
 isPentagonal = (n) ->
-	res = (Math.sqrt(24 * n + 1) + 1) / 6
-	res == Math.floor(res)
+	(res = (Math.sqrt(24 * n + 1) + 1) / 6) == Math.floor(res)
 
 
 hexagonal()
