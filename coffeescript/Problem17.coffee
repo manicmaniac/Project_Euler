@@ -45,19 +45,20 @@ dic = {
 		1000:'onethousand'
 	}
 
-numToEn = (n, res='') ->
-	if n == 0
-		res
-	else if n == 1000
-		dic[1000]
-	else if n % 100 == 0
-		res + dic[n / 100] + dic[100]
-	else if n <= 20
-		res + dic[n]
-	else if 20 < n < 100
-		numToEn(n % 10, res + dic[n - n % 10])
-	else if n >= 100
-		numToEn(n % 100, res + dic[Math.floor(n / 100)] + dic[100] + 'and')
+numToEn = (n) ->
+	do (n, res='') ->
+		if n == 0
+			res
+		else if n == 1000
+			dic[1000]
+		else if n % 100 == 0
+			res + dic[n / 100] + dic[100]
+		else if n <= 20
+			res + dic[n]
+		else if 20 < n < 100
+			arguments.callee(n % 10, res + dic[n - n % 10])
+		else if n >= 100
+			arguments.callee(n % 100, res + dic[Math.floor(n / 100)] + dic[100] + 'and')
 
-console.log (numToEn(i) for i in [1..1000]).join('').length
+console.log [1..1e3].map(numToEn).join('').length
 
