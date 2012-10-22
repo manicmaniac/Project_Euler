@@ -8,14 +8,9 @@ maximum digital sum?
 ###
 
 Bigint = require('bigint')
+_ = require('underscore')
 
-sumDigits = (n) ->
-	((Number i) for i in (String n)).reduce((x, y) -> x + y)
+sumDigits = (n) -> (Number i for i in String n).reduce((x, y) -> x + y)
 
-max = 0
-for a in [1..99]
-	for b in [1..99]
-		current = sumDigits Bigint.pow(a, b)
-		max = current if max < current
-console.log max
+console.log _(_(sumDigits(Bigint.pow(a, b)) for a in [1..99] for b in [1..99]).flatten()).max()
 
