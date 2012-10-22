@@ -20,6 +20,7 @@ bottom right by only moving right and down.
 ###
 
 fs = require('fs')
+_ = require('underscore')
 
 FILE = './matrix.txt'
 
@@ -27,12 +28,10 @@ rawdata = fs.readFileSync(FILE, 'ascii')
 data = rawdata.replace(/\r/g, '').split('\n').map((x) -> x.split(',').map(Number))
 data.pop()
 
-min = Math.min
-
 for y in [0...data.length]
     for x in [0...data.length]
         if x * y
-            data[y][x] += min(data[y - 1][x], data[y][x - 1])
+            data[y][x] += Math.min(data[y - 1][x], data[y][x - 1])
         else unless x + y
             continue
         else unless x
@@ -40,5 +39,5 @@ for y in [0...data.length]
         else unless y
             data[y][x] += data[y][x - 1]
 
-console.log data
+console.log _(data.reverse()).invoke('reverse')[0][0]
 
