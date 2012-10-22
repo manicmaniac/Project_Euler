@@ -16,17 +16,19 @@ What is the first of these numbers?
 
 _ = require('underscore')
 
+count = do (n=0) -> -> ++ n
+
 factorize = (n) ->
     [d, res] = [2, []]
     while n >= d
-        if !(n % d)
-            res.push(d)
+        unless n % d
+            res.push d
             n /= d
         else
             d++
     res
 
-distinctFactors = (n) -> _.uniq(factorize(n), true).length
+distinctFactors = (n) -> _.uniq(factorize n, true).length
 
 i = 0
 while true
