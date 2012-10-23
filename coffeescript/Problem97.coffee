@@ -13,7 +13,7 @@ Find the last ten digits of this prime number.
 powLastDigits = (n) ->
 	res = 2
 	for i in [1...n]
-		res = Number(String(res).slice(-10))
+		res = Number (String res).slice -10
 		res *= 2
 	res
 

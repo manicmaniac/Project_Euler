@@ -14,7 +14,7 @@ What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed
 in the same way?
 ###
 
-_iter = ->
+iter = do ->
 	index = 3
 	increase = 2
 	repeat = 0
@@ -25,7 +25,6 @@ _iter = ->
 			repeat = 0
 			increase += 2
 		index += increase
-iter = _iter()
 
 console.log (x while (x = iter()) <= 1001*1001).reduce((x, y) -> x + y) + 4
 

@@ -12,3 +12,4 @@ object Problem56 {
     println((for(i <- BigInt(1) to 99; j <- 1 to 99) yield i.pow(j).toString.map(_.asDigit).sum).max)
   }
 }
+

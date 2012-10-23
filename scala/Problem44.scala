@@ -26,6 +26,7 @@ object Problem44 {
           }
         )
       ).filter(null!=).head
-    print(k - j)
+    println(k - j)
   }
 }
+

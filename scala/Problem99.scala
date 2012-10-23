@@ -21,6 +21,7 @@ object Problem99 {
   val data = Source.fromFile(FILE).mkString.split("\r\n").toList.map(_.split(",").toList.map(_.toInt))
 
   def main(args:Array[String]) {
-    print((data.map(p => p(1) * math.log(p(0))).zipWithIndex.max)._2 + 1)
+    println((data.map(p => p(1) * math.log(p(0))).zipWithIndex.max)._2 + 1)
   }
 }
+

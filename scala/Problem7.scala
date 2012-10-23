@@ -5,12 +5,12 @@ What is the 10 001st prime number?
 */
 
 object Problem7 {
-  lazy val primes = 2 #:: Stream.from(1).map(_*2+1).filter(isPrime)
+  lazy val primes = 2 #:: (Stream from 1 map(_ * 2 + 1) filter isPrime)
 
-  def isPrime(n:Int) = BigInt(n).isProbablePrime(10)
+  def isPrime(n:Int) = BigInt(n) isProbablePrime 10
 
   def main(args:Array[String]) {
-    print(primes(10000))
+    println(primes(10000))
   }
 }
 

@@ -26,6 +26,7 @@ object Problem19 {
       calendar.add(Calendar.MONTH, 1)
       calendar.get(Calendar.DAY_OF_WEEK) == 1
     }
-    println(sundays.count(_==true))
+    println(sundays count(_==true))
   }
 }
+

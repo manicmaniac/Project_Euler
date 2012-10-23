@@ -12,6 +12,7 @@ object Problem41 {
   def isProbablePrime(n:Int) = BigInt(n).isProbablePrime(1)
 
   def main(args:Array[String]) {
-    print(1 to 9 map(pandigitals) reduce(_++_) filter(isProbablePrime) max)
+    println(1 to 9 map(pandigitals) reduce(_++_) filter(isProbablePrime) max)
   }
 }
+

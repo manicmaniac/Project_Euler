@@ -7,12 +7,9 @@ their digits.
 Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 ###
 
-factorial = (n) -> if n > 1 then [1..n].reduce((x, y) -> x * y) else 1
+factorial = [0..9].map((n) -> if n < 2 then 1 else arguments.callee(n - 1) * n)
 
-factorial[0..9] = [0..9].map(factorial)
+isCurious = (n) -> (factorial[i] for i in String n).reduce((x, y) -> x + y) == n
 
-isCurious = (n) ->
-	(factorial[Number(i)] for i in n.toString()).reduce((x, y) -> x + y) == n
-
-console.log [3..(factorial[9] * 7)].filter(isCurious).reduce((x, y) -> x + y)
+console.log [3..factorial[9]*7].filter(isCurious).reduce((x, y) -> x + y)
 

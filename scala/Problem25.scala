@@ -21,7 +21,7 @@ What is the first term in the Fibonacci sequence to contain 1000 digits?
 object Problem25 {
   def main(args:Array[String]) {
     lazy val fib:Stream[BigInt] = 0 #:: 1 #:: fib.zip(fib.tail).map(p => p._1 + p._2)
-    print(fib.indexWhere(_.toString.length>999))
+    println(fib.indexWhere(_.toString.length>999))
   }
 }
 

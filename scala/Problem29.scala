@@ -17,8 +17,7 @@ and 2 ≤ b ≤ 100?
 
 object Problem29 {
   def main(args:Array[String]) {
-    //9183
-    //print((for(i <- BigInt(2) to 100; j <- 2 to 100) yield i pow j).distinct.length)
-    print((BigInt(2) to 100 toSet) map((x:BigInt) => 2 to 100 flatMap((y:Int) => x pow y) length))
+    println((for(i <- BigInt(2) to 100; j <- 2 to 100) yield i pow j).distinct length)
   }
 }
+

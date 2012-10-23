@@ -26,6 +26,7 @@ object Problem26 {
       }
     }.filter(_._1 != None).map(p => (p._1.get, p._2))
   def main(args:Array[String]) {
-    print(felm(1001).max._2)
+    println(felm(1001).max._2)
   }
 }
+

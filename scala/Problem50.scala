@@ -16,9 +16,10 @@ consecutive primes?
 object Problem50 {
   val primes = 2 #:: Stream.from(1).map(_ * 2 + 1).filter(BigInt(_).isProbablePrime(10))
 
-  def isPrime(n:Int) = BigInt(n).isProbablePrime(10)
+  def isPrime(n:Int) = BigInt(n) isProbablePrime 10
 
   def main(args:Array[String]) {
-    print((546 to 1 by -1).flatMap(primes.take(546).sliding(_).map(_.sum).find(x => x<1000000 && isPrime(x))) max)
+    println((546 to 1 by -1).flatMap(primes.take(546).sliding(_).map(_.sum).find(x => x<1e6 && isPrime(x))) max)
   }
 }
+

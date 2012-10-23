@@ -13,11 +13,11 @@ adjacent digits) with the same digit, is part of an eight prime value family.
 */
 
 object Problem51 {
-  def isPrime(n:Int) = BigInt(n).isProbablePrime(10)
+  def isPrime(n:Int) = BigInt(n) isProbablePrime 10
 
   val primes = Stream.from(1).map(_ * 2 + 1).filter(isPrime)
 
-  def digitize(n:Int) = n.toString.map(_.asDigit)
+  def digitize(n:Int) = n.toString.map(_ asDigit)
 
   def replaseDigitIsPrime(digits:Seq[Int], n:Int):Int = {
     val d = digits.mkString
@@ -34,6 +34,7 @@ object Problem51 {
   }
 
   def main(args:Array[String]) {
-    print(primes.map(digitize).find(hasReplacableDigits(_) > 7).get.mkString.toInt)
+    println(primes.map(digitize).find(hasReplacableDigits(_) > 7).get.mkString.toInt)
   }
 }
+

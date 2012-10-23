@@ -6,7 +6,7 @@ Find the sum of the digits in the number 100!
 
 object Problem20 {
   def main(args:Array[String]) {
-    print((BigInt(1) to 100 product).toString.map(_.asDigit) sum)
+    println((BigInt(1) to 100 product).toString.map(_.asDigit) sum)
   }
 }
 

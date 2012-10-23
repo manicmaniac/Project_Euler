@@ -10,28 +10,20 @@ It can be verified that T285 = P165 = H143 = 40755.
 
 Find the next triangle number that is also pentagonal and hexagonal.
 '''
-def genTri(max):
-    res = 0
-    for i in range(1, max):
-        res += i
-        yield res
 
-def genPen(max):
-    res = 0
-    for i in range(1, max, 3):
-        res += i
-        yield res
+from math import sqrt
+from itertools import count
 
-def genHex(max):
-    res = 0
-    for i in range(1, max, 4):
-        res += i
-        yield res
+def is_pentagonal(n):
+    return not (sqrt(24 * n + 1) + 1) / 6 % 1
+
+def gen_hexagonal():
+    for i in count():
+        yield i * (2 * i - 1)
 
 if __name__ == '__main__':
-    tri = set(i for i in genTri(1000000))
-    pen = set(i for i in genPen(1000000))
-    hex = set(i for i in genHex(1000000))
-
-    print tri & pen & hex
+    for i in gen_hexagonal():
+        if is_pentagonal(i) and i > 40755:
+            print i
+            break
 

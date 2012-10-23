@@ -23,13 +23,9 @@ The 12th term, F[12], is the first term to contain three digits.
 What is the first term in the Fibonacci sequence to contain 1000 digits?
 ###
 
-bigint = require('bigint')
+Bigint = require('bigint')
 
-_fib = (i=bigint(0), j=bigint(1)) ->
-	-> ([_, i, j] = [i, j, i.add(j)])[0]
-fib = _fib()
+fib = do (i=(Bigint 0), j=(Bigint 1)) -> -> ([i, j] = [j, i.add j])[0]
 
-ans = 0
-ans++ while (x = fib().toString()).length < 1000
-console.log ans
+console.log (x while (x = String fib()).length < 1e3).length + 1
 

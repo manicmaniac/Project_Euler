@@ -19,14 +19,14 @@ Find the value of d < 1000 for which ^1/[d] contains the longest recurring
 cycle in its decimal fraction part.
 ###
 
-bigint = require('bigint')
+Bigint = require('bigint')
+_ = require('underscore')
 
 felm = (d) ->
 	for length in [1..d]
-		if bigint(10).pow(length).mod(d).eq(1)
+		if (Bigint 10).pow(length).mod(d).eq 1
 			return length
-	return 0
-		
-res = (felm(i) for i in [1..999])
-console.log res.indexOf(Math.max(res...)) + 1
+	0
+
+console.log (res = [1..999].map(felm)).indexOf(_.max res) + 1
 

@@ -6,27 +6,15 @@ What is the smallest positive number that is evenly divisible by all of the
 numbers from 1 to 20?
 */
 
+var _ = require('underscore');
+
 function gcd(m, n) {
-	if(n==0) return m;
-	else if(m<n) return gcd(n, m);
-	else return gcd(n, m%n);
-};
+  return !n ? m : m < n ? gcd(n, m) : gcd(n, m % n);
+}
 
 function lcm(m, n) {
-	return m*n / gcd(m, n);
-};
+	return m * n / gcd(m, n);
+}
 
-function range(begin, end, step) {
-	if(typeof end === 'undefined') {
-		end = begin;
-		begin = 0;
-	};
-	if(typeof step === 'undefined') step = 1;
-	var res = [];
-	for(var i=begin; i<end; i+=step) {
-		res.push(i);
-	};
-	return res;
-};
+console.log(_.range(1, 21).reduce(lcm));
 
-console.log(range(1, 21).reduce(lcm));

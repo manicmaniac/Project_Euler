@@ -39,6 +39,7 @@ object Problem18 {
     case _ => findRoute(pyramid.tail.head.zip(pyramid.head.zip(pyramid.head.tail)).map(p => p._1 + (if(p._2._1>p._2._2) p._2._1; else p._2._2))::pyramid.tail.tail)
   }
   def main(args:Array[String]) {
-    print(findRoute(pyramid.reverse))
+    println(findRoute(pyramid reverse))
   }
 }
+

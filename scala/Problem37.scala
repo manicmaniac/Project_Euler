@@ -26,6 +26,7 @@ object Problem37 {
   })
 
   def main(args:Array[String]) {
-    print(candidates.filter(trunc(_).forall(isPrime)).take(11).sum)
+    println(candidates.filter(trunc(_).forall(isPrime)).take(11).sum)
   }
 }
+

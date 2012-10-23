@@ -41,3 +41,4 @@ if __name__ == '__main__':
         if i[0] + i[1] + i[2] == 1000:
             print i[0] * i[1] * i[2]
             break
+

@@ -4,6 +4,7 @@ What is the sum of the digits of the number 2 1000 ?
 */
 object Problem16 {
   def main(args:Array[String]) {
-    print(BigInt(2).pow(1000).toString.map(_.asDigit) sum)
+    println(BigInt(2).pow(1000).toString.map(_ asDigit) sum)
   }
 }
+

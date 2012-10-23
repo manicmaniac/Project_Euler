@@ -23,3 +23,4 @@ object Problem21 {
       println(list.intersect((list.map(p => (p._2, p._1)))).filter(p => p._1 != p._2).map(p => p._1 + p._2).sum/2)
   }
 }
+

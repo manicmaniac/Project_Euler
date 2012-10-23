@@ -33,18 +33,16 @@ Number::reverse = ->
 	Number((char for char in @.toString()).reverse().join(''))
 
 isPalindromic = (n) ->
-	d = (Number(i) for i in String(n))
-	d.join() == d.reverse().join()
+	(d = (i for i in String n)).join() == d.reverse().join()
 
-isLychrel = (n) -> ((n, i) ->
+isLychrel = (n) -> do (n, i=0) ->
 		res = n + n.reverse()
-		if isPalindromic(res)
-			return false
+		if isPalindromic res
+			false
 		else if i < 50
 			arguments.callee(res, i + 1)
 		else
 			true
-	)(n, 0)
 
 console.log [1..9999].filter(isLychrel).length
 

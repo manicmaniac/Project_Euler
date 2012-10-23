@@ -15,6 +15,7 @@ find the value of the denominator.
 object Problem33 {
 // ij / jk
   def gcd(s:Double, t:Double):Int = if(s == 0) 1 else gcd(t, s % t)
+
   val conditionalFractions = {
     for(i <- 1 to 9; j <- 1 to 9; k <- 1 to 9) yield {
       val denominator = (i.toString + j.toString).toDouble
@@ -24,9 +25,11 @@ object Problem33 {
       }
     }
   }.filter(_!=()).asInstanceOf[Seq[(Int, Int)]]
+
   def main(args:Array[String]) {
     val n = conditionalFractions.unzip._1.product
     val d = conditionalFractions.unzip._2.product
-    print(d / n)
+    println(d / n)
   }
 }
+

@@ -8,11 +8,12 @@ How many routes are there through a 20×20 grid?
 */
 
 object Problem15 {
-  def fact(n:BigInt) = (BigInt(1) to n).product
+  def fact(n:BigInt) = (BigInt(1) to n) product
 
   def c(m:BigInt, n:BigInt) = (fact(m) / fact(n)) / fact(n)
 
   def main(args:Array[String]) {
-    print(c(40, 20))
+    println(c(40, 20))
   }
 }
+

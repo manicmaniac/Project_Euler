@@ -36,6 +36,7 @@ object Problem27 {
         ((1 to 1000).map(f(_, a, b)).takeWhile(isPrime).length, a, b)
       }
     }.max
-    print(res._2 * res._3)
+    println(res._2 * res._3)
   }
 }
+

@@ -26,6 +26,7 @@ object Problem28 {
     1 #:: cycle((1 to 4).toStream).zip(tmp).map(p => p._1 * p._2 + 1)
   }
   def main(args:Array[String]) {
-    print(diagons.takeWhile(_<=1001*1001).sum)
+    println(diagons.takeWhile(_<=1001*1001).sum)
   }
 }
+
