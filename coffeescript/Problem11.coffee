@@ -8,8 +8,10 @@ What is the greatest product of four adjacent numbers in any direction (up,
 down, left, right, or diagonally) in the 20×20 grid?
 ###
 
-rawdata =
-'''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+_ = require('underscore')
+
+rawdata = '''
+08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -28,25 +30,20 @@ rawdata =
 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
-01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
+'''
 
-horizonal = (line.split(' ').map(Number) for line in rawdata.split('\n'))
+matrix = rawdata.split('\n').map (x) -> x.split(' ').map Number
 
-vertical = ( ->
-	res = (Array(horizonal[0].length) for i in Array(horizonal.length))
-	for y in [0...horizonal.length]
-		for x in [0...horizonal[0].length]
-			res[x][y] = horizonal[y][x]
-	res)()
+horizonal = (xs) -> xs
+vertical = (xs) -> _.zip xs...
+diagonal = (xs) ->
+	tl = _.zip ((Array i).concat x for x, i in xs)...
+	tr = _.zip ((Array i).concat x for x, i in xs.reverse())...
+	tl.concat(tr).map _.compact
 
-productFour = (line) ->
-	acc = 0
-	for i in [0..line.length - 4]
-		current = line[..].splice(i, 4).reduce((x, y) -> x * y)
-		acc = current if acc < current
-	acc
+findMaxProduct = (arr) ->
+	_(arr[i..i+3].reduce((x, y) -> x * y) for x, i in arr).max()
 
-max_horizonal = Math.max((productFour(i) for i in horizonal)...)
-
-console.log vertical
+console.log _.max(_.max((f matrix).map findMaxProduct) for f in [horizonal, vertical, diagonal])
 
