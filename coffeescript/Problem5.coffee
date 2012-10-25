@@ -8,5 +8,5 @@ numbers from 1 to 20?
 
 Bigint = require('bigint')
 
-console.log [1..20].reduce((x, y) -> x * y / (Bigint x).gcd(Bigint y))
+console.log [1..20].reduce (x, y) -> x * y / (Bigint x).gcd Bigint y
 
