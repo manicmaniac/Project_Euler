@@ -43,11 +43,11 @@ isGoldbachComposite = (n) ->
 			return true if prime + square == n
 	false
 
-count = do (n=0) -> -> n++
+count = do (n=0) -> -> ++ n
 
 loop
 	x = count() * 2 + 5
-	unless isGoldbachComposite(x)
+	unless isGoldbachComposite x
 		console.log x
 		break
 
