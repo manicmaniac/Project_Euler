@@ -36,7 +36,7 @@ object Problem74 {
   }
 
   def main(args:Array[String]) {
-    println((1 to 1000000).par.map(chain(_, Nil).length).count(60==))
+    println((1 to 1000000).par.count(chain(_, Nil).length == 60))
   }
 }
 
