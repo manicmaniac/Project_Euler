@@ -28,7 +28,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
         <a href="http://github.com/substack/node-bigint">node-bigint</a><br>
         <a href="https://github.com/thegoleffect/node-itertools">node-itertools</a>
     </td>
-    <td>★★★★</td>
+    <td>★★★★☆</td>
   </tr>
   <tr>
     <td>Java</td>
