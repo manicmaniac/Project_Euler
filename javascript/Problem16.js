@@ -7,14 +7,10 @@ What is the sum of the digits of the number 2^1000?
 var bigint = require('bigint');
 
 var digits = function(n) {
-  return n.toString().split('').map(Number);
-}
+  return String(n).split('').map(Number);
+};
 
-var sum = function(xs) {
-  return xs.reduce(function(x, y) {
-    return x + y;
-  })
-}
-
-console.log(sum(digits(bigint.pow(2, 1000))));
+console.log((digits(bigint.pow(2, 1e3))).reduce(function(x, y) {
+  return x + y;
+}));
 
