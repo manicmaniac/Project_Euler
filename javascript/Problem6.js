@@ -10,13 +10,11 @@ Hence the difference between the sum of the squares of the first ten natural num
 Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 */
 
-console.log((function() {
-  var i, j, squOfSum = 0, sumOfSqu = 0;
-  for(i=0, j=0; i<=100; i++, j++) { 
-    squOfSum += j;
-    sumOfSqu += i * i;
-  }
-  squOfSum *= squOfSum;
-  return squOfSum - sumOfSqu;
-}()));
+var _ = require('underscore');
+
+console.log(Math.pow(_.range(101).reduce(function(x, y) {
+  return x + y;
+}), 2) - (_.range(101).reduce(function(x, y) {
+  return x + y * y;
+})));
 
