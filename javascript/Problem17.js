@@ -12,51 +12,63 @@ letters. The use of "and" when writing out numbers is in compliance with
 British usage.
 */
 
-dic = new Array();
-dic[0] = '';
-dic[1] = 'one';
-dic[2] = 'two';
-dic[3] = 'three';
-dic[4] = 'four';
-dic[5] = 'five';
-dic[6] = 'six';
-dic[7] = 'seven';
-dic[8] = 'eight';
-dic[9] = 'nine';
-dic[10] = 'ten';
-dic[11] = 'eleven';
-dic[12] = 'twelve';
-dic[13] = 'thirteen';
-dic[14] = 'fourteen';
-dic[15] = 'fifteen';
-dic[16] = 'sixteen';
-dic[17] = 'seventeen';
-dic[18] = 'eighteen';
-dic[19] = 'nineteen';
-dic[20] = 'twenty';
-dic[30] = 'thirty';
-dic[40] = 'forty';
-dic[50] = 'fifty';
-dic[60] = 'sixty';
-dic[70] = 'seventy';
-dic[80] = 'eighty';
-dic[90] = 'ninety';
-dic[100] = 'handred';
-dic[1000] = 'onethousand';
+var _ = require('underscore');
 
-function numToEn(n, res) {
-  if(typeof res === 'undefined') res = ''
-  if(n==0) return res;
-  else if(n==1000) return dic[n];
-  else if(n%100==0) return res + dic[n/100] + dic[100];
-  else if(n<=20) return res + dic[n];
-  else if(n>20 && n<100) return numToEn(n%10, res + dic[n-n%10]);
-  else if(n>=100) return numToEn(n%100, res + dic[Math.floor(n/100)] + dic[100] + 'and')
-}
+var dic = {
+  0: '',
+  1: 'one',
+  2: 'two',
+  3: 'three',
+  4: 'four',
+  5: 'five',
+  6: 'six',
+  7: 'seven',
+  8: 'eight',
+  9: 'nine',
+  10: 'ten',
+  11: 'eleven',
+  12: 'twelve',
+  13: 'thirteen',
+  14: 'fourteen',
+  15: 'fifteen',
+  16: 'sixteen',
+  17: 'seventeen',
+  18: 'eighteen',
+  19: 'nineteen',
+  20: 'twenty',
+  30: 'thirty',
+  40: 'forty',
+  50: 'fifty',
+  60: 'sixty',
+  70: 'seventy',
+  80: 'eighty',
+  90: 'ninety',
+  100: 'handred',
+  1000: 'onethousand'
+};
 
-var res = 0;
-for(var i=1; i<=1000; i++) {
-  res += numToEn(i).length;
-}
-console.log(res);
+numToEn = function(n) {
+  return (function loop(n, res) {
+    if(n === 0) {
+      return res;
+    }
+    if(n === 1000) {
+      return dic[n];
+    }
+    if(n % 100 === 0) {
+      return res + dic[n/100] + dic[100];
+    }
+    if(n <= 20) {
+      return res + dic[n];
+    }
+    if(n > 20 && n < 100) {
+      return loop(n%10, res + dic[n-n%10]);
+    }
+    if(n >= 100) {
+      return loop(n%100, res + dic[Math.floor(n/100)] + dic[100] + 'and');
+    }
+  }(n, ''));
+};
+
+console.log(_.range(1, 1e3 + 1).map(numToEn).join('').length);
 
