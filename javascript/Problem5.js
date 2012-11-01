@@ -8,13 +8,13 @@ numbers from 1 to 20?
 
 var _ = require('underscore');
 
-function gcd(m, n) {
-  return !n ? m : m < n ? gcd(n, m) : gcd(n, m % n);
-}
+var gcd = function(m, n) {
+  return n ? m < n ? gcd(n, m) : gcd(n, m % n) : m;
+};
 
-function lcm(m, n) {
+var lcm = function(m, n) {
 	return m * n / gcd(m, n);
-}
+};
 
 console.log(_.range(1, 21).reduce(lcm));
 
