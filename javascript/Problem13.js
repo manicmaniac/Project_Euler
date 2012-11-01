@@ -106,6 +106,7 @@ var data = [
 53503534226472524250874054075591789781264330331690
 ];
 
-var res = data.reduce(function(x, y) {return x+y});
-console.log(Math.floor(res * Math.pow(10, -42)));
+console.log(Math.floor(data.reduce(function(x, y) {
+  return x + y;
+}) * 1e-42));
 
