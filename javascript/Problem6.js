@@ -10,5 +10,13 @@ Hence the difference between the sum of the squares of the first ten natural num
 Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 */
 
-for(x=y=i=0;i++<100;)x+=i*i,y+=i;console.log(y*y-x)
+console.log((function() {
+  var i, j, squOfSum = 0, sumOfSqu = 0;
+  for(i=0, j=0; i<=100; i++, j++) { 
+    squOfSum += j;
+    sumOfSqu += i * i;
+  }
+  squOfSum *= squOfSum;
+  return squOfSum - sumOfSqu;
+}()));
 
