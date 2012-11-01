@@ -17,37 +17,18 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million.
 */
 
-function collatz(n) {
+var _ = require('underscore');
+
+var collatz = function(n) {
 	var res = [n];
 	while(n > 1) {
-		if(n % 2 == 0) n /= 2;
-		else n = 3 * n + 1;
+    n = (n % 2 === 0 ? n / 2 : 3 * n + 1);
 		res.push(n);
 	}
 	return res;
-}
+};
 
-function range(begin, end, step) {
-	if(typeof end === 'undefined') {
-		end = begin;
-		begin = 0;
-	}
-	if(typeof step === 'undefined') step = 1;
-	var res = [];
-	for(var i=begin; i<end; i+=step) {
-		res.push(i);
-	}
-	return res;
-}
-
-var i = 1;
-var res = [1, 1];
-var tmp = 0;
-while(i<1000000) {
-	tmp = collatz(i).length;
-	if(res[0]<tmp) res = [tmp, i];
-	i += 2;
-}
-
-console.log(res[1]);
+console.log(_(_.range(1, 1e6, 2)).max(function(x) {
+  return collatz(x).length;
+}));
 
