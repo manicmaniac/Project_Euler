@@ -16,19 +16,23 @@ var fs = require('fs');
 
 var FILE = './names.txt';
 
-function nameScore(name) {
-  var res = 0;
-  for(var i=0; i<name.length; i++) {
-    res += name[i].charCodeAt()-64;
+var nameScore = function(name) {
+  var res = 0, i;
+  for(i=0; i<name.length; i++) {
+    res += name[i].charCodeAt() - 64;
   }
   return res;
-}
+};
 
 fs.readFile(FILE, 'ascii', function(err, data) {
-  nameList = data.replace(/"/g, '').split(',').sort();
+  var nameList = data.replace(/"/g, '').split(',').sort();
   var res = 0;
-  for(var i=0; i<nameList.length; i++) {
-    res += nameScore(nameList[i]) * (i+1);
-  }
+  nameList.reduce(function(x, y, i) {
+    if (i === 1) {
+      res = nameScore(x);
+    }
+    res += nameScore(y) * (i + 1);
+  });
   console.log(res);
-})
+});
+
