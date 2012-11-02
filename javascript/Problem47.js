@@ -14,45 +14,32 @@ Find the first four consecutive integers to have four distinct primes factors.
 What is the first of these numbers?
 */
 
-function factorize(n) {
-  var res = [];
-  var d = 2;
+var _ = require('underscore');
+
+var factorize = function(n) {
+  var res = [], d = 2;
   while (n >= d) {
-    if (n % d == 0) {
+    if (n % d === 0) {
       res.push(d);
       n /= d;
     }
-    else d++;
-  }
-  return res;
-}
-
-function uniq(arr) {
-  var map = {};
-  var res = [];
-  var value
-  for (var i=0; i<arr.length; i++) {
-    value = arr[i]
-    if (!(value in map)) {
-      map[value] = true;
-      res.push(value);
+    else {
+      d ++;
     }
   }
   return res;
-}
+};
 
-function isConditional(n) {
-  return (uniq(factorize(n)).length == 4);
-}
-
-//main
-for (var i=0;
-	    !(isConditional(i) &&
-	    isConditional(i+1) &&
-	    isConditional(i+2) &&
-	    isConditional(i+3)
-	    );
-	    i++
-    ) {}
-console.log(i);
+console.log((function() {
+  var conditional = function(x) {
+    return [x, x + 1, x + 2, x + 3].every(function(x) {
+      return _.uniq(factorize(x)).length === 4;
+    });
+  };
+  var i = 0;
+  while (!(conditional(i))) {
+    i++;
+  }
+  return i;
+}()));
 
