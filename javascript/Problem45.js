@@ -11,14 +11,13 @@ It can be verified that T[285] = P[165] = H[143] = 40755.
 Find the next triangle number that is also pentagonal and hexagonal.
 */
 
-var _hexagonal = function() {
+var hexagonal = (function() {
   var n = 0;
   return function() {
     n++;
     return n * (2 * n - 1);
   };
-};
-var hexagonal = _hexagonal();
+}());
 
 var isTriangle = function(n) {
   var res = (Math.sqrt(8 * n + 1) - 1) / 2;
@@ -31,11 +30,12 @@ var isPentagonal = function(n) {
 };
 
 hexagonal();
-for (;;) {
-  var x = hexagonal();
-  if (isTriangle(x) && isPentagonal(x) && x !== 40755) {
-    console.log(x);
-    break;
+console.log((function() {
+  for (;;) {
+    var x = hexagonal();
+    if (isTriangle(x) && isPentagonal(x) && x !== 40755) {
+      return x;
+    }
   }
-}
+}()));
 
