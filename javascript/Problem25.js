@@ -23,20 +23,23 @@ The 12th term, F[12], is the first term to contain three digits.
 What is the first term in the Fibonacci sequence to contain 1000 digits?
 */
 
-var bigint = require('bigint');
+var Bigint = require('bigint');
 
-var _fib = function() {
-  var i = bigint(0), j = bigint(1);
+var fib = (function() {
+  var i = Bigint(0), j = Bigint(1);
   return function() {
     var tmp = i;
     i = j;
     j = j.add(tmp);
-    return i.toString();
-  }
-}
-var fib = _fib();
+    return String(i);
+  };
+}());
 
-var ans = 1
-while (fib().length < 1000) { ans++; }
-console.log(ans);
+console.log((function() {
+  var ans = 1;
+  while (fib().length < 1000) {
+    ans ++;
+  }
+  return ans;
+}()));
 
