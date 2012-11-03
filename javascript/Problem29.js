@@ -18,7 +18,7 @@ and 2 ≤ b ≤ 100?
 var Bigint = require('bigint');
 var _ = require('underscore');
 
-console.log(_(function() {
+console.log(_((function() {
 	var a, b, res = [];
 	for (a=2; a<101; a++) {
 		for (b=2; b<101; b++) {
@@ -26,5 +26,5 @@ console.log(_(function() {
 		}
 	}
 	return res;
-}()).chain().flatten().uniq().value().length);
+}())).chain().flatten().uniq().value().length);
 
