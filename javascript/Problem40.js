@@ -12,13 +12,7 @@ following expression.
 d[1] × d[10] × d[100] × d[1000] × d[10000] × d[100000] × d[1000000]
 */
 
-function d(n) {
-  var res = '';
-  for (var i=0; res.length <= n; i++) {
-    res = res + i.toString();
-  }
-  return res[n];
-}
+var _ = require('underscore');
 
-console.log(d(1) * d(10) * d(100) * d(1000) * d(10000) * d(100000) * d(1000000));
+console.log((d = _.range(1e6).join(''))[1] * d[10] * d[100] * d[1e3] * d[1e4] * d[1e5] * d[1e6]);
 

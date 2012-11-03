@@ -21,17 +21,17 @@ o)
 ###
 
 fs = require('fs')
+_ = require('underscore')
 
 FILE = './triangle.txt'
 
 rawdata = fs.readFileSync(FILE, 'ascii').replace(/\r/g, '').slice(0, -1)
 
-pyramid = rawdata.split('\n').map((x) -> x.split(' ').map(Number))
-pyramid.reverse()
+pyramid = rawdata.split('\n').map((x) -> x.split(' ').map(Number)).reverse()
 
 for line, y in pyramid
 	if y > 0 then for elem, x in line
-		pyramid[y][x] += Math.max(pyramid[y - 1][x..x + 1]...)
+		pyramid[y][x] += _.max(pyramid[y - 1][x..x + 1])
 
-console.log pyramid[pyramid.length - 1][0]
+console.log _(pyramid).last()[0]
 

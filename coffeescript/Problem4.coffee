@@ -5,19 +5,13 @@ the product of two 2-digit numbers is 9009 = 91 × 99.
 Find the largest palindrome made from the product of two 3-digit numbers.
 ###
 
+_ = require('underscore')
+
 genPalindrome = (n) ->
-	str = (i for i in (String n))
-	rev = (i for i in (String n)).reverse()
-	Number str.concat(rev).join('')
+	Number (x = (i for i in String n)).concat(x[..].reverse()).join ''
 
 productOf3Digits = (n) ->
-	for i in [100..999]
-		if n % i == 0 and 99 < n / i < 1000
-			return true
-	false
+	[100..999].some (x) -> not (n % x) and 99 < n / x < 1000
 
-for i in [999..100]
-	if productOf3Digits(genPalindrome(i))
-		console.log genPalindrome(i)
-		break
+console.log _([999..100].map genPalindrome).find productOf3Digits
 

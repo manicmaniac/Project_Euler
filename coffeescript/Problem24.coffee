@@ -12,5 +12,5 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5,
 
 itertools = require('itertools')
 
-console.log itertools.permutationsSync([0..9])[1e6 - 1].join('')
+console.log itertools.permutationsSync([0..9])[1e6-1].join('')
 

@@ -22,8 +22,7 @@ data = fs.readFileSync(FILE, 'ascii').replace(/"/g, '').split(',')
 
 isTriangle = (n) -> !((Math.sqrt(8 * n + 1) - 1) / 2 % 1)
 
-score = (name) ->
-	(i.charCodeAt() - 64 for i in name).reduce((x, y) -> (x + y))
+score = (name) -> (i.charCodeAt() - 64 for i in name).reduce((x, y) -> (x + y))
 
 console.log data.map(score).filter(isTriangle).length
 

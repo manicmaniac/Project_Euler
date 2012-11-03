@@ -11,22 +11,23 @@ and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and
 Evaluate the sum of all the amicable numbers under 10000.
 */
 
-function d(n) {
-  var res = 0;
-  for (var i=1; i<n; i++) {
-    if (n % i == 0) {res += i;}
+var _ = require('underscore');
+
+var d = function(n) {
+  var res = 0, i;
+  for (i=1; i<n; i++) {
+    if (n % i === 0) {
+      res += i;
+    }
   }
   return res;
-}
+};
 
-function isAmicable(n) {return n == d(d(n)) && n != d(n);}
+var isAmicable = function(n) {
+  return n === d(d(n)) && n !== d(n);
+};
 
-function sum(xs) {return xs.reduce(function(x, y) {return x + y;});}
-
-var lst = [];
-for (var i=0; i<10000; i++) {
-  lst[lst.length] = i;
-}
-
-console.log(sum(lst.filter(isAmicable)));
+console.log(_.range(1e4).filter(isAmicable).reduce(function(x, y) {
+  return x + y;
+}));
 

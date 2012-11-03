@@ -21,21 +21,29 @@ What is the value of the first triangle number to have over five hundred
 divisors?
 */
 
-function divisors(n) {
-	var res = [];
-	for(var i=1; i<Math.sqrt(n); i++) {
-		if(n%i==0) {
-			res.push(i);
-			res.push(n/i);
+var divisors = function(n) {
+	var res = [], i;
+	for(i=1; i<Math.sqrt(n); i++) {
+		if(n % i === 0) {
+			res.push(i, n / i);
 		}
 	}
 	return res;
-}
+};
 
-var i = 1;
-var tri = 1;
-while(divisors(tri).length < 500) {
-	i += 1;
-	tri = i * (i + 1) / 2;
-}
-console.log(tri)
+var tri = (function() {
+  var i = 0;
+  return function() {
+    i ++;
+    return i * (i + 1) / 2;
+  };
+}());
+
+console.log((function() {
+  var x;
+  while (divisors(x).length < 500) {
+    x = tri();
+  }
+  return x;
+}()));
+

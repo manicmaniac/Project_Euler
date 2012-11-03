@@ -11,9 +11,7 @@ isPrime = (n) ->
 		return false if n % i == 0
 	true
 
-_primes = (i=2) ->
-	-> i++ until isPrime(i); i++
-primes = _primes()
+primes = do (i=2) -> -> i++ until isPrime(i); i++
 
 primes() for i in [1..10000]
 console.log primes()

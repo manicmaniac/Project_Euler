@@ -18,10 +18,5 @@ and 2 ≤ b ≤ 100?
 Bigint = require('bigint')
 _ = require('underscore')
 
-arr = []
-for a in [2..100]
-	for b in [2..100]
-		arr.push(String(Bigint.pow(a, b)))
-
-console.log _.uniq(arr).length
+console.log _(_(String Bigint.pow(a, b) for a in [2..100] for b in [2..100]).flatten()).uniq().length
 

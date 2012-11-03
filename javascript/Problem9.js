@@ -9,5 +9,14 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 */
 
-for(m=n=1;m*(m+n)!=500;n++)if(m<n)m++,n=1;console.log((m*m*m*m-n*n*n*n)*2*m*n)
+console.log((function() {
+  var m, n;
+  for (m=1, n=1; m*(m+n)!==500; n++) {
+    if (m < n) {
+      m ++;
+      n = 1;
+    }
+  }
+  return (Math.pow(m, 4) - Math.pow(n, 4)) * 2 * m * n;
+}()));
 

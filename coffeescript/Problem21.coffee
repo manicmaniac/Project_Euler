@@ -12,7 +12,7 @@ Evaluate the sum of all the amicable numbers under 10000.
 ###
 
 properDivisors = (n) ->
-	if n == 1 then [1] else [1...n].filter((x) -> n % x == 0)
+	if n == 1 then [1] else [1...n].filter((x) -> not (n % x))
 
 hasAmicable = (n) ->
 	spd = properDivisors(n).reduce((x, y) -> x + y)

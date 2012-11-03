@@ -16,18 +16,13 @@ How many Sundays fell on the first of the month during the twentieth century (1
 Jan 1901 to 31 Dec 2000)?
 */
 
-var date = new Date();
-var res = 0;
+var _ = require('underscore');
 
-for(var y=1901; y<2001; y++) {
-  date.setYear(y);
-  for(var m=0; m<12; m++) {
-    date.setMonth(m);
-    if(date.getDay() == 0) {
-      res++;
-    }
-  }
-}
-
-console.log(res);
+console.log(_.range(1901, 2001).map(function(y) {
+  return _.range(0, 12).filter(function(m) {
+    return (new Date(y, m, 1)).getDay() === 0;
+  }).length;
+}).reduce(function(x, y) {
+  return x + y;
+}));
 

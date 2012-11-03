@@ -22,15 +22,10 @@ divisors?
 ###
 
 divisors = (n) ->
-	res = 0
-	for i in [1..Math.sqrt(n)]
-		if !(n % i) then res += 2
-	res
+	[1..Math.sqrt n].filter((x) -> not (n % x)).length * 2
 
-_tri = (i=0) ->
-	-> i++; i * (i + 1) / 2
-tri = _tri()
+tri = do (i=0) -> -> ++ i * (i + 1) / 2
 
-x while divisors((x = tri())) < 500
+x until divisors(x = tri()) > 500
 console.log x
 

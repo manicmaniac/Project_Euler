@@ -18,40 +18,30 @@ Find the sum of all 0 to 9 pandigital numbers with this property.
 */
 
 function isPandigital(n) {
-  var s = n.toString();
-  if (s.length != 10) {
-    return false;
-  }
-  else {
-    var res = [];
-    for (var i=0; i<s.length; i++) {
-      res.push(s[i]);
-    }
-    return String(res.sort()) == '0,1,2,3,4,5,6,7,8,9';
-  }
+  return String(n).length === 10 && [].map.apply(String(n), [function(x) {
+    return Number(x);
+  }]).sort().join('') === '0123456789';
 }
 
-function sum(xs) {
-  return xs.reduce(function(x, y) {return x + y;});
-}
-
-var res = [];
-for (var d1=1; d1<10; d1++) {
-  for (var d2=0; d2<10; d2++) {
-    for (var d3=0; d3<10; d3++) {
-      for (var d4=0; d4<10; d4+=2) {
-        for (var d5=0; d5<10; d5++) {
-          if ((d3 + d4 + d5) % 3 == 0) {
-            for (var d6=0; d6<10; d6+=5) {
-              for (var d7=0; d7<10; d7++) {
-                if ((d5 * 100 + d6 * 10 + d7) % 7 == 0) {
-                  for (var d8=0; d8<10; d8++) {
-                    if ((d6 * 100 + d7 * 10 + d8) % 11 == 0) {
-                      for (var d9=0; d9<10; d9++) {
-                        if ((d7 * 100 + d8 * 10 + d9) % 13 == 0) {
-                          for (var d10=0; d10<10; d10++) {
-                            if ((d8 * 100 + d9 * 10 + d10) % 17 == 0) {
-                              res.push(Number([d1, d2, d3, d4, d5, d6, d7, d8, d9, d10].join('')));
+console.log((function() {
+  var res = [], d1, d2, d3, d4, d5, d6, d7, d8, d9, d10;
+  for (d1=1; d1<10; d1++) {
+    for (d2=0; d2<10; d2++) {
+      for (d3=0; d3<10; d3++) {
+        for (d4=0; d4<10; d4+=2) {
+          for (d5=0; d5<10; d5++) {
+            if ((d3 + d4 + d5) % 3 === 0) {
+              for (d6=0; d6<10; d6+=5) {
+                for (d7=0; d7<10; d7++) {
+                  if ((d5 * 100 + d6 * 10 + d7) % 7 === 0) {
+                    for (d8=0; d8<10; d8++) {
+                      if ((d6 * 100 + d7 * 10 + d8) % 11 === 0) {
+                        for (d9=0; d9<10; d9++) {
+                          if ((d7 * 100 + d8 * 10 + d9) % 13 === 0) {
+                            for (d10=0; d10<10; d10++) {
+                              if ((d8 * 100 + d9 * 10 + d10) % 17 === 0) {
+                                res.push(Number([d1, d2, d3, d4, d5, d6, d7, d8, d9, d10].join('')));
+                              }
                             }
                           }
                         }
@@ -66,6 +56,9 @@ for (var d1=1; d1<10; d1++) {
       }
     }
   }
-}
+  return res;
+}()).filter(isPandigital).reduce(function(x, y) {
+  return x + y;
+  }
+));
 
-console.log(sum(res.filter(isPandigital)));

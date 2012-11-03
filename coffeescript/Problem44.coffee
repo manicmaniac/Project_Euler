@@ -12,19 +12,17 @@ difference is pentagonal and D = |P[k] − P[j]| is minimised; what is the value
 of D?
 ###
 
-_penta = (n=1) -> -> n * (3 * n++ - 1) / 2
-penta = _penta()
+penta = do (n=0) -> -> ++ n * (3 * n - 1) / 2
 
 isPentagonal = (n) ->
-	res = (Math.sqrt(24 * n + 1) + 1) / 6
-	res == Math.floor(res)
+	(res = (Math.sqrt(24 * n + 1) + 1) / 6) == Math.floor res
 
 cache = []
 until ans
 	curr = penta()
 	for i in cache
-		ans = curr - i if [curr - i, curr + i].every(isPentagonal)
-	cache.unshift(curr)
+		ans = curr - i if [curr-i, curr+i].every isPentagonal
+	cache.unshift curr
 
 console.log ans
 

@@ -17,6 +17,8 @@ containing one-hundred rows; it cannot be solved by brute force, and requires a
 clever method! ;o)
 ###
 
+_ = require('underscore')
+
 rawdata =
 '''75
 95 64
@@ -34,12 +36,11 @@ rawdata =
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23'''
 
-pyramid = rawdata.split('\n').map((x) -> x.split(' ').map(Number))
-pyramid.reverse()
+pyramid = rawdata.split('\n').map((x) -> x.split(' ').map(Number)).reverse()
 
 for line, y in pyramid
 	if y > 0 then for elem, x in line
-		pyramid[y][x] += Math.max(pyramid[y - 1][x..x + 1]...)
+		pyramid[y][x] += _.max(pyramid[y - 1][x..x+1])
 
-console.log pyramid[pyramid.length - 1][0]
+console.log _(pyramid).last()[0]
 

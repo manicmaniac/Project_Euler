@@ -6,5 +6,5 @@ What is the sum of the digits of the number 2^1000?
 
 Bigint = require('bigint')
 
-console.log ((Number i) for i in (String (Bigint 2).pow(1000))).reduce((x, y) -> x + y)
+console.log (Number i for i in String (Bigint 2).pow(1e3)).reduce((x, y) -> x + y)
 

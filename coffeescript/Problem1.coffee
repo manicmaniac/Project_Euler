@@ -5,5 +5,5 @@ get 3, 5, 6 and 9. The sum of these multiples is 23.
 Find the sum of all the multiples of 3 or 5 below 1000.
 ###
 
-console.log [1..999].filter((n) -> !(n % 3 * n % 5)).reduce((s, t) -> s + t)
+console.log [0..999].reduce (x, y) -> !(y % 3 * y % 5) && x + y || x
 

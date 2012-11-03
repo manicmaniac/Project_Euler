@@ -14,27 +14,23 @@ Find the sum of all the numbers that can be written as the sum of fifth powers
 of their digits.
 */
 
-function asDigit(n) {
-  var s = n.toString();
-  var res = [];
-  for (var i=0; i<s.length; i++) {
-    res[i] = s.slice(i, i+1) * 1;
-  }
-  return res;
-}
+var _ = require('underscore');
 
-function sum(xs) {
-  return xs.reduce(function(x, y) {return x+y});
-}
+var asDigit = function(n) {
+  return  [].map.apply(String(n), [function(x) {
+    return Number(x);
+  }]);
+};
 
-function is5thPowers(n) {
-  return sum(asDigit(n).map(function(x) {return Math.pow(x, 5)})) == n;
-}
+var is5thPowers = function(n) {
+  return (asDigit(n).map(function(x) {
+    return Math.pow(x, 5);
+  })).reduce(function(x, y) {
+    return x + y;
+  }) === n;
+};
 
-var lst = [];
-for (var i=2; i<354294; i++) {
-  lst[i] = i;
-}
-
-console.log(sum(lst.filter(is5thPowers)));
+console.log(_.range(2, Math.pow(9, 5) * 6).filter(is5thPowers).reduce(function(x, y) {
+  return x + y;
+}));
 
