@@ -16,10 +16,7 @@ How many Sundays fell on the first of the month during the twentieth century (1
 Jan 1901 to 31 Dec 2000)?
 ###
 
-_cal = (y=1901, m=-1, date=new Date()) -> ->
-		if m > 10 then [y, m] = [y + 1, 0] else m++
-		date.setYear(y); date.setMonth(m); date.getDay()
-cal = _cal()
+_ = require('underscore')
 
-console.log (cal() for i in [1..1200]).filter((x) -> !x).length
+console.log [1901..2000].map((y) -> [0..11].filter((m) -> not new Date(y, m, 1).getDay()).length).reduce (x, y) -> x + y
 
