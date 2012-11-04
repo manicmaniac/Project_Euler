@@ -16,14 +16,13 @@ Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be see
 
 Find the value of d  1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 '''
+
 def felm(n):
-    for d in range(1, n):
-        for l in range(1, d):
-            if (10 ** l) % d == 1:
-                yield l, d
-                break
+    for l in range(1, n):
+        if (10 ** l) % n == 1:
+            return l
+    return 0
 
 if __name__ == '__main__':
-    res = dict(felm(1001))
-    print res[max(res)]
+    print max(range(1000), key=felm)
 
