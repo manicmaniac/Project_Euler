@@ -8,13 +8,7 @@ var _ = require('underscore');
 
 var factorize = function(n) {
   return (function loop(n, c, res) {
-    if (c > n) {
-      return res;
-    }
-    if (n % c) {
-      return loop(n, c+1, res);
-    }
-    return loop(n/c, c, res.concat([c]));
+    return n < c ? res : n % c ? loop(n, c + 1, res) : loop(n / c, c, res.concat([c]));
   }(n, 2, []));
 };
 
