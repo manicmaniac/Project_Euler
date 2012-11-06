@@ -10,32 +10,22 @@ How many circular primes are there below one million?
 
 rotations = (n) ->
 	res = []
-	digits = (i for i in String(n))
+	digits = (i for i in String n)
 	for i in [1..digits.length]
-		res.push(Number(digits.reduce((x, y) -> x + y)))
-		digits.push(digits.shift())
+		res.push Number digits.join ''
+		digits.push digits.shift()
 	res
 
 sieve = (limit) ->
-	primes = []
-	search = [2..limit]
-	while true
+	[primes, search] = [[], [2..limit]]
+	loop
 		current = search[0]
-		primes.push(current)
-		search = search.filter((x) -> x % current != 0)
+		primes.push current
+		search = search.filter (x) -> x % current
 		if Math.pow(primes[primes.length - 1], 2) > search[search.length - 1]
-			return primes.concat(search)
+			return primes.concat search
 
-allIn = (xs, from) ->
-	for i in xs
-		return false unless i in from
-	return true
+candidates = [2].concat sieve(1e6).filter (x) -> (i for i in String x).every (x) -> x % 2
 
-primeList = sieve(1e6)
-
-ans = 0
-for i in primeList
-	if allIn(rotations(i), primeList)
-		ans++
-console.log ans
+console.log (candidates.filter (x) -> rotations(x).every (y) -> y in candidates).length
 
