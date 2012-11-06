@@ -35,7 +35,7 @@ containsOrigin = (v1, v2, v3) ->
 
 fs.readFile FILE, 'ascii', (err, data) ->
 	throw err if err
-	lines = data.split('\n').map((x) -> x.split(',').map(Number))
+	lines = data.split('\n').map (line) -> line.split(',')
 	console.log _(lines.map (line) ->
 		v1 = new Vector(line[0], line[1])
 		v2 = new Vector(line[2], line[3])
