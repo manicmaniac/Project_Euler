@@ -36,9 +36,9 @@ containsOrigin = (v1, v2, v3) ->
 fs.readFile FILE, 'ascii', (err, data) ->
 	throw err if err
 	lines = data.split('\n').map (line) -> line.split(',')
-	console.log _(lines.map (line) ->
+	console.log (lines.filter (line) ->
 		v1 = new Vector(line[0], line[1])
 		v2 = new Vector(line[2], line[3])
 		v3 = new Vector(line[4], line[5])
-		containsOrigin(v1, v2, v3)).compact().length
+		containsOrigin(v1, v2, v3)).length
 
