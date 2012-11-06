@@ -12,12 +12,7 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 _ = require('underscore')
 
-isPrime = (n) ->
-	return false if n < 2
-	return true if n == 2
-	for i in [2..Math.sqrt n]
-		return false unless n % i
-	true
+isPrime = (n) -> not (n - 2) or [2..Math.sqrt n].every (x) -> n % x
 
 trunc = (n) ->
 	digits = (i for i in String n)
@@ -26,10 +21,9 @@ trunc = (n) ->
 	rtol = (digits[0...i].reverse(false) for i in [1..digits.length-1])
 	_(ltor.concat rtol).invoke('join', '').map Number
 
-[res, i] = [[], 9]
-while res.length < 11
-	i+=2
-	if isPrime i
-		res.push i if trunc(i).every(isPrime)
-console.log res.reduce((x, y) -> x + y)
+console.log do (res=[], i=9) ->
+	while res.length < 11
+		i += 2
+		res.push i if [i].concat(trunc i).every isPrime
+	res.reduce (x, y) -> x + y
 
