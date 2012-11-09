@@ -15,22 +15,12 @@ What is the smallest odd composite that cannot be written as the sum of a prime
 and twice a square?
 ###
 
-isPrime = (n) ->
-	return false if n < 2
-	return true if n == 2
-	for i in [2..Math.sqrt n]
-		return false unless n % i
-	true
-
-_primes = (n=1) -> ->
-	n++;
-	n++ until isPrime n; n
+isPrime = (n) -> not (n - 2) or [2..Math.sqrt n].every (x) -> n % x
 
 _doubleSquares = (n=0) -> -> ++ n * n * 2
 
 primeRange = (n) ->
-	primes = _primes()
-	x while (x = primes()) < n
+	[2..n].filter isPrime
 
 squareRange = (n) ->
 	doubleSquares = _doubleSquares()
@@ -45,9 +35,8 @@ isGoldbachComposite = (n) ->
 
 count = do (n=0) -> -> ++ n
 
-loop
-	x = count() * 2 + 5
-	unless isGoldbachComposite x
-		console.log x
-		break
-
+console.log do ->
+	loop
+		x = count() * 2 + 5
+		unless isGoldbachComposite x
+			return x
