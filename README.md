@@ -68,6 +68,12 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>★★★★☆</td>
   </tr>
   <tr>
+    <td>Ruby</td>
+    <td>ruby v1.8.7</td>
+    <td>-</td>
+    <td>☆</td>
+  </tr>
+  <tr>
     <td>Scala</td>
     <td>v2.9.0.1</td>
     <td>-</td>
