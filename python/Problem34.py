@@ -10,12 +10,8 @@ Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 from math import factorial
 
-def as_digit(n):
-    return map(int, str(n))
-
 def is_curious(n):
-    if n < 3: return False
-    else: return n == sum(map(factorial, as_digit(n)))
+    return False if n < 3 else n == sum(factorial(int(i)) for i in str(n))
 
 if __name__ == '__main__':
     print sum(filter(is_curious, range(factorial(9) * 7)))
