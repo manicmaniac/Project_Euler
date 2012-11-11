@@ -20,8 +20,10 @@ def solution():
                 u = find_oblique(s, t)
                 if not u % 1 and s + t + u == i:
                     acc.append((s, t, int(u)))
-        if acc: yield len(acc), i
+        if acc:
+            yield len(acc), i
 
 
 if __name__ == '__main__':
-    print max((s, t) for (s, t) in solution())[1]
+    print max(solution())[1]
+
