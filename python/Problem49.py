@@ -7,24 +7,17 @@ There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, ex
 
 What 12-digit number do you form by concatenating the three terms in this sequence?
 '''
-from prime import genprime, isprime
-from operator import add
+from sympy import sieve, isprime
 
 def genseq():
-    for i in genprime(3333):
-        if i > 1000:
-            for j in range(1000, 3333, 2):
-                if isprime(i + j) and isprime(i + j * 2):
-                    seq = [i, i + j, i + j * 2]
-                    yield seq
+    for i in sieve.primerange(1000, 3333):
+        for j in range(1000, 3333, 2):
+            if isprime(i + j) and isprime(i + j * 2):
+                yield [i, i + j, i + j * 2]
 
 def is_permutation(l):
-    return sorted(list(str(l[0]))) == sorted(list(str(l[1]))) == sorted(list(str(l[2])))
-
-def concatenate(n):
-    return reduce(add, [str(i) for i in n])
+    return len(set(''.join(sorted(str(i))) for i in l)) == 1
 
 if __name__ == '__main__':
-    for i in genseq():
-        if is_permutation(i): print concatenate(i)
+    print ''.join(map(str, filter(is_permutation, genseq())[1]))
 
