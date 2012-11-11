@@ -33,3 +33,4 @@ def is_pandigital(n):
 
 if __name__ == '__main__':
     print sum(filter(is_pandigital, candidates))
+
