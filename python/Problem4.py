@@ -7,8 +7,8 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 
 from math import sqrt
 
-def is_palindromic(num):
-    return str(num) == str(num)[::-1]
+def is_palindromic(n):
+    return str(n) == str(n)[::-1]
 
 def is_3digits_product(n):
     for i in range(100, int(sqrt(n) + 1)):
