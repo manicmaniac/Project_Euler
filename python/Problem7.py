@@ -7,6 +7,7 @@ the 6th prime is 13.
 What is the 10 001st prime number?
 '''
                                                                                
-from sympy import *
+from sympy import sieve
+
 print sieve[10001]
 
