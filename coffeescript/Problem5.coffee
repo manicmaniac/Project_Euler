@@ -6,7 +6,8 @@ What is the smallest positive number that is evenly divisible by all of the
 numbers from 1 to 20?
 ###
 
-Bigint = require('bigint')
+gcd = (x, y) -> x and gcd(y, x % y) or y
+lcm = (x, y) -> x * y / gcd x, y
 
-console.log [1..20].reduce (x, y) -> x * y / (Bigint x).gcd Bigint y
+console.log [1..20].reduce lcm
 
