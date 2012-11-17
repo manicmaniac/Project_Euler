@@ -17,19 +17,14 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million.
 ###
 
+_ = require('underscore')
+
 collatz = (n) ->
-	res = [n]
-	while n > 1
-		if n % 2 == 0 then n /= 2 else n = 3 * n + 1
-		res.push(n)
+	res = []
+	do rec = (n=n) ->
+		res.push n
+		n is 1 and res or rec(n % 2 and 3 * n + 1 or n / 2)
 	res
 
-i = max = 1
-while i < 1000000
-	current = collatz(i).length
-	if max < current
-		max = current
-		ans = i
-	i+=2
-console.log ans
+console.log _([1..1e6]).max (x) -> collatz(x).length
 
