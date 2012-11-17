@@ -16,8 +16,7 @@ object Problem14 {
     case _ if(n % 2 != 0) => collatz(3*n+1, length+1)
   }
   def main(args:Array[String]) {
-    val list = (1 to 1000000).map(collatz(_, 0))
-    println(list.indexOf(list.max) + 1)
+    println((1L to 1000000).maxBy(collatz(_, 0)))
   }
 }
 
