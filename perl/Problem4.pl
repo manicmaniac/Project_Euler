@@ -10,18 +10,19 @@ use strict;
 use warnings;
 
 sub is_palindrome {
-    my ($str, $rev) = ($_[0]);
+    my ($str, $rev) = (shift, ());
     $rev = reverse $str;
     return $str eq $rev;
 }
 
 sub is_3digit_product {
-    for my $i (100..999) {
-        if (!($_[0] % $i) && $_[0] / $i < 1e3) {
+    my $n = shift;
+    for (100..999) {
+        if (!($n % $_) && $n / $_ < 1e3) {
             return 1;
         }
     }
-    return 0;
+    return '';
 }
 
 for my $i (grep { is_palindrome($_) && is_3digit_product($_) } reverse(1e4..998001)) {
