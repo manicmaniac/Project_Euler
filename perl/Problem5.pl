@@ -12,12 +12,12 @@ use warnings;
 use List::Util qw/reduce/;
 
 sub gcd {
-    my ($a, $b) = ($_[0], $_[1]);
+    my ($a, $b) = @_;
     return $b ? gcd($b, $a % $b) : $a;
 }
 
 sub lcm {
-    my ($a, $b) = ($_[0], $_[1]);
+    my ($a, $b) = @_;
     return $a * $b / gcd($a, $b);
 }
 
