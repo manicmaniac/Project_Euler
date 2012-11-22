@@ -28,5 +28,5 @@ felm = (d) ->
 			return length
 	0
 
-console.log (res = [1..999].map(felm)).indexOf(_.max res) + 1
+console.log _([1..999]).max felm
 
