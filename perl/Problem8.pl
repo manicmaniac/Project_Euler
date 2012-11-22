@@ -32,12 +32,10 @@ EOD
 $data =~ s/\n//g;
 
 sub find_5_consecutive {
-    my ($max, $curr) = (0, 0);
+    my ($max, $curr, $data) = (0, 0, shift);
     for my $i (0..(length($data) - 5)) {
         $curr = reduce { our ($a, $b); $a * $b } split //, (substr $data, $i, 5);
-        if ($max < $curr) {
-            $max = $curr;
-        }
+        $max = $curr if ($max < $curr)
     }
     return $max;
 }
