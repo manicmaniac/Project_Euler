@@ -9,7 +9,7 @@ use strict;
 use warnings;
 
 sub factor {
-    my ($n, $d, @res) = ($_[0], 2);
+    my ($n, $d, @res) = (shift, 2);
     while ($n >= $d) {
         unless ($n % $d) {
             push @res, $d;
