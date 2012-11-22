@@ -11,16 +11,15 @@ four million, find the sum of the even-valued terms.
 
 use strict;
 use warnings;
-use List::Util qw/sum/;
 
 sub fib {
-    my ($i, $j, $limit, @res) = (0, 1, $_[0]);
-    while ($i < $limit) {
-        ($i, $j) = ($j, $i + $j);
-        push @res, $i;
+    my ($i, $j) = (0, 1);
+    return sub {
+        return (($i, $j) = ($j, $i + $j))[0];
     }
-    return @res;
 }
 
-print sum grep { !($_ % 2) } fib 4e6;
+my ($fib, $x, $ans) = (fib(), 0, 0);
+$ans += $x % 2 ? 0 : $x while ($x = $fib -> ()) < 4e6;
+print $ans;
 
