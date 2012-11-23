@@ -17,7 +17,7 @@ note the following:
 Find the sum of all 0 to 9 pandigital numbers with this property.
 ###
 
-isPandigital = (n) -> (i for i in String n).sort().join('') == '0123456789'
+isPandigital = (n) -> String(n).split('').sort().join('') == '0123456789'
 
 res = []
 for d1 in [1..9]
@@ -37,7 +37,7 @@ for d1 in [1..9]
 									continue if (d7 * 100 + d8 * 10 + d9) % 13
 									for d10 in [1..9]
 										continue if (d8 * 100 + d9 * 10 + d10) % 17
-										res.push Number [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10].join('')
+										res.push Number [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10].join ''
 
-console.log res.filter(isPandigital).reduce((x, y) -> (x + y))
+console.log res.filter(isPandigital).reduce (x, y) -> (x + y)
 
