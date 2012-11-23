@@ -16,15 +16,15 @@ include it once in your sum.
 itertools = require('itertools')
 _ = require('underscore')
 
-permutations = itertools.permutationsSync([1..9]).map((x) -> x.join(''))
+permutations = itertools.permutationsSync([1..9]).map (x) -> x.join ''
 res = []
 
 for i in permutations
-	current = (Number i[5..9])
-	if (Number i[0]) * (Number i[1..4]) == current
-		res.push(current)
-	if (Number i[0..1]) * (Number i[2..4]) == current
+	current = Number i[5..9]
+	if i[0] * i[1..4] == current
+		res.push current
+	if i[0..1] * i[2..4] == current
 		res.push current
 
-console.log _(res).uniq().reduce((x, y) -> x + y)
+console.log _(res).uniq().reduce (x, y) -> x + y
 
