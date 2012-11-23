@@ -18,17 +18,18 @@ concatenated product of an integer with (1,2, ... , n) where n > 1?
 
 _ = require('underscore')
 
-isPandigital = (n) -> (i for i in String n).sort().join('') == '123456789'
+isPandigital = (n) -> String(n).split('').sort().join('') == '123456789'
 
 concatProduct = (n) ->
-	do (n, i=1, res='') ->
-		len = (String res).length
-		if len == 9
-			Number res
-		else if len > 9
-			0
-		else
-			arguments.callee(n, i + 1, (res + String(n * i)))
+	do rec = (n, i=1, res='') ->
+		len = String(res).length
+		switch
+			when len == 9
+				res
+			when len > 9
+				0
+			else
+				rec n, i + 1, res + String(n * i)
 
-console.log _([1..9876].map(concatProduct).filter isPandigital).max()
+console.log _.max [1..9876].map(concatProduct).filter isPandigital
 
