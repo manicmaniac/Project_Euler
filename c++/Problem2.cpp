@@ -11,20 +11,16 @@ four million, find the sum of the even-valued terms.
 #include <iostream>
 using namespace std;
 
-int main() {
-	int res = 0;
-	int s = 0;
-	int t = 1;
-	for(int tmp=0; tmp<4000000;) {
-		tmp = s;
-		s = t;
-		t += tmp;
-		if (tmp % 2 == 0) {
-			res += tmp;
-		}
-	}
-
-	cout << res;
-	return 0;
+int fib(int n) {
+	return n < 2 ? 1 : fib(n - 1) + fib(n - 2);
 }
 
+int main(int argc, char const* argv[]) {
+	int x = 0;
+	int ans = 0;
+	for (int i=0; x<4e6; x=fib(i), i++) {
+		ans += x % 2 ? 0 : x;
+	}
+	cout << ans;
+	return 0;
+}
