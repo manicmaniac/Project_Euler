@@ -12,23 +12,20 @@ If the product of these four fractions is given in its lowest common terms,
 find the value of the denominator.
 ###
 
-gcd = (x, y) ->
-	return gcd(y, x) if x < y
-	return x if y == 0
-	gcd(y, x % y)
+gcd = (a, b) -> b and gcd(b, a % b) or a
 
 # ij / jk
 res = []
 for i in [1..9]
 	for j in [1..9]
 		for k in [1..9]
-			nume = Number("#{i}#{j}")
-			deno = Number("#{j}#{k}")
+			nume = [i, j].join ''
+			deno = [j, k].join ''
 			if nume < deno and nume / deno == i / k
-				res.push([Number("#{i}#{j}"), Number("#{j}#{k}")])
+				res.push [nume, deno]
 
-nume = (i[0] for i in res).reduce((x, y) -> (x * y))
-deno = (i[1] for i in res).reduce((x, y) -> (x * y))
+nume = (i[0] for i in res).reduce (x, y) -> (x * y)
+deno = (i[1] for i in res).reduce (x, y) -> (x * y)
 
-console.log Math.max(nume, deno) / gcd(nume, deno)
+console.log Math.max(nume, deno) / gcd nume, deno
 
