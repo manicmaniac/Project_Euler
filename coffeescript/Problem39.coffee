@@ -13,12 +13,12 @@ findPythagorean = (p) ->
 	res = []
 	for a in [1...p]
 		for b in [1..a]
-			c = Math.sqrt(a * a + b * b)
+			c = Math.sqrt a * a + b * b
 			if a + b + c == p
 				res.push [a, b, c]
 	res
 
 
 
-console.log _([12..1000]).max((x) -> findPythagorean(x).length)
+console.log _([12..1000]).max (x) -> findPythagorean(x).length
 
