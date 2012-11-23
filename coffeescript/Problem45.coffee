@@ -14,10 +14,9 @@ Find the next triangle number that is also pentagonal and hexagonal.
 hexagonal = do (n=0) -> -> ++ n * (2 * n - 1)
 
 isPentagonal = (n) ->
-	(res = (Math.sqrt(24 * n + 1) + 1) / 6) == Math.floor(res)
+	(res = (Math.sqrt(24 * n + 1) + 1) / 6) == Math.floor res
 
-
-hexagonal()
-(x until (x = hexagonal()) and isPentagonal(x)) for i in [0, 1]
-console.log x
+console.log do ->
+	(ans until (ans = hexagonal()) and isPentagonal ans) for i in [0..2]
+	ans
 
