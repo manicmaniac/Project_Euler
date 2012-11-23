@@ -22,7 +22,7 @@ int maxFactor(long n) {
 	return res;
 }
 
-int main() {
+int main(int argc, char const* argv[]) {
 	cout << maxFactor(600851475143L);
 	return 0;
 }
