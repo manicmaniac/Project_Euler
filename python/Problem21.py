@@ -11,7 +11,7 @@ Evaluate the sum of all the amicable numbers under 10000.
 
 from math import sqrt
 
-def devisors(n):
+def divisors(n):
     res = [1]
     for i in range(2, int(sqrt(n)) + 1):
         if not n % i:
@@ -19,8 +19,8 @@ def devisors(n):
     return sorted(res)
 
 def has_amicable(n):
-    s = sum(devisors(n))
-    return s != n and sum(devisors(s)) == n
+    s = sum(divisors(n))
+    return s != n and sum(divisors(s)) == n
 
 if __name__ == '__main__':
     print sum(filter(has_amicable, range(2, 10000)))
