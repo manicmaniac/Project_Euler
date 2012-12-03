@@ -9,22 +9,13 @@ What is the total of all the name scores in the file?
 '''
 import csv
 
-FILENAME = './names.txt'
+FILE = './names.txt'
 
-class Name(object):
-    @property
-    def score(self):
-        score = 0
-        for i, name in enumerate(self.namelist):
-            for char in name:
-                score += (ord(char) - 64) * (i + 1)
-        return score
-
-    def __init__(self, filename):
-        csvfile = list(csv.reader(open(filename)))
-        self.namelist = sorted(csvfile[0])
-
+def name_score(name):
+    return sum(ord(i) - 64 for i in name)
 
 if __name__ == '__main__':
-    print Name(FILENAME).score
+    with open(FILE) as f:
+        data = sorted(next(csv.reader(f)))
+        print sum(i * name_score(x) for i, x in enumerate(data, 1))
 
