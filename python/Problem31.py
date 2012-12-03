@@ -10,12 +10,15 @@ It is possible to make Â£2 in the following way:
 How many different ways can Â£2 be made using any number of coins?
 '''
 
-coins = [1, 2, 5, 10, 20, 50, 100, 200]
+coins = [200, 100, 50, 20, 10, 5, 2, 1]
 
-def calc(n):
-    pass
+def currency(amount, coins):
+    cache = {0: 1}
+    for coin in coins:
+        for i in range(coin, amount + 1):
+            cache[i] = cache.setdefault(i, 0) + cache.setdefault(i - coin, 0)
+    return cache[amount]
 
 if __name__ == '__main__':
-    for i in calc(10):
-        print i
+    print currency(200, coins)
 
