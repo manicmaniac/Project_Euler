@@ -64,23 +64,25 @@ continued fraction for e.
 from fractions import Fraction
 from itertools import islice
 
+
 def fraction_for_e(term):
-    def tail():
-        i = 0
+    def tail(i=0):
         while True:
             i += 2
             yield 1
             yield i
             yield 1
-    tail = list(islice(tail(), 0, term))[::-1]
-    head = 2
-    curr = 0
-    for i in tail:
+
+    tail = list(islice(tail(), 0, term))
+    head, curr = 2, 0
+    for i in reversed(tail):
         curr = Fraction(1, i + curr)
-    return curr + head
+    return head + curr
+
 
 def digits(n):
     return map(int, str(n))
+
 
 if __name__ == '__main__':
     print sum(digits(fraction_for_e(99).numerator))
