@@ -22,11 +22,11 @@ divisors?
 */
 
 var divisors = function(n) {
-	var res = [], i;
-	for(i=1; i<Math.sqrt(n); i++) {
-		if(n % i === 0) {
-			res.push(i, n / i);
-		}
+	var res = [], i, lim;
+	for (i=1, lim=Math.sqrt(n); i<lim; i++) {
+    if (n % i === 0) {
+      res.push(i, n / i);
+    }
 	}
 	return res;
 };
