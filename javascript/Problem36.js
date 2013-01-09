@@ -9,17 +9,13 @@ leading zeros.)
 */
 
 var _ = require('underscore');
+_.mixin(require('underscore.string'));
 
-var asDigit = function(n) {
-  return [].map.apply(String(n), [function(x) {
-    return Number(x);
-  }]);
-};
 
 var isPalindromic = function(n) {
-  var d = asDigit(n);
-  return d.join() === d.reverse().join();
+  return String(n) === _(n).reverse();
 };
+
 
 console.log(_.range(1e6).filter(function(x) {
   return isPalindromic(x) && isPalindromic(x.toString(2));
