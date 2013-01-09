@@ -15,15 +15,11 @@ of their digits.
 */
 
 var _ = require('underscore');
+_.mixin(require('underscore.string'));
 
-var asDigit = function(n) {
-  return  [].map.apply(String(n), [function(x) {
-    return Number(x);
-  }]);
-};
 
 var is5thPowers = function(n) {
-  return (asDigit(n).map(function(x) {
+  return (_(n).chars().map(function(x) {
     return Math.pow(x, 5);
   })).reduce(function(x, y) {
     return x + y;
