@@ -25,6 +25,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>CoffeeScript v1.3.3 on Node.js v0.8.7</td>
     <td>
         <a href="http://underscorejs.org">Underscore.js</a><br>
+        <a href="http://epeli.github.com/underscore.string">Underscore.string</a><br>
         <a href="http://github.com/substack/node-bigint">node-bigint</a><br>
         <a href="https://github.com/thegoleffect/node-itertools">node-itertools</a>
     </td>
@@ -41,6 +42,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <td>Node.js v0.8.7</td>
     <td>
         <a href="http://underscorejs.org">Underscore.js</a><br>
+        <a href="http://epeli.github.com/underscore.string">Underscore.string</a><br>
         <a href="http://github.com/substack/node-bigint">node-bigint</a><br>
         <a href="https://github.com/thegoleffect/node-itertools">node-itertools</a>
     </td>
