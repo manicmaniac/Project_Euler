@@ -4,9 +4,12 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
+var _ = require('underscore');
+_.mixin(require('underscore.string'));
+
+
 var isPalindromic = function(n) {
-  str = String(n);
-  return str === str.split("").reverse().join("");
+  return String(n) === _(n).reverse();
 };
 
 var findMaxPalindromic = function(digits) {
@@ -22,6 +25,7 @@ var findMaxPalindromic = function(digits) {
   }
   return res;
 };
+
 
 console.log(findMaxPalindromic(3));
 
