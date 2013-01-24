@@ -28,15 +28,14 @@ text must contain common English words, decrypt the message and find the sum of
 the ASCII values in the original text.
 '''
 
-from urllib import urlopen
-from string import ascii_lowercase
+from string import ascii_lowercase, printable
 
-def fast_xor_decryption(data, key_size):
+def fast_xor_decryption(data, key_size, hint=printable):
     res = []
     for i in range(key_size):
         arr = []
         current = data[i::key_size]
-        for letter in ascii_lowercase:
+        for letter in hint:
             arr.append(''.join(map(lambda x: chr(x ^ ord(letter)), current)))
         res.append(max(arr, key=alphabet_ratio))
     return ''.join(map(lambda x: ''.join(x), zip(*res)))
@@ -47,7 +46,8 @@ def alphabet_ratio(text):
 
 
 if __name__ == '__main__':
-    FILE = 'http://projecteuler.net/project/cipher1.txt'
-    data = map(int, urlopen(FILE).read().split(','))
-    print sum(map(ord, fast_xor_decryption(data, 3)))
+    FILE = './cipher1.txt'
+    with open(FILE) as f:
+        data = map(int, f.read().split(','))
+    print sum(map(ord, fast_xor_decryption(data, 3, hint=ascii_lowercase)))
 
