@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
 '''
 Each character on a computer is assigned a unique code and the preferred
 standard is ASCII (American Standard Code for Information Interchange). For
@@ -25,39 +27,27 @@ a file containing the encrypted ASCII codes, and the knowledge that the plain
 text must contain common English words, decrypt the message and find the sum of
 the ASCII values in the original text.
 '''
-from itertools import permutations
-from string import printable
 
-CIPHER = r"./cipher1.txt"
+from urllib import urlopen
+from string import ascii_lowercase
 
-class Decryptor(object):
-    def __init__(self, cipher):
-        self.cipher = cipher
-
-    def decrypt_with(self, key):
-        def key_cycle(key):
-            res = []
-            while len(res) <= len(self.cipher):
-                for i in key:
-                    res.append(ord(i))
-            return res
-
-        res = ''.join(map(chr, [i[0]^i[1] for i in zip(self.cipher, key_cycle(key))]))
-        if all(i in printable for i in res):
-            return res
+def fast_xor_decryption(data, key_size):
+    res = []
+    for i in range(key_size):
+        arr = []
+        current = data[i::key_size]
+        for letter in ascii_lowercase:
+            arr.append(''.join(map(lambda x: chr(x ^ ord(letter)), current)))
+        res.append(max(arr, key=alphabet_ratio))
+    return ''.join(map(lambda x: ''.join(x), zip(*res)))
 
 
-def generate_keys(digits):
-    return [map(chr, i) for i in permutations(range(97, 123), digits)]
+def alphabet_ratio(text):
+    return len(filter(lambda x: x in ascii_lowercase, text)) / float(len(text))
 
 
 if __name__ == '__main__':
-    with open(CIPHER) as f:
-        cipher = map(int, f.read().rstrip().split(','))
-    decryptor = Decryptor(cipher)
-    for i in generate_keys(3):
-        res = decryptor.decrypt_with(i)
-        if res and all(i in res for i in [' is ', ' the ']):
-            message = res
+    FILE = 'http://projecteuler.net/project/cipher1.txt'
+    data = map(int, urlopen(FILE).read().split(','))
+    print sum(map(ord, fast_xor_decryption(data, 3)))
 
-    print sum(ord(i) for i in message)
