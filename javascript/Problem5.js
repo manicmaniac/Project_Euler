@@ -9,7 +9,7 @@ numbers from 1 to 20?
 var _ = require('underscore');
 
 var gcd = function(m, n) {
-  return n ? m < n ? gcd(n, m) : gcd(n, m % n) : m;
+  return n ? gcd(n ,m % n) : m;
 };
 
 var lcm = function(m, n) {
