@@ -2,23 +2,9 @@
 Find the greatest product of five consecutive digits in the 1000-digit number.
 */
 
-var findGreatestProduct = function(stream) {
-  var res = 0, i, j, substr, mul;
-  for (i=0; i<stream.length-4; i++) {
-    substr = stream.slice(i, i + 5);
-    mul = 1;
-    for (j=0; j<substr.length; j++) {
-      mul *= substr[j];
-      if (res < mul) {
-        res = mul;
-      }
-    }
-  }
-  return res;
-};
+var _ = require('underscore');
 
-console.log(findGreatestProduct(
-"73167176531330624919225119674426574742355349194934" +
+var data = "73167176531330624919225119674426574742355349194934" +
 "96983520312774506326239578318016984801869478851843" +
 "85861560789112949495459501737958331952853208805511" +
 "12540698747158523863050715693290963295227443043557" +
@@ -38,5 +24,20 @@ console.log(findGreatestProduct(
 "84580156166097919133875499200524063689912560717606" +
 "05886116467109405077541002256983155200055935729725" +
 "71636269561882670428252483600823257530420752963450"
-));
+
+_.mixin({
+  sliding: function(xs, size) {
+             return xs.map(function(x, i) {
+               return xs.slice(i, i + size);
+             });
+           },
+
+  product: function(xs) {
+             return xs.reduce(function(x, y) {
+               return x * y;
+             });
+           }
+});
+
+console.log(_.chain(data.split('')).sliding(5).map(_.product).max().value());
 
