@@ -7,8 +7,8 @@ What is the largest prime factor of the number 600851475143 ?
 var _ = require('underscore');
 
 var factorize = function(n) {
-  return (function loop(n, c, res) {
-    return n < c ? res : n % c ? loop(n, c + 1, res) : loop(n / c, c, res.concat([c]));
+  return (function rec(n, c, res) {
+    return n < c ? res : n % c ? rec(n, c + 1, res) : rec(n / c, c, res.concat([c]));
   }(n, 2, []));
 };
 
