@@ -9,7 +9,9 @@ It can be seen that P4 + P7 = 22 + 70 = 92 = P8. However, their difference, 70  
 
 Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference is pentagonal and D = |Pk  Pj| is minimised; what is the value of D?
 '''
-from itertools import count, combinations
+
+from itertools import count
+from math import sqrt
 
 def gen_pentagonal(m=0):
     for n in count(1):
@@ -17,8 +19,19 @@ def gen_pentagonal(m=0):
         if m and res > m: return
         yield res
 
+def is_pentagonal(n):
+    return (sqrt(24 * n + 1) + 1) / 6 % 1 == 0
+
+
 if __name__ == '__main__':
-    pentalist = [i for i in gen_pentagonal(10000000)]
-    for s, t in combinations([j for j in pentalist], 2):
-        if s + t in pentalist and abs(s - t) in pentalist:
-            print abs(s - t)
+    penta = gen_pentagonal()
+    ans = None
+    cache = []
+    while not ans:
+        curr = next(penta)
+        for i in cache:
+            if all(map(is_pentagonal, [curr - i, curr + i])):
+                ans = curr - i
+        cache = [curr] + cache
+    print ans
+
