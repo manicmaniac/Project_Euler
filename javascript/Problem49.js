@@ -12,11 +12,33 @@ sequence?
 
 var _ = require('underscore');
 
-var isPermutations = function(xs) {
+var MAX = Math.ceil(1e4 / 3),
+    MIN = 1e3;
+
+function isPermutations(xs) {
   return _.uniq(xs.map(function(x) {
-    return [].map.apply(String(x), [_.identity]).sort().join('');
+    return String(x).split('').sort().join('');
   })).length === 1;
-};
+}
+
+function sieve(limit) {
+  var primes = [],
+      search = _.range(2, limit),
+      current;
+
+  function cannotDivide(n) {
+    return n % current !== 0;
+  }
+
+  while (true) {
+    current = search[0];
+    primes.push(current);
+    search = search.filter(cannotDivide);
+    if (Math.pow(primes[primes.length - 1], 2) > search[search.length - 1]) {
+      return primes.concat(search);
+    }
+  }
+}
 
 var isPrime = function(n) {
   if (n < 2) {
@@ -29,17 +51,20 @@ var isPrime = function(n) {
     return n % x === 0;
   });
 };
+isPrime = _.memoize(isPrime);
 
-var primeList = _.range(1, 3334).filter(isPrime);
+var primeList = sieve(MAX);
 
 var sequences = (function() {
-  var res = [], seq;
-  primeList.forEach(function(i) {
-    if (i > 1e3) {
-      _.range(1e3, 3334, 2).forEach(function(j) {
-        if ([i + j, i + j * 2].every(isPrime)) {
-          seq = [i, i + j, i + j * 2];
-          res.push(seq);
+  var res = [];
+  primeList.forEach(function(prime) {
+    if (prime > MIN) {
+      _.range(MIN, MAX, 2).forEach(function(margin) {
+        var a = prime,
+            b = prime + margin,
+            c = prime + margin * 2;
+        if ([b, c].every(isPrime)) {
+          res.push([a, b, c]);
         }
       });
     }

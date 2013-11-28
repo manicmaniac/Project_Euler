@@ -29,9 +29,24 @@ var isPrime = function(n) {
   });
 };
 
-var primeRange = function(n) {
-  return _.range(2, n).filter(isPrime);
-};
+function sieve(limit) {
+  var primes = [],
+      search = _.range(2, limit),
+      current;
+
+  function cannotDivide(n) {
+    return n % current !== 0;
+  }
+
+  while (true) {
+    current = search[0];
+    primes.push(current);
+    search = search.filter(cannotDivide);
+    if (Math.pow(primes[primes.length - 1], 2) > search[search.length - 1]) {
+      return primes.concat(search);
+    }
+  }
+}
 
 var squareRange = function(n) {
   return (function() {
@@ -47,7 +62,7 @@ var isGoldbachComposite = function(n) {
   if (isPrime(n)) {
     return true;
   }
-  return primeRange(n).some(function(prime) {
+  return sieve(n).some(function(prime) {
     return squareRange(n).some(function(square) {
       return prime + square === n;
     });
@@ -55,10 +70,9 @@ var isGoldbachComposite = function(n) {
 };
 
 console.log((function() {
-  var i = 7;
-  while (isGoldbachComposite(i)) {
-    i += 2;
-  }
+  var i;
+  for (i=7; isGoldbachComposite(i); i+=2);
+
   return i;
 }()));
 

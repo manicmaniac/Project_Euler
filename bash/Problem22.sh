@@ -1,4 +1,5 @@
-/*
+#!/bin/bash
+:<<'###'
 Using names.txt (right click and 'Save Link/Target As...'), a 46K text file
 containing over five-thousand first names, begin by sorting it into
 alphabetical order. Then working out the alphabetical value for each name,
@@ -10,29 +11,36 @@ worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would
 obtain a score of 938 × 53 = 49714.
 
 What is the total of all the name scores in the file?
-*/
+###
 
-var fs = require('fs');
+FILE='../resources/names.txt'
 
-var FILE = '../resources/names.txt';
 
-var nameScore = function(name) {
-  var res = 0, i;
-  for(i=0; i<name.length; i++) {
-    res += name[i].charCodeAt() - 64;
-  }
-  return res;
-};
+data=`cat $FILE | sed -e 's/"//g' | tr -cs '[A-Z]' '[\n*]' | sort`
 
-fs.readFile(FILE, 'ascii', function(err, data) {
-  var nameList = data.replace(/"/g, '').split(',').sort();
-  var res = 0;
-  nameList.reduce(function(x, y, i) {
-    if (i === 1) {
-      res = nameScore(x);
-    }
-    res += nameScore(y) * (i + 1);
-  });
-  console.log(res);
-});
+function ord() {
+    echo $((`printf "%d" \'$1` - 64))
+}
+
+function score() {
+    local {name=$1,res=0}
+    for i in `echo $name | sed -e 's/./& /g'`
+    do
+        tmp=`ord $i`
+        let res=$res+$tmp
+    done
+    echo $res
+}
+
+i=1
+for name in `echo $data`
+do
+    ans=0
+    score_by_name=`score $name`
+    final_score=`echo "$score_by_name * $i" | bc`
+    let ans=$ans+$final_score
+    let i=$i+1
+done
+
+echo $ans
 

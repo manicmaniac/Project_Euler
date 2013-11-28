@@ -13,7 +13,7 @@ so as to determine the shortest possible secret passcode of unknown length.
 import scala.io.Source
 
 object Problem79 {
-  val FILE = "./keylog.txt"
+  val FILE = "../resources/keylog.txt"
   def input(file:String) = {
     val source = Source.fromFile(file)
     source.mkString.split("\r\n").toList

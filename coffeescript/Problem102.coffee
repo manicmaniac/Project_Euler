@@ -22,7 +22,7 @@ given above.
 fs = require('fs')
 _ = require('underscore')
 
-FILE = './triangles.txt'
+FILE = '../resources/triangles.txt'
 
 class Vector
 	constructor: (@x, @y) ->

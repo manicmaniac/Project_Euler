@@ -12,7 +12,7 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 var _ = require('underscore');
 
-var isPrime = function(n) {
+function isPrime(n) {
 	if (n < 2) {
 		return false;
 	}
@@ -22,10 +22,10 @@ var isPrime = function(n) {
 	return !(_.range(2, Math.sqrt(n) + 1).some(function(x) {
 		return n % x === 0;
 	}));
-};
+}
 
-var trunc = function(n) {
-	var digits = [].map.apply(String(n), [_.identity]);
+function trunc(n) {
+	var digits = Array.prototype.map.apply(String(n), [_.identity]);
 	var ltor = _.range(1, digits.length).map(function(x) {
 		return digits.slice(0, x);
 	});
@@ -36,12 +36,12 @@ var trunc = function(n) {
 	return ltor.concat(rtol).map(function(x) {
 		return Number(x.join(''));
 	});
-};
+}
 
 console.log((function() {
-	var res = [], i = 9;
-	while (res.length < 11) {
-		i += 2;
+	var res = [], i;
+
+	for (i=9; res.length<11; i+=2) {
 		if (isPrime(i) && trunc(i).every(isPrime)) {
 			res.push(i);
 		}

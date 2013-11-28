@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 :<<'###'
 Using names.txt (right click and 'Save Link/Target As...'), a 46K text file
 containing over five-thousand first names, begin by sorting it into
@@ -13,34 +13,11 @@ obtain a score of 938 × 53 = 49714.
 What is the total of all the name scores in the file?
 ###
 
-FILE='./names.txt'
-
-
-data=`cat $FILE | sed -e 's/"//g' | tr -cs '[A-Z]' '[\n*]' | sort`
-
-function ord() {
-    echo $((`printf "%d" \'$1` - 64))
+score () {
+	echo -n ABCDEFGHIJKLMNOPQRSTUVWXYZ | sed -E "s/./&\n/g" |
+	( echo -n $1 | sed -E "s/./&\n/g" | sort | diff -u /dev/fd/3 -) 3<&0 |
+	tail -n +4 | cat -n | grep -v '-' | cut -f1 | paste -sd+ | bc
 }
 
-function score() {
-    local {name=$1,res=0}
-    for i in `echo $name | sed -e 's/./& /g'`
-    do
-        tmp=`ord $i`
-        let res=$res+$tmp
-    done
-    echo $res
-}
-
-i=1
-for name in `echo $data`
-do
-    ans=0
-    score_by_name=`score $name`
-    final_score=`echo "$score_by_name * $i" | bc`
-    let ans=$ans+$final_score
-    let i=$i+1
-done
-
-echo $ans
+sed -e 's/"//g;s/,/\n/g' names.txt | sort
 

@@ -14,7 +14,7 @@ What is the total of all the name scores in the file?
 
 fs = require('fs')
 
-FILE = './names.txt'
+FILE = '../resources/names.txt'
 
 data = fs.readFileSync FILE, 'ascii'
 names = data.replace(/"/g, '').split(',').sort()

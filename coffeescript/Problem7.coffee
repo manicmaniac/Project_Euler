@@ -5,11 +5,7 @@ the 6th prime is 13.
 What is the 10 001st prime number?
 ###
 
-isPrime = (n) ->
-	return true if n == 2
-	for i in [2..Math.sqrt(n)]
-		return false if n % i == 0
-	true
+isPrime = (n)-> n == 2 or [2..Math.sqrt n].every (x)-> n % x
 
 primes = do (i=2) -> -> i++ until isPrime(i); i++
 

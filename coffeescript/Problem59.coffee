@@ -29,7 +29,7 @@ the ASCII values in the original text.
 fs = require('fs')
 _ = require('underscore')
 
-FILE = './cipher1.txt'
+FILE = '../resources/cipher1.txt'
 data = fs.readFileSync(FILE, 'ascii').replace(/\r/g, '').split(',').map(Number)
 
 expand = (arr, length) ->
@@ -65,5 +65,4 @@ for key in keys
 original = candidates.filter((x) -> x.match(/\ the\ /))[0]
 ans = (char.charCodeAt() for char in original).reduce((x, y) -> x + y)
 console.log(ans)
-
 

@@ -43,8 +43,9 @@ class Pyramid(object):
         self.inputdata()
 
 if __name__ == '__main__':
-    FILE = './triangle.txt'
+    FILE = '../resources/triangle.txt'
     with open(FILE) as f:
         data = f.read()
     p = Pyramid(data)
     print p.solution()
+

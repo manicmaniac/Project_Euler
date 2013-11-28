@@ -17,7 +17,7 @@ given above.
 
 from math import log
 
-FILE = "./base_exp.txt"
+FILE = "../resources/base_exp.txt"
 
 if __name__ == '__main__':
     with open(FILE) as f:

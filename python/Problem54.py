@@ -50,7 +50,7 @@ winner.
 How many hands does Player 1 win?
 '''
 
-FILE = './poker.txt'
+FILE = '../resources/poker.txt'
 
 class PlayingCard(object):
     SUITS = {'Club': '♣', 'Diamond': '♢',

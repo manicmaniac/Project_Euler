@@ -32,7 +32,7 @@ than four consecutive identical units.
 var _ = require('underscore');
 var fs = require('fs');
 
-var FILE = './roman.txt';
+var FILE = '../resources/roman.txt';
 
 var Roman = function(n) {
   if (_.isString(n)) {

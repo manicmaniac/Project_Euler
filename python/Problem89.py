@@ -30,7 +30,7 @@ than four consecutive identical units.
 '''
 import string
 
-FILE = './roman.txt'
+FILE = '../resources/roman.txt'
 
 class Roman(int):
     roman_dict = {1000: 'M', 900: 'CM', 500: 'D', 400: 'CD', 100: 'C', 90: 'XC',

@@ -17,7 +17,7 @@ words?
 import scala.io.Source
 
 object Problem42 {
-  val FILE = "./words.txt"
+  val FILE = "../resources/words.txt"
 
   val data = Source.fromFile(FILE).mkString.replace("\"", "").split(",").toList
 

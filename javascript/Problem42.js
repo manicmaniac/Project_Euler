@@ -16,11 +16,11 @@ words?
 
 var fs = require('fs');
 
-var FILE = './words.txt';
+var FILE = '../resources/words.txt';
 
 function isTriangle(n) {
   if (typeof n === 'number') {
-    return (Math.sqrt(8 * n + 1) - 1) / 2 % 1 == 0;
+    return (Math.sqrt(8 * n + 1) - 1) / 2 % 1 === 0;
   }
   else if (typeof n === 'string') {
     var res = 0;
@@ -39,5 +39,5 @@ fs.readFile(FILE, 'ascii', function(err, data) {
     if (isTriangle(wordList[i])) res++;
   }
   console.log(res);
-})
+});
 

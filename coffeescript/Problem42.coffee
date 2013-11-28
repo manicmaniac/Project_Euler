@@ -16,7 +16,7 @@ words?
 
 fs = require('fs')
 
-FILE = './words.txt'
+FILE = '../resources/words.txt'
 
 data = fs.readFileSync(FILE, 'ascii').replace(/"/g, '').split ','
 

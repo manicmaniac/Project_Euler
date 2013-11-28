@@ -9,7 +9,7 @@ What is the total of all the name scores in the file?
 '''
 import csv
 
-FILE = './names.txt'
+FILE = '../resources/names.txt'
 
 def name_score(name):
     return sum(ord(i) - 64 for i in name)

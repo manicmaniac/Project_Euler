@@ -24,7 +24,7 @@ given above.
 from sympy import *
 import csv
 
-FILE = './triangles.txt'
+FILE = '../resources/triangles.txt'
 
 x = Symbol('x')
 y = Symbol('y')
@@ -44,3 +44,4 @@ if __name__ == '__main__':
         if contains_origin(a, b, c):
             res += 1
     print res
+

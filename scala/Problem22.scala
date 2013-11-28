@@ -14,7 +14,7 @@ What is the total of all the name scores in the file?
 import scala.io.Source
 
 object Problem22 {
-  val FILE = "./names.txt"
+  val FILE = "../resources/names.txt"
 
   val data = Source.fromFile(FILE).mkString.replace("\"", "").split(",").toList.sorted
 

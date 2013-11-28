@@ -16,7 +16,7 @@ given above.
 import scala.io.Source
 
 object Problem99 {
-  val FILE = "./base_exp.txt"
+  val FILE = "../resources/base_exp.txt"
 
   val data = Source.fromFile(FILE).mkString.split("\r\n").toList.map(_.split(",").toList.map(_.toInt))
 

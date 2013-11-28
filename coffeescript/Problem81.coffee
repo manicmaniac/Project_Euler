@@ -22,7 +22,7 @@ bottom right by only moving right and down.
 fs = require('fs')
 _ = require('underscore')
 
-FILE = './matrix.txt'
+FILE = '../resources/matrix.txt'
 
 rawdata = fs.readFileSync(FILE, 'ascii')
 data = rawdata.replace(/\r/g, '').split('\n').map((x) -> x.split(',').map(Number))

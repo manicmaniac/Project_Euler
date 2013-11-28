@@ -23,7 +23,7 @@ var findPythagorean = function(p) {
 };
 
 console.log((function() {
-	return _(_.range(12, 1001)).max(function(x) {
+	return _(_.range(12, 1001, 12)).max(function(x) {
 		return findPythagorean(x).length;
 	});
 }()));

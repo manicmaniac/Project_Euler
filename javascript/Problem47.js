@@ -16,30 +16,44 @@ What is the first of these numbers?
 
 var _ = require('underscore');
 
-var factorize = function(n) {
-  var res = [], d = 2;
+function isPrime(n) {
+	if (n < 2) {
+		return false;
+	}
+	if (n === 2) {
+		return true;
+	}
+	return !(_.range(2, Math.sqrt(n) + 1).some(function(x) {
+		return n % x === 0;
+	}));
+}
+
+function factorize(n) {
+  var res = {},
+      d = 2;
+	if (isPrime(n)) {
+		return res;
+	}
   while (n >= d) {
     if (n % d === 0) {
-      res.push(d);
+      res[d] = (res[d] + 1) || 1;
       n /= d;
-    }
-    else {
-      d ++;
+    } else {
+      d++;
     }
   }
   return res;
-};
+}
 
 console.log((function() {
   var conditional = function(x) {
     return [x, x + 1, x + 2, x + 3].every(function(x) {
-      return _.uniq(factorize(x)).length === 4;
+      return Object.keys(factorize(x)).length === 4;
     });
   };
   var i = 0;
-  while (!(conditional(i))) {
-    i++;
-  }
+  while (!(conditional(i++)));
+
   return i;
 }()));
 

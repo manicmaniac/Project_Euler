@@ -21,7 +21,7 @@ As...'), a 31K text file containing a 80 by 80 matrix, from the top left to the
 bottom right by only moving right and down.
 '''
 
-FILE = './matrix.txt'
+FILE = '../resources/matrix.txt'
 
 with open(FILE) as f:
     rawdata = f.read()
@@ -33,7 +33,7 @@ for y in range(len(data)):
         if x * y:
             data[y][x] += min(data[y - 1][x], data[y][x - 1])
         elif not x + y:
-            pass
+            continue
         elif not x:
             data[y][x] += data[y - 1][x]
         elif not y:

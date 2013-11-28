@@ -50,7 +50,7 @@ How many hands does Player 1 win?
 
 fs = require('fs')
 
-FILE = './poker.txt'
+FILE = '../resources/poker.txt'
 TALON = fs.readFileSync(FILE, 'utf-8').replace(/\r/g, '')
 
 class PlayingCard

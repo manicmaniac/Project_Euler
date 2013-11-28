@@ -15,7 +15,7 @@ containing nearly two-thousand common English words, how many are triangle
 words?
 ###
 
-FILE='./words.txt'
+FILE='../resources/words.txt'
 
 data=`cat $FILE | sed -e 's/"//g' | tr -cs '[A-Z]' '[\n*]'`
 

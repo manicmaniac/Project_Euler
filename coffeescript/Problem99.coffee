@@ -16,7 +16,7 @@ given above.
 fs = require('fs')
 _ = require('underscore')
 
-FILE = './base_exp.txt'
+FILE = '../resources/base_exp.txt'
 
 data = fs.readFileSync(FILE, 'ascii').replace(/\r/g, '').split('\n').map((x) -> x.split(',').map Number)
 

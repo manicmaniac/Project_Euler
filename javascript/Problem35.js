@@ -10,32 +10,42 @@ How many circular primes are there below one million?
 
 var _ = require('underscore');
 
-var rotations = function(n) {
-  var res = [], i, len;
-  var digits = String(n).split('');
-  for (i=0, len=digits.length; i<len; i++) {
+function rotations(n) {
+  var res = [],
+      digits = String(n).split('');
+
+  _(digits.length).times(function() {
     res.push(Number(digits.join('')));
     digits.push(digits.shift());
-  }
+  });
   return res;
-};
+}
 
-var sieve = function(limit) {
-  var primes = [], search = _.range(2, limit), current;
+function sieve(limit) {
+  var primes = [],
+      search = _.range(2, limit),
+      current;
+
+  function cannotDivide(n) {
+    return n % current !== 0;
+  }
+
   while (true) {
     current = search[0];
     primes.push(current);
-    search = search.filter(function(x) { return x % current; });
+    search = search.filter(cannotDivide);
     if (Math.pow(primes[primes.length - 1], 2) > search[search.length - 1]) {
       return primes.concat(search);
     }
   }
-};
+}
 
 
 console.log((function() {
   var candidates = [2].concat(sieve(1e6).filter(function(x) {
-    return String(x).split('').every(function(y) { return y % 2; });
+    return String(x).split('').every(function(y) {
+      return y % 2;
+    });
   }));
   return candidates.filter(function(x) {
     return rotations(x).every(function(y) {

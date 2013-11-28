@@ -15,7 +15,7 @@ var _ = require('underscore');
 
 var d = function(n) {
   var res = 0, i;
-  for (i=1; i<n; i++) {
+  for (i=1; i<(n/2)+1; i++) {
     if (n % i === 0) {
       res += i;
     }

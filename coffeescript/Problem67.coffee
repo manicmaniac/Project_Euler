@@ -23,7 +23,7 @@ o)
 fs = require('fs')
 _ = require('underscore')
 
-FILE = './triangle.txt'
+FILE = '../resources/triangle.txt'
 
 rawdata = fs.readFileSync(FILE, 'ascii').replace(/\r/g, '').slice(0, -1)
 
