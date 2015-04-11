@@ -18,9 +18,10 @@ Find the value of d  1000 for which 1/d contains the longest recurring cycle in 
 '''
 
 def felm(n):
-    for l in range(1, n):
-        if (10 ** l) % n == 1:
-            return l
+    if n % 2:
+        for l in range(1, n):
+            if (10 ** l) % n == 1:
+                return l
     return 0
 
 if __name__ == '__main__':

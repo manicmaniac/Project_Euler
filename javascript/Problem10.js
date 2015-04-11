@@ -6,7 +6,7 @@ Find the sum of all the primes below two million.
 
 function sieve(limit) {
   if (limit < 2) {
-    return;
+    return [];
   }
 
   var UNKNOWN  = 0,
@@ -17,14 +17,10 @@ function sieve(limit) {
   search[0] = NONPRIME;
   search[1] = NONPRIME;
 
-  var current = 1,
-      i;
-  while (current++) {
-    for (i=current*2; i<limit; i+=current) {
+  var sqrt_limit = Math.sqrt(limit);
+  for (var current=2; current<=sqrt_limit; current++) {
+    for (var i=current*2; i<limit; i+=current) {
       search[i] = NONPRIME;
-    }
-    if (limit < current * current) {
-      break;
     }
   }
 

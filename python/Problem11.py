@@ -41,7 +41,7 @@ def vertical(mtrx):
 def diagonal(mtrx):
     tl = vertical(([None] * i) + x for i, x in enumerate(mtrx))
     tr = vertical(([None] * i) + x for i, x in enumerate(reversed(mtrx)))
-    return [filter(lambda x: x != None, line) for line in tl + tr]
+    return [filter(lambda x: x is not None, line) for line in tl + tr]
 
 def find_max_product(arr):
     return max(reduce(lambda x, y: x * y, arr[i:i + 4]) for i, x in enumerate(arr))

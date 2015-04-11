@@ -12,12 +12,13 @@ def is_palindromic(n):
 
 def is_3digits_product(n):
     for i in range(100, int(sqrt(n) + 1)):
-        if not n % i and n / i < 1000:
+        d, m = divmod(n, i)
+        if not m and d < 1000:
             return True
     return False
 
 if __name__ == '__main__':
-    for i in reversed(range(10000, 998001)):
+    for i in reversed(xrange(10000, 998001)):
         if is_palindromic(i) and is_3digits_product(i):
             print i
             break

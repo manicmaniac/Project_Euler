@@ -27,9 +27,28 @@ data = '''73167176531330624919225119674426574742355349194934
 '''.replace('\n', '')
 
 
-def scan(xs):
-    for i in range(len(xs) - 5):
-        yield reduce(lambda x, y: int(x) * int(y), xs[i:i + 5])
+from operator import mul
 
-print max(scan(data))
+def sliding(xs, n):
+    for i in range(len(xs) - n + 1):
+        yield xs[i:i+n]
+
+def digits(xs):
+    if isinstance(xs, int):
+        xs = str(xs)
+    return map(int, xs)
+
+def compose2(f, g):
+    def composed(x):
+        return f(g(x))
+    return composed
+
+def compose(*func):
+    return reduce(compose2, func)
+
+def product(xs):
+    return reduce(mul, xs)
+
+if __name__ == '__main__':
+    print max(map(compose(product, digits), sliding(data, 5)))
 
