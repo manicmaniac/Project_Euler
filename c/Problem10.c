@@ -16,17 +16,17 @@ int *sieve(int limit, size_t *size) {
     int i;
     double sqrt_limit = sqrt(limit);
     for (current = 2; current <= sqrt_limit; current++) {
-	for (i = current << 1; i < limit; i += current) {
-	    search[i] = NONPRIME;
-	}
+        for (i = current << 1; i < limit; i += current) {
+            search[i] = NONPRIME;
+        }
     }
     *size = 0;
     int *sparse_res = (int *)malloc(limit * sizeof(int));
     for (i = 0; i < limit; i++) {
-	if (search[i] == UNKNOWN) {
-	    sparse_res[*size] = i;
-	    *size += 1;
-	}
+        if (search[i] == UNKNOWN) {
+            sparse_res[*size] = i;
+            *size += 1;
+        }
     }
     free(search);
     int *res = (int *)malloc(*size * sizeof(int));

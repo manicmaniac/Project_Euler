@@ -37,14 +37,14 @@ factor_t *factorize(long n, size_t *size) {
 int main(int argc, char const* argv[])
 {
     const int long n = 600851475143;
-	size_t size;
+    size_t size;
     factor_t *factors = factorize(n, &size);
     //printf("%d\n", factors[size - 1]);
     int i;
     for (i = 0; i < size; i++) {
         printf("%d\n", factors[i].number);
     }
-	free(factors);
-	return 0;
+    free(factors);
+    return 0;
 }
 

@@ -5,13 +5,13 @@
 
 void reverse(char *str) {
     if (str) {
-	char *end = str + strlen(str) - 1;
+    char *end = str + strlen(str) - 1;
 #define SWAP(a, b) do { a ^= b; b ^= a; a ^= b; } while (0)
-	while (str < end) {
-	    SWAP(*str, *end);
-	    str++;
-	    end--;
-	}
+    while (str < end) {
+        SWAP(*str, *end);
+        str++;
+        end--;
+    }
 #undef SWAP
     }
 }
@@ -19,12 +19,13 @@ void reverse(char *str) {
 int palindrome(int n) {
     const size_t bufsize = 10;
     char buffer[bufsize];
-    char copied[bufsize * 2];
+    char copied[bufsize];
+    char res[bufsize * 2];
     snprintf(buffer, bufsize, "%d", n);
     memcpy(copied, buffer, bufsize);
     reverse(buffer);
-    snprintf(copied, bufsize * 2, "%s%s", copied, buffer);
-    return atoi(copied);
+    snprintf(res, bufsize * 2, "%s%s", copied, buffer);
+    return atoi(res);
 }
 
 char is_product(int n) {
@@ -46,10 +47,10 @@ int main(int argc, char const* argv[])
     const min = 100;
     int i, pal;
     for (i = max; i > min; i--) {
-	pal = palindrome(i);
-	if (is_product(pal)) {
-	    break;
-	}
+    pal = palindrome(i);
+    if (is_product(pal)) {
+        break;
+    }
     }
     printf("%d\n", pal);
     return 0;

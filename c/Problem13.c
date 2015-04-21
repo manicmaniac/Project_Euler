@@ -107,26 +107,31 @@ static const char *data[] = {
     "77158542502016545090413245809786882778948721859617",
     "72107838435069186155435662884062257473692284509516",
     "20849603980134001723930671666823555245252804609722",
-    "53503534226472524250874054075591789781264330331690"
+    "53503534226472524250874054075591789781264330331690",
+    NULL
 };
 
-int main(int argc, char const* argv[])
-{
-    int i;
-    mpz_t acc;
+int main(int argc, char const* argv[]) {
+    mpz_t sum;
     mpz_t current;
+    mpz_init_set_ui(sum, 0);
     const int base = 10;
-    mpz_init_set_ui(acc, 0);
-    for (i = 0; i < 100; i++) {
+    int i;
+    const char *line;
+    for (i = 0; (line = data[i]) != NULL; i++) {
         mpz_init_set_str(current, data[i], base);
-        mpz_add(acc, acc, current);
+        mpz_add(sum, sum, current);
     }
-    char *buf = (char *)calloc(256, sizeof(char));
-    mpz_get_str(buf, base, acc);
+    mpz_clear(current);
+    char *buf = (char *)calloc(mpz_sizeinbase(sum, base) + 1, sizeof(char));
+    mpz_get_str(buf, base, sum);
+    mpz_clear(sum);
     const int len = 10;
     char *substr = (char *)calloc(len + 1, sizeof(char));
     strncpy(substr, buf, len);
+    free(buf);
     printf("%s\n", substr);
+    free(substr);
     return 0;
 }
 

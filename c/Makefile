@@ -15,9 +15,24 @@ EXECUTABLES: $(SRCS)
 Problem4: Problem4.c
 	$(CC) $< -lm -o $@
 
+Problem7: Problem7.c
+	$(CC) $< -lm -o $@
+
+Problem9: Problem9.c
+	$(CC) $< -lm -o $@
+
 Problem10: Problem10.c
 	$(CC) $< -lm -o $@
 
 Problem13: Problem13.c
+	$(CC) $< -lgmp -o $@
+
+Problem16: Problem16.c
+	$(CC) $< -lgmp -o $@
+
+Problem20: Problem20.c
+	$(CC) $< -lgmp -o $@
+
+Problem25: Problem20.c
 	$(CC) $< -lgmp -o $@
 
