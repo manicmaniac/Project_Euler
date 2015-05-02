@@ -12,6 +12,9 @@ clean:
 
 EXECUTABLES: $(SRCS)
 
+Problem2-1: Problem2-1.c
+	$(CC) $< -lm -o $@
+
 Problem4: Problem4.c
 	$(CC) $< -lm -o $@
 
