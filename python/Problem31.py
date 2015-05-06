@@ -10,14 +10,18 @@ It is possible to make Â£2 in the following way:
 How many different ways can Â£2 be made using any number of coins?
 '''
 
+from collections import defaultdict
+
 coins = [200, 100, 50, 20, 10, 5, 2, 1]
 
 def currency(amount, coins):
-    cache = {0: 1}
+    cache = defaultdict(lambda: 0)
+    cache[0] = 1
     for coin in coins:
         for i in range(coin, amount + 1):
-            cache[i] = cache.setdefault(i, 0) + cache.setdefault(i - coin, 0)
+            cache[i] += cache[i - coin]
     return cache[amount]
+
 
 if __name__ == '__main__':
     print currency(200, coins)
