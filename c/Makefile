@@ -36,6 +36,3 @@ Problem16: Problem16.c
 Problem20: Problem20.c
 	$(CC) $< -lgmp -o $@
 
-Problem25: Problem20.c
-	$(CC) $< -lgmp -o $@
-

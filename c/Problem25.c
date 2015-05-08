@@ -23,12 +23,18 @@
  * What is the first term in the Fibonacci sequence to contain 1000 digits?
  */
 #include <stdio.h>
-#include <gmp.h>
+
+#define LOG10_SQRT5 0.349485002168
+#define LOG10_PHI   0.20898764025
+
+int fib_digits(int n) {
+    return (int)(n * LOG10_PHI - LOG10_SQRT5) + 1;
+}
 
 int main(int argc, char const* argv[]) {
-    mpz_t fib;
-    mpz_init(fib);
-    mpz_clear(fib);
+    int i, res;
+    for (i = 0; (res = fib_digits(i) - 1000); i -= res);
+    printf("%d\n", i);
     return 0;
 }
 
