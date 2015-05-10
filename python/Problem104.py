@@ -19,12 +19,12 @@ import math
 
 
 # constants
-LOG_PHI = math.log10((1 + math.sqrt(5)) / 2)
-LOG_SQRT5 = math.log10(5) / 2
+LOG10_PHI = math.log10((1 + math.sqrt(5)) / 2)
+LOG10_SQRT5 = math.log10(5) / 2
 
 def upper_fib(n):
     ''' terms of first 9 digits of fibonacci sequence '''
-    l = LOG_PHI * (n + 1) - LOG_SQRT5
+    l = LOG10_PHI * (n + 1) - LOG10_SQRT5
     if l > 9:
         # take first 10 digits for precision
         l, _ = math.modf(l)
@@ -43,19 +43,24 @@ def lower_fibs():
     
 
 def is_pandigital(n):
-    ''' check if pandigital from 1 to 9 '''
+    ''' check if `n` is pandigital from 1 to 9 '''
     if n % 9:
+        # all pandigital numbers are divisible by 9
         return False
-    bits = 0
+    #         9876543210
+    flags = 0b0000000001
     while n:
+        # pop the last digit
         n, d = divmod(n, 10)
-        bits |= 1 << d
-    return bits == 0x3fe
+        # set a flag for last digit
+        flags |= 1 << d
+    #                 9876543210
+    return flags == 0b1111111111
 
 
 if __name__ == '__main__':
-    for i, fib in enumerate(lower_fibs()):
-        if is_pandigital(fib) and is_pandigital(upper_fib(i)):
+    for i, lower_fib in enumerate(lower_fibs()):
+        if is_pandigital(lower_fib) and is_pandigital(upper_fib(i)):
             break
     print i + 1
 
