@@ -14,7 +14,7 @@ pandigital.
 Given that F[k] is the first Fibonacci number for which the first nine digits
 AND the last nine digits are 1-9 pandigital, find k.
 '''
-import threading
+
 import math
 
 
@@ -22,19 +22,15 @@ import math
 LOG_PHI = math.log10((1 + math.sqrt(5)) / 2)
 LOG_SQRT5 = math.log10(5) / 2
 
-
-def upper_fibs():
+def upper_fib(n):
     ''' terms of first 9 digits of fibonacci sequence '''
-    i = 0
-    while True:
-        l = LOG_PHI * (i + 1) - LOG_SQRT5
-        if l > 9:
-            # take first 10 digits for precision
-            l, _ = math.modf(l)
-            l += 9
-        # and drop last digits
-        yield int(round(10 ** l) / 10)
-        i += 1
+    l = LOG_PHI * (n + 1) - LOG_SQRT5
+    if l > 9:
+        # take first 10 digits for precision
+        l, _ = math.modf(l)
+        l += 9
+    # and drop last digits
+    return int(10 ** l + 0.5) / 10
 
 
 def lower_fibs():
@@ -42,7 +38,7 @@ def lower_fibs():
     i, j = 0, 1
     while True:
         # take last 9 digits
-        i, j = j, (i + j) % 10 ** 9
+        i, j = j, (i + j) % 1000000000
         yield i
     
 
@@ -58,40 +54,8 @@ def is_pandigital(n):
 
 
 if __name__ == '__main__':
-    class Subthread(threading.Thread):
-        ''' subthread to find first 9 digits pandigital fibonacci '''
-        def __init__(self, results):
-            super(Subthread, self).__init__()
-            self.results = results
-            self.did_found = threading.Event()
-
-        def run(self):
-            for i, fib in enumerate(upper_fibs(), 1):
-                if self.did_found.is_set():
-                    break
-                if is_pandigital(fib):
-                    if i in self.results:
-                        print i
-                        break
-                    else:
-                        self.results.append(i)
-            self.stop()
-
-        def stop(self):
-            self.did_found.set()
-
-    results = []
-    subthread = Subthread(results)
-    subthread.start()
-
-    for i, fib in enumerate(lower_fibs(), 1):
-        if not subthread.is_alive():
+    for i, fib in enumerate(lower_fibs()):
+        if is_pandigital(fib) and is_pandigital(upper_fib(i)):
             break
-        if is_pandigital(fib):
-            if i in results:
-                print i
-                break
-            else:
-                results.append(i)
-    subthread.stop()
+    print i + 1
 
