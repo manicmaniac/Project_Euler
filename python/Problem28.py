@@ -13,70 +13,32 @@ It can be verified that the sum of the numbers on the diagonals is 101.
 
 What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 '''
-class Matrix(object):
-    def sumdiagon(self):
-        tl = []
-        tr = []
-        for i in range(self.width):
-            tl.append(self.matrix[i][i])  #topleft to bottomright
-        for i in range(self.width):
-            tr.append(self.matrix[self.width - 1 - i][i])
-        return sum(tl + tr) - 1
 
-    def __init__(self, width):
-        self.width = width
-        self.matrix = []
-        for i in range(width):
-            self.matrix.append([])
-            for j in range(width):
-                self.matrix[i].append([])
-class Dot(object):
-    def _direct(self):
-        res = [i / 2 for i in range(2, self.objmatrix.width * 2 + 1)]
-        res2 = []
-        for i in range(2, self.objmatrix.width * 2):
-            res2.append('right')
-            res2.append('below')
-            res2.append('left')
-            res2.append('above')
-        return zip(res2, res)
+from itertools import count, islice, chain
 
-    def put(self):
-        self.objmatrix.matrix[self.y][self.x] = self.value.next()
-    def goright(self): self.x += 1
-    def gobelow(self): self.y += 1
-    def goleft(self): self.x -= 1
-    def goabove(self): self.y -= 1
+# N   E
+#  \ /
+#   *
+#  / \
+# W   S
 
-    def run(self):
-        for i in self.direction:
-            if i[0] == 'right':
-                for j in range(i[1]):
-                    self.put()
-                    self.goright()
-            elif i[0] == 'below':
-                for j in range(i[1]):
-                    self.put()
-                    self.gobelow()
-            elif i[0] == 'left':
-                for j in range(i[1]):
-                    self.put()
-                    self.goleft()
-            elif i[0] == 'above':
-                for j in range(i[1]):
-                    self.put()
-                    self.goabove()
+def north():
+    for n in count():
+        yield (2 * n + 1) ** 2 - 2 * n
 
-    def __init__(self, objmatrix):
-        self.objmatrix = objmatrix
-        self.x = objmatrix.width / 2
-        self.y = objmatrix.width / 2
-        self.value = iter(range(1, objmatrix.width ** 2 + 1))
-        self.direction = self._direct()
+def east():
+    for n in count():
+        yield (2 * n + 1) ** 2
+
+def south():
+    for n in count():
+        yield (2 * n + 1) ** 2 - 6 * n
+
+def west():
+    for n in count():
+        yield (2 * n + 1) ** 2 - 4 * n
 
 
 if __name__ == '__main__':
-    m = Matrix(1001)
-    d = Dot(m)
-    d.run()
-    print m.sumdiagon()
+    print sum(chain(*(islice(i(), 1, 501) for i in [north, east, south, west]))) + 1
+

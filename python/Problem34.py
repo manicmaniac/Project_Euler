@@ -10,9 +10,16 @@ Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 from math import factorial
 
-def is_curious(n):
-    return False if n < 3 else n == sum(factorial(int(i)) for i in str(n))
+factorials = map(factorial, range(0, 10))
+
+def is_factorion(n):
+    res = 0
+    d = n
+    while d:
+        d, m = divmod(d, 10)
+        res += factorials[m]
+    return n == res
 
 if __name__ == '__main__':
-    print sum(filter(is_curious, range(factorial(9) * 7)))
+    print sum(filter(is_factorion, range(3, factorial(9) * 7)))
 

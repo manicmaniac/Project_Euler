@@ -9,16 +9,21 @@ There are exactly four non-trivial examples of this type of fraction, less than 
 
 If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 '''
+from __future__ import division
 from fractions import Fraction
+from itertools import product as cartesian_product
+from operator import mul
 
-# ij / jk 
-res = []
-for i in range(1, 10):
-    for j in range(1, 10):
-        for k in range(1, 10):
-            denominator =  float(str(i) + str(j))
-            numerator = float(str(j) + str(k))
-            if denominator < numerator:
-                if denominator / numerator == float(str(i)) / float(str(k)):
-                    res.append(Fraction('%s/%s' % (int(denominator), int(numerator))))
-print str(Fraction(reduce(lambda x, y: x * y, res))).partition('/')[2]
+
+def product(xs):
+    return reduce(mul, xs)
+
+
+if __name__ == '__main__':
+    res = []
+    for i, j, k in cartesian_product(range(1, 10), repeat=3):
+        d, n = (i * 10 + j, j * 10 + k)
+        if d / n == i / k:
+            res.append(Fraction(d, n))
+    print Fraction(product(res)).denominator
+

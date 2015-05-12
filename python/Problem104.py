@@ -49,11 +49,26 @@ def is_pandigital(n):
         return False
     #         9876543210
     flags = 0b0000000001
-    while n:
-        # pop the last digit
-        n, d = divmod(n, 10)
-        # set a flag for last digit
-        flags |= 1 << d
+    # pop the last digit
+    n, d = divmod(n, 10)
+    # set a flag for last digit
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
+    n, d = divmod(n, 10)
+    flags |= 1 << d
     #                 9876543210
     return flags == 0b1111111111
 
