@@ -14,7 +14,15 @@ How many different ways can one hundred be written as a sum of at least two
 positive integers?
 '''
 
-from sympy import *
+from itertools import repeat
 
-print npartitions(100)
+def npartitions(n):
+    cache = [1] + list(repeat(0, n))
+    for i in range(1, n + 1):
+        for j in range(i, n + 1):
+            cache[j] += cache[j - i]
+    return cache[n]
+
+if __name__ == '__main__':
+    print npartitions(100)
 

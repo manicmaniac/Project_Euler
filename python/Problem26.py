@@ -20,7 +20,7 @@ Find the value of d  1000 for which 1/d contains the longest recurring cycle in 
 def felm(n):
     if n % 2:
         for l in range(1, n):
-            if (10 ** l) % n == 1:
+            if pow(10, l, n) == 1:
                 return l
     return 0
 
