@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 int npartitions(int n) {
-    int i, j;
+    int i, j, res;
     int *cache;
     cache = (int *)calloc(n + 1, sizeof(int));
     cache[0] = 1;
@@ -24,7 +24,9 @@ int npartitions(int n) {
             cache[j] += cache[j - i];
         }
     }
-    return cache[n];
+    res = cache[n];
+    free(cache);
+    return res;
 }
 
 int main(int argc, char const* argv[]) {
