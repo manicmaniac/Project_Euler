@@ -13,5 +13,20 @@ The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 '''
 
-print sum(i for i in range(2, 9**5 * 6) if i == sum(j**5 for j in map(int, str(i))))
+
+class is_armstrong(object):
+    def __init__(self, n):
+        self._pows = [i ** n for i in range(10)]
+
+    def __call__(self, x):
+        d = x
+        acc = 0
+        while d and acc <= x:
+            d, m = divmod(d, 10)
+            acc += self._pows[m]
+        return acc == x
+
+
+if __name__ == '__main__':
+    print sum(filter(is_armstrong(5), range(2, 9 ** 5 * 6)))
 
