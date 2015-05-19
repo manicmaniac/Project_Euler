@@ -25,9 +25,6 @@ def pollards_rho(n):
     find the one of divisors of the integer `n` with Pollard's Rho method.
     returns -1 if it is a prime.
     '''
-    if n < 10:
-        # switch to trial division for a small integer
-        return trial_division(n)
     x, y, c, d = 2, 2, 1, 1
     def f(x):
         # the LCG pseudorandom number generator
@@ -43,7 +40,7 @@ def pollards_rho(n):
 
 class memoize(object):
     '''
-    a decorator function class for memoizing a expensive function
+    a decorator function class to memoize a expensive function.
     '''
     def __init__(self, func):
         self._func = func
@@ -63,7 +60,11 @@ def factor(n):
     factorize the integer `n`.
     returns list of prime factors.
     '''
-    divisor = pollards_rho(n)
+    if n < 100:
+        # fallbacks to trial division for a small integer
+        divisor = trial_division(n)
+    else:
+        divisor = pollards_rho(n)
     if divisor == -1:
         return [n]
     return factor(n / divisor) + factor(divisor)
