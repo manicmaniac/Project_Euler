@@ -15,22 +15,27 @@ d8d9d10=289 is divisible by 17
 Find the sum of all 0 to 9 pandigital numbers with this property.
 '''
 
-candidates =  [int(''.join(map(str, [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10])))
-        for d1 in range(1, 10)
-        for d2 in range(10)
-        for d3 in range(10)
-        for d4 in range(10) if not (d2 * 100 + d3 * 10 + d4) % 2
-        for d5 in range(10) if not (d3 * 100 + d4 * 10 + d5) % 3
-        for d6 in range(10) if not (d4 * 100 + d5 * 10 + d6) % 5
-        for d7 in range(10) if not (d5 * 100 + d6 * 10 + d7) % 7
-        for d8 in range(10) if not (d6 * 100 + d7 * 10 + d8) % 11
-        for d9 in range(10) if not (d7 * 100 + d8 * 10 + d9) % 13
-        for d10 in range(10) if not (d8 * 100 + d9 * 10 + d10) % 17]
+from itertools import permutations
 
-def is_pandigital(n):
-    return sorted(str(n)) == map(str, range(10))
+def pandigital_digits():
+    return permutations(range(10))
 
+def has_substr_divisibility(digits):
+    d1, d2, d3, d4, d5, d6, d7, d8, d9, d10 = digits
+    return not (
+        not d1
+        or d4 & 1
+        or (d3 + d4 + d5) % 3
+        or d6 != 5
+        or (d5 * 100 + d6 * 10 + d7) % 7
+        or (d6 * 100 + d7 * 10 + d8) % 11
+        or (d7 * 100 + d8 * 10 + d9) % 13
+        or (d8 * 100 + d9 * 10 + d10) % 17
+    )
+
+def concat(digits):
+    return int(''.join(map(str, digits)))
 
 if __name__ == '__main__':
-    print sum(filter(is_pandigital, candidates))
+    print sum(concat(digits) for digits in pandigital_digits() if has_substr_divisibility(digits))
 

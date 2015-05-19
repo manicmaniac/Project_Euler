@@ -15,12 +15,13 @@ NOTE: The first two lines in the file represent the numbers in the example
 given above.
 '''
 
-from math import log
+import csv
+import math
 
 FILE = "../resources/base_exp.txt"
 
 if __name__ == '__main__':
     with open(FILE) as f:
-        data = [map(int, i.split(",")) for i in f.read().splitlines()]
-    print max((exponent * log(base, 10), i+1) for i, (base, exponent) in enumerate(data))[1]
+        table = (map(int, row) for row in csv.reader(f))
+        print max((math.log(base) * exp, i) for i, (base, exp) in enumerate(table, 1))[1]
 
