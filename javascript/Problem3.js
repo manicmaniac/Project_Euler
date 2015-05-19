@@ -60,12 +60,13 @@ function pollardsRho(n) {
 
 /**
  * a wrapper function to memoize a expensive function.
+ * to change the context for function call, bind `this` to the context.
  */
-function memoize(func, context) {
+function memoize(func) {
   var cache = {};
   return function(/* args ... */) {
     var args = Array.prototype.slice.call(arguments);
-    return cache[args] ? cache[args] : cache[args] = func.apply(context, args);
+    return cache[args] ? cache[args] : cache[args] = func.apply(this, args);
   }
 }
 
@@ -82,7 +83,7 @@ function factor(n) {
   return factor(n / divisor).concat(factor(divisor));
 }
 // memoize results
-factor = memoize(factor);
+factor = memoize.call(this, factor);
 
 
 // main entry point
