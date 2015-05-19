@@ -41,6 +41,23 @@ def pollards_rho(n):
     return d
 
 
+class memoize(object):
+    '''
+    a decorator function class for memoizing a expensive function
+    '''
+    def __init__(self, func):
+        self._func = func
+        self._cache = {}
+
+    def __call__(self, *args):
+        if self._cache.has_key(args):
+            return self._cache[args]
+        res = self._func(*args)
+        self._cache[args] = res
+        return res
+
+
+@memoize
 def factor(n):
     '''
     factorize the integer `n`.
