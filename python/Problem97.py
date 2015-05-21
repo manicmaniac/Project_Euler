@@ -8,14 +8,5 @@ However, in 2004 there was found a massive non-Mersenne prime which contains 2,3
 Find the last ten digits of this prime number.
 '''
 
-def f(n):
-    res = 2
-    for i in range(0, n-1):
-        if len(str(res)) > 10:
-            res = int(str(res)[-10:])
-        res = res << 1
-    return res
-
-if __name__ == '__main__':
-    print str(28433 * f(7830457) + 1)[-10:]
+print (28433 * pow(2, 7830457, 10000000000) + 1) % 10000000000
 
