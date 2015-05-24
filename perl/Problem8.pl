@@ -1,7 +1,5 @@
-#!/usr/bin/env perl -l
-=pod
-Find the greatest product of five consecutive digits in the 1000-digit number.
-=cut
+#!/usr/bin/env perl
+# Find the greatest product of five consecutive digits in the 1000-digit number.
 
 use strict;
 use warnings;

@@ -1,11 +1,9 @@
-#!/usr/bin/env perl -l
-=pod
-2520 is the smallest number that can be divided by each of the numbers from 1
-to 10 without any remainder.
-
-What is the smallest positive number that is evenly divisible by all of the
-numbers from 1 to 20?
-=cut
+#!/usr/bin/env perl
+# 2520 is the smallest number that can be divided by each of the numbers from 1
+# to 10 without any remainder.
+# 
+# What is the smallest positive number that is evenly divisible by all of the
+# numbers from 1 to 20?
 
 use strict;
 use warnings;
