@@ -23,18 +23,15 @@ LOG10_PHI = math.log10((1 + math.sqrt(5)) / 2)
 LOG10_SQRT5 = math.log10(5) / 2
 
 def upper_fib(n):
-    ''' terms of first 9 digits of fibonacci sequence '''
+    ''' estimate first 9 digits of the `n` term of fibonacci sequence '''
     l = LOG10_PHI * (n + 1) - LOG10_SQRT5
-    if l > 9:
-        # take first 10 digits for precision
-        l, _ = math.modf(l)
-        l += 9
-    # and drop last digits
-    return int(10 ** l + 0.5) / 10
+    l, _ = math.modf(l)
+    # convert into decimal and round it
+    return int(10 ** l * 1e8 + 0.5)
 
 
 def lower_fibs():
-    ''' terms of last 9 digits of fibonacci sequence '''
+    ''' last 9 digits numbers of fibonacci sequence '''
     i, j = 0, 1
     while True:
         # take last 9 digits
@@ -42,16 +39,16 @@ def lower_fibs():
         yield i
     
 
-def is_pandigital(n):
-    ''' check if `n` is pandigital from 1 to 9 '''
-    if n % 9:
+def is_pandigital(x):
+    ''' check if `x` is 1-9 pandigital '''
+    if x % 9:
         # all pandigital numbers are divisible by 9
         return False
     #         9876543210
     flags = 0b0000000001
-    while n:
+    while x:
         # pop the last digit
-        n, d = divmod(n, 10)
+        x, d = divmod(x, 10)
         # set a flag for last digit
         flags |= 1 << d
     #                 9876543210
