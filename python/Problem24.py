@@ -8,7 +8,12 @@ A permutation is an ordered arrangement of objects. For example, 3124 is one pos
 What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 '''
 
-from itertools import permutations, islice
+import itertools
 
-print ''.join(map(str, (next(islice(permutations(range(10)), 1e6 - 1, 1e6)))))
+def nth(iterable, n, default=None):
+    return next(itertools.islice(iterable, n, None), default)
+
+if __name__ == '__main__':
+    perms = itertools.permutations(range(10))
+    print ''.join(map(str, nth(perms, 999999)))
 
