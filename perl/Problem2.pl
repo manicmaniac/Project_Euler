@@ -9,15 +9,18 @@
 
 use strict;
 use warnings;
+use Memoize;
 
+memoize('fib');
 sub fib {
-    my ($i, $j) = (0, 1);
-    return sub {
-        return (($i, $j) = ($j, $i + $j))[0];
-    }
+    my $n = shift;
+    return 1 if $n < 2;
+    return fib($n - 1) + fib($n - 2);
 }
 
-my ($fib, $x, $ans) = (fib(), 0, 0);
-$ans += $x % 2 ? 0 : $x while ($x = $fib -> ()) < 4e6;
-print $ans;
+my $acc = 0;
+for (my $i = 2; (my $x = fib($i)) < 4e6; $i += 3) {
+    $acc += $x;
+}
+print($acc . "\n");
 
