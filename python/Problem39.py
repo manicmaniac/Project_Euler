@@ -7,18 +7,15 @@ If p is the perimeter of a right angle triangle with integral length sides, {a,b
 
 For which value of p  1000, is the number of solutions maximised?
 '''
-from math import sqrt
-
-def find_oblique(a, b):
-    return sqrt(a ** 2 + b ** 2)
+from math import hypot
 
 def solution():
     for i in range(12, 1000, 12):
         acc = []
         for s in range(1, i):
             for t in range(s, i - s):
-                u = find_oblique(s, t)
-                if not u % 1 and s + t + u == i:
+                u = hypot(s, t)
+                if u.is_integer() and s + t + u == i:
                     acc.append((s, t, int(u)))
         if acc:
             yield len(acc), i
