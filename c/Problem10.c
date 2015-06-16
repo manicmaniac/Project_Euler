@@ -4,12 +4,14 @@
 #include <math.h>
 
 int *sieve(int limit, size_t *size) {
+    enum {
+        UNKNOWN = 0,
+        NONPRIME
+    };
     if (limit < 2) {
         return NULL;
     }
     char *search = (char *)calloc(limit, sizeof(char));
-    const char UNKNOWN = 0;
-    const char NONPRIME = 1;
     search[0] = NONPRIME;
     search[1] = NONPRIME;
     int current;
