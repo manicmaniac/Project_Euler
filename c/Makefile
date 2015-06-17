@@ -27,6 +27,9 @@ Problem9: Problem9.c
 Problem10: Problem10.c
 	$(CC) $< -lm -o $@
 
+Problem11: Problem11.c
+	$(CC) $< -lm -o $@
+
 Problem16: Problem16.c
 	$(CC) $< -lgmp -o $@
 
