@@ -35,6 +35,3 @@ function sliding($xs, $size) {
 
 print_r(max(array_map("array_product", sliding($data, 5))));
 
-
-?>
-

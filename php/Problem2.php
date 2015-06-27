@@ -26,4 +26,4 @@ function sum_of_even_fib ($max)
 }
 
 echo sum_of_even_fib(4000000);
-?>
+

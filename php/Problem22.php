@@ -33,5 +33,3 @@ foreach ($row as $key => $value) {
 }
 echo $acc;
 
-?>
-

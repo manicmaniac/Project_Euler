@@ -8,5 +8,3 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 echo array_sum(array_unique(array_merge(range(0, 999, 3), range(0, 999, 5))));
 
-?>
-

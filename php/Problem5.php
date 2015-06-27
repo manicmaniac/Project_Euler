@@ -14,5 +14,3 @@ function lcm($x, $y) {
 
 echo array_reduce(range(2, 21), "lcm", 1);
 
-?>
-

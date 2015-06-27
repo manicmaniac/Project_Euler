@@ -21,5 +21,3 @@ function sieve($limit) {
 
 print_r(array_sum(sieve(2000000)));
 
-?>
-

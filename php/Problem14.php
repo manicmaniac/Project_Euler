@@ -46,5 +46,3 @@ function max_cached_collatz($n) {
 
 echo max_cached_collatz(1000000)[0];
 
-?>
-

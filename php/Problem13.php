@@ -108,5 +108,3 @@ EOS;
 
 echo substr(sprintf('%f', array_sum(explode("\n", $data))), 0, 10);
 
-?>
-

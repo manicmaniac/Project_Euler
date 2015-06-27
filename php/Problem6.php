@@ -21,5 +21,3 @@ function square($x) {
 
 echo square(array_sum(range(1, 100))) - array_sum(array_map("square", range(1, 100)));
 
-?>
-
