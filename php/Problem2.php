@@ -9,21 +9,22 @@ By considering the terms in the Fibonacci sequence whose values do not exceed
 four million, find the sum of the even-valued terms.
 */
 
-function sum_of_even_fib ($max)
-{
-	$res = 0;
-	$s = 0;
-	$t = 1;
-	for ($i=0; $s<$max; $i++) {
-		if ($s % 2 == 0) {
-			$res += $s;
-		}
-		$tmp = $s;
-		$s = $t;
-		$t += $tmp;
-	}
-	return $res;
+function fib() {
+    list($i, $j) = [0, 1];
+    while ($i != INF) {
+        list($i, $j) = [$j, $i + $j];
+        yield $i;
+    }
 }
 
-echo sum_of_even_fib(4000000);
+$res = 0;
+foreach (fib() as $i) {
+    if ($i >= 4e6) {
+        break;
+    }
+    if (!($i & 1)) {
+        $res += $i;
+    }
+}
+echo $res;
 
