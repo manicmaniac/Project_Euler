@@ -7,7 +7,8 @@
 
 use strict;
 use warnings;
-use List::Util qw/reduce/;
+
+package Problem5;
 
 sub gcd {
     my ($a, $b) = @_;
@@ -19,5 +20,10 @@ sub lcm {
     return $a * $b / gcd($a, $b);
 }
 
-print reduce { our ($a, $b); lcm $a, $b } 1..20;
+
+package main;
+
+use List::Util qw/reduce/;
+
+print(reduce { Problem5::lcm(our $a, our $b) } 1..20);
 

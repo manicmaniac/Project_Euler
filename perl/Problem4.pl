@@ -7,6 +7,8 @@
 use strict;
 use warnings;
 
+package Problem4;
+
 sub is_palindrome {
     my ($str, $rev) = (shift, ());
     $rev = reverse $str;
@@ -23,7 +25,10 @@ sub is_3digit_product {
     return '';
 }
 
-for my $i (grep { is_palindrome($_) && is_3digit_product($_) } reverse(1e4..998001)) {
+
+package main;
+
+for my $i (grep { Problem4::is_palindrome($_) && Problem4::is_3digit_product($_) } reverse(1e4..998001)) {
     print $i;
     last;
 }

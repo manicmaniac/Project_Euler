@@ -14,9 +14,9 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
     <th>Progress</th>
   </tr>
   <tr>
-    <td rowspan="12">Ubuntu 11.10<br>Oneiric Ocelot</td>
+    <td rowspan="12">Ubuntu 14.04<br>Trusty Tahr</td>
     <td>C++</td>
-    <td>g++ v4.6.1</td>
+    <td>C++11</td>
     <td>-</td>
     <td>☆</td>
   </tr>

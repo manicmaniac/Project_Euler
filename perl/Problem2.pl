@@ -9,6 +9,9 @@
 
 use strict;
 use warnings;
+
+package Problem2;
+
 use Memoize;
 
 memoize('fib');
@@ -18,8 +21,11 @@ sub fib {
     return fib($n - 1) + fib($n - 2);
 }
 
+
+package main;
+
 my $acc = 0;
-for (my $i = 2; (my $x = fib($i)) < 4e6; $i += 3) {
+for (my $i = 2; (my $x = Problem2::fib($i)) < 4e6; $i += 3) {
     $acc += $x;
 }
 print($acc . "\n");

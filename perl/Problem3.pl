@@ -6,6 +6,8 @@
 use strict;
 use warnings;
 
+package Problem3;
+
 sub factor {
     my ($n, $d, @res) = (shift, 2);
     while ($n >= $d) {
@@ -20,5 +22,8 @@ sub factor {
     return \@res;
 }
 
-print ${factor(600851475143)}[-1];
+
+package main;
+
+print ${Problem3::factor(600851475143)}[-1];
 

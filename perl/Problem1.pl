@@ -6,7 +6,10 @@
 
 use strict;
 use warnings;
+
+package main;
+
 use List::Util qw/sum/;
 
-print sum grep !($_ % 3 * $_ % 5), 0..999
+print sum(grep(!($_ % 3 * $_ % 5), 0..999))
 

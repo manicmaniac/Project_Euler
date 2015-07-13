@@ -16,7 +16,7 @@ bool is_factorion(int x) {
         .quot = x,
         .rem = 0
     };
-    while (dm.quot) {
+    while (dm.quot && res <= x) {
         dm = div(dm.quot, 10);
         res += factorials[dm.rem];
     }
