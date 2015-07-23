@@ -5,11 +5,9 @@
 #
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-set acc 0
-for {set i 0} {$i < 1000} {incr i} {
-    if {!($i % 3 * $i % 5)} {
-        incr acc $i
-    }
-}
-puts $acc
+package require struct::list
+package require lambda
+
+puts [tcl::mathop::+ {*}[struct::list filter [struct::list iota 1000] [lambda {x} {expr $x % 3 * $x % 5 == 0}]]]
+
 
