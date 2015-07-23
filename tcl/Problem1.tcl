@@ -7,7 +7,8 @@
 
 package require struct::list
 package require lambda
+namespace import tcl::mathop::+
 
-puts [tcl::mathop::+ {*}[struct::list filter [struct::list iota 1000] [lambda {x} {expr $x % 3 * $x % 5 == 0}]]]
+puts [+ {*}[struct::list filter [struct::list iota 1000] [lambda {x} {expr $x % 3 * $x % 5 == 0}]]]
 
 
