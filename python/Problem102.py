@@ -1,6 +1,6 @@
 #/usr/bin/env python
 # -*- coding:utf-8 -*-
-'''
+r"""
 Three distinct points are plotted at random on a Cartesian plane, for which
 -1000 ≤ x, y ≤ 1000, such that a triangle is formed.
 
@@ -19,29 +19,30 @@ of triangles for which the interior contains the origin.
 
 NOTE: The first two examples in the file represent the triangles in the example
 given above.
-'''
+"""
 
-from sympy import *
 import csv
 
-FILE = '../resources/triangles.txt'
 
-x = Symbol('x')
-y = Symbol('y')
+def cross_product(a, b):
+    return a.real * b.imag - b.real * a.imag
 
-def contains_origin(a,b,c):
-    res = (solve([a[0]*x+b[0]*y+c[0], a[1]*x+b[1]*y+c[1]], [x, y]))
-    return min(res[x], res[y]) > 0
+
+def contains_origin(a, b, c):
+    p = cross_product(a, b)
+    q = cross_product(b, c)
+    r = cross_product(c, a)
+    return (p < 0 and q < 0 and r < 0) or (p >= 0 and q >= 0 and r >= 0)
+
 
 if __name__ == '__main__':
-    rawdata = csv.reader(open(FILE))
-    data = [map(int, i) for i in rawdata]
-    res = 0
-    for i in data:
-        a = i[0:2]
-        b = i[2:4]
-        c = i[4:6]
-        if contains_origin(a, b, c):
-            res += 1
-    print res
-
+    count = 0
+    with open('../resources/triangles.txt') as f:
+        for row in csv.reader(f):
+            ax, ay, bx, by, cx, cy = map(int, row)
+            a = complex(ax, ay)
+            b = complex(bx, by)
+            c = complex(cx, cy)
+            if contains_origin(a, b, c):
+                count += 1
+    print(count)
