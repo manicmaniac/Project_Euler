@@ -22,13 +22,17 @@
 #include <stdio.h>
 
 int powmod(int x, int y, int z) {
-    int i, acc;
+    int t;
 
-    acc = 1;
-    for (i = 0; i < y; i++) {
-        acc = acc * x % z;
+    if (!y) {
+        return 1;
     }
-    return acc;
+    t = powmod(x, y >> 1, z);
+    t = t * t % z;
+    if (y & 1) {
+        t = t * x % z;
+    }
+    return t;
 }
 
 int felm(int x) {
