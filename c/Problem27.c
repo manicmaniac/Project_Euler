@@ -48,37 +48,32 @@ bool is_prime(int n) {
 }
 
 int *sieve(int limit, size_t *size) {
-    enum {
-        UNKNOWN = 0,
-        NONPRIME
-    };
+    int *search, *result;
+    int i, j;
+    double sqrt_limit;
+
     if (limit < 2) {
         return NULL;
     }
-    char *search = (char *)calloc(limit, sizeof(char));
-    search[0] = NONPRIME;
-    search[1] = NONPRIME;
-    int current;
-    int i;
-    double sqrt_limit = sqrt(limit);
-    for (current = 2; current <= sqrt_limit; current++) {
-        for (i = current << 1; i < limit; i += current) {
-            search[i] = NONPRIME;
-        }
-    }
+    search = calloc(limit, sizeof(int));
+    result = malloc(limit * sizeof(int));
+    search[0] = 1;
+    search[1] = 1;
+    sqrt_limit = sqrt(limit);
     *size = 0;
-    int *sparse_res = (int *)malloc(limit * sizeof(int));
-    for (i = 0; i < limit; i++) {
-        if (search[i] == UNKNOWN) {
-            sparse_res[*size] = i;
+    for (i = 2; i <= limit; i++) {
+        if (!search[i]) {
+            if (i <= sqrt_limit) {
+                for (j = i << 1; j < limit; j += i) {
+                    search[j] = 1;
+                }
+            }
+            result[*size] = i;
             *size += 1;
         }
     }
     free(search);
-    int *res = (int *)malloc(*size * sizeof(int));
-    memcpy(res, sparse_res, *size * sizeof(int));
-    free(sparse_res);
-    return res;
+    return realloc(result, *size * sizeof(int));
 }
 
 int count_quadratic_primes(int a, int b) {
