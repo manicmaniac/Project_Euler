@@ -8,45 +8,38 @@
 #include <stdlib.h>
 #include <math.h>
 
-static const int limit = 2000000;
-
 int *sieve(int limit, size_t *size) {
-    int *search, *result;
-    int i, j;
+    int i, j, *search, *result;
     double sqrt_limit;
 
-    if (limit < 2) {
-        return NULL;
-    }
     search = calloc(limit, sizeof(int));
-    result = malloc(limit * sizeof(int));
-    search[0] = 1;
-    search[1] = 1;
+    search[0] = search[1] = 1;
     sqrt_limit = sqrt(limit);
-    *size = 0;
-    for (i = 2; i <= limit; i++) {
+    for (i = 2; i < sqrt_limit; i++) {
         if (!search[i]) {
-            if (i <= sqrt_limit) {
-                for (j = i << 1; j < limit; j += i) {
-                    search[j] = 1;
-                }
+            for (j = i << 1; j < limit; j += i) {
+                search[j] = 1;
             }
-            result[*size] = i;
-            *size += 1;
         }
     }
+    result = malloc(limit * sizeof(int));
+    for (i = j = 0; i < limit; i++) {
+        if (!search[i]) {
+            result[j++] = i;
+        }
+    }
+    *size = j;
     free(search);
-    return realloc(result, *size * sizeof(int));
+    return result;
 }
 
 int main(int argc, const char *argv[]) {
-    size_t i, size;
-    int *primes;
     long res;
+    int i, *primes;
+    size_t size;
 
-    primes = sieve(limit, &size);
-    res = 0;
-    for (i = 0; i < size; i++) {
+    primes = sieve(2000000, &size);
+    for (res = i = 0; i < size; i++) {
         res += primes[i];
     }
     free(primes);

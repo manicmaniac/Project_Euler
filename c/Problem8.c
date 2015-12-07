@@ -27,10 +27,9 @@ static const char data[] =
     "05886116467109405077541002256983155200055935729725"
     "71636269561882670428252483600823257530420752963450";
 
-int main(int argc, char const* argv[])
-{
-    int product, res;
-    int i, j;
+int main(int argc, const char *argv[]) {
+    int product, res, i, j;
+
     for (i = 0; i <= 1000 - 5; i++) {
         product = 1;
         for (j = 0; j < 5; j++) {
@@ -41,4 +40,3 @@ int main(int argc, char const* argv[])
     printf("%d\n", res);
     return 0;
 }
-
