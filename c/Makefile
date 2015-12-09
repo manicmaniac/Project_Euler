@@ -39,10 +39,16 @@ Problem20: Problem20.c
 Problem21: Problem21.c
 	$(CC) $< -lm -o $@
 
+Problem27: Problem27.c
+	$(CC) $< -lm -o $@
+
 Problem29: Problem29.c
 	$(CC) $< -lm -o $@
 
 Problem38: Problem38.c
+	$(CC) $< -lm -o $@
+
+Problem41: Problem41.c
 	$(CC) $< -lm -o $@
 
 Problem104: Problem104.c
