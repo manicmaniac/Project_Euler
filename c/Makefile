@@ -57,6 +57,9 @@ Problem42: Problem42.c
 Problem43: Problem43.c
 	$(CC) $< -lm -o $@
 
+Problem44: Problem44.c
+	$(CC) $< -lm -o $@
+
 Problem104: Problem104.c
 	$(CC) $< -lm -o $@
 
