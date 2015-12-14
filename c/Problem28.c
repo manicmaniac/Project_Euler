@@ -15,52 +15,11 @@
  */
 #include <stdio.h>
 
-/* N   E
- *  \ /
- *   *
- *  / \
- * W   S
- */
-
-inline int north(int x) {
-    int y;
-
-    y = 2 * x + 1;
-    return y * y - 2 * x;
-}
-
-inline int east(int x) {
-    int y;
-
-    y = 2 * x + 1;
-    return y * y;
-}
-
-inline int south(int x) {
-    int y;
-
-    y = 2 * x + 1;
-    return y * y - 6 * x;
-}
-
-inline int west(int x) {
-    int y;
-
-    y = 2 * x + 1;
-    return y * y - 4 * x;
-}
-
 int main(int argc, char const* argv[]) {
-    int i;
-    int res;
+    int x;
 
-    res = 1;
-    for (i = 1; i <= 500; i++) {
-        res += north(i);
-        res += east(i);
-        res += south(i);
-        res += west(i);
-    }
-    printf("%d\n", res);
+    /* 1 + sum(16x^2 + 4x + 4), 1 <= x <= 1001/2 */
+    x = 1001 / 2;
+    printf("%d\n", 2 * (x + 1) * (8 * x * x + 7 * x + 6) / 3 - 3);
     return 0;
 }
