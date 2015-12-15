@@ -12,23 +12,21 @@ For the first one hundred natural numbers, find the total of the digital sums
 of the first one hundred decimal digits for all the irrational square roots.
 '''
 
-from decimal import *
-
-getcontext().prec = 105
-squares = [i ** 2 for i in range(10)]
+import decimal
+import math
 
 
-def sum_digits(n):
-    return sum(map(int, str(n)))
-
-
-def floor(n):
-    return int(n - (n % 1))
+def sum_digits(x):
+    return sum(map(int, str(x)))
 
 
 if __name__ == '__main__':
-    res = 0
-    for i in range(100):
-        if i not in squares:
-            res += sum_digits(floor(Decimal(i).sqrt() * 10 ** 99))
-    print res
+    with decimal.localcontext() as context:
+        context.prec = 102
+        context.rounding = decimal.ROUND_DOWN
+        result = 0
+        _1e99 = 10 ** 99
+        for i in range(100):
+            if not math.sqrt(i).is_integer():
+                result += sum_digits((context.sqrt(i) * _1e99).to_integral())
+        print(result)
