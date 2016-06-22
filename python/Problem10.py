@@ -20,7 +20,7 @@ def sieve(limit):
     sqrt_limit = int(math.sqrt(limit))
     for i in range(2, sqrt_limit):
         if search[i]:
-            for j in range(i << 1, limit, i):
+            for j in range(i ** 2, limit, i):
                 search[j] = 0
     return itertools.compress(range(limit), search)
 

@@ -17,7 +17,7 @@ int *sieve(int limit, size_t *size) {
     sqrt_limit = sqrt(limit);
     for (i = 2; i < sqrt_limit; i++) {
         if (!search[i]) {
-            for (j = i << 1; j < limit; j += i) {
+            for (j = i * i; j < limit; j += i) {
                 search[j] = 1;
             }
         }
