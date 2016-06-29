@@ -1,0 +1,13 @@
+from fractions import Fraction
+from itertools import product
+
+
+def generate_fractions():
+    for i, j, k in product(range(1, 10), repeat=3):
+        d, n = (i * 10 + j, j * 10 + k)
+        if d / n == i / k:
+            yield Fraction(d, n)
+
+
+if __name__ == '__main__':
+    generate_fractions() |> reduce$(*) |> Fraction |> .denominator |> print
