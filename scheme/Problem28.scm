@@ -11,6 +11,6 @@
 ;;; What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
 (display
-  (let ((x (floor (/ 1001 2))))
+  (let ((x (floor/ 1001 2)))
     (- (* (* (1+ x) (/ (+ (+ (* 8 x x) (* x 7)) 6) 3)) 2) 3)))
 (newline)

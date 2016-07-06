@@ -21,18 +21,16 @@
 ;;;
 ;;; What is the first term in the Fibonacci sequence to contain 1000 digits?
 
-(define *log10-phi*
-  (log10 (/ (1+ (sqrt 5)) 2)))
+(use-modules (srfi srfi-41))
 
-(define *log10-sqrt5*
-  (/ (log10 5) 2))
+(define *log10-phi* (log10 (/ (1+ (sqrt 5)) 2)))
+(define *log10-sqrt5* (/ (log10 5) 2))
 
 (define (fibonacci-digits-length n)
   (1+ (floor (- (* *log10-phi* n) *log10-sqrt5*))))
 
 (display
-  (let loop ((i 0))
-    (if (> (fibonacci-digits-length i) 999)
-      i
-      (loop (1+ i)))))
+  (stream-car
+    (stream-drop-while (lambda (x) (> 1000 (fibonacci-digits-length x)))
+                      (stream-from 0))))
 (newline)
