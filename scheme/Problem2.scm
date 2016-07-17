@@ -18,5 +18,5 @@
   ((compose (cut stream-fold + 0 <>)
             (cut stream-filter even? <>)
             (cut stream-take-while (cut < <> 4e6) <>))
-  fibonacci))
+   fibonacci))
 (newline)

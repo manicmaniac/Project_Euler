@@ -12,11 +12,17 @@
 ;;; Find the difference between the sum of the squares of the first one hundred
 ;;; natural numbers and the square of the sum.
 
-(use-modules (srfi srfi-26))
+(use-modules (srfi srfi-1)
+             (srfi srfi-26))
+
+(define (square x)
+  (expt x 2))
 
 (display
-  (let ((numbers (iota 101))
-        (square (cut expt <> 2)))
-    (- (square (apply + numbers))
-       (apply + (map square numbers)))))
+  (let ((numbers (iota 101)))
+    (- (square (apply +
+                      numbers))
+       (apply +
+              (map square
+                   numbers)))))
 (newline)

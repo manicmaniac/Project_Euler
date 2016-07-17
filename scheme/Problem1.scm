@@ -3,9 +3,11 @@
 ;;;
 ;;; Find the sum of all the multiples of 3 or 5 below 1000.
 
+(use-modules (srfi srfi-1))
+
 (display
   (apply +
-    (filter
-      (lambda (x) (zero? (* (modulo x 3) (modulo x 5))))
-      (iota 1000))))
+         (filter
+           (lambda (x) (zero? (* (modulo x 3) (modulo x 5))))
+           (iota 1000))))
 (newline)
