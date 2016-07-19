@@ -14,8 +14,8 @@
 ;;; How many Sundays fell on the first of the month during the twentieth century (1
 ;;; Jan 1901 to 31 Dec 2000)?
 
-(use-modules (srfi srfi-1)
-             (srfi srfi-19))
+(import (srfi :1)
+        (srfi :19))
 
 (define (sunday? date)
   (zero? (date-week-day date)))

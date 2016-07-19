@@ -9,7 +9,7 @@
 ;;;
 ;;; Find the next triangle number that is also pentagonal and hexagonal.
 
-(use-modules (srfi srfi-41))
+(import (srfi :41))
 
 (define (pentagonal? x)
   (integer?
@@ -18,7 +18,8 @@
        6)))
 
 (define hexagonals
-  (stream-of (* x (1- (* 2 x)))
+  (stream-of (* x
+                (1- (* 2 x)))
              (x in (stream-from 1))))
 
 (display

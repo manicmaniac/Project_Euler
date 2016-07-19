@@ -13,7 +13,7 @@
   (if (< x 10)
     (list x)
     (append (digits (floor/ x 10))
-            (list (remainder x 10)))))
+            (list (modulo x 10)))))
 
 (define (factorion? x)
   (if (< x 3)
@@ -26,4 +26,5 @@
 (display
   (apply +
          (filter factorion?
-                 (iota (* 7 (factorial 9))))))
+                 (iota (* 7
+                          (factorial 9))))))

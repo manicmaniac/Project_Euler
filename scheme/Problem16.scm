@@ -3,7 +3,8 @@
 ;;; What is the sum of the digits of the number 2^1000?
 
 (define (digits x)
-  (map (compose string->number string)
+  (map (compose string->number
+                string)
        (string->list
          (number->string x))))
 

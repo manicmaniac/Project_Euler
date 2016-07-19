@@ -5,11 +5,12 @@
 (define (factor n)
   (let loop ((n n)
              (d 2)
-             (res #f))
+             (res '()))
     (cond ((< n d) res)
-          ((zero? (remainder n d)) (loop (/ n d) d (cons d res)))
+          ((zero? (modulo n d)) (loop (/ n d) d (cons d res)))
           (else (loop n (1+ d) res)))))
 
 
-(display (car (factor 600851475143)))
+(display
+  (car (factor 600851475143)))
 (newline)

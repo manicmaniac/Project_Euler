@@ -5,7 +5,7 @@
 ;;;
 ;;; How many such routes are there through a 20×20 grid?
 
-(use-modules (srfi srfi-1))
+(import (srfi :1))
 
 (define (factorial x)
   (if (eqv? 1 x)
@@ -15,7 +15,8 @@
 (define (c a b)
   (/
     (reduce * 1
-            (iota (- a b) (1+ b)))
+            (iota (- a b)
+                  (1+ b)))
     (factorial b)))
 
 (display

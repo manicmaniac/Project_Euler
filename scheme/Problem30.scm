@@ -12,7 +12,7 @@
 ;;; Find the sum of all the numbers that can be written as the sum of fifth powers
 ;;; of their digits.
 
-(use-modules (srfi srfi-1))
+(import (srfi :1))
 
 (define (digits x)
   (map (compose string->number
