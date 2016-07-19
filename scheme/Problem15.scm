@@ -5,19 +5,15 @@
 ;;;
 ;;; How many such routes are there through a 20×20 grid?
 
-(import (srfi :1))
-
 (define (factorial x)
   (if (eqv? 1 x)
     1
     (* x (factorial (1- x)))))
 
-(define (c a b)
-  (/
-    (reduce * 1
-            (iota (- a b)
-                  (1+ b)))
-    (factorial b)))
+(define (c n r)
+  (/ (factorial n)
+     (* (factorial r)
+        (factorial (- n r)))))
 
 (display
   (c 40 20))
