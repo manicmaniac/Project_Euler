@@ -10,34 +10,36 @@
         (srfi :1)
         (srfi :26))
 
+(define (sum lst)
+  (apply + lst))
+
+(define (product lst)
+  (apply * lst))
+
 (define (name-score name)
-  (apply +
-         (map (cut - <> 64)
-              (bytevector->u8-list (string->bytevector name "ascii")))))
+  (sum (map (cut - <> 64)
+            (bytevector->u8-list (string->bytevector name "ascii")))))
 
 (define (parse-csv-line line)
   (map name-score
-    (sort (string-split
-            (string-delete (cut eqv? <> #\")
-                           line)
-            #\,)
-          string<?)))
-
-(define product
-  (cut apply * <>))
+       (sort (string-split (string-delete (cut eqv? <> #\")
+                                          line)
+                           #\,)
+             string<?)))
 
 (define (zip-index xs)
   (zip xs
-       (iota (length xs) 1)))
+       (iota (length xs)
+             1)))
 
-(define filename
+(define *filename*
   "../resources/names.txt")
 
-(with-input-from-file filename (lambda ()
-                                 (display
-                                   (apply +
-                                          ((compose (cut map product <>)
-                                                    zip-index
-                                                    parse-csv-line
-                                                    read-line))))
-                                 (newline)))
+(display
+  (with-input-from-file *filename*
+                        (compose sum
+                                 (cut map product <>)
+                                 zip-index
+                                 parse-csv-line
+                                 read-line)))
+(newline)

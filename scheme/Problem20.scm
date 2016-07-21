@@ -5,15 +5,24 @@
 ;;;
 ;;; Find the sum of the digits in the number 100!
 
+(import (ice-9 receive)
+        (rnrs base))
+
 (define (factorial x)
   (if (eqv? x 1)
     1
     (* x (factorial (1- x)))))
 
 (define (digits x)
-  (map (compose string->number string)
-       (string->list
-         (number->string x))))
+  (let loop ((x x)
+             (result '()))
+    (if (zero? x)
+      result
+      (receive (quot rem)
+               (div-and-mod x 10)
+               (loop quot
+                     (cons rem
+                           result))))))
 
 (display
   (apply +

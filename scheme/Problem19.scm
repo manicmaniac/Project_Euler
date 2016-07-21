@@ -29,11 +29,10 @@
               lists))
 
 (display
-  (count (lambda (year-and-month)
-           (receive (year month)
-                    (apply values
-                           year-and-month)
-                    (zero? (date-week-day (make-date 0 0 0 0 1 month year 0)))))
-         (cartesian-product (iota 100 1901)
-                            (iota 12 1))))
-(newline)
+  (receive (years months)
+           (unzip2 (cartesian-product (iota 100 1901)
+                                      (iota 12 1)))
+           (count (lambda (year month)
+                    (zero? (date-week-day (make-date 0 0 0 0 1 month year 0))))
+                  years
+                  months)))
