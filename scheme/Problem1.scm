@@ -7,9 +7,8 @@
 
 (display
   (apply +
-         (filter
-           (lambda (x)
-             (zero? (* (modulo x 3)
-                       (modulo x 5))))
-           (iota 1000))))
+         (filter (lambda (x)
+                   (zero? (* (modulo x 3)
+                             (modulo x 5))))
+                 (iota 1000))))
 (newline)

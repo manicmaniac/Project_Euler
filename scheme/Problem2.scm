@@ -6,19 +6,20 @@
 ;;; By considering the terms in the Fibonacci sequence whose values do not exceed
 ;;; four million, find the sum of the even-valued terms.
 
-(import (srfi :26)
-        (srfi :41))
+(import (srfi :41))
 
-(define fibonacci
+(define fibonaccies
   (stream-cons 1
                (stream-cons 1
                             (stream-map +
-                                        (stream-cdr fibonacci)
-                                        fibonacci))))
+                                        (stream-cdr fibonaccies)
+                                        fibonaccies))))
 
 (display
-  ((compose (cut stream-fold + 0 <>)
-            (cut stream-filter even? <>)
-            (cut stream-take-while (cut < <> 4e6) <>))
-   fibonacci))
+  (stream-fold +
+               0
+               (stream-filter even?
+                              (stream-take-while (lambda (x)
+                                                   (< x 4e6))
+                                                 fibonaccies))))
 (newline)

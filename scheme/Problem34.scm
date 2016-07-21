@@ -4,24 +4,30 @@
 ;;;
 ;;; Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
+(import (ice-9 receive)
+        (rnrs base))
+
 (define (factorial x)
   (if (zero? x)
     1
     (* x (factorial (1- x)))))
 
 (define (digits x)
-  (if (< x 10)
-    (list x)
-    (append (digits (floor/ x 10))
-            (list (modulo x 10)))))
+  (let loop ((x x)
+             (result '()))
+    (if (zero? x)
+      result
+      (receive (quot rem)
+               (div-and-mod x 10)
+               (loop quot (cons rem
+                                result))))))
 
 (define (factorion? x)
-  (if (< x 3)
-    #f
-    (eqv? x
-          (apply +
-                (map factorial
-                      (digits x))))))
+  (and (< 3 x)
+       (eqv? x
+             (apply +
+                    (map factorial
+                         (digits x))))))
 
 (display
   (apply +

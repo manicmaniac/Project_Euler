@@ -3,17 +3,30 @@
 ;;;
 ;;; How many n-digit positive integers exist which are also an nth power?
 
-(import (srfi :1))
+(import (ice-9 receive)
+        (srfi :1))
 
-(define (ndigits x)
-  (inexact->exact (1+ (floor (log10 x)))))
+(define digits-length
+  (compose 1+
+           inexact->exact
+           floor
+           log10))
+
+(define (cartesian-product . lists)
+  (fold-right (lambda (xs ys)
+                (append-map (lambda (x)
+                              (map (lambda (y)
+                                     (cons x y))
+                                   ys))
+                            xs))
+              '(())
+              lists))
 
 (display
-  (count identity
-         (concatenate
-           (map (lambda (a)
-                  (map (lambda (b)
-                         (eqv? b (ndigits (expt a b))))
-                       (iota 21 1)))
-                (iota 9 1)))))
+  (count (lambda (x-and-y)
+           (receive (x y)
+                    (apply values x-and-y)
+                    (eqv? y (digits-length (expt x y)))))
+         (cartesian-product (iota 9 1)
+                            (iota 21 1))))
 (newline)

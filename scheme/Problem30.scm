@@ -12,13 +12,20 @@
 ;;; Find the sum of all the numbers that can be written as the sum of fifth powers
 ;;; of their digits.
 
-(import (srfi :1))
+(import (ice-9 receive)
+        (rnrs base)
+        (srfi :1))
 
 (define (digits x)
-  (map (compose string->number
-                string)
-       (string->list
-         (number->string x))))
+  (let loop ((x x)
+             (result '()))
+    (if (zero? x)
+      result
+      (receive (quot rem)
+               (div-and-mod x 10)
+               (loop quot
+                     (cons rem
+                           result))))))
 
 
 (define (armstrong? n x)

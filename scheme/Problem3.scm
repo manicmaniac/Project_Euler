@@ -7,8 +7,12 @@
              (d 2)
              (res '()))
     (cond ((< n d) res)
-          ((zero? (modulo n d)) (loop (/ n d) d (cons d res)))
-          (else (loop n (1+ d) res)))))
+          ((zero? (modulo n d)) (loop (/ n d)
+                                      d
+                                      (cons d res)))
+          (else (loop n
+                      (1+ d)
+                      res)))))
 
 
 (display

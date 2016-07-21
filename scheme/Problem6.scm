@@ -12,8 +12,7 @@
 ;;; Find the difference between the sum of the squares of the first one hundred
 ;;; natural numbers and the square of the sum.
 
-(import (srfi :1)
-        (srfi :26))
+(import (srfi :1))
 
 (define (square x)
   (expt x 2))
