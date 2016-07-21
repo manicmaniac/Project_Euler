@@ -18,3 +18,4 @@
 (display
   (apply +
          (digits (factorial 100))))
+(newline)

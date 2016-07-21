@@ -11,3 +11,4 @@
 (display
   (apply +
          (digits (expt 2 1000))))
+(newline)

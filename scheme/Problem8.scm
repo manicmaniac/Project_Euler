@@ -40,3 +40,4 @@
          (map (lambda (xs)
                 (apply * xs))
               (sliding 5 data))))
+(newline)

@@ -17,3 +17,4 @@
 
 (display
   (c 40 20))
+(newline)

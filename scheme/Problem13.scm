@@ -105,3 +105,4 @@
 (display
   (substring (number->string (apply + data))
              0 10))
+(newline)

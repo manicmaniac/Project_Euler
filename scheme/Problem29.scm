@@ -31,3 +31,4 @@
       (delete-duplicates
         (map (cut apply expt <>)
              (cartesian-product range range))))))
+(newline)

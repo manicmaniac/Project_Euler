@@ -87,5 +87,6 @@
                                                     (lines '()))
                                            (if (eof-object? line)
                                              lines
-                                             (loop (read-line) (append lines
-                                                                       (list line)))))))))
+                                             (loop (read-line)
+                                                   (cons line lines))))))
+                                 (newline)))

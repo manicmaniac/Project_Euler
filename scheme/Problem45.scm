@@ -26,3 +26,4 @@
   (stream-ref (stream-filter pentagonal?
                              hexagonals)
               2))
+(newline)
