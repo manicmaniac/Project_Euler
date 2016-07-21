@@ -83,7 +83,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   </tr>
   <tr>
     <td>Scheme</td>
-    <td>Gauche v0.9.1</td>
+    <td>Guile v2.0.9</td>
     <td>-</td>
     <td>★☆</td>
   </tr>
