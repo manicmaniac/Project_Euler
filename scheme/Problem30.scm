@@ -17,15 +17,17 @@
         (srfi :1))
 
 (define (digits x)
-  (let loop ((x x)
-             (result '()))
-    (if (zero? x)
-      result
-      (receive (quot rem)
-               (div-and-mod x 10)
-               (loop quot
-                     (cons rem
-                           result))))))
+  (if (zero? x)
+    '(0)
+    (let loop ((x x)
+               (result '()))
+      (if (zero? x)
+        result
+        (receive (quot rem)
+                 (div-and-mod x 10)
+                 (loop quot
+                       (cons rem
+                             result)))))))
 
 
 (define (armstrong? n x)

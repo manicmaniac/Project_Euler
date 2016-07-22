@@ -2,19 +2,27 @@
 ;;;
 ;;; What is the largest prime factor of the number 600851475143 ?
 
-(define (factor n)
-  (let loop ((n n)
-             (d 2)
-             (res '()))
-    (cond ((< n d) res)
-          ((zero? (modulo n d)) (loop (/ n d)
-                                      d
-                                      (cons d res)))
-          (else (loop n
-                      (1+ d)
-                      res)))))
+(import (ice-9 receive)
+        (rnrs base))
+
+(define (factor x)
+  (let loop ((x x)
+             (divisor 2)
+             (result '()))
+    (if (< x divisor)
+      result
+      (receive (quot rem)
+               (div-and-mod x divisor)
+               (if (zero? (modulo x divisor))
+                 (loop quot
+                       divisor
+                       (cons divisor result))
+                 (loop x
+                       (1+ divisor)
+                       result))))))
 
 
 (display
-  (car (factor 600851475143)))
+  (apply max
+         (factor 600851475143)))
 (newline)

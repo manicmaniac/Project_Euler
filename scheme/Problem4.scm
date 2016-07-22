@@ -3,21 +3,24 @@
 ;;;
 ;;; Find the largest palindrome made from the product of two 3-digit numbers.
 
-(import (srfi :1))
+(import (ice-9 receive)
+        (rnrs base)
+        (srfi :1))
 
 (define (palindrome? x)
   (let ((s (number->string x)))
     (string=? s (string-reverse s))))
 
 (define (product-of-3digits? x)
-  (let loop ((i 100))
-    (if (> i (sqrt x))
-      #f
-      (let ((d (floor/ x i))
-            (m (modulo x i)))
-        (unless (and (zero? m)
-                     (< d 1000))
-          (loop (1+ i)))))))
+  (let loop ((i 100)
+             (sqrt-x (sqrt x)))
+    (and (> sqrt-x i)
+         (receive (quot rem)
+                  (div-and-mod x i)
+                  (or (and (zero? rem)
+                           (< quot 1000))
+                      (loop (1+ i)
+                            sqrt-x))))))
 
 (display
   (find (lambda (x)

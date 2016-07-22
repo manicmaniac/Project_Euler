@@ -5,23 +5,40 @@
 ;;; Considering natural numbers of the form, a^b, where a, b < 100, what is the
 ;;; maximum digital sum?
 
-(import (srfi :1))
+(import (ice-9 receive)
+        (rnrs base)
+        (srfi :1))
 
 (define (digits x)
-  (map (compose string->number
-                string)
-       (string->list
-         (number->string x))))
+  (if (zero? x)
+    '(0)
+    (let loop ((x x)
+               (result '()))
+      (if (zero? x)
+        result
+        (receive (quot rem)
+                 (div-and-mod x 10)
+                 (loop quot
+                       (cons rem
+                             result)))))))
 
+(define (cartesian-product . lists)
+  (fold-right (lambda (xs ys)
+                (append-map (lambda (x)
+                              (map (lambda (y)
+                                     (cons x y))
+                                   ys))
+                            xs))
+              '(())
+              lists))
 
 (display
   (apply max
-         (concatenate
-           (let ((range (iota 100)))
-             (map (lambda (b)
-                    (map (lambda (a)
+         (let ((range (iota 100)))
+           (map (lambda (x-and-y)
+                  (receive (x y)
+                           (apply values x-and-y)
                            (apply +
-                                  (digits (expt a b))))
-                         range))
-                  range)))))
+                                  (digits (expt x y)))))
+                (cartesian-product range range)))))
 (newline)

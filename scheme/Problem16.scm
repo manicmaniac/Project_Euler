@@ -2,11 +2,20 @@
 ;;;
 ;;; What is the sum of the digits of the number 2^1000?
 
+(import (ice-9 receive)
+        (rnrs base))
+
 (define (digits x)
-  (map (compose string->number
-                string)
-       (string->list
-         (number->string x))))
+  (if (zero? x) 0
+    (let loop ((x x)
+               (result '()))
+      (if (zero? x)
+        result
+        (receive (quot rem)
+                 (div-and-mod x 10)
+                 (loop quot
+                       (cons rem
+                             result)))))))
 
 (display
   (apply +

@@ -12,10 +12,8 @@
 (import (srfi :41))
 
 (define (pentagonal? x)
-  (integer?
-    (/ (1+ (sqrt (1+ (* 24
-                        x))))
-       6)))
+  (integer? (/ (1+ (sqrt (1+ (* 24 x))))
+                6)))
 
 (define hexagonals
   (stream-of (* x
