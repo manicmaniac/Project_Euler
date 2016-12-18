@@ -56,6 +56,22 @@
               '(())
               lists))
 
+(define (sieve lst)
+  (let loop ((head (car lst))
+             (tail (cdr lst))
+             (result '()))
+    (if (< (last tail) (expt head 2))
+      (append (reverse result)
+              (cons head tail))
+      (loop (car tail)
+            (remove (lambda (x)
+                      (zero? (modulo x head)))
+                    (cdr tail))
+            (cons head result)))))
+
+(define (primes-to x)
+  (sieve (iota (1- x) 2)))
+
 (define (prime-producer a b)
   (lambda (n)
     (+ b
@@ -71,6 +87,6 @@
   (apply *
          (arg-max (lambda (a-and-b)
                     (apply prime-producer-length a-and-b))
-                  (cartesian-product (iota 1000 -999 2)
-                                     (iota 1000 -999 2)))))
+                  (cartesian-product (iota 999 -999 2)
+                                     (primes-to 1000)))))
 (newline)
