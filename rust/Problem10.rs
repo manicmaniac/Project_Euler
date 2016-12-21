@@ -13,7 +13,7 @@ fn sieve(limit: usize) -> Vec<i64> {
     is_primes[1] = false;
     let sqrt_limit = (limit as f64).sqrt() as usize;
     for i in 2..sqrt_limit {
-        if is_primes[i] == true {
+        if is_primes[i] {
             for j in i..(((limit as f64) / i as f64).ceil() as usize) {
                 is_primes[j * i] = false
             }
@@ -25,7 +25,7 @@ fn sieve(limit: usize) -> Vec<i64> {
             result.push(i as i64);
         }
     }
-    return result;
+    result
 }
 
 fn main() {
