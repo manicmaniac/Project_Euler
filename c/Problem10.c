@@ -3,46 +3,38 @@
  *
  * Find the sum of all the primes below two million.
  */
-
-#include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 
-int *sieve(int limit, size_t *size) {
-    int i, j, *search, *result;
-    double sqrt_limit;
+void sieve(char *array, size_t size) {
+    size_t i, j, limit;
 
-    search = calloc(limit, sizeof(int));
-    search[0] = search[1] = 1;
-    sqrt_limit = sqrt(limit);
-    for (i = 2; i < sqrt_limit; i++) {
-        if (!search[i]) {
-            for (j = i * i; j < limit; j += i) {
-                search[j] = 1;
+    array[0] = 1;
+    array[1] = 1;
+    limit = (size_t)sqrt((double)size);
+    for (i = 2; i <= limit; i++) {
+        if (!array[i]) {
+            for (j = i * i; j < size; j += i) {
+                array[j] = 1;
             }
         }
     }
-    result = malloc(limit * sizeof(int));
-    for (i = j = 0; i < limit; i++) {
-        if (!search[i]) {
-            result[j++] = i;
-        }
-    }
-    *size = j;
-    free(search);
-    return result;
 }
 
-int main(int argc, const char *argv[]) {
-    long res;
-    int i, *primes;
-    size_t size;
+int main(int argc, char **argv) {
+#define SIZE_OF_ARRAY 2000000
+    char array[SIZE_OF_ARRAY] = { 0 };
+    size_t i;
+    long sum;
 
-    primes = sieve(2000000, &size);
-    for (res = i = 0; i < size; i++) {
-        res += primes[i];
+    sieve(array, SIZE_OF_ARRAY);
+    sum = 0;
+    for (i = 0; i < SIZE_OF_ARRAY; i++) {
+        if (!array[i]) {
+            sum += i;
+        }
     }
-    free(primes);
-    printf("%ld\n", res);
+    printf("%ld\n", sum);
     return 0;
+#undef SIZE_OF_ARRAY
 }
