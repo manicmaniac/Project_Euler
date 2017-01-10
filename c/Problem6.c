@@ -11,10 +11,10 @@
  */
 #include <stdio.h>
 
-int main(int argc, const char *argv[]) {
-    long sum_of_square, square_of_sum, i;
-
-    sum_of_square = square_of_sum = 0;
+int main(int argc, char **argv) {
+    long sum_of_square = 0;
+    long square_of_sum = 0;
+    long i;
     for (i = 0; i <= 100; i++) {
         sum_of_square += i * i;
         square_of_sum += i;
