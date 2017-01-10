@@ -16,14 +16,12 @@ double fibterm(int n) {
     return round(pow(PHI, n + 1) / SQRT5);
 }
 
-int main(int argc, const char *argv[]) {
-    int i, res, x;
-
-    for (res = i = 0; (x = (int)fibterm(i)) < 4e6; i++) {
-        if (!(x & 1)) {
-            res += x;
-        }
+int main(int argc, char **argv) {
+    int sum = 0;
+    int i, x;
+    for (i = 2; (x = (int)fibterm(i)) < 4e6; i += 3) {
+        sum += x;
     }
-    printf("%d\n", res);
+    printf("%d\n", sum);
     return 0;
 }
