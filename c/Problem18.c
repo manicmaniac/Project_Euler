@@ -1,84 +1,65 @@
 /*
  * By starting at the top of the triangle below and moving to adjacent numbers on
  * the row below, the maximum total from top to bottom is 23.
- * 
+ *
  * 3
  * 7 4
  * 2 4 6
  * 8 5 9 3
- * 
+ *
  * That is, 3 + 7 + 4 + 9 = 23.
- * 
+ *
  * Find the maximum total from top to bottom of the triangle below:
- * 
+ *
  * NOTE: As there are only 16384 routes, it is possible to solve this problem by
  * trying every route. However, Problem 67, is the same challenge with a triangle
  * containing one-hundred rows; it cannot be solved by brute force, and requires a
  * clever method! ;o)
  */
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-typedef struct pyramid_t {
-    int value;
-    struct pyramid_t *left;
-    struct pyramid_t *right;
-} pyramid_t;
+#define MAX(x, y) (x > y ? x : y)
 
-pyramid_t *pyramid_new(int value) {
-    pyramid_t *pyramid = (pyramid_t *)malloc(sizeof(pyramid_t));
-    pyramid->value = value;
-    pyramid->left = NULL;
-    pyramid->right = NULL;
-}
+static const int data[] = {
+    75,
+    95, 64,
+    17, 47, 82,
+    18, 35, 87, 10,
+    20,  4, 82, 47, 65,
+    19,  1, 23, 75,  3, 34,
+    88,  2, 77, 73,  7, 63, 67,
+    99, 65,  4, 28,  6, 16, 70, 92,
+    41, 41, 26, 56, 83, 40, 80, 70, 33,
+    41, 48, 72, 33, 47, 32, 37, 16, 94, 29,
+    53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14,
+    70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57,
+    91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48,
+    63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31,
+     4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23,
+};
 
-pyramid_t *pyramid_from_array(int *array, size_t array_size) {
-    int i;
-    pyramid_t *root = pyramid_new(array[0]);
-    pyramid_t *pyramid = root;
-    for (i = 1; i < array_size; i++) {
-        if (!pyramid->left) {
-            pyramid->left = pyramid_new(array[i]);
-        } else if (!pyramid->right) {
-            pyramid->right = pyramid_new(array[i]);
-        } else {
-            pyramid = pyramid->left;
+int pyramid_route(int *pyramid, int size) {
+    for (; size > 1; size--) {
+        int offset = -size;
+        int i;
+        for (i = 1; i <= size; i++) {
+            offset += i;
+        }
+        int *longer = pyramid + offset;
+        int *shorter = longer - size + 1;
+        for (i = 0; i < (size - 1); i++) {
+            shorter[i] += MAX(longer[i], longer[i + 1]);
         }
     }
-    return root;
+    return pyramid[0];
 }
 
-void pyramid_free(pyramid_t *pyramid) {
-    pyramid_free(pyramid->left);
-    pyramid_free(pyramid->right);
-    free(pyramid);
-}
-
-typedef int(*pyramid_route_compare_func)(int lhs, int rhs);
-
-int pyramid_route(pyramid_t *pyramid, pyramid_route_compare_func cmp) {
-    int left = pyramid_route(pyramid->left, cmp);
-    int right = pyramid_route(pyramid->right, cmp);
-    return cmp(left, right);
-}
-
-static int pyramid_max(int lhs, int rhs) {
-    return (lhs < rhs ? rhs : lhs);
-}
-
-int main(int argc, char const* argv[]) {
-    pyramid_t *root = pyramid_new(3);
-    root->left = pyramid_new(7);
-    root->right = pyramid_new(4);
-    //
-    root->left->left = pyramid_new(2);
-    root->left->right = pyramid_new(4);
-    root->right->left = root->left->right;
-    root->right->right = pyramid_new(6);
-    //
-    int res = pyramid_route(root, pyramid_max);
-    printf("%d\n", res);
-    pyramid_free(root);
+int main(int argc, char *argv[]) {
+    int *buffer = malloc(sizeof(data));
+    memcpy(buffer, data, sizeof(data));
+    printf("%d\n", pyramid_route(buffer, 15));
     return 0;
 }
-
