@@ -16,7 +16,6 @@
  * containing one-hundred rows; it cannot be solved by brute force, and requires a
  * clever method! ;o)
  */
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -61,5 +60,6 @@ int main(int argc, char *argv[]) {
     int *buffer = malloc(sizeof(data));
     memcpy(buffer, data, sizeof(data));
     printf("%d\n", pyramid_route(buffer, 15));
+    free(buffer);
     return 0;
 }
