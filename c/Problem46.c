@@ -42,7 +42,7 @@ bool is_twice_of_square(int x) {
     return !modf(sqrt(x / 2), &integral);
 }
 
-bool is_goldbach_composite(int x, unsigned int precision) {
+bool is_goldbach_composite(int x) {
     size_t size = (size_t)x + 1;
     char *sieved = calloc(size, sizeof(char));
     sieve(sieved, size);
@@ -60,7 +60,7 @@ bool is_goldbach_composite(int x, unsigned int precision) {
 int main(int argc, char *argv[]) {
     int i;
     for (i = 9; i < (INT_MAX - 1); i += 2) {
-        if (!is_goldbach_composite(i, 20)) {
+        if (!is_goldbach_composite(i)) {
             printf("%d\n", i);
             break;
         }
