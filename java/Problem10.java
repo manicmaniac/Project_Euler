@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class Problem10 {
     static class Primes implements Iterable<Integer> {
-        private int limit;
+        private final int limit;
         private boolean[] isComposites;
 
         public Primes(int limit) {
@@ -18,6 +18,7 @@ public class Problem10 {
             return limit;
         }
 
+        @Override
         public Iterator<Integer> iterator() {
             synchronized (this) {
                 if (!isSieved()) {
@@ -48,10 +49,12 @@ public class Problem10 {
         class PrimesIterator implements Iterator<Integer> {
             private Integer next = 2;
 
+            @Override
             public boolean hasNext() {
                 return this.next != null;
             }
 
+            @Override
             public Integer next() {
                 Integer current = this.next;
                 for (int i = current + 1; i < isComposites.length; i++) {
