@@ -7,17 +7,35 @@
  * By considering the terms in the Fibonacci sequence whose values do not exceed
  * four million, find the sum of the even-valued terms.
  */
-const SQRT_5: f64 = 2.2360679775;
-const PHI: f64 = 1.61803398875;
+struct Fibonacci {
+    curr: i64,
+    next: i64,
+}
 
-fn fibterm(n: i32) -> i32 {
-    (PHI.powi(n + 1) / SQRT_5).round() as i32
+impl Fibonacci {
+    fn new() -> Fibonacci {
+        Fibonacci {
+            curr: 0,
+            next: 1,
+        }
+    }
+}
+
+impl Iterator for Fibonacci {
+    type Item = i64;
+
+    fn next(&mut self) -> Option<i64> {
+        let (curr, next) = (self.next, self.curr + self.next);
+        self.curr = curr;
+        self.next = next;
+        Some(self.curr)
+    }
 }
 
 fn main() {
-    let answer = (0..).map(fibterm)
-                      .take_while(|&x| x < 4000000)
-                      .filter(|x| x & 1 == 0)
-                      .fold(0, |x, y| x + y);
+    let fibonacci = Fibonacci::new();
+    let answer: i64 = fibonacci.filter(|&x| x & 1 == 0)
+        .take_while(|&x| x < 4_000_000)
+        .sum();
     println!("{}", answer);
 }
