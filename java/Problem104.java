@@ -12,6 +12,7 @@
  * Given that F[k] is the first Fibonacci number for which the first nine digits
  * AND the last nine digits are 1-9 pandigital, find k.
  */
+import java.util.BitSet;
 import java.util.PrimitiveIterator;
 
 public class Problem104 {
@@ -85,11 +86,12 @@ public class Problem104 {
             if (x % 9 != 0) {
                 return false;
             }
-            int flags = 0x1;
+            final int nbits = 9;
+            BitSet bitSet = new BitSet(nbits);
             for (long i = x; i > 0; i /= 10) {
-                flags |= 0x1 << (i % 10);
+                bitSet.set((int) (i % 10));
             }
-            return (flags == 0x3ff);
+            return bitSet.cardinality() == nbits;
         }
     }
 
