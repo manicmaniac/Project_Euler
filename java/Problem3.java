@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Problem3 {
-	public static List<Long> factorize(long x) {
-		List<Long> divisors = new ArrayList<Long>();
-		for (long i = 2L; i <= x; i++) {
-			if (x % i == 0) {
-				divisors.add(i);
-				x /= i;
-				i--;
-			}
-		}
-		return divisors;
-	}
-	public static void main(String[] args) {
+    public static List<Long> factorize(long x) {
+        List<Long> factors = new ArrayList<Long>();
+        for (long i = 2L; i <= x; i++) {
+            if (x % i == 0) {
+                factors.add(i);
+                x /= i;
+                i--;
+            }
+        }
+        return factors;
+    }
+
+    public static void main(String[] args) {
         List<Long> factors = factorize(600851475143L);
         long answer = factors.get(factors.size() - 1);
-		System.out.println(answer);
-	}
+        System.out.println(answer);
+    }
 }
-

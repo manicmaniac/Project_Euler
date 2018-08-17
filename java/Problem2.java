@@ -37,7 +37,7 @@ public class Problem2 {
         }
     }
 
-	public static void main(String args[]) {
+    public static void main(String args[]) {
         Fibonacci fibonacci = new Fibonacci();
         long answer = 0;
         for (long x : fibonacci) {
@@ -49,5 +49,5 @@ public class Problem2 {
             }
         }
         System.out.println(answer);
-	}
+    }
 }

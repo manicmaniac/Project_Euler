@@ -9,20 +9,20 @@ import java.util.Comparator;
 import java.util.stream.IntStream;
 
 public class Problem4 {
-	public static boolean isPalindromic(int n) {
-		String original = String.valueOf(n);
-		String reversed = new StringBuffer(original).reverse().toString();
-		return original.equals(reversed);
-	}
+    public static boolean isPalindromic(int n) {
+        String original = String.valueOf(n);
+        String reversed = new StringBuffer(original).reverse().toString();
+        return original.equals(reversed);
+    }
 
-	public static boolean isProductOf3Digits(int x) {
+    public static boolean isProductOf3Digits(int x) {
         return IntStream.range(100, 999)
                 .filter(i -> x % i == 0 && x / i < 1000 && x / i > 99)
                 .findFirst()
                 .isPresent();
-	}
+    }
 
-	public static void main(String args[]) {
+    public static void main(String args[]) {
         int answer = IntStream.rangeClosed(100 * 100, 999 * 999)
                 .boxed()
                 .sorted(Comparator.reverseOrder())
@@ -31,6 +31,6 @@ public class Problem4 {
                 .findFirst()
                 .getAsInt();
         System.out.println(answer);
-	}
+    }
 }
 

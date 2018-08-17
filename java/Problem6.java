@@ -21,10 +21,10 @@ public class Problem6 {
         return x * x;
     }
 
-	public static void main(String args[]) {
+    public static void main(String args[]) {
         int squareAndSum = IntStream.rangeClosed(1, 100).map(Problem6::square).sum();
         int sumAndSquare = square(IntStream.rangeClosed(1, 100).sum());
         int answer = sumAndSquare - squareAndSum;
         System.out.println(answer);
-	}
+    }
 }

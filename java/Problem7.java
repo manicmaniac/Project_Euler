@@ -35,12 +35,12 @@ public class Problem7 {
         }
     }
 
-	public static void main(String args[]) {
+    public static void main(String args[]) {
         Prime prime = new Prime();
         Spliterator<BigInteger> spliterator = Spliterators.spliteratorUnknownSize(prime.iterator(),
                     Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SORTED);
         Stream<BigInteger> stream = StreamSupport.stream(spliterator, false);
         BigInteger answer = stream.skip(10000).findFirst().get();
         System.out.println(answer);
-	}
+    }
 }
