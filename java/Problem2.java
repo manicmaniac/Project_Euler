@@ -8,23 +8,46 @@ By considering the terms in the Fibonacci sequence whose values do not exceed
 four million, find the sum of the even-valued terms.
 */
 
-class Problem2 {
-	public static int sumEvenFib(int max) {
-		int s = 1;
-		int t = 1;
-		int tmp = 0;
-		int res = 0;
-		while(t<max) {
-			tmp = s;
-			s = t;
-			t += tmp;
-			if(s % 2 == 0) {
-				res += s;
-			}
-		}
-		return res;
-	}
+import java.util.Iterator;
+import java.util.PrimitiveIterator;
+
+public class Problem2 {
+    public static class Fibonacci implements Iterable<Long> {
+        @Override
+        public Iterator<Long> iterator() {
+            return new FibonacciIterator();
+        }
+
+        private static class FibonacciIterator implements PrimitiveIterator.OfLong {
+            private long a = 1;
+            private long b = 1;
+
+            @Override
+            public boolean hasNext() {
+                return true;
+            }
+
+            @Override
+            public long nextLong() {
+                long tmp = a;
+                a = b;
+                b += tmp;
+                return a;
+            }
+        }
+    }
+
 	public static void main(String args[]) {
-		System.out.println(sumEvenFib(4000000));
+        Fibonacci fibonacci = new Fibonacci();
+        long answer = 0;
+        for (long x : fibonacci) {
+            if (x >= 4000000) {
+                break;
+            }
+            if (x % 2 == 0) {
+                answer += x;
+            }
+        }
+        System.out.println(answer);
 	}
 }

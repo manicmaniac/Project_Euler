@@ -5,33 +5,42 @@ the 6th prime is 13.
 What is the 10 001st prime number?
 */
 
-class Problem7 {
-	public static boolean isPrime(int n) {
-		if (n == 2) {
-			return true;
-		}
-		else if (n < 2 || n % 2 == 0) {
-			return false;
-		}
-		else {
-			for (int i=3; i<=Math.sqrt(n); i+=2) {
-				if (n % i == 0) {
-					return false;
-				}
-			}
-			return true;
-		}
-	}
+import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+public class Problem7 {
+    public static class Prime implements Iterable<BigInteger> {
+        @Override
+        public Iterator<BigInteger> iterator() {
+            return new PrimeIterator();
+        }
+
+        private static class PrimeIterator implements Iterator<BigInteger> {
+            private BigInteger current = BigInteger.ONE;
+
+            @Override
+            public boolean hasNext() {
+                return true;
+            }
+
+            @Override
+            public BigInteger next() {
+                current = current.nextProbablePrime();
+                return current;
+            }
+        }
+    }
+
 	public static void main(String args[]) {
-		int index = 0;
-		int i = 0;
-		while (index < 10001) {
-			i++;
-			if (isPrime(i)) {
-				index++;
-			}
-		}
-		System.out.println(i);
+        Prime prime = new Prime();
+        Spliterator<BigInteger> spliterator = Spliterators.spliteratorUnknownSize(prime.iterator(),
+                    Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SORTED);
+        Stream<BigInteger> stream = StreamSupport.stream(spliterator, false);
+        BigInteger answer = stream.skip(10000).findFirst().get();
+        System.out.println(answer);
 	}
 }
-

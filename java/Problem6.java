@@ -14,16 +14,17 @@ Find the difference between the sum of the squares of the first one hundred
 natural numbers and the square of the sum.
 */
 
-class Problem6 {
+import java.util.stream.IntStream;
+
+public class Problem6 {
+    private static int square(int x) {
+        return x * x;
+    }
+
 	public static void main(String args[]) {
-		int squareAndSum = 0;
-		int sumAndSquare = 0;
-		for (int i=1; i<=100; i++) {
-			squareAndSum += i * i;
-			sumAndSquare += i;
-		}
-		sumAndSquare *= sumAndSquare;
-		System.out.println(sumAndSquare - squareAndSum);
+        int squareAndSum = IntStream.rangeClosed(1, 100).map(Problem6::square).sum();
+        int sumAndSquare = square(IntStream.rangeClosed(1, 100).sum());
+        int answer = sumAndSquare - squareAndSum;
+        System.out.println(answer);
 	}
 }
-

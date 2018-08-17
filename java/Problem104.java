@@ -12,10 +12,10 @@
  * Given that F[k] is the first Fibonacci number for which the first nine digits
  * AND the last nine digits are 1-9 pandigital, find k.
  */
-import java.util.Iterator;
+import java.util.PrimitiveIterator;
 
 public class Problem104 {
-    static class UpperFibonacci {
+    private static class UpperFibonacci {
         private static final double LOG10_PHI = Math.log10((1.0 + Math.sqrt(5.0)) / 2.0);
         private static final double LOG10_SQRT5 = Math.log10(5.0) / 2.0;
         private final int precision;
@@ -35,11 +35,11 @@ public class Problem104 {
                 double fractional = log10_fib - (double)integral;
                 log10_fib = precision + fractional;
             }
-            return (long)Math.round(Math.pow(10, log10_fib - 1));
+            return (long) Math.round(Math.pow(10, log10_fib - 1));
         }
     }
 
-    static class LowerFibonacci implements Iterable<Long> {
+    private static class LowerFibonacci implements Iterable<Long> {
         private final int precision;
 
         public LowerFibonacci(int precision) {
@@ -51,16 +51,16 @@ public class Problem104 {
         }
 
         @Override
-        public Iterator<Long> iterator() {
-            return new LowerFibonacciIterator();
+        public PrimitiveIterator.OfLong iterator() {
+            return new LowerFibonacciIterator(precision);
         }
 
-        class LowerFibonacciIterator implements Iterator<Long> {
+        private static class LowerFibonacciIterator implements PrimitiveIterator.OfLong {
             private final long divisor;
             private long current = 0;
             private long next = 1;
 
-            public LowerFibonacciIterator() {
+            public LowerFibonacciIterator(int precision) {
                 this.divisor = (long)Math.pow(10.0, (double)precision);
             }
 
@@ -70,7 +70,7 @@ public class Problem104 {
             }
 
             @Override
-            public Long next() {
+            public long nextLong() {
                 long current = this.next;
                 long next = (this.current + this.next) % divisor;
                 this.current = current;
@@ -80,8 +80,8 @@ public class Problem104 {
         }
     }
 
-    static class PandigitalNumber {
-        static boolean isPandigital(long x) {
+    private static class PandigitalNumber {
+        public static boolean isPandigital(long x) {
             if (x % 9 != 0) {
                 return false;
             }
@@ -107,6 +107,7 @@ public class Problem104 {
             }
             counter++;
         }
-        System.out.println(counter + 1);
+        int answer = counter + 1;
+        System.out.println(answer);
     }
 }

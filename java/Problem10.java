@@ -4,6 +4,11 @@
  * Find the sum of all the primes below two million.
  */
 import java.util.Iterator;
+import java.util.PrimitiveIterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 public class Problem10 {
     static class Primes implements Iterable<Integer> {
@@ -14,12 +19,8 @@ public class Problem10 {
             this.limit = limit;
         }
 
-        public int getLimit() {
-            return limit;
-        }
-
         @Override
-        public Iterator<Integer> iterator() {
+        public PrimitiveIterator.OfInt iterator() {
             synchronized (this) {
                 if (!isSieved()) {
                     sieve();
@@ -46,24 +47,25 @@ public class Problem10 {
             }
         }
 
-        class PrimesIterator implements Iterator<Integer> {
-            private Integer next = 2;
+        class PrimesIterator implements PrimitiveIterator.OfInt {
+            private static final int NOT_FOUND = Integer.MIN_VALUE;
+            private int next = 2;
 
             @Override
             public boolean hasNext() {
-                return this.next != null;
+                return next != NOT_FOUND;
             }
 
             @Override
-            public Integer next() {
-                Integer current = this.next;
+            public int nextInt() {
+                int current = next;
                 for (int i = current + 1; i < isComposites.length; i++) {
                     if (!isComposites[i]) {
-                        this.next = i;
+                        next = i;
                         return current;
                     }
                 }
-                this.next = null;
+                next = NOT_FOUND;
                 return current;
             }
         }
@@ -71,11 +73,10 @@ public class Problem10 {
 
     public static void main(String[] args) {
         Primes primes = new Primes(2000000);
-        long sum = 0;
-        for (int i : primes) {
-            sum += i;
-        }
-        System.out.println(sum);
+        Spliterator.OfInt spliterator = Spliterators.spliteratorUnknownSize(primes.iterator(),
+                    Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SORTED);
+        IntStream stream = StreamSupport.intStream(spliterator, false);
+        long answer = stream.mapToLong(Integer::toUnsignedLong).sum();
+        System.out.println(answer);
     }
 }
-

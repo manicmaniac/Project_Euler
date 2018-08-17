@@ -4,22 +4,25 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
 */
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-class Problem3 {
-	public static Vector factorize(long x) {
-		Vector<Long> res = new Vector<Long>();
-		for (long i=2; i<=x; i++) {
+public class Problem3 {
+	public static List<Long> factorize(long x) {
+		List<Long> divisors = new ArrayList<Long>();
+		for (long i = 2L; i <= x; i++) {
 			if (x % i == 0) {
-				res.addElement(i);
+				divisors.add(i);
 				x /= i;
 				i--;
 			}
 		}
-		return res;
+		return divisors;
 	}
 	public static void main(String[] args) {
-		System.out.println(factorize(600851475143L).lastElement());
+        List<Long> factors = factorize(600851475143L);
+        long answer = factors.get(factors.size() - 1);
+		System.out.println(answer);
 	}
 }
 

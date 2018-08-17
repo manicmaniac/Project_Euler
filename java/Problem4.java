@@ -5,29 +5,32 @@ the product of two 2-digit numbers is 9009 = 91 × 99.
 Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
-class Problem4 {
+import java.util.Comparator;
+import java.util.stream.IntStream;
+
+public class Problem4 {
 	public static boolean isPalindromic(int n) {
-		StringBuffer sb = new StringBuffer(Integer.toString(n));
-		sb.reverse();
-		String reversed = sb.toString();
-		String original = Integer.toString(n);
+		String original = String.valueOf(n);
+		String reversed = new StringBuffer(original).reverse().toString();
 		return original.equals(reversed);
 	}
-	public static boolean isProductOf3Digits(int n) {
-		for (int i=100; i<999; i++) {
-			if (n % i == 0 && n / i < 1000 && n / i > 99) {
-				return true;
-			}
-		}
-		return false;
+
+	public static boolean isProductOf3Digits(int x) {
+        return IntStream.range(100, 999)
+                .filter(i -> x % i == 0 && x / i < 1000 && x / i > 99)
+                .findFirst()
+                .isPresent();
 	}
+
 	public static void main(String args[]) {
-		for (int i=998001; i>9999; i--) {
-			if (isProductOf3Digits(i) && isPalindromic(i)) {
-				System.out.println(i);
-				break;
-			}
-		}
+        int answer = IntStream.rangeClosed(100 * 100, 999 * 999)
+                .boxed()
+                .sorted(Comparator.reverseOrder())
+                .mapToInt(Integer::new)
+                .filter(x -> isProductOf3Digits(x) && isPalindromic(x))
+                .findFirst()
+                .getAsInt();
+        System.out.println(answer);
 	}
 }
 

@@ -4,17 +4,11 @@ get 3, 5, 6 and 9. The sum of these multiples is 23.
 
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
-class Problem1 {
-	public static int fizzbuzz() {
-		int acc = 0;
-		for(int i=0; i<1000; i++) {
-			if(i%3==0 ||i%5==0) {
-				acc += i;
-			}
-		}
-		return acc;
-	}
+import java.util.stream.IntStream;
+
+public class Problem1 {
 	public static void main(String[] args) {
-		System.out.println(fizzbuzz());
+        int answer = IntStream.range(0, 1000).filter(x -> x % 3 * x % 5 == 0).sum();
+        System.out.println(answer);
 	}
 }
