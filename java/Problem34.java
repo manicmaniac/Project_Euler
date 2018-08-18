@@ -17,13 +17,11 @@ public class Problem34 {
     }
 
     private static boolean isFactorion(int x) {
-        int result = 0;
-        int y = x;
-        while (y > 0 && result <= x) {
-            result += factorial(y % 10);
-            y /= 10;
-        }
-        return x == result;
+        return x == String.valueOf(x)
+                .chars()
+                .map(Character::getNumericValue)
+                .map(Problem34::factorial)
+                .sum();
     }
 
     public static void main(String[] args) {

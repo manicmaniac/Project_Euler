@@ -53,17 +53,13 @@ public class Problem104 {
 
         @Override
         public PrimitiveIterator.OfLong iterator() {
-            return new LowerFibonacciIterator(precision);
+            return new LowerFibonacciIterator();
         }
 
-        private static class LowerFibonacciIterator implements PrimitiveIterator.OfLong {
-            private final long divisor;
+        private class LowerFibonacciIterator implements PrimitiveIterator.OfLong {
+            private final long divisor = (long) Math.pow(10, precision);
             private long current = 0;
             private long next = 1;
-
-            public LowerFibonacciIterator(int precision) {
-                this.divisor = (long)Math.pow(10.0, (double)precision);
-            }
 
             @Override
             public boolean hasNext() {
@@ -82,6 +78,9 @@ public class Problem104 {
     }
 
     private static class PandigitalNumber {
+        private PandigitalNumber() {
+        }
+
         public static boolean isPandigital(long x) {
             if (x % 9 != 0) {
                 return false;

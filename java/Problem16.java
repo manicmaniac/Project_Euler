@@ -8,12 +8,12 @@ import java.math.BigInteger;
 
 public class Problem16 {
     public static void main(String[] args) {
-        int answer = 0;
-        BigInteger[] divmod;
-        for (BigInteger x = BigInteger.valueOf(2).pow(1000); x.signum() > 0; x = divmod[0]) {
-            divmod = x.divideAndRemainder(BigInteger.TEN);
-            answer += divmod[1].intValue();
-        }
+        int answer = BigInteger.valueOf(2)
+                .pow(1000)
+                .toString()
+                .chars()
+                .map(Character::getNumericValue)
+                .sum();
         System.out.println(answer);
     }
 }

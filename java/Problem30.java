@@ -14,13 +14,12 @@ import java.util.stream.LongStream;
 
 public class Problem30 {
     private static boolean isArmstrong5(long x) {
-        long result = 0;
-        long y = x;
-        while (y > 0 && result <= x) {
-            result += (long) Math.pow(y % 10, 5);
-            y /= 10;
-        }
-        return result == x;
+        return x == String.valueOf(x)
+                .chars()
+                .map(Character::getNumericValue)
+                .mapToLong(Long::new)
+                .map(y -> (long) Math.pow(y, 5))
+                .sum();
     }
 
     public static void main(String[] args) {
