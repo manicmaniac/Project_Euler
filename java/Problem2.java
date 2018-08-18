@@ -8,13 +8,12 @@
  * four million, find the sum of the even-valued terms.
  */
 
-import java.util.Iterator;
 import java.util.PrimitiveIterator;
 
 public class Problem2 {
-    public static class Fibonacci implements Iterable<Long> {
+    private static class Fibonacci implements Iterable<Long> {
         @Override
-        public Iterator<Long> iterator() {
+        public PrimitiveIterator.OfLong iterator() {
             return new FibonacciIterator();
         }
 
