@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class Problem5 {
     public static int lcm(int x, int y) {
-        return x * y / BigInteger.valueOf(x).gcd(BigInteger.valueOf(y)).intValueExact();
+        return x * y / BigInteger.valueOf(x).gcd(BigInteger.valueOf(y)).intValue();
     }
 
     public static void main(String args[]) {

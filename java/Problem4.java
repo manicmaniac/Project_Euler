@@ -5,27 +5,29 @@
  * Find the largest palindrome made from the product of two 3-digit numbers.
  */
 
-import java.util.Comparator;
 import java.util.stream.IntStream;
+import java.util.function.IntPredicate;
+
+import static java.util.Comparator.reverseOrder;
 
 public class Problem4 {
-    public static boolean isPalindromic(int n) {
+    private static boolean isPalindromic(int n) {
         String original = String.valueOf(n);
-        String reversed = new StringBuffer(original).reverse().toString();
+        String reversed = new StringBuilder(original).reverse().toString();
         return original.equals(reversed);
     }
 
-    public static boolean isProductOf3Digits(int x) {
+    private static boolean isProductOf3Digits(int x) {
         return IntStream.range(100, 999)
                 .filter(i -> x % i == 0 && x / i < 1000 && x / i > 99)
-                .findFirst()
+                .findAny()
                 .isPresent();
     }
 
     public static void main(String args[]) {
         int answer = IntStream.rangeClosed(100 * 100, 999 * 999)
                 .boxed()
-                .sorted(Comparator.reverseOrder())
+                .sorted(reverseOrder())
                 .mapToInt(Integer::new)
                 .filter(x -> isProductOf3Digits(x) && isPalindromic(x))
                 .findFirst()
@@ -33,4 +35,3 @@ public class Problem4 {
         System.out.println(answer);
     }
 }
-
