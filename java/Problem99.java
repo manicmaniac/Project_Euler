@@ -21,8 +21,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Comparator.comparing;
-
 public class Problem99 {
     public static void main(String[] args) throws IOException {
         Map<Integer, Double> resultsByLineNo = new HashMap<>();
@@ -37,7 +35,7 @@ public class Problem99 {
                 resultsByLineNo.put(lineNo, Math.log(base) * exp);
             }
         }
-        int answer = Collections.max(resultsByLineNo.entrySet(), comparing(Map.Entry::getValue)).getKey();
+        int answer = Collections.max(resultsByLineNo.entrySet(), Map.Entry.comparingByValue()).getKey();
         System.out.println(answer);
     }
 }
