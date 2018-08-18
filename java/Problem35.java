@@ -61,6 +61,13 @@ public class Problem35 {
             return new PrimesIterator();
         }
 
+        @Override
+        public Spliterator.OfInt spliterator() {
+            return Spliterators.spliterator(iterator(),
+                    (long) Math.floor(limit / Math.log(limit)),
+                    Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SORTED);
+        }
+
         public boolean contains(int x) {
             if (x >= limit) {
                 return false;
@@ -70,24 +77,16 @@ public class Problem35 {
         }
 
         private synchronized void sieveIfNeeded() {
-            if (!isSieved()) {
-                sieve();
-            }
-        }
-
-        private boolean isSieved() {
-            return isComposites != null;
-        }
-
-        private void sieve() {
-            isComposites = new boolean[limit];
-            isComposites[0] = true;
-            isComposites[1] = true;
-            int sqrtLimit = (int)Math.sqrt(limit);
-            for (int i = 2; i <= sqrtLimit; i++) {
-                if (!isComposites[i]) {
-                    for (int j = i * i; j < limit; j += i) {
-                        isComposites[j] = true;
+            if (isComposites == null) {
+                isComposites = new boolean[limit];
+                isComposites[0] = true;
+                isComposites[1] = true;
+                int sqrtLimit = (int)Math.sqrt(limit);
+                for (int i = 2; i <= sqrtLimit; i++) {
+                    if (!isComposites[i]) {
+                        for (int j = i * i; j < limit; j += i) {
+                            isComposites[j] = true;
+                        }
                     }
                 }
             }
@@ -144,9 +143,7 @@ public class Problem35 {
 
     public static void main(String[] args) {
         CircularPrimes circularPrimes = new CircularPrimes(1000000);
-        Spliterator.OfInt spliterator = Spliterators.spliteratorUnknownSize(circularPrimes.getPrimes().iterator(),
-                    Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SORTED);
-        IntStream stream = StreamSupport.intStream(spliterator, false);
+        IntStream stream = StreamSupport.intStream(circularPrimes.getPrimes().spliterator(), false);
         long answer = stream.filter(circularPrimes::isCircularPrime).count();
         System.out.println(answer);
     }

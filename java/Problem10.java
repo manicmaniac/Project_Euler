@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
 public class Problem10 {
-    static class Primes implements Iterable<Integer> {
+    private static class Primes implements Iterable<Integer> {
         private final int limit;
         private boolean[] isComposites;
 
@@ -20,27 +20,28 @@ public class Problem10 {
 
         @Override
         public PrimitiveIterator.OfInt iterator() {
-            synchronized (this) {
-                if (!isSieved()) {
-                    sieve();
-                }
-            }
+            sieveIfNeeded();
             return new PrimesIterator();
         }
 
-        private boolean isSieved() {
-            return isComposites != null;
+        @Override
+        public Spliterator.OfInt spliterator() {
+            return Spliterators.spliterator(iterator(),
+                    (long) Math.floor(limit / Math.log(limit)),
+                    Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SORTED);
         }
 
-        private void sieve() {
-            isComposites = new boolean[limit];
-            isComposites[0] = true;
-            isComposites[1] = true;
-            int sqrtLimit = (int)Math.sqrt(limit);
-            for (int i = 2; i <= sqrtLimit; i++) {
-                if (!isComposites[i]) {
-                    for (int j = i * i; j < limit; j += i) {
-                        isComposites[j] = true;
+        private synchronized void sieveIfNeeded() {
+            if (isComposites == null) {
+                isComposites = new boolean[limit];
+                isComposites[0] = true;
+                isComposites[1] = true;
+                int sqrtLimit = (int)Math.sqrt(limit);
+                for (int i = 2; i <= sqrtLimit; i++) {
+                    if (!isComposites[i]) {
+                        for (int j = i * i; j < limit; j += i) {
+                            isComposites[j] = true;
+                        }
                     }
                 }
             }
@@ -72,10 +73,8 @@ public class Problem10 {
 
     public static void main(String[] args) {
         Primes primes = new Primes(2000000);
-        Spliterator.OfInt spliterator = Spliterators.spliteratorUnknownSize(primes.iterator(),
-                    Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SORTED);
-        IntStream stream = StreamSupport.intStream(spliterator, false);
-        long answer = stream.mapToLong(Integer::toUnsignedLong).sum();
+        IntStream stream = StreamSupport.intStream(primes.spliterator(), false);
+        long answer = stream.mapToLong(Long::new).sum();
         System.out.println(answer);
     }
 }

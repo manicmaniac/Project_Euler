@@ -23,7 +23,7 @@ public class Problem2 {
 
             @Override
             public boolean hasNext() {
-                return true;
+                return a + b > 0;
             }
 
             @Override
