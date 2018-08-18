@@ -3,7 +3,6 @@
  *
  * Find the sum of all the primes below two million.
  */
-import java.util.Iterator;
 import java.util.PrimitiveIterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -47,7 +46,7 @@ public class Problem10 {
             }
         }
 
-        class PrimesIterator implements PrimitiveIterator.OfInt {
+        private class PrimesIterator implements PrimitiveIterator.OfInt {
             private static final int NOT_FOUND = Integer.MIN_VALUE;
             private int next = 2;
 
