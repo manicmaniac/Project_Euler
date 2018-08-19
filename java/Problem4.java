@@ -6,7 +6,6 @@
  */
 
 import java.util.stream.IntStream;
-import java.util.function.IntPredicate;
 
 import static java.util.Comparator.reverseOrder;
 
