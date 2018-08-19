@@ -14,15 +14,32 @@
 import java.util.stream.IntStream;
 
 public class Problem45 {
-    private static boolean isPentagonal(long x) {
-        return ((Math.sqrt(24 * x + 1) + 1) / 6) % 1 == 0;
+    private static class Triangulars {
+        private Triangulars() {
+        }
+
+        public static int at(int n) {
+            return n * (n * 2 - 1);
+        }
+
+        public static IntStream intStream() {
+            return IntStream.iterate(1, x -> x + 1).map(Triangulars::at);
+        }
+    }
+
+    private static class Pentagonals {
+        private Pentagonals() {
+        }
+
+        public static boolean isPentagonal(int x) {
+            return ((Math.sqrt(24 * x + 1) + 1) / 6) % 1 == 0;
+        }
     }
 
     public static void main(String[] args) {
-        int answer = IntStream.iterate(1, x -> x + 1)
+        int answer = Triangulars.intStream()
                 .skip(1)
-                .map(x -> x * (x * 2 - 1))
-                .filter(Problem45::isPentagonal)
+                .filter(Pentagonals::isPentagonal)
                 .findFirst()
                 .getAsInt();
         System.out.println(answer);
