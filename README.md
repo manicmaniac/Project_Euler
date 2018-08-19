@@ -33,7 +33,7 @@ Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
   </tr>
   <tr>
     <td>Java</td>
-    <td>v1.6.0_24 on OpenJDK 64-Bit Server VM</td>
+    <td>v1.8.0_102</td>
     <td>-</td>
     <td>★</td>
   </tr>
