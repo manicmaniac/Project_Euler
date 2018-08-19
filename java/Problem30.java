@@ -16,9 +16,7 @@ public class Problem30 {
     private static boolean isArmstrong5(long x) {
         return x == String.valueOf(x)
                 .chars()
-                .map(Character::getNumericValue)
-                .mapToLong(Long::new)
-                .map(y -> (long) Math.pow(y, 5))
+                .mapToLong(y -> (long) Math.pow(Character.getNumericValue(y), 5))
                 .sum();
     }
 
