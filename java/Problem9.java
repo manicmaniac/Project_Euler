@@ -8,7 +8,6 @@
  * There exists exactly one Pythagorean triplet for which a + b + c = 1000.
  * Find the product abc.
  */
-import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 public class Problem9 {
@@ -38,14 +37,10 @@ public class Problem9 {
 
     public static void main(String[] args) {
         int answer = IntStream.iterate(1, x -> x + 1)
-                .flatMap(x -> {
-                    OptionalInt result = IntStream.range(1, x)
+                .flatMap(x -> IntStream.range(1, x)
                             .mapToObj(y -> new PythagorianTriplet(x, y))
-                            .filter(z -> z.sum() == 1000)
-                            .mapToInt(PythagorianTriplet::product)
-                            .findAny();
-                    return result.isPresent() ? IntStream.of(result.getAsInt()) : null;
-                })
+                            .filter(p -> p.sum() == 1000)
+                            .mapToInt(PythagorianTriplet::product))
                 .findAny()
                 .getAsInt();
         System.out.println(answer);
