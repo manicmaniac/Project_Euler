@@ -63,8 +63,7 @@ public class Problem17 {
 
     public static void main(String[] args) {
         int answer = IntStream.rangeClosed(1, 1000)
-                .boxed()
-                .map(x -> new EnglishNumber(x).toString())
+                .mapToObj(x -> new EnglishNumber(x).toString())
                 .collect(Collectors.joining())
                 .length();
         System.out.println(answer);

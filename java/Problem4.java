@@ -28,10 +28,9 @@ public class Problem4 {
         int answer = IntStream.rangeClosed(100 * 100, 999 * 999)
                 .boxed()
                 .sorted(reverseOrder())
-                .mapToInt(Integer::new)
                 .filter(x -> isProductOf3Digits(x) && isPalindromic(x))
                 .findFirst()
-                .getAsInt();
+                .get();
         System.out.println(answer);
     }
 }

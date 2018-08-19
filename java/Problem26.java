@@ -37,8 +37,7 @@ public class Problem26 {
         int answer = IntStream.range(0, 1000)
                 .boxed()
                 .max(Comparator.comparing(Problem26::fermatsLittleTheorem))
-                .get()
-                .intValue();
+                .get();
         System.out.println(answer);
     }
 }
