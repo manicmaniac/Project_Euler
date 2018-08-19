@@ -10,14 +10,15 @@ import java.math.BigInteger;
 import java.util.stream.IntStream;
 
 public class Problem5 {
-    public static int lcm(int x, int y) {
-        return x * y / BigInteger.valueOf(x).gcd(BigInteger.valueOf(y)).intValue();
+    public static BigInteger lcm(BigInteger x, BigInteger y) {
+        return x.multiply(y).divide(x.gcd(y));
     }
 
     public static void main(String args[]) {
-        int answer = IntStream.range(2, 20)
+        BigInteger answer = IntStream.rangeClosed(2, 20)
+                .mapToObj(BigInteger::valueOf)
                 .reduce(Problem5::lcm)
-                .getAsInt();
+                .get();
         System.out.println(answer);
     }
 }
