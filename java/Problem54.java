@@ -52,196 +52,216 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.stream.IntStream;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.groupingBy;
 
 public class Problem54 {
-    public static class PlayingCard implements Comparable<PlayingCard> {
-        public static final int CLUB = 0;
-        public static final int DIAMOND = 1;
-        public static final int HEART = 2;
-        public static final int SPADE = 3;
 
-        private static final String SUITS = "CDHS";
-        private static final String RANKS = "23456789TJQKA";
-        private static PlayingCard[] cachedInstances = new PlayingCard[52];
+    private enum Suit {
+        CLUB,
+        DIAMOND,
+        HEART,
+        SPADE;
 
-        private final int value;
+        private static final char[] SYMBOLS = new char[]{'C', 'D', 'H', 'S'};
 
-        private PlayingCard(int value) {
-            this.value = value;
+        public static Suit get(int ordinal) {
+            switch (ordinal) {
+                case 0:
+                    return CLUB;
+                case 1:
+                    return DIAMOND;
+                case 2:
+                    return HEART;
+                case 3:
+                    return SPADE;
+                default:
+                    throw new IllegalArgumentException("invalid ordinal: " + ordinal);
+            }
         }
 
-        public static PlayingCard get(int suit, int rank) {
-            if (suit < 0 || suit > 3) {
-                throw new IllegalArgumentException("invalid suit: " + suit);
+        public static Suit get(char symbol) {
+            int ordinal = Arrays.binarySearch(SYMBOLS, symbol);
+            if (ordinal < 0) {
+                throw new IllegalArgumentException("invalid symbol: " + symbol);
             }
-            if (rank < 1 || rank > 13) {
-                throw new IllegalArgumentException("invalid rank: " + rank);
-            }
-            int value = suit + 4 * (rank == 1 ? 12 : rank - 2);
-            return get(value);
-        }
-
-        public static PlayingCard get(CharSequence chars) {
-            if (chars.length() != 2) {
-                throw new IllegalArgumentException("invalid chars: " + chars);
-            }
-            int value = SUITS.indexOf(chars.charAt(1)) + 4 * RANKS.indexOf(chars.charAt(0));
-            return get(value);
-        }
-
-        private static PlayingCard get(int value) {
-            PlayingCard instance = cachedInstances[value];
-            if (instance == null) {
-                instance = new PlayingCard(value);
-                cachedInstances[value] = instance;
-            }
-            return instance;
-        }
-
-        @Override
-        public int compareTo(PlayingCard o) {
-            return Integer.compare(value, o.value);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null) {
-                return false;
-            }
-            if (o == this) {
-                return true;
-            }
-            if (!(o instanceof PlayingCard)) {
-                return false;
-            }
-            return ((PlayingCard) o).value == value;
-        }
-
-        @Override
-        public int hashCode() {
-            return 31 ^ Integer.hashCode(value);
+            return get(ordinal);
         }
 
         @Override
         public String toString() {
-            return "" + RANKS.charAt(getRankValue()) + SUITS.charAt(getSuit());
-        }
-
-        public int getSuit() {
-            return value % 4;
-        }
-
-        public int getRank() {
-            int rankValue = getRankValue();
-            return (rankValue == 12) ? 1 : rankValue + 2;
-        }
-
-        private int getRankValue() {
-            return (value - getSuit()) / 4;
+            return Character.toString(SYMBOLS[ordinal()]);
         }
     }
 
-    public static class PokerHand implements Comparable<PokerHand> {
-        public static final int HIGH_CARD = 0;
-        public static final int ONE_PAIR = 1;
-        public static final int TWO_PAIRS = 2;
-        public static final int THREE_OF_A_KIND = 3;
-        public static final int STRAIGHT = 4;
-        public static final int FLUSH = 5;
-        public static final int FULL_HOUSE = 6;
-        public static final int FOUR_OF_A_KIND = 7;
-        public static final int STRAIGHT_FLUSH = 8;
-        public static final int ROYAL_FLUSH = 9;
+    private static class Rank implements Comparable<Rank> {
+        private static final Rank[] sharedInstances = IntStream.range(0, 13)
+                .mapToObj(Rank::new)
+                .toArray(Rank[]::new);
+        private static final char[] SYMBOLS = new char[]{'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
 
-        private static final String[] KIND_NAMES = new String[]{
-            "High Card", "One Pair", "Two Pairs", "Three of a Kind", "Straight", "Flush",
-            "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"
-        };
+        private final int value;
 
-        private final PlayingCard[] playingCards;
-        private final int kind;
+        private Rank(int value) {
+            this.value = value;
+        }
 
-        public PokerHand(PlayingCard p1, PlayingCard p2, PlayingCard p3, PlayingCard p4, PlayingCard p5) {
-            List<PlayingCard> playingCards = new ArrayList<>(Arrays.asList(p1, p2, p3, p4, p5));
-            playingCards.sort(Comparator.naturalOrder());
-            int rankBits = 0;
-            Map<Integer, SortedSet<PlayingCard>> groupedBySuit = new HashMap<>();
-            Map<Integer, SortedSet<PlayingCard>> groupedByRank = new HashMap<>();
-            for (final PlayingCard playingCard : playingCards) {
-                int suit = playingCard.getSuit();
-                int rank = playingCard.getRank();
-                rankBits |= 1 << (rank - 1);
-                groupedBySuit.compute(suit, (k, v) -> {
-                    if (v == null) {
-                        v = new TreeSet<>();
-                    }
-                    v.add(playingCard);
-                    return v;
-                });
-                groupedByRank.compute(rank, (k, v) -> {
-                    if (v == null) {
-                        v = new TreeSet<>();
-                    }
-                    v.add(playingCard);
-                    return v;
-                });
-            }
-            boolean isCyclicSequence = (rankBits == 0b1111000000001);
-            while ((rankBits & 1) == 0) {
-                rankBits >>= 1;
-            }
-            boolean isSequence = isCyclicSequence || (rankBits == 0b11111);
-            if (groupedBySuit.size() == 1) {
-                if (isCyclicSequence) {
-                    kind = ROYAL_FLUSH;
-                } else if (isSequence) {
-                    kind = STRAIGHT_FLUSH;
-                } else {
-                    kind = FLUSH;
+        static Rank get(int n) {
+            int value = (n == 1) ? 12 : n - 2;
+            return sharedInstances[value];
+        }
+
+        static Rank get(char symbol) {
+            for (int i = 0; i < SYMBOLS.length; i++) {
+                if (SYMBOLS[i] == symbol) {
+                    return get(i == 12 ? 1 : i + 2);
                 }
-            } else if (isSequence) {
-                kind = STRAIGHT;
+            }
+            throw new IllegalArgumentException("invalid symbol: " + symbol);
+        }
+
+        @Override
+        public int compareTo(Rank o) {
+            return Integer.compare(value, o.value);
+        }
+
+        @Override
+        public String toString() {
+            return Character.toString(SYMBOLS[value]);
+        }
+    }
+
+    private static class PlayingCard implements Comparable<PlayingCard> {
+        private static final PlayingCard[] sharedInstances = IntStream.range(0, 52)
+                .mapToObj(PlayingCard::new)
+                .toArray(PlayingCard[]::new);
+
+        private final Suit suit;
+        private final Rank rank;
+
+        private PlayingCard(Suit suit, Rank rank) {
+            this.suit = suit;
+            this.rank = rank;
+        }
+
+        private PlayingCard(int value) {
+            this(Suit.get(value & 3), Rank.get((value >> 2) == 12 ? 1 : (value >> 2) + 2));
+        }
+
+        static PlayingCard get(Suit suit, Rank rank) {
+            return get(suit.ordinal() | rank.value << 2);
+        }
+
+        static PlayingCard get(String symbol) {
+            if (symbol.length() != 2) {
+                throw new IllegalArgumentException("invalid symbol: " + symbol);
+            }
+            return get(Suit.get(symbol.charAt(1)), Rank.get(symbol.charAt(0)));
+        }
+
+        private static PlayingCard get(int value) {
+            return sharedInstances[value];
+        }
+
+        Rank getRank() {
+            return rank;
+        }
+
+        @Override
+        public int compareTo(PlayingCard o) {
+            int result = rank.compareTo(o.rank);
+            if (result != 0) {
+                return result;
+            }
+            return suit.compareTo(o.suit);
+        }
+
+        @Override
+        public String toString() {
+            return rank.toString() + suit.toString();
+        }
+    }
+
+    private enum PokerHandKind {
+        HIGH_CARD,
+        ONE_PAIR,
+        TWO_PAIRS,
+        THREE_OF_A_KIND,
+        STRAIGHT,
+        FLUSH,
+        FULL_HOUSE,
+        FOUR_OF_A_KIND,
+        STRAIGHT_FLUSH,
+        ROYAL_FLUSH
+    }
+
+    private static class PokerHand implements Comparable<PokerHand> {
+        private final PlayingCard[] playingCards;
+        private final PokerHandKind kind;
+
+        PokerHand(PlayingCard p1, PlayingCard p2, PlayingCard p3, PlayingCard p4, PlayingCard p5) {
+            this(new PlayingCard[]{p1, p2, p3, p4, p5});
+        }
+
+        private PokerHand(PlayingCard... playingCards) {
+            if (playingCards.length != 5) {
+                throw new IllegalArgumentException("invalid number of playing cards: " + playingCards.length);
+            }
+            this.playingCards = playingCards;
+            if (countSuits() == 1) {
+                if (isSequential()) {
+                    if (getMaxRank().equals(Rank.get(1))) {
+                        kind = PokerHandKind.ROYAL_FLUSH;
+                    } else {
+                        kind = PokerHandKind.STRAIGHT_FLUSH;
+                    }
+                } else {
+                    kind = PokerHandKind.FLUSH;
+                }
+                Arrays.sort(playingCards);
+            } else if (isSequential()) {
+                kind = PokerHandKind.STRAIGHT;
+                Arrays.sort(playingCards);
             } else {
-                int maxSizeOfGroups = groupedByRank.values().stream().mapToInt(SortedSet::size).max().getAsInt();
-                switch (maxSizeOfGroups) {
+                switch (countRanks()) {
+                    case 5:
+                        kind = PokerHandKind.HIGH_CARD;
+                        Arrays.sort(playingCards);
+                        break;
                     case 4:
-                        kind = FOUR_OF_A_KIND;
+                        kind = PokerHandKind.ONE_PAIR;
+                        sortByRankCommonality();
                         break;
                     case 3:
-                        kind = (groupedByRank.size() == 2 ? FULL_HOUSE : THREE_OF_A_KIND);
+                        if (countMostCommonRanks() == 3) {
+                            kind = PokerHandKind.THREE_OF_A_KIND;
+                        } else {
+                            kind = PokerHandKind.TWO_PAIRS;
+                        }
+                        sortByRankCommonality();
                         break;
                     case 2:
-                        kind = (groupedByRank.size() == 3 ? TWO_PAIRS : ONE_PAIR);
-                        break;
-                    case 1:
-                        kind = HIGH_CARD;
+                        if (countMostCommonRanks() == 4) {
+                            kind = PokerHandKind.FOUR_OF_A_KIND;
+                        } else {
+                            kind = PokerHandKind.FULL_HOUSE;
+                        }
+                        sortByRankCommonality();
                         break;
                     default:
-                        throw new AssertionError("cannot reach here");
-                }
-                if (maxSizeOfGroups > 1) {
-                    SortedSet<PlayingCard> majorGroup = Collections.max(groupedByRank.values(), Comparator.comparing(SortedSet::size));
-                    for (final PlayingCard playingCard : majorGroup) {
-                        playingCards.remove(playingCard);
-                    }
-                    playingCards.addAll(majorGroup);
+                        throw new IllegalStateException("cannot reach here");
                 }
             }
-            this.playingCards = playingCards.toArray(new PlayingCard[0]);
         }
 
         @Override
         public int compareTo(PokerHand o) {
-            int result = Integer.compare(kind, o.kind);
+            int result = kind.compareTo(o.kind);
             if (result != 0) {
                 return result;
             }
@@ -256,44 +276,104 @@ public class Problem54 {
 
         @Override
         public String toString() {
-            return getKindAsString() + Arrays.toString(playingCards);
+            return kind + Arrays.toString(playingCards);
         }
 
-        public int getKind() {
-            return kind;
+        private boolean isSequential() {
+            int bits = 0;
+            for (final PlayingCard playingCard : playingCards) {
+                bits |= 1 << (playingCard.rank.value);
+            }
+            if (bits == 0b1000000001111) {
+                return true;
+            }
+            while ((bits & 1) == 0) {
+                bits >>>= 1;
+            }
+            return bits == 0b11111;
         }
 
-        public String getKindAsString() {
-            return KIND_NAMES[getKind()];
+        private Rank getMaxRank() {
+            Rank maxRank = null;
+            for (final PlayingCard playingCard : playingCards) {
+                Rank rank = playingCard.rank;
+                if (maxRank == null || maxRank.compareTo(rank) < 0) {
+                    maxRank = rank;
+                }
+            }
+            return maxRank;
+        }
+
+        private int countSuits() {
+            int bits = 0;
+            for (final PlayingCard playingCard : playingCards) {
+                bits |= 1 << playingCard.suit.ordinal();
+            }
+            return Integer.bitCount(bits);
+        }
+
+        private int countRanks() {
+            int bits = 0;
+            for (final PlayingCard playingCard : playingCards) {
+                bits |= 1 << playingCard.rank.value;
+            }
+            return Integer.bitCount(bits);
+        }
+
+        private int countMostCommonRanks() {
+            int[] counter = new int[13];
+            for (final PlayingCard playingCard : playingCards) {
+                counter[playingCard.rank.value]++;
+            }
+            int maxCount = 0;
+            for (int count : counter) {
+                if (maxCount < count) {
+                    maxCount = count;
+                }
+            }
+            return maxCount;
+        }
+
+        private void sortByRankCommonality() {
+            PlayingCard[] newPlayingCards = Arrays.stream(playingCards)
+                    .collect(groupingBy(PlayingCard::getRank))
+                    .entrySet()
+                    .stream()
+                    .sorted(comparingInt((Map.Entry<Rank, List<PlayingCard>> entry) -> entry.getValue().size())
+                            .thenComparing(Map.Entry.comparingByKey()))
+                    .flatMap(entry -> entry.getValue().stream())
+                    .toArray(PlayingCard[]::new);
+            System.arraycopy(newPlayingCards, 0, playingCards, 0, newPlayingCards.length);
         }
     }
 
     public static void main(String[] args) throws IOException {
-        int answer = 0;
         File file = new File("../resources/poker.txt");
+        int answer = 0;
         try (FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
                 String[] symbols = line.split(" ");
-                PlayingCard[] playingCards = Arrays.stream(symbols)
-                        .map(PlayingCard::get)
-                        .toArray(PlayingCard[]::new);
-                PokerHand hand1 = new PokerHand(
+                PlayingCard[] playingCards = new PlayingCard[10];
+                for (int i = 0; i < 10; i++) {
+                    playingCards[i] = PlayingCard.get(symbols[i]);
+                }
+                PokerHand pokerHand1 = new PokerHand(
                         playingCards[0],
                         playingCards[1],
                         playingCards[2],
                         playingCards[3],
                         playingCards[4]
                 );
-                PokerHand hand2 = new PokerHand(
+                PokerHand pokerHand2 = new PokerHand(
                         playingCards[5],
                         playingCards[6],
                         playingCards[7],
                         playingCards[8],
                         playingCards[9]
                 );
-                if (hand1.compareTo(hand2) > 0) {
+                if (pokerHand1.compareTo(pokerHand2) > 0) {
                     answer++;
                 }
             }
