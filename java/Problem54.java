@@ -197,7 +197,34 @@ public class Problem54 {
         FULL_HOUSE,
         FOUR_OF_A_KIND,
         STRAIGHT_FLUSH,
-        ROYAL_FLUSH
+        ROYAL_FLUSH;
+
+        void sort(PlayingCard[] playingCards) {
+            switch (this) {
+                case HIGH_CARD:
+                case STRAIGHT:
+                case FLUSH:
+                case STRAIGHT_FLUSH:
+                case ROYAL_FLUSH:
+                    Arrays.sort(playingCards);
+                    break;
+                case ONE_PAIR:
+                case TWO_PAIRS:
+                case THREE_OF_A_KIND:
+                case FULL_HOUSE:
+                case FOUR_OF_A_KIND:
+                    PlayingCard[] newPlayingCards = Arrays.stream(playingCards)
+                            .collect(groupingBy(PlayingCard::getRank))
+                            .entrySet()
+                            .stream()
+                            .sorted(comparingInt((Map.Entry<Rank, List<PlayingCard>> entry) -> entry.getValue().size())
+                                    .thenComparing(Map.Entry.comparingByKey()))
+                            .flatMap(entry -> entry.getValue().stream())
+                            .toArray(PlayingCard[]::new);
+                    System.arraycopy(newPlayingCards, 0, playingCards, 0, newPlayingCards.length);
+                    break;
+            }
+        }
     }
 
     private static class PokerHand implements Comparable<PokerHand> {
@@ -223,40 +250,33 @@ public class Problem54 {
                 } else {
                     kind = PokerHandKind.FLUSH;
                 }
-                Arrays.sort(playingCards);
             } else if (isSequential()) {
                 kind = PokerHandKind.STRAIGHT;
-                Arrays.sort(playingCards);
-            } else {
-                switch (countRanks()) {
-                    case 5:
-                        kind = PokerHandKind.HIGH_CARD;
-                        Arrays.sort(playingCards);
-                        break;
-                    case 4:
-                        kind = PokerHandKind.ONE_PAIR;
-                        sortByRankCommonality();
-                        break;
-                    case 3:
-                        if (countMostCommonRanks() == 3) {
-                            kind = PokerHandKind.THREE_OF_A_KIND;
-                        } else {
-                            kind = PokerHandKind.TWO_PAIRS;
-                        }
-                        sortByRankCommonality();
-                        break;
-                    case 2:
-                        if (countMostCommonRanks() == 4) {
-                            kind = PokerHandKind.FOUR_OF_A_KIND;
-                        } else {
-                            kind = PokerHandKind.FULL_HOUSE;
-                        }
-                        sortByRankCommonality();
-                        break;
-                    default:
-                        throw new IllegalStateException("cannot reach here");
-                }
+            } else switch (countRanks()) {
+                case 5:
+                    kind = PokerHandKind.HIGH_CARD;
+                    break;
+                case 4:
+                    kind = PokerHandKind.ONE_PAIR;
+                    break;
+                case 3:
+                    if (countMostCommonRanks() == 3) {
+                        kind = PokerHandKind.THREE_OF_A_KIND;
+                    } else {
+                        kind = PokerHandKind.TWO_PAIRS;
+                    }
+                    break;
+                case 2:
+                    if (countMostCommonRanks() == 4) {
+                        kind = PokerHandKind.FOUR_OF_A_KIND;
+                    } else {
+                        kind = PokerHandKind.FULL_HOUSE;
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException("cannot reach here");
             }
+            kind.sort(this.playingCards);
         }
 
         @Override
@@ -332,18 +352,6 @@ public class Problem54 {
                 }
             }
             return maxCount;
-        }
-
-        private void sortByRankCommonality() {
-            PlayingCard[] newPlayingCards = Arrays.stream(playingCards)
-                    .collect(groupingBy(PlayingCard::getRank))
-                    .entrySet()
-                    .stream()
-                    .sorted(comparingInt((Map.Entry<Rank, List<PlayingCard>> entry) -> entry.getValue().size())
-                            .thenComparing(Map.Entry.comparingByKey()))
-                    .flatMap(entry -> entry.getValue().stream())
-                    .toArray(PlayingCard[]::new);
-            System.arraycopy(newPlayingCards, 0, playingCards, 0, newPlayingCards.length);
         }
     }
 
