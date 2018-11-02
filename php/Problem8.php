@@ -33,5 +33,4 @@ function sliding($xs, $size) {
     }, range(0, count($xs) - $size));
 }
 
-print_r(max(array_map("array_product", sliding($data, 5))));
-
+echo max(array_map("array_product", sliding($data, 5)));

@@ -19,5 +19,4 @@ function sieve($limit) {
     return array_keys($search);
 }
 
-print_r(array_sum(sieve(2000000)));
-
+echo array_sum(sieve(2000000));

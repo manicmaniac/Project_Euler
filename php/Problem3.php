@@ -14,5 +14,4 @@ function factorize($n) {
 	echo $i;
 }
 
-factorize(600851475143)
-
+factorize(600851475143);
