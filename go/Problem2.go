@@ -15,17 +15,17 @@ import (
 	"math"
 )
 
-const sqrt5 float64 = 2.2360679775
-const phi float64 = 1.61803398875
+const Sqrt5 float64 = 2.2360679775
+const Phi float64 = 1.61803398875
 
-func fibterm(n int) float64 {
-	return math.Floor(0.5 + (math.Pow(phi, float64(n+1)) / sqrt5))
+func Fibterm(n int) float64 {
+	return math.Floor(0.5 + (math.Pow(Phi, float64(n+1)) / Sqrt5))
 }
 
 func main() {
 	sum := 0
 	for i := 0; ; i++ {
-		x := int(fibterm(i))
+		x := int(Fibterm(i))
 		if x%2 == 0 {
 			sum += x
 		}
