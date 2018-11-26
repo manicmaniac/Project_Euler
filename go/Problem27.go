@@ -30,8 +30,7 @@ import (
 	"math/big"
 )
 
-func CountQuadraticPrimes(a int, b int) int {
-	count := 0
+func CountQuadraticPrimes(a int, b int) (count int) {
 	for i := 0; i < b; i++ {
 		x := big.NewInt(int64(i*i + a*i + b))
 		if x.ProbablyPrime(10) {
@@ -40,7 +39,7 @@ func CountQuadraticPrimes(a int, b int) int {
 			break
 		}
 	}
-	return count
+	return
 }
 
 func main() {

@@ -16,12 +16,11 @@ import (
 	"math"
 )
 
-func Factorial(x int) int {
-	var result int
+func Factorial(x int) (result int) {
 	for result = 1; x > 0; x-- {
 		result *= x
 	}
-	return result
+	return
 }
 
 func PermutationAt(xs []int, n int) {

@@ -35,13 +35,12 @@ func Permutations(xs []int, n int, context interface{}, callback func(xs []int, 
 	Permutations(xs, n-1, context, callback)
 }
 
-func ConcatenateDigits(digits []int, start int, stop int) int {
-	concatenated := 0
+func ConcatenateDigits(digits []int, start int, stop int) (concatenated int) {
 	for i := start; i < stop; i++ {
 		concatenated *= 10
 		concatenated += digits[i]
 	}
-	return concatenated
+	return
 }
 
 func main() {

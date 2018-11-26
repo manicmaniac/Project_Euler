@@ -20,12 +20,11 @@ import (
 	"sort"
 )
 
-func CalcNameScore(name string) int {
-	score := 0
+func CalcNameScore(name string) (score int) {
 	for _, value := range name {
 		score += int(value) - 64
 	}
-	return score
+	return
 }
 
 func main() {

@@ -27,12 +27,11 @@ func IsTriangle(x int) bool {
 	return fractional == 0.0
 }
 
-func CalcWordScore(word string) int {
-	result := 0
+func CalcWordScore(word string) (score int) {
 	for _, c := range word {
-		result += int(c) - 64
+		score += int(c) - 64
 	}
-	return result
+	return
 }
 
 func main() {

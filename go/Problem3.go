@@ -7,8 +7,7 @@ package main
 
 import "fmt"
 
-func Factorize(x int64) []int64 {
-	factors := make([]int64, 1)
+func Factorize(x int64) (factors []int64) {
 	for d := int64(2); x >= d; {
 		if x%d == 0 {
 			factors = append(factors, d)
@@ -17,7 +16,7 @@ func Factorize(x int64) []int64 {
 			d += 1
 		}
 	}
-	return factors
+	return
 }
 
 func main() {

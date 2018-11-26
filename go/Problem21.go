@@ -10,14 +10,13 @@ package main
 
 import "fmt"
 
-func SumOfDivisors(x int) int {
-	result := 0
+func SumOfDivisors(x int) (result int) {
 	for i := 1; i < (x/2 + 1); i++ {
 		if x%i == 0 {
 			result += i
 		}
 	}
-	return result
+	return
 }
 
 func HasAmicable(x int) bool {

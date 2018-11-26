@@ -18,33 +18,32 @@ var Roman_20_90 = []string{
 	"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
 }
 
-func IntToRoman(x int) string {
-	result := ""
+func IntToRoman(x int) (roman string) {
 	if x == 0 {
-		result = "zero"
+		roman = "zero"
 	}
 	for x > 0 {
 		if x < 20 {
-			result += Roman_1_19[x]
+			roman += Roman_1_19[x]
 			break
 		}
 		if x < 100 {
-			result += Roman_20_90[x/10]
+			roman += Roman_20_90[x/10]
 			x %= 10
 		} else if x < 1000 {
-			result += Roman_1_19[x/100]
-			result += "handred"
+			roman += Roman_1_19[x/100]
+			roman += "handred"
 			x %= 100
 			if x == 0 {
 				break
 			}
-			result += "and"
+			roman += "and"
 		} else if x == 1000 {
-			result = "onethousand"
+			roman = "onethousand"
 			break
 		}
 	}
-	return result
+	return
 }
 
 func main() {
