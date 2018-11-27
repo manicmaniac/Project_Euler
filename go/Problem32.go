@@ -16,13 +16,13 @@ package main
 
 import "fmt"
 
-func Permutations(xs []int, n int, context interface{}, callback func(xs []int, context interface{})) {
+func Permutations(xs []int, n int, callback func(xs []int)) {
 	if n == 1 {
-		callback(xs, context)
+		callback(xs)
 		return
 	}
 	for i := 0; i < n-1; i++ {
-		Permutations(xs, n-1, context, callback)
+		Permutations(xs, n-1, callback)
 		tmp := xs[n-1]
 		if n%2 == 0 {
 			xs[n-1] = xs[i]
@@ -32,7 +32,7 @@ func Permutations(xs []int, n int, context interface{}, callback func(xs []int, 
 			xs[0] = tmp
 		}
 	}
-	Permutations(xs, n-1, context, callback)
+	Permutations(xs, n-1, callback)
 }
 
 func ConcatenateDigits(digits []int, start int, stop int) (concatenated int) {
@@ -46,18 +46,18 @@ func ConcatenateDigits(digits []int, start int, stop int) (concatenated int) {
 func main() {
 	digits := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	context := make([]bool, 9999)
-	Permutations(digits, 9, context, func(digits []int, context interface{}) {
+	Permutations(digits, 9, func(digits []int) {
 		product := ConcatenateDigits(digits, 5, 9)
-		if !context.([]bool)[product] {
+		if !context[product] {
 			multiplier := digits[0]
 			multiplicand := ConcatenateDigits(digits, 1, 5)
 			if multiplier*multiplicand == product {
-				context.([]bool)[product] = true
+				context[product] = true
 			} else {
 				multiplier = ConcatenateDigits(digits, 0, 2)
 				multiplicand = ConcatenateDigits(digits, 2, 5)
 				if multiplier*multiplicand == product {
-					context.([]bool)[product] = true
+					context[product] = true
 				}
 			}
 		}
