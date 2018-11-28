@@ -61,6 +61,7 @@ int bit_count(int x) {
 }
 
 static const char rank_symbols[] = { 0, 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
+
 int rank_init(int *rank, char symbol) {
     int i;
 
@@ -78,7 +79,7 @@ int rank_init(int *rank, char symbol) {
 int rank_compare(int lhs, int rhs) {
     lhs = (lhs == 1) ? 14 : (lhs - 2);
     rhs = (rhs == 1) ? 14 : (rhs - 2);
-    return memcmp(&lhs, &rhs, 1);
+    return memcmp(&lhs, &rhs, sizeof(int));
 }
 
 char rank_to_symbol(int rank) {
@@ -112,7 +113,7 @@ int suit_init(suit_t *suit, char symbol) {
 }
 
 int suit_compare(suit_t lhs, suit_t rhs) {
-    return memcmp(&lhs, &rhs, 1);
+    return memcmp(&lhs, &rhs, sizeof(suit_t));
 }
 
 char suit_to_symbol(suit_t suit) {
@@ -235,12 +236,11 @@ typedef enum {
 } hand_kind_t;
 
 int hand_kind_compare(hand_kind_t lhs, hand_kind_t rhs) {
-    return memcmp(&lhs, &rhs, 1);
+    return memcmp(&lhs, &rhs, sizeof(hand_kind_t));
 }
 
 typedef struct {
     int count;
-    int rank;
     card_t cards[5];
 } card_grouped_by_rank;
 
@@ -251,7 +251,7 @@ int card_grouped_by_rank_compare_by_count(const card_grouped_by_rank *lhs, const
     if (result) {
         return result;
     }
-    return rank_compare(lhs->rank, rhs->rank);
+    return rank_compare(lhs->cards[0].rank, rhs->cards[0].rank);
 }
 
 void hand_kind_sort_cards(hand_kind_t kind, card_t *cards) {
@@ -272,9 +272,6 @@ void hand_kind_sort_cards(hand_kind_t kind, card_t *cards) {
         case HAND_THREE_OF_A_KIND:
         case HAND_FULL_HOUSE:
         case HAND_FOUR_OF_A_KIND:
-            for (i = 0; i < 14; i++) {
-                entries[i].rank = i;
-            }
             for (i = 0; i < 5; i++) {
                 entry = &(entries[cards[i].rank]);
                 memcpy(&(entry->cards[entry->count]), &(cards[i]), sizeof(card_t));
@@ -409,14 +406,14 @@ int main(int argc, const char *argv[]) {
     count = 0;
     for (i = 0; (read = fscanf(fp, "%3s", symbols)) == 1; i++) {
         if (!card_init(&(cards[i % 10]), symbols)) {
-            return 1;
+            goto fail;
         }
         if (i % 10 == 9) {
             if (!hand_init(&hand1, &(cards[0]), &(cards[1]), &(cards[2]), &(cards[3]), &(cards[4]))) {
-                return 1;
+                goto fail;
             }
             if (!hand_init(&hand2, &(cards[5]), &(cards[6]), &(cards[7]), &(cards[8]), &(cards[9]))) {
-                return 1;
+                goto fail;
             }
             if (hand_compare(&hand1, &hand2) > 0) {
                 count++;
@@ -424,10 +421,13 @@ int main(int argc, const char *argv[]) {
         }
     }
     if (read != EOF) {
-        fclose(fp);
-        return 1;
+        goto fail;
     }
     fclose(fp);
     printf("%d\n", count);
     return 0;
+
+fail:
+    fclose(fp);
+    return 1;
 }
