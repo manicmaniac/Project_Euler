@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func FindLogestCollatzChain(limit int) int {
-	cache := make(map[int]int)
+	cache := make([]int, limit+1)
 	longestStart := 0
 	longestLength := 0
 	for start := 1; start < limit; start += 2 {
