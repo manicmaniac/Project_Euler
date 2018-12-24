@@ -5,17 +5,16 @@
  *
  * Note: as 1! = 1 and 2! = 2 are not sums they are not included.
  */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-bool is_factorion(int x) {
+int is_factorion(int x) {
     static const int factorials[] = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880 };
     int res = 0;
-    div_t dm = {
-        .quot = x,
-        .rem = 0
-    };
+    div_t dm;
+
+    dm.quot = x;
     while (dm.quot && res <= x) {
         dm = div(dm.quot, 10);
         res += factorials[dm.rem];
@@ -24,13 +23,14 @@ bool is_factorion(int x) {
 }
 
 int main(int argc, const char *argv[]) {
-    int acc = 0;
+    int result = 0;
     int i;
+
     for (i = 3; i < 362880 * 7; i++) {
         if (is_factorion(i)) {
-            acc += i;
+            result += i;
         }
     }
-    printf("%d\n", acc);
+    printf("%d\n", result);
     return 0;
 }

@@ -10,16 +10,17 @@
  *
  * What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n  1?
  */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <math.h>
 
-bool is_pandigital(int n) {
+int is_pandigital(int n) {
     int flags, d;
     div_t dm;
+
     if (n % 9) {
-        return false;
+        return 0;
     }
     flags = 1;
     while (n) {
@@ -33,15 +34,16 @@ bool is_pandigital(int n) {
 
 int concat(int x, int y) {
     int r;
+
     r = (int)log10(y) + 1;
     return x * pow(10, r) + y;
 }
 
 int main(int argc, const char *argv[]) {
-    const int limit = 9877;
     int max, i, j, acc;
+
     max = 0;
-    for (i = 0; i < limit; i++) {
+    for (i = 0; i < 9877; i++) {
         acc = 0;
         for (j = 1; j < 10; j++) {
             acc = concat(acc, i * j);
@@ -57,4 +59,3 @@ int main(int argc, const char *argv[]) {
     printf("%d\n", max);
     return 0;
 }
-

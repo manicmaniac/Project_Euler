@@ -37,7 +37,7 @@ void permutation_at(int *xs, size_t count, int n) {
     permutation_at(xs + 1, count - 1, n - m * index);
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, const char *argv[]) {
     int i;
     int digits[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 

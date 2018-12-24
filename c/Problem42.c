@@ -14,13 +14,10 @@
  * words?
  */
 
-#include <errno.h>
 #include <math.h>
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-bool is_triangle(int x) {
+int is_triangle(int x) {
     double result;
 
     result = (sqrt(8 * x + 1) - 1) / 2;
@@ -37,29 +34,33 @@ int word_score(const char *word) {
     return result;
 }
 
-static const char *path = "../resources/words.txt";
-
 int main(int argc, const char *argv[]) {
-    int count;
+    static const char path[] = "../resources/words.txt";
+    int exit_status, count;
     char word[64];
     FILE *fp;
 
-    if (!(fp = fopen(path, "r"))) {
-        goto error;
+    exit_status = 0;
+    fp = fopen(path, "r");
+    if (!fp) {
+        perror(path);
+        exit_status = 1;
     }
-    for (count = 0; fscanf(fp, "\"%[A-Z]\",", word) != EOF;) {
-        if (is_triangle(word_score(word))) {
-            count++;
+    if (!exit_status) {
+        count = 0;
+        while (fscanf(fp, "\"%64[A-Z]\",", word) != EOF) {
+            if (is_triangle(word_score(word))) {
+                count++;
+            }
+        }
+        if (ferror(fp)) {
+            perror(path);
+            exit_status = 1;
         }
     }
-    if (ferror(fp)) {
-        goto error;
+    if (fp) {
+        fclose(fp);
     }
-    fclose(fp);
     printf("%d\n", count);
-    return 0;
-
-error:
-    perror(path);
-    return errno;
+    return exit_status;
 }

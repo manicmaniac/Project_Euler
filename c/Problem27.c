@@ -90,7 +90,7 @@ int count_quadratic_primes(int a, int b) {
     return count;
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, const char *argv[]) {
     int a, b, current, longest, longest_product;
     size_t i, size;
     int *primes;
@@ -111,4 +111,3 @@ int main(int argc, char const *argv[]) {
     printf("%d\n", longest_product);
     return 0;
 }
-

@@ -16,9 +16,11 @@ double fibterm(int n) {
     return round(pow(PHI, n + 1) / SQRT5);
 }
 
-int main(int argc, char **argv) {
-    int sum = 0;
+int main(int argc, const char **argv) {
+    int sum;
     int i, x;
+
+    sum = 0;
     for (i = 2; (x = (int)fibterm(i)) < 4e6; i += 3) {
         sum += x;
     }

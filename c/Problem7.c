@@ -4,26 +4,25 @@
  * What is the 10 001st prime number?
  */
 #include <stdio.h>
-#include <stdbool.h>
 #include <math.h>
 
-bool is_prime(int n) {
+int is_prime(int n) {
     int i;
     double sqrt_n;
 
     if (n == 2) {
-        return true;
+        return 1;
     }
     if (n < 2 || n % 2 == 0) {
-        return false;
+        return 0;
     }
     sqrt_n = sqrt(n);
     for (i = 3; i <= sqrt_n; i += 2) {
         if (n % i == 0) {
-            return false;
+            return 0;
         }
     }
-    return true;
+    return 1;
 }
 
 int main(int argc, const char *argv[]) {

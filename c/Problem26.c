@@ -48,7 +48,7 @@ int felm(int x) {
     return 0;
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, const char *argv[]) {
     int i, x, max_felm, max_i;
 
     max_felm = 0;
@@ -62,4 +62,3 @@ int main(int argc, char const *argv[]) {
     printf("%d\n", max_i);
     return 0;
 }
-

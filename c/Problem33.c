@@ -12,7 +12,6 @@
  * find the value of the denominator.
  */
 
-#include <complex.h>
 #include <stdio.h>
 
 int main(int argc, const char *argv[]) {

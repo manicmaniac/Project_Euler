@@ -1,7 +1,7 @@
 /*
  * You are given the following information, but you may prefer to do some research
  * for yourself.
- * 
+ *
  *   • 1 Jan 1900 was a Monday.
  *   • Thirty days has September,
  *     April, June and November.
@@ -11,29 +11,22 @@
  *     And on leap years, twenty-nine.
  *   • A leap year occurs on any year evenly divisible by 4, but not on a century
  *     unless it is divisible by 400.
- * 
+ *
  * How many Sundays fell on the first of the month during the twentieth century (1
  * Jan 1901 to 31 Dec 2000)?
  */
 #include <stdio.h>
 #include <time.h>
 
-int wday(int year, int month, int day) {
-    struct tm time = {
-        .tm_year = year,
-        .tm_mon = month,
-        .tm_mday = day,
-    };
-    mktime(&time);
-    return time.tm_wday;
-}
-
-int main(int argc, char const* argv[]) {
+int main(int argc, const char *argv[]) {
+    struct tm time = { 0 };
     int count = 0;
-    int y, m;
-    for (y = 1901; y <= 2000; y++) {
-        for (m = 0; m < 12; m++) {
-            if (!wday(y, m, 1)) {
+
+    time.tm_mday = 1;
+    for (time.tm_year = 1; time.tm_year < 101; time.tm_year++) {
+        for (time.tm_mon = 0; time.tm_mon < 12; time.tm_mon++) {
+            mktime(&time);
+            if (!time.tm_wday) {
                 count++;
             }
         }
@@ -41,4 +34,3 @@ int main(int argc, char const* argv[]) {
     printf("%d\n", count);
     return 0;
 }
-

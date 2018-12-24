@@ -1,5 +1,4 @@
 #include <math.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,23 +23,23 @@ void permutations(int *p, size_t n, void (*callback)(int *)) {
     permutations(p, n - 1, callback);
 }
 
-bool is_prime(int x) {
+int is_prime(int x) {
     int i;
     double sqrt_x;
 
     if (x == 2) {
-        return true;
+        return 1;
     }
     if (x < 2 || !(x & 1)) {
-        return false;
+        return 0;
     }
     sqrt_x = sqrt(x);
     for (i = 3; i <= sqrt_x; i++) {
         if (!(x % i)) {
-            return false;
+            return 0;
         }
     }
-    return true;
+    return 1;
 }
 
 static void callback(int *p) {

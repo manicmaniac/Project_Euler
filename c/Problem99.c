@@ -16,31 +16,32 @@
 #include <stdio.h>
 #include <math.h>
 
-static const char *path = "../resources/base_exp.txt";
-
 int main(int argc, const char *argv[]) {
-    int base, exp, lineno, max_lineno;
+    static const char path[] = "../resources/base_exp.txt";
+    int exit_status, base, exp, lineno, max_lineno;
     double value, max_value;
     FILE *fp;
 
-    if (!(fp = fopen(path, "r"))) {
-        goto error;
+    exit_status = 0;
+    fp = fopen(path, "r");
+    if (!fp) {
+        exit_status = 1;
     }
-    for (lineno = 1; fscanf(fp, "%d,%d\n", &base, &exp) != EOF; lineno++) {
-        value = log(base) * exp;
-        if (max_value < value) {
-            max_value = value;
-            max_lineno = lineno;
+    if (!exit_status) {
+        for (lineno = 1; fscanf(fp, "%10d,%10d\n", &base, &exp) != EOF; lineno++) {
+            value = log(base) * exp;
+            if (max_value < value) {
+                max_value = value;
+                max_lineno = lineno;
+            }
+        }
+        if (ferror(fp)) {
+            exit_status = 1;
         }
     }
-    if (ferror(fp)) {
-        goto error;
+    if (fp) {
+        fclose(fp);
     }
-    fclose(fp);
     printf("%d\n", max_lineno);
-    return 0;
-
-error:
-    perror(path);
-    return 1;
+    return exit_status;
 }

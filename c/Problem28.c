@@ -13,9 +13,10 @@
  * What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed
  * in the same way?
  */
+
 #include <stdio.h>
 
-int main(int argc, char const* argv[]) {
+int main(int argc, const char *argv[]) {
     int x;
 
     /* 1 + sum(16x^2 + 4x + 4), 1 <= x <= 1001/2 */

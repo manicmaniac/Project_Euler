@@ -12,6 +12,7 @@
  * HINT: Some products can be obtained in more than one way so be sure to only
  * include it once in your sum.
  */
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -83,4 +84,3 @@ int main(int argc, const char *argv[]) {
     printf("%d\n", sum);
     return 0;
 }
-

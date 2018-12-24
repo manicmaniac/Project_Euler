@@ -20,29 +20,33 @@ static const char *roman_map_20_90[] = {
     "eighty", "ninety"
 };
 
-void uitor(char *buffer, unsigned int x) {
+void uitor(char *buffer, int x) {
+    const char *roman;
+    size_t size;
+    div_t dm;
+
     if (!x) {
-        const char *roman = "zero";
-        size_t size = strlen(roman);
+        roman = "zero";
+        size = strlen(roman);
         memcpy(buffer, roman, size + 1);
     }
     while (x) {
         if (x < 20) {
-            const char *roman = roman_map_1_19[x];
-            size_t size = strlen(roman);
+            roman = roman_map_1_19[x];
+            size = strlen(roman);
             memcpy(buffer, roman, size + 1);
             break;
         } else if (x < 100) {
-            div_t dm = div(x, 10);
-            const char *roman = roman_map_20_90[dm.quot];
-            size_t size = strlen(roman);
+            dm = div(x, 10);
+            roman = roman_map_20_90[dm.quot];
+            size = strlen(roman);
             memcpy(buffer, roman, size + 1);
             x = dm.rem;
             buffer += size;
         } else if (x < 1000) {
-            div_t dm = div(x, 100);
-            const char *roman = roman_map_1_19[dm.quot];
-            size_t size = strlen(roman);
+            dm = div(x, 100);
+            roman = roman_map_1_19[dm.quot];
+            size = strlen(roman);
             memcpy(buffer, roman, size);
             memcpy(buffer + size, "handred", 7 + 1);
             if (dm.rem) {
@@ -53,18 +57,19 @@ void uitor(char *buffer, unsigned int x) {
                 break;
             }
         } else if (x == 1000) {
-            const char *roman = "onethousand";
-            size_t size = strlen(roman);
+            roman = "onethousand";
+            size = strlen(roman);
             memcpy(buffer, roman, size + 1);
             break;
         }
     }
 }
 
-int main(int argc, char *argv[]) {
-    char buffer[32] = { 0 };
+int main(int argc, const char *argv[]) {
+    char buffer[32];
     int count = 0;
-    unsigned int i;
+    int i;
+
     for (i = 1; i <= 1000; i++) {
         uitor(buffer, i);
         count += strlen(buffer);

@@ -41,14 +41,15 @@ static const int data[] = {
 };
 
 int pyramid_route(int *pyramid, int size) {
+    int offset, i, *longer, *shorter;
+
     for (; size > 1; size--) {
-        int offset = -size;
-        int i;
+        offset = -size;
         for (i = 1; i <= size; i++) {
             offset += i;
         }
-        int *longer = pyramid + offset;
-        int *shorter = longer - size + 1;
+        longer = pyramid + offset;
+        shorter = longer - size + 1;
         for (i = 0; i < (size - 1); i++) {
             shorter[i] += MAX(longer[i], longer[i + 1]);
         }
@@ -56,8 +57,10 @@ int pyramid_route(int *pyramid, int size) {
     return pyramid[0];
 }
 
-int main(int argc, char *argv[]) {
-    int *buffer = malloc(sizeof(data));
+int main(int argc, const char *argv[]) {
+    int *buffer;
+
+    buffer = malloc(sizeof(data));
     memcpy(buffer, data, sizeof(data));
     printf("%d\n", pyramid_route(buffer, 15));
     free(buffer);

@@ -8,22 +8,24 @@
  * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
  */
 #include <math.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-bool is_abundant(int x) {
-    char *array = calloc(x, sizeof(char));
-    int limit = (int)sqrt(x);
-    int i;
+int is_abundant(int x) {
+    char *array;
+    int limit, i, sum;
+    div_t dm;
+
+    array = calloc(x, sizeof(char));
+    limit = (int)sqrt(x);
     for (i = 2; i <= limit; i++) {
-        div_t dm = div(x, i);
+        dm = div(x, i);
         if (!dm.rem) {
             array[i] = 1;
             array[dm.quot] = 1;
         }
     }
-    int sum = 0;
+    sum = 0;
     for (i = 0; i < x; i++) {
         if (array[i]) {
             sum += i;
@@ -33,38 +35,33 @@ bool is_abundant(int x) {
     return sum > x;
 }
 
-int main(int argc, char const* argv[]) {
-    const int limit = 28123;
-    int i;
-    int abundants_count = 0;
-    int *abundants = calloc(limit, sizeof(int));
-    for (i = 0; i <= limit; i++) {
+#define LIMIT 28123
+
+int main(int argc, const char *argv[]) {
+    int i, j, abundants_count, abundants[LIMIT], sum_of_2_abundants[LIMIT], sum;
+
+    abundants_count = 0;
+    for (i = 0; i <= sizeof(abundants) / sizeof(abundants[0]); i++) {
         if (is_abundant(i)) {
             abundants[abundants_count] = i;
             abundants_count++;
         }
     }
-    abundants = realloc(abundants, abundants_count * sizeof(int));
-    char *sum_of_2_abundants = calloc(limit, sizeof(int));
     for (i = 0; i < abundants_count; i++) {
-        int j;
         for (j = i; j < abundants_count; j++) {
-            int sum = abundants[i] + abundants[j];
-            if (sum > limit) {
+            sum = abundants[i] + abundants[j];
+            if (sum > LIMIT) {
                 break;
             }
             sum_of_2_abundants[sum] = 1;
         }
     }
-    free(abundants);
-    int sum = 0;
-    for (i = 0; i < limit; i++) {
+    sum = 0;
+    for (i = 0; i < LIMIT; i++) {
         if (!sum_of_2_abundants[i]) {
             sum += i;
         }
     }
-    free(sum_of_2_abundants);
     printf("%d\n", sum);
     return 0;
 }
-

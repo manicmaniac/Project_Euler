@@ -20,9 +20,9 @@ int letter_score(char letter) {
 }
 
 int name_score(const char *name) {
-    int score = 0;
-    int i;
+    int score = 0, i;
     char c;
+
     for (i = 0; (c = name[i]) != '\0'; i++) {
         score += letter_score(c);
     }
@@ -30,27 +30,40 @@ int name_score(const char *name) {
 }
 
 int main(int argc, const char *argv[]) {
-    const char *names_txt = "../resources/names.txt";
-    FILE *fp = fopen(names_txt, "r");
+    const char path[] = "../resources/names.txt";
+    FILE *fp;
+    char name[32], name_list[8192][32];
+    int exit_status, i, j, names_count, name_length, total;
+
+    exit_status = 0;
+    fp = fopen(path, "r");
     if (!fp) {
-        return 1;
+        perror(path);
+        exit_status = 1;
     }
-    char name[32];
-    char name_list[8192][32];
-    int i, j;
-    for (i = 0; fscanf(fp, "\"%[A-Z]\",", name) != EOF ; i++) {
-        for (j = 0; j < 32; j++) {
-            name_list[i][j] = name[j];
+    if (!exit_status) {
+        for (i = 0; fscanf(fp, "\"%[A-Z]\",", name) != EOF ; i++) {
+            for (j = 0; j < 32; j++) {
+                name_list[i][j] = name[j];
+            }
+        }
+        if (ferror(fp)) {
+            perror(path);
+            exit_status = 1;
         }
     }
-    const int names_count = i;
-    const int name_length = j;
-    qsort(name_list, names_count, name_length, (int (*)(const void *, const void *))strcmp);
-    int total = 0;
-    for (i = 0; i < names_count; i++) {
-        total += name_score(name_list[i]) * (i + 1);
+    if (!exit_status) {
+        names_count = i;
+        name_length = j;
+        qsort(name_list, names_count, name_length, (int (*)(const void *, const void *))strcmp);
+        total = 0;
+        for (i = 0; i < names_count; i++) {
+            total += name_score(name_list[i]) * (i + 1);
+        }
+        printf("%d\n", total);
     }
-    printf("%d\n", total);
-    return 0;
+    if (fp) {
+        fclose(fp);
+    }
+    return exit_status;
 }
-

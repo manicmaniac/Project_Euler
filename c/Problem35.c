@@ -7,6 +7,7 @@
  *
  * How many circular primes are there below one million?
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
