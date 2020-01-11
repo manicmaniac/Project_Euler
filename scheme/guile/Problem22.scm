@@ -33,7 +33,7 @@
              1)))
 
 (define *filename*
-  "../resources/names.txt")
+  "../../resources/names.txt")
 
 (display
   (with-input-from-file *filename*

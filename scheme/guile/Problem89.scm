@@ -74,7 +74,7 @@
     (roman->number str)))
 
 (define filename
-  "../resources/roman.txt")
+  "../../resources/roman.txt")
 
 (with-input-from-file filename (lambda ()
                                  (display
