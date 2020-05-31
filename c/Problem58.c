@@ -42,7 +42,7 @@ int is_prime(int x) {
     return 1;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int primes_count;
     long i, j, x, d;
 

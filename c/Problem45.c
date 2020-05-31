@@ -26,7 +26,7 @@ long hexagonal(int n) {
     return n * (n * 2 - 1);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i;
     long x;
 

@@ -52,7 +52,7 @@ int is_truncatable_prime(int x) {
 }
 
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i, count, sum;
 
     sum = 0;

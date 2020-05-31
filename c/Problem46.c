@@ -57,7 +57,7 @@ bool is_goldbach_composite(int x) {
     return false;
 }
 
-int main(int argc, char *argv[]) {
+int main(void) {
     int i;
     for (i = 9; i < (INT_MAX - 1); i += 2) {
         if (!is_goldbach_composite(i)) {

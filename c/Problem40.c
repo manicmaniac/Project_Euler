@@ -35,7 +35,7 @@ int champernowne_at(int n) {
     return digit_at(i, n);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int product = 1;
 
     product *= champernowne_at(1);

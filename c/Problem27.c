@@ -83,7 +83,7 @@ int count_quadratic_primes(int a, int b) {
     return count;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int longest_product = 0;
     size_t size = 0;
     int *primes = sieve(1000, &size);

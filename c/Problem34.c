@@ -22,7 +22,7 @@ int is_factorion(int x) {
     return x == res;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int result = 0;
     int i;
 

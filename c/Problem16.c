@@ -104,7 +104,7 @@ void bignum_pow(bignum *a, int exp) {
     bignum_delete(b);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     bignum *a = bignum_new(2);
     bignum_pow(a, 1000);
     int sum = 0;

@@ -28,7 +28,7 @@ bool is_pentagonal(int x) {
     return a == (int)a;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i, j, x, y, *cache;
 
     cache = NULL;

@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const char path[] = "../resources/base_exp.txt";
     int exit_status, base, exp, lineno, max_lineno;
     double value, max_value;

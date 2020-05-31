@@ -45,7 +45,7 @@ int pyramid_route(int *pyramid, int size) {
     return pyramid[0];
 }
 
-int main(int argc, char *argv[]) {
+int main(void) {
     static const char *path = "../resources/triangle.txt";
     size_t rows_count = 100;
     size_t size = triangular(rows_count);

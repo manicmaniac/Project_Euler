@@ -45,7 +45,7 @@ int is_decimal_palindromic(int x) {
     return 0;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i, result;
 
     result = 0;

@@ -20,7 +20,7 @@ int currency(int amount, const int *coins, size_t coins_count) {
     return currency(amount, coins + 1, coins_count - 1) + currency(amount - coins[0], coins, coins_count);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const int coins[] = { 200, 100, 50, 20, 10, 5, 2, 1 };
     int result;
 

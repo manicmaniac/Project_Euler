@@ -23,7 +23,7 @@ int gcd(int x, int y) {
     return gcd(y, x % y);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int count, d, n;
 
     count = 0;

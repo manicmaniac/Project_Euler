@@ -38,7 +38,7 @@ bool contains_origin(double complex a, double complex b, double complex c) {
     return (p < 0 && q < 0 && r < 0) || (p >= 0 && q >= 0 && r >= 0);
 }
 
-int main(int argc, char const *argv[]) {
+int main(void) {
     int ax, ay, bx, by, cx, cy;
     double complex a, b, c;
     int count;

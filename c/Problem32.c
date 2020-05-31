@@ -68,7 +68,7 @@ static void callback(int *digits, void *context) {
     }
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int sum;
     int digits[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     bool context[9999] = {false};

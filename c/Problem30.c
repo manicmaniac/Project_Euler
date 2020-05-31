@@ -31,7 +31,7 @@ int is_armstrong5(long x) {
     return result == x;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     long result = 0, i;
 
     for (i = 2; i < 6 * POW5(9); i++) {

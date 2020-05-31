@@ -41,7 +41,7 @@ int count_distinct_factors(int x) {
     return count;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i;
 
     for (i = 0; ; i++) {

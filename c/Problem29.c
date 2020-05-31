@@ -18,7 +18,7 @@
 #include <math.h>
 #include <stdio.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int a, b, i, j, is_cached;
     double tmp, cache[(100 - 2) * (100 - 2)];
 

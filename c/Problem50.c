@@ -86,7 +86,7 @@ int sum_ints(int *array, size_t start, size_t length) {
     return sum;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int sum, i, j, *primes, start, max_sum;
     size_t primes_count, length, max_length;
 

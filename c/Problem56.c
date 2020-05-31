@@ -124,7 +124,7 @@ void bignum_pow(bignum *a, int exp) {
     bignum_delete(b);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     bignum *big_a;
     int max_sum, sum;
     size_t a, b, i;

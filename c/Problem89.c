@@ -168,7 +168,7 @@ void itor(char *buffer, size_t buffer_len, int x) {
     }
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const char path[] = "../resources/roman.txt";
     int exit_status, x;
     size_t saved_length, line_length;

@@ -29,7 +29,7 @@ double log_ncr(int n, int r) {
     return log_fac(n) - log_fac(r) - log_fac(n - r);
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int count, n, r;
     double limit;
 

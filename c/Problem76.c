@@ -29,7 +29,7 @@ int npartitions(int n) {
     return res;
 }
 
-int main(int argc, char const* argv[]) {
+int main(void) {
     printf("%d\n", npartitions(100));
     return 0;
 }

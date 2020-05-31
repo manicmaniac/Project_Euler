@@ -25,7 +25,7 @@ long long llpowmod(long long x, long long y, long long z) {
     return t;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     printf("%lld\n", (28433 * llpowmod(2, 7830457, 10000000000) + 1) % 10000000000);
     return 0;
 }

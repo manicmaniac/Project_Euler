@@ -50,7 +50,7 @@ int is_permuting(int *xs, size_t size) {
     return 1;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     char array[10000] = { 0 };
     int triplets[3];
     size_t i, j;

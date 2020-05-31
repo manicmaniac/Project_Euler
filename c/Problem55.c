@@ -182,7 +182,7 @@ int bignum_is_lychrel(const bignum *a, int tries) {
     return result;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int a, count;
     bignum *big_a;
 

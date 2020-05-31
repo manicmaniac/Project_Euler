@@ -390,7 +390,7 @@ char *hand_get_string(const hand_t *hand, char *buffer, int count) {
     return buffer;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     const char *path = "../resources/poker.txt";
     FILE *fp;
     int i, read, count;

@@ -80,7 +80,7 @@ static bool callback(int n, long fib, int precision) {
     return true;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const int precision = 9;
     lower_fibs(precision, callback);
     return 0;

@@ -39,7 +39,7 @@ int concat(int x, int y) {
     return x * pow(10, r) + y;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int max, i, j, acc;
 
     max = 0;

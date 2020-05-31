@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int count, a, b;
 
     count = 0;

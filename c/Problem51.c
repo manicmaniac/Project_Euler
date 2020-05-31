@@ -74,7 +74,7 @@ int count_max_replaceable_digits(int x) {
     return max_count;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i;
 
     for (i = 0; count_max_replaceable_digits(i) < 8; i++);

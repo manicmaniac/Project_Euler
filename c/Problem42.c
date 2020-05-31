@@ -34,7 +34,7 @@ int word_score(const char *word) {
     return result;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const char path[] = "../resources/words.txt";
     int exit_status, count;
     char word[64];

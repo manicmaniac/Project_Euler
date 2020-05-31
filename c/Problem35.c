@@ -50,7 +50,7 @@ static int is_composite(int x, void *context) {
     return is_composites_by_n[x];
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     char is_composites_by_n[1000000] = { 0 };
     int count, i, is_circular_prime;
 

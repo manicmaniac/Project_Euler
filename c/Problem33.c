@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i, j, k, d, n;
     double res_d, res_n;
 

@@ -25,7 +25,7 @@ int count_combinations_of_sides_for_perimeter(int p) {
     return count;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int p, p_for_max_count, max_count, count;
 
     p_for_max_count = 0;

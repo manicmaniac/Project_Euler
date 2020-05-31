@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int x;
 
     /* 1 + sum(16x^2 + 4x + 4), 1 <= x <= 1001/2 */

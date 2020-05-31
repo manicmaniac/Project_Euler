@@ -35,7 +35,7 @@ int count_cycle(int x) {
     return i;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i;
 
     for (i = 1; count_cycle(i) < 6; i++);

@@ -55,7 +55,7 @@ static void callback(int *p) {
     }
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int digits[] = {1, 2, 3, 4, 5, 6};
 
     permutations(digits, 6, callback);

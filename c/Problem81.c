@@ -17,7 +17,7 @@
 
 #define MIN(a, b)  (a < b ? a : b)
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const char path[] = "../resources/matrix.txt";
     int exit_status, x, y, matrix[80][80];
     FILE *fp;

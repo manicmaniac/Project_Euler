@@ -19,7 +19,7 @@ long long llpowmod(long long x, long long y, long long z) {
     return t;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     long long i, result;
 
     result = 0;
