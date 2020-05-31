@@ -18,26 +18,24 @@
  */
 #include <stdio.h>
 
-#define MAX(x, y) (x > y ? x : y)
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
 
-int pyramid_route(int *pyramid, int size) {
-    int offset, i, *longer, *shorter;
-
+int pyramid_route(int *pyramid, size_t size) {
     for (; size > 1; size--) {
-        offset = -size;
-        for (i = 1; i <= size; i++) {
+        off_t offset = -size;
+        for (size_t i = 1; i <= size; i++) {
             offset += i;
         }
-        longer = pyramid + offset;
-        shorter = longer - size + 1;
-        for (i = 0; i < (size - 1); i++) {
+        int *longer = pyramid + offset;
+        int *shorter = longer - size + 1;
+        for (size_t i = 0; i < (size - 1); i++) {
             shorter[i] += MAX(longer[i], longer[i + 1]);
         }
     }
     return pyramid[0];
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int data[120] = {
         75,
         95, 64,

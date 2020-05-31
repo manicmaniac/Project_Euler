@@ -9,13 +9,10 @@
 #include <stdlib.h>
 
 int make_palindrome(int x) {
-    int ndigits, palindrome, i;
-    div_t dm;
-
-    dm.quot = x;
-    ndigits = (int)log10(x) + 1;
-    palindrome = x * pow(10, ndigits);
-    for (i = ndigits; dm.quot; i--) {
+    div_t dm = { .quot = x };
+    int ndigits = (int)log10(x) + 1;
+    int palindrome = x * pow(10, ndigits);
+    for (int i = ndigits; dm.quot; i--) {
         dm = div(dm.quot, 10);
         palindrome += dm.rem * pow(10, i - 1);
     }
@@ -23,13 +20,10 @@ int make_palindrome(int x) {
 }
 
 int is_product_of_ndigits(int x, int n) {
-    int min, max, i;
-    div_t dm;
-
-    min = pow(10, n - 1);
-    max = min * 10 - 1;
-    for (i = max; i >= min; i--) {
-        dm = div(x, i);
+    int min = pow(10, n - 1);
+    int max = min * 10 - 1;
+    for (int i = max; i >= min; i--) {
+        div_t dm = div(x, i);
         if (!dm.rem) {
             return dm.quot >= min && dm.quot <= max;
         }
@@ -37,10 +31,10 @@ int is_product_of_ndigits(int x, int n) {
     return 0;
 }
 
-int main(int argc, const char *argv[]) {
-    int i, palindrome;
+int main(void) {
+    int palindrome;
 
-    for (i = 999; i > 100; i--) {
+    for (int i = 999; i > 100; i--) {
         palindrome = make_palindrome(i);
         if (is_product_of_ndigits(palindrome, 3)) {
             break;

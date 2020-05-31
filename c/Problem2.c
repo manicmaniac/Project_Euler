@@ -9,19 +9,15 @@
 #include <math.h>
 #include <stdio.h>
 
-static const double SQRT5 = 2.2360679775;
-static const double PHI = 1.61803398875;
-
 double fibterm(int n) {
+    static const double SQRT5 = 2.2360679775;
+    static const double PHI = 1.61803398875;
     return round(pow(PHI, n + 1) / SQRT5);
 }
 
-int main(int argc, const char **argv) {
-    int sum;
-    int i, x;
-
-    sum = 0;
-    for (i = 2; (x = (int)fibterm(i)) < 4e6; i += 3) {
+int main(void) {
+    int sum = 0;
+    for (int x, i = 2; (x = (int)fibterm(i)) < 4e6; i += 3) {
         sum += x;
     }
     printf("%d\n", sum);

@@ -11,18 +11,16 @@
 
 double ncr(int n, int r) {
     double result = 1;
-    int i;
-
-    for (i = r + 1; i < n + 1; i++) {
+    for (int i = r + 1; i < n + 1; i++) {
         result *= i;
     }
-    for (i = 1; i < r + 1; i++) {
+    for (int i = 1; i < r + 1; i++) {
         result /= i;
     }
     return result;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     printf("%.lf\n", ncr(40, 20));
     return 0;
 }

@@ -24,46 +24,41 @@
  * starting with n = 0.
  */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
-int is_prime(int n) {
+bool is_prime(int n) {
     if (n == 2) {
-        return 1;
+        return true;
     }
     if (n < 2 || n % 2 == 0) {
-        return 0;
+        return false;
     }
-    int i;
     double sqrt_n = sqrt(n);
-    for (i = 3; i <= sqrt_n; i += 2) {
+    for (int i = 3; i <= sqrt_n; i += 2) {
         if (n % i == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 int *sieve(int limit, size_t *size) {
-    int *search, *result;
-    int i, j;
-    double sqrt_limit;
-
     if (limit < 2) {
         return NULL;
     }
-    search = calloc(limit, sizeof(int));
-    result = malloc(limit * sizeof(int));
+    int *search = calloc(limit, sizeof(int));
+    int *result = malloc(limit * sizeof(int));
     search[0] = 1;
     search[1] = 1;
-    sqrt_limit = sqrt(limit);
+    double sqrt_limit = sqrt(limit);
     *size = 0;
-    for (i = 2; i <= limit; i++) {
+    for (size_t i = 2; i <= limit; i++) {
         if (!search[i]) {
             if (i <= sqrt_limit) {
-                for (j = i << 1; j < limit; j += i) {
+                for (size_t j = i << 1; j < limit; j += i) {
                     search[j] = 1;
                 }
             }
@@ -76,11 +71,9 @@ int *sieve(int limit, size_t *size) {
 }
 
 int count_quadratic_primes(int a, int b) {
-    int count, i, x;
-
-    count = 0;
-    for (i = 0; i < b; i++) {
-        x = i * i + a * i + b;
+    int count = 0;
+    for (int i = 0; i < b; i++) {
+        int x = i * i + a * i + b;
         if (is_prime(x)) {
             count++;
         } else {
@@ -91,16 +84,14 @@ int count_quadratic_primes(int a, int b) {
 }
 
 int main(int argc, const char *argv[]) {
-    int a, b, current, longest, longest_product;
-    size_t i, size;
-    int *primes;
-
-    primes = sieve(1000, &size);
-    longest = 0;
-    for (a = -999; a < 1000; a += 2) {
-        for (i = 0; i < size; i++) {
-            b = primes[i];
-            current = count_quadratic_primes(a, b);
+    int longest_product = 0;
+    size_t size = 0;
+    int *primes = sieve(1000, &size);
+    int longest = 0;
+    for (int a = -999; a < 1000; a += 2) {
+        for (size_t i = 0; i < size; i++) {
+            int b = primes[i];
+            int current = count_quadratic_primes(a, b);
             if (longest < current) {
                 longest = current;
                 longest_product = a * b;

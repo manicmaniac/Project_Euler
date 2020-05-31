@@ -107,12 +107,10 @@ static const double data[] = {
     53503534226472524250874054075591789781264330331690.0,
 };
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     double result = 0;
-    int i;
-    char buffer[11];
-
-    for (i = 0; i < sizeof(data) / sizeof(data[0]); i++) {
+    char buffer[11] = { 0 };
+    for (size_t i = 0; i < sizeof(data) / sizeof(data[0]); i++) {
         result += data[i];
     }
     snprintf(buffer, sizeof(buffer), "%f", result);

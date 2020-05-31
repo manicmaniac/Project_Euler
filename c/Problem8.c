@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <string.h>
 
 static const char data[] =
     "73167176531330624919225119674426574742355349194934"
@@ -27,13 +26,12 @@ static const char data[] =
     "05886116467109405077541002256983155200055935729725"
     "71636269561882670428252483600823257530420752963450";
 
-int main(int argc, const char *argv[]) {
-    int product, res, i, j;
-
-    for (i = 0; i <= 1000 - 5; i++) {
-        product = 1;
-        for (j = 0; j < 5; j++) {
-            product *= data[i + j] - 48;
+int main(void) {
+    int res = 0;
+    for (int i = 0; i <= 1000 - 5; i++) {
+        int product = 1;
+        for (int j = 0; j < 5; j++) {
+            product *= data[i + j] - '0';
             res = (res < product) ? product : res;
         }
     }

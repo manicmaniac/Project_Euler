@@ -6,12 +6,13 @@
  *
  * Evaluate the sum of all the amicable numbers under 10000.
  */
+
+#include <stdbool.h>
 #include <stdio.h>
 
 int sum_of_divisors(int x) {
-    int i, result = 0;
-
-    for (i = 1; i < (x / 2 + 1); i++) {
+    int result = 0;
+    for (int i = 1; i < (x / 2 + 1); i++) {
         if (x % i == 0) {
             result += i;
         }
@@ -19,15 +20,14 @@ int sum_of_divisors(int x) {
     return result;
 }
 
-int has_amicable(int x) {
+bool has_amicable(int x) {
     int sum = sum_of_divisors(x);
     return sum != x && sum_of_divisors(sum) == x;
 }
 
-int main(int argc, const char *argv[]) {
-    int i, result = 0;
-
-    for (i = 2; i < 10000; i++) {
+int main(void) {
+    int result = 0;
+    for (int i = 2; i < 10000; i++) {
         if (has_amicable(i)) {
             result += i;
         }

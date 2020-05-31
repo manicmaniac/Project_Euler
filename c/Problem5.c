@@ -18,11 +18,9 @@ long llcm(long x, long y) {
     return x * y / lgcd(x, y);
 }
 
-int main(int argc, const char *argv[]) {
-    long result, i;
-
-    result = 1;
-    for (i = 1; i <= 20; i++) {
+int main(void) {
+    long result = 1;
+    for (long i = 1; i <= 20; i++) {
         result = llcm(result, i);
     }
     printf("%ld\n", result);

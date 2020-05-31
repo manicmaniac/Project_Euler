@@ -20,13 +20,12 @@
 #include <stdlib.h>
 
 int longest_collatz(int limit) {
-    int *cache, longest_start = 0, longest_length = 0, start, length;
-    long i;
+    int longest_start = 0, longest_length = 0;
 
-    cache = calloc(limit, sizeof(int));
-    for (start = 1; start < limit; start += 2) {
-        length = 1;
-        for (i = start; i > 1; length++) {
+    int *cache = calloc(limit, sizeof(int));
+    for (int start = 1; start < limit; start += 2) {
+        int length = 1;
+        for (long i = start; i > 1; length++) {
             i = (i % 2 ? 3 * i + 1 : i / 2);
             if (i <= limit && cache[i]) {
                 length += cache[i];
@@ -43,7 +42,7 @@ int longest_collatz(int limit) {
     return longest_start;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     printf("%d\n", longest_collatz(1000000));
     return 0;
 }

@@ -11,9 +11,8 @@
 #include <stdio.h>
 #include <math.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int m, n;
-
     for (m = n = 1; m * (m + n) != 500; n++) {
         if (m < n) {
             m++;

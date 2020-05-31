@@ -22,12 +22,10 @@
 #include <stdio.h>
 
 int powmod(int x, int y, int z) {
-    int t;
-
     if (!y) {
         return 1;
     }
-    t = powmod(x, y >> 1, z);
+    int t = powmod(x, y >> 1, z);
     t = t * t % z;
     if (y & 1) {
         t = t * x % z;
@@ -36,10 +34,8 @@ int powmod(int x, int y, int z) {
 }
 
 int felm(int x) {
-    int i;
-
     if (x & 1) {
-        for (i = 1; i < x; i++) {
+        for (int i = 1; i < x; i++) {
             if (powmod(10, i, x) == 1) {
                 return i;
             }
@@ -48,12 +44,11 @@ int felm(int x) {
     return 0;
 }
 
-int main(int argc, const char *argv[]) {
-    int i, x, max_felm, max_i;
-
-    max_felm = 0;
-    for (i = 0; i < 1000; i++) {
-        x = felm(i);
+int main(void) {
+    int max_i = 0;
+    int max_felm = 0;
+    for (int i = 0; i < 1000; i++) {
+        int x = felm(i);
         if (max_felm < x) {
             max_felm = x;
             max_i = i;

@@ -65,12 +65,10 @@ void uitor(char *buffer, int x) {
     }
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     char buffer[32];
     int count = 0;
-    int i;
-
-    for (i = 1; i <= 1000; i++) {
+    for (int i = 1; i <= 1000; i++) {
         uitor(buffer, i);
         count += strlen(buffer);
     }

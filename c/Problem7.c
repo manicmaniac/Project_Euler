@@ -3,36 +3,33 @@
  *
  * What is the 10 001st prime number?
  */
+#include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
 
-int is_prime(int n) {
-    int i;
-    double sqrt_n;
-
+bool is_prime(int n) {
     if (n == 2) {
-        return 1;
+        return true;
     }
     if (n < 2 || n % 2 == 0) {
-        return 0;
+        return false;
     }
-    sqrt_n = sqrt(n);
-    for (i = 3; i <= sqrt_n; i += 2) {
+    double sqrt_n = sqrt(n);
+    for (int i = 3; i <= sqrt_n; i += 2) {
         if (n % i == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
-int main(int argc, const char *argv[]) {
-    int count, i;
-
-    count = i = 0;
+int main(void) {
+    int count = 0;
+    int i = 0;
     while (count <= 10000) {
         i++;
         if (is_prime(i)) {
-            count ++;
+            count++;
         }
     }
     printf("%d\n", i);

@@ -24,16 +24,15 @@
  */
 #include <stdio.h>
 
-#define LOG10_SQRT5 0.349485002168
-#define LOG10_PHI   0.20898764025
-
 int fib_digits(int n) {
+    static const double LOG10_SQRT5 = 0.349485002168;
+    static const double LOG10_PHI = 0.20898764025;
     return (int)(n * LOG10_PHI - LOG10_SQRT5) + 1;
 }
 
-int main(int argc, const char *argv[]) {
-    int i, res;
-    for (i = 0; (res = fib_digits(i) - 1000); i -= res);
+int main(void) {
+    int i, result;
+    for (i = 0; (result = fib_digits(i) - 1000); i -= result);
     printf("%d\n", i);
     return 0;
 }

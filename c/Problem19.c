@@ -18,10 +18,9 @@
 #include <stdio.h>
 #include <time.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     struct tm time = { 0 };
     int count = 0;
-
     time.tm_mday = 1;
     for (time.tm_year = 1; time.tm_year < 101; time.tm_year++) {
         for (time.tm_mon = 0; time.tm_mon < 12; time.tm_mon++) {

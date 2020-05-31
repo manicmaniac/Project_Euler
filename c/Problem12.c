@@ -20,12 +20,11 @@
  * What is the value of the first triangle number to have over five hundred
  * divisors?
  */
+
 #include <stdio.h>
-#include <stdlib.h>
 
 int divisors_count(int n) {
     int res = 1, i = 1, d = 2;
-
     while (n >= d) {
         if (n % d) {
             res *= i;
@@ -40,11 +39,11 @@ int divisors_count(int n) {
     return res;
 }
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     int i = 1, j = 2;
-
     do {
-        i += j++;
+        i += j;
+        j++;
     } while (divisors_count(i) < 500);
     printf("%d\n", i);
     return 0;

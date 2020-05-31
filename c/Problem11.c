@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <math.h>
 
-static const int data[] =  {
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+
+static const char data[] =  {
     /*        0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19 */
     /*  1 */  8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8,
     /*  2 */ 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48,  4, 56, 62,  0,
@@ -34,39 +36,37 @@ static const int data[] =  {
     /* 20 */  1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48,
 };
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     static const int sequence = 4;
-    int size_of_data, side, i, j, product, max_product;
-
-    size_of_data = sizeof(data) / sizeof(data[0]);
-    side = sqrt(size_of_data);
+    size_t size_of_data = sizeof(data) / sizeof(data[0]);
+    size_t side = (size_t)sqrt((double)size_of_data);
     size_of_data -= side;
-    max_product = 0;
-    for (i = 0; i < size_of_data; i++) {
+    int max_product = 0;
+    for (size_t i = 0; i < size_of_data; i++) {
         // horizontal
-        product = 1;
-        for (j = 0; j < sequence && (i + j) < side; j++) {
+        int product = 1;
+        for (size_t j = 0; j < sequence && (i + j) < side; j++) {
             product *= data[i + j];
         }
-        max_product = max_product > product ? max_product : product;
+        max_product = MAX(max_product, product);
         // vertical
         product = 1;
-        for (j = 0; j < sequence && (i + j * side) < size_of_data; j++) {
+        for (size_t j = 0; j < sequence && (i + j * side) < size_of_data; j++) {
             product *= data[i + j * side];
         }
-        max_product = max_product > product ? max_product : product;
+        max_product = MAX(max_product, product);
         // diagonal (top left -> bottom right)
         product = 1;
-        for (j = 0; j < sequence && (i + j * side + j) < size_of_data; j++) {
+        for (size_t j = 0; j < sequence && (i + j * side + j) < size_of_data; j++) {
             product *= data[i + j * side + j];
         }
-        max_product = max_product > product ? max_product : product;
+        max_product = MAX(max_product, product);
         // diagonal (top right -> bottom left)
         product = 1;
-        for (j = 0; j < sequence && (i + j * side - j) < size_of_data; j++) {
+        for (size_t j = 0; j < sequence && (i + j * side - j) < size_of_data; j++) {
             product *= data[i + j * side - j];
         }
-        max_product = max_product > product ? max_product : product;
+        max_product = MAX(max_product, product);
     }
     printf("%d\n", max_product);
     return 0;
