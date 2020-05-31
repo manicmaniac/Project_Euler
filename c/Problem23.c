@@ -32,13 +32,25 @@ bool is_abundant(int x) {
     return sum > x;
 }
 
+void sieve_abundants(char *array, size_t limit) {
+    for (size_t i = 0; i < limit; i++) {
+        if (!array[i] && is_abundant(i)) {
+            for (size_t j = i; j < limit; j += i) {
+                array[j] = 1;
+            }
+        }
+    }
+}
+
 #define LIMIT 28123
 
 int main(void) {
+    char array[LIMIT] = { 0 };
     int abundants[LIMIT], sum_of_2_abundants[LIMIT];
+    sieve_abundants(array, LIMIT);
     size_t abundants_count = 0;
-    for (size_t i = 0; i <= sizeof(abundants) / sizeof(abundants[0]); i++) {
-        if (is_abundant(i)) {
+    for (size_t i = 0; i < LIMIT; i++) {
+        if (array[i]) {
             abundants[abundants_count] = i;
             abundants_count++;
         }
