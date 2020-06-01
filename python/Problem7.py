@@ -8,7 +8,6 @@ What is the 10 001st prime number?
 
 import math
 import itertools
-import sys
 
 
 def prime_numbers(x):
@@ -16,8 +15,6 @@ def prime_numbers(x):
 
 
 def sieve(limit):
-    if sys.version_info < (3,):
-        range = xrange
     search = bytearray([1] * limit)
     search[0] = 0
     search[1] = 0

@@ -11,12 +11,6 @@ import collections
 import bisect
 import itertools
 import math
-import sys
-
-if sys.version_info < (3,):
-    _range = xrange
-else:
-    _range = range
 
 
 def sieve(limit):
@@ -24,11 +18,11 @@ def sieve(limit):
     search[0] = 0
     search[1] = 0
     sqrt_limit = int(math.sqrt(limit))
-    for i in _range(2, sqrt_limit):
+    for i in range(2, sqrt_limit):
         if search[i]:
-            for j in _range(i << 1, limit, i):
+            for j in range(i << 1, limit, i):
                 search[j] = 0
-    return itertools.compress(_range(limit), search)
+    return itertools.compress(range(limit), search)
 
 
 def contains(a, x):
@@ -51,9 +45,9 @@ def is_circular_prime(x, is_prime):
 
 def cycle(x):
     ndigits = int(math.log10(x))
-    for _ in _range(ndigits + 1):
+    for _ in range(ndigits + 1):
         yield x
-        x = (x % 10) * 10 ** ndigits + x / 10
+        x = (x % 10) * 10 ** ndigits + x // 10
 
 
 if __name__ == '__main__':

@@ -7,12 +7,9 @@ Find the sum of all the primes below two million.
 
 import itertools
 import math
-import sys
 
 
 def sieve(limit):
-    if sys.version_info < (3,):
-        range = xrange
     search = bytearray([1] * limit)
     search[0] = 0
     search[1] = 0

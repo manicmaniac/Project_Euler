@@ -21,7 +21,7 @@ def is_3digits_product(x):
 
 
 if __name__ == '__main__':
-    for i in reversed(xrange(10000, 998001)):
+    for i in reversed(range(10000, 998001)):
         if is_palindrome(i) and is_3digits_product(i):
             print(i)
             break
