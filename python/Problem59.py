@@ -49,4 +49,3 @@ if __name__ == '__main__':
     with open(FILE) as f:
         data = map(int, f.read().split(','))
     print(sum(map(ord, fast_xor_decryption(data, 3, hint=ascii_lowercase))))
-

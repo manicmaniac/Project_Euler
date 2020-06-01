@@ -22,4 +22,3 @@ if __name__ == '__main__':
     with open('../resources/words.txt', 'rb') as f:
         for row in csv.reader(f):
             print(sum(is_triangle(i) for i in row))
-

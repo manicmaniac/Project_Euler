@@ -28,4 +28,3 @@ class is_armstrong(object):
 
 if __name__ == '__main__':
     print(sum(filter(is_armstrong(5), range(2, 9 ** 5 * 6))))
-

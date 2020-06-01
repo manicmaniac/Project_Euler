@@ -24,4 +24,3 @@ def npartitions(n):
 
 if __name__ == '__main__':
     print(npartitions(100))
-

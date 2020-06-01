@@ -15,4 +15,3 @@ def nth(iterable, n, default=None):
 if __name__ == '__main__':
     perms = itertools.permutations(range(10))
     print(''.join(map(str, nth(perms, 999999))))
-

@@ -19,4 +19,3 @@ if __name__ == '__main__':
     while not has_same_digits(res):
         res += 1
     print(res)
-

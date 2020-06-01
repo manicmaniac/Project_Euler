@@ -16,4 +16,3 @@ def c(a, b):
 
 if __name__ == '__main__':
     print(c(40, 20))
-

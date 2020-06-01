@@ -30,4 +30,3 @@ if __name__ == '__main__':
             if res > 1000000:
                 count += 1
     print(count)
-

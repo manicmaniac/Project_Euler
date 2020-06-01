@@ -50,4 +50,3 @@ def product(xs):
 
 if __name__ == '__main__':
     print(max(map(compose(product, digits), sliding(data, 5))))
-

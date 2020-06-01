@@ -25,4 +25,3 @@ def felm(n):
 
 if __name__ == '__main__':
     print(max(range(1000), key=felm))
-

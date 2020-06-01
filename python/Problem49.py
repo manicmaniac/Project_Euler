@@ -19,4 +19,3 @@ def is_permutation(l):
 
 if __name__ == '__main__':
     print(''.join(map(str, filter(is_permutation, genseq())[1])))
-

@@ -36,4 +36,3 @@ if __name__ == '__main__':
         keylog = [int(i) for i in f.read().splitlines()]
     ks = KeySolver(keylog)
     print(ks.solve())
-

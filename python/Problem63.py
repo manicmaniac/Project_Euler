@@ -7,4 +7,3 @@ How many n-digit positive integers exist which are also an nth power?
 """
 
 print(len(list(i for i in range(1, 10) for j in range(1, 22) if len(str(i ** j)) == j)))
-

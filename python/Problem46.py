@@ -38,4 +38,3 @@ if __name__ == '__main__':
         if not is_goldbach_composite(i):
             print(i)
             break
-

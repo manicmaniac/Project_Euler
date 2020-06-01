@@ -39,4 +39,3 @@ if __name__ == '__main__':
             found += 1
             ans += prime
     print(ans)
-

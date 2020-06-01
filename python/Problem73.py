@@ -29,4 +29,3 @@ if __name__ == '__main__':
             elif 0.333333333334 < (n / d) < 0.5:
                 res += 1
     print(res)
-

@@ -21,4 +21,3 @@ from datetime import date
 from itertools import product
 
 print(sum(date(y, m, 1).weekday() == 6 for y, m in product(range(1901, 2001), range(1, 13))))
-

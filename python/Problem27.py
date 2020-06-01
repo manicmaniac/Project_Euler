@@ -47,4 +47,3 @@ if __name__ == '__main__':
                 max_length = formula.length
                 ans = a * b
     print(ans)
-

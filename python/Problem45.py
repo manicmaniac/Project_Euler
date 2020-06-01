@@ -25,4 +25,3 @@ if __name__ == '__main__':
         if is_pentagonal(i) and i > 40755:
             print(i)
             break
-

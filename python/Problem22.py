@@ -17,4 +17,3 @@ if __name__ == '__main__':
     with open(FILE) as f:
         data = sorted(next(csv.reader(f)))
         print(sum(i * name_score(x) for i, x in enumerate(data, 1)))
-

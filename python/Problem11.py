@@ -46,4 +46,3 @@ def find_max_product(arr):
     return max(reduce(lambda x, y: x * y, arr[i:i + 4]) for i, x in enumerate(arr))
 
 print(max(map(find_max_product, horizonal(matrix) + vertical(matrix) + diagonal(matrix))))
-

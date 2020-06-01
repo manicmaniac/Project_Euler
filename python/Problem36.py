@@ -15,4 +15,3 @@ def base2(n):
 
 if __name__ == '__main__':
     print(sum(i for i in range(10**6) if is_palindromic(i) and is_palindromic(base2(i))))
-

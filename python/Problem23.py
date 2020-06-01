@@ -26,4 +26,3 @@ if __name__ == '__main__':
             if j > i or i + j > 28123: break
             twoabundants.append(i + j)
     print(sum(set(twoabundants) ^ set(range(1, 28124))))
-

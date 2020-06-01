@@ -27,4 +27,3 @@ for i in count():
     if cache.values().count(current) == 5:
         print(min_key(current, cache))
         break
-

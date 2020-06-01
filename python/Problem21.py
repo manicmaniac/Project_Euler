@@ -23,4 +23,3 @@ def has_amicable(n):
 
 if __name__ == '__main__':
     print(sum(filter(has_amicable, range(2, 10000))))
-

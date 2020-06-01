@@ -55,4 +55,3 @@ if __name__ == '__main__':
     limit = 9876
     concats = itertools.imap(concat_to_9_digits, xrange(1, limit + 1))
     print(max(i for i in concats if is_pandigital(i) and number_of_digits(i) == 9))
-

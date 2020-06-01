@@ -37,4 +37,3 @@ def concat(digits):
 
 if __name__ == '__main__':
     print(sum(concat(digits) for digits in pandigital_digits() if has_substr_divisibility(digits)))
-

@@ -39,4 +39,3 @@ for y in range(len(data)):
             data[y][x] += data[y][x - 1]
 
 print(data[-1][-1])
-

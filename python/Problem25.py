@@ -39,4 +39,3 @@ if __name__ == '__main__':
         if digits_of_fib(i) > 999:
             print(i)
             break
-

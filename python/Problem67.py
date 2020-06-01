@@ -48,4 +48,3 @@ if __name__ == '__main__':
         data = f.read()
     p = Pyramid(data)
     print(p.solution())
-

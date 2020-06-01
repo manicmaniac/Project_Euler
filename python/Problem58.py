@@ -47,4 +47,3 @@ while True:
     if primes / amount < 0.1:
         print(sqrt(current))
         break
-

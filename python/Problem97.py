@@ -8,4 +8,3 @@ Find the last ten digits of this prime number.
 """
 
 print((28433 * pow(2, 7830457, 10000000000) + 1) % 10000000000)
-

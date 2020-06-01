@@ -41,4 +41,3 @@ if __name__ == '__main__':
         if divisors(i) >= 500:
             print(i)
             break
-

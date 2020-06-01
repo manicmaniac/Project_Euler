@@ -36,4 +36,3 @@ for prime in sieve:
     if has_replaceable_digit(prime) > 7:
         print(prime)
         break
-

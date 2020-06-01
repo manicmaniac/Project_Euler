@@ -14,4 +14,3 @@ def find_max(m):
 
 if __name__ == '__main__':
     print(find_max(100))
-

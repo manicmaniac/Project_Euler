@@ -31,4 +31,3 @@ def is_lychrel(n, tries):
 
 if __name__ == '__main__':
     print(sum(is_lychrel(i, 50) for i in range(1, 10001)))
-
