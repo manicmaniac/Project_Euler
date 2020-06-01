@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 Consider the following "magic" 3-gon ring, filled with the numbers 1 to 6, and
 each line adding to nine.
 
@@ -32,9 +31,9 @@ form 16- and 17-digit strings. What is the maximum 16-digit string for a
 "magic" 5-gon ring?
 
 [p068_2]
-'''
+"""
 
-'''
+"""
     o0
       \
        i0   o1
@@ -44,7 +43,7 @@ form 16- and 17-digit strings. What is the maximum 16-digit string for a
 o4  i3 - i2 - o2
      \
       o3
-'''
+"""
 
 from itertools import product
 

@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 It is possible to show that the square root of two can be expressed as an
 infinite continued fraction.
 
@@ -19,7 +18,7 @@ numerator exceeds the number of digits in the denominator.
 
 In the first one-thousand expansions, how many fractions contain a numerator
 with more digits than denominator?
-'''
+"""
 
 from __future__ import division
 from sympy import Rational

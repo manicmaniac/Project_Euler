@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# coding:utf-8
 """
 The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
 

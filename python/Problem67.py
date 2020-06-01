@@ -1,4 +1,4 @@
-'''
+"""
 By starting at the top of the triangle below and moving to adjacent numbers on
 the row below, the maximum total from top to bottom is 23.
 
@@ -18,7 +18,7 @@ to try every route to solve this problem, as there are 2^99 altogether! If you
 could check one trillion (10^12) routes every second it would take over twenty
 billion years to check them all. There is an efficient algorithm to solve it. ;
 o)
-'''
+"""
 
 import copy
 

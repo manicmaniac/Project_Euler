@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# coding:utf-8
 r"""
 The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 

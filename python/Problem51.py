@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 By replacing the 1^st digit of *3, it turns out that six of the nine possible
 values: 13, 23, 43, 53, 73, and 83, are all prime.
 
@@ -12,7 +11,7 @@ smallest prime with this property.
 
 Find the smallest prime which, by replacing part of the number (not necessarily
 adjacent digits) with the same digit, is part of an eight prime value family.
-'''
+"""
 
 from sympy import sieve, isprime
 

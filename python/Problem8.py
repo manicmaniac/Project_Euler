@@ -1,8 +1,7 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 Find the greatest product of five consecutive digits in the 1000-digit number.
-'''
+"""
 
 data = '''73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843

@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 Each character on a computer is assigned a unique code and the preferred
 standard is ASCII (American Standard Code for Information Interchange). For
 example, uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.
@@ -26,7 +25,7 @@ case characters. Using cipher1.txt (right click and 'Save Link/Target As...'),
 a file containing the encrypted ASCII codes, and the knowledge that the plain
 text must contain common English words, decrypt the message and find the sum of
 the ASCII values in the original text.
-'''
+"""
 
 from string import ascii_lowercase, printable
 

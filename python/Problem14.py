@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 The following iterative sequence is defined for the set of positive integers:
 
 n → n/2 (n is even)
@@ -14,7 +13,7 @@ It can be seen that this sequence (starting at 13 and finishing at 1) contains 1
 Which starting number, under one million, produces the longest chain?
 
 NOTE: Once the chain starts the terms are allowed to go above one million.
-'''
+"""
 
 def max_cached_collatz(n):
     cache = {}

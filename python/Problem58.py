@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 Starting with 1 and spiralling anticlockwise in the following way, a square
 spiral with side length 7 is formed.
 
@@ -20,7 +19,7 @@ If one complete new layer is wrapped around the spiral above, a square spiral
 with side length 9 will be formed. If this process is continued, what is the
 side length of the square spiral for which the ratio of primes along both
 diagonals first falls below 10%?
-'''
+"""
 
 from __future__ import division
 from math import sqrt

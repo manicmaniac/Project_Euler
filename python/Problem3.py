@@ -1,9 +1,8 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
-'''
+"""
 import math
 import fractions
 import random
@@ -11,16 +10,16 @@ import functools
 
 
 def lcg(n, c, x):
-    '''
+"""
     a pseudorandom number generator (known as Linear Congruential Generator)
-    '''
+"""
     return (x * x + c) % n
 
 
 class memoize(object):
-    '''
+"""
     a decorator function class to memoize a expensive function.
-    '''
+"""
     def __init__(self, func):
         self._func = func
         self._cache = {}
@@ -35,10 +34,10 @@ class memoize(object):
 
 @memoize
 def is_prime(n, accuracy=20):
-    '''
+"""
     check if `n` is probable prime using Rabin Miller method.
     to get more reliability, increase `accuracy` parameter.
-    '''
+"""
     n = abs(n)
     if n == 2:
         return True
@@ -60,10 +59,10 @@ def is_prime(n, accuracy=20):
 
 
 def trial_division(n):
-    '''
+"""
     find the smallest divisor of the integer `n` with Trial Division method.
     returns -1 if it is a prime.
-    '''
+"""
     limit = int(math.sqrt(n) + 1)
     for i in range(2, limit):
         if not n % i:
@@ -72,12 +71,12 @@ def trial_division(n):
 
 
 def pollards_rho(n, c=1):
-    '''
+"""
     find the one of divisors of the composite number `n` with Pollard's Rho method.
     returns -1 if it is a prime.
     to get another result, change `c` parameter.
     warning: less reliable for small composite numbers.
-    '''
+"""
     x, y, d = 2, 2, 1
     f = functools.partial(lcg, n, c)
     while d == 1 and n:
@@ -91,10 +90,10 @@ def pollards_rho(n, c=1):
 
 @memoize
 def factor(n, accuracy=10):
-    '''
+"""
     factorize the integer `n`.
     returns list of prime factors.
-    '''
+"""
     if is_prime(n):
         return [n]
     if n < 100:

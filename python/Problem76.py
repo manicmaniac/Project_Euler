@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 It is possible to write five as a sum in exactly six different ways:
 
 4 + 1
@@ -12,7 +11,7 @@ It is possible to write five as a sum in exactly six different ways:
 
 How many different ways can one hundred be written as a sum of at least two
 positive integers?
-'''
+"""
 
 from itertools import repeat
 

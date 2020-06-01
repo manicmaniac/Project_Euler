@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF
 (n,d)=1, it is called a reduced proper fraction.
 
@@ -16,7 +15,7 @@ How many fractions lie between 1/3 and 1/2 in the sorted set of reduced proper
 fractions for d ≤ 12,000?
 
 Note: The upper limit has been changed recently.
-'''
+"""
 
 from __future__ import division
 from fractions import gcd

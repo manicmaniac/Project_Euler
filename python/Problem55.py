@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 If we take 47, reverse and add, 47 + 74 = 121, which is palindromic.
 
 Not all numbers produce palindromes so quickly. For example,
@@ -18,7 +17,7 @@ Surprisingly, there are palindromic numbers that are themselves Lychrel numbers;
 How many Lychrel numbers are there below ten-thousand?
 
 NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
-'''
+"""
 def is_palindrome(n):
     s = str(n)
     return s == s[::-1]

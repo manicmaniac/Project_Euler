@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 Comparing two numbers written in index form like 2^11 and 3^7 is not difficult,
 as any calculator would confirm that 2^11 = 2048 < 3^7 = 2187.
 
@@ -13,7 +12,7 @@ which line number has the greatest numerical value.
 
 NOTE: The first two lines in the file represent the numbers in the example
 given above.
-'''
+"""
 
 import csv
 import math

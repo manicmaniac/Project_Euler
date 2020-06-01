@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 The square root of 2 can be written as an infinite continued fraction.
 
 √2 = 1 + 1
@@ -60,7 +59,7 @@ The sum of digits in the numerator of the 10^th convergent is 1+4+5+7=17.
 
 Find the sum of digits in the numerator of the 100^th convergent of the
 continued fraction for e.
-'''
+"""
 from fractions import Fraction
 from itertools import islice
 

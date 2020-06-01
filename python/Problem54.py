@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-'''
+# coding:utf-8
+"""
 In the card game poker, a hand consists of five cards and are ranked, from
 lowest to highest, in the following way:
 
@@ -48,7 +47,7 @@ player's hand is in no specific order, and in each hand there is a clear
 winner.
 
 How many hands does Player 1 win?
-'''
+"""
 
 FILE = '../resources/poker.txt'
 
