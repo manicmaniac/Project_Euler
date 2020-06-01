@@ -26,7 +26,7 @@ def max_cached_collatz(n):
                 i = 3 * i + 1
             else:
                 i >>= 1
-            if cache.has_key(i):
+            if i in cache:
                 length += cache[i]
                 break
             length += 1

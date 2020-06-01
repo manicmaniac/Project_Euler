@@ -25,7 +25,7 @@ class memoize(object):
         self._cache = {}
 
     def __call__(self, *args):
-        if self._cache.has_key(args):
+        if args in self._cache:
             return self._cache[args]
         res = self._func(*args)
         self._cache[args] = res
@@ -107,7 +107,7 @@ def factor(n, accuracy=10):
             # repeat with another constant
             return factor(n, accuracy - 1)
         return [n]
-    return factor(n / divisor) + factor(divisor)
+    return factor(n // divisor) + factor(divisor)
 
 
 if __name__ == '__main__':
