@@ -22,5 +22,5 @@ def has_amicable(n):
     return s != n and sum(divisors(s)) == n
 
 if __name__ == '__main__':
-    print sum(filter(has_amicable, range(2, 10000)))
+    print(sum(filter(has_amicable, range(2, 10000))))
 

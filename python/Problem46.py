@@ -36,6 +36,6 @@ def is_goldbach_composite(n):
 if __name__ == '__main__':
     for i in count(5, 2):
         if not is_goldbach_composite(i):
-            print i
+            print(i)
             break
 

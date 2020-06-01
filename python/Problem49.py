@@ -18,5 +18,5 @@ def is_permutation(l):
     return len(set(''.join(sorted(str(i))) for i in l)) == 1
 
 if __name__ == '__main__':
-    print ''.join(map(str, filter(is_permutation, genseq())[1]))
+    print(''.join(map(str, filter(is_permutation, genseq())[1])))
 

@@ -16,5 +16,5 @@ for i in permutation:
         res.append(int(i[5:9]))
     if int(i[:2]) * int(i[2:5]) == int(i[5:9]):
         res.append(int(i[5:9]))
-print sum(set(res))
+print(sum(set(res)))
 

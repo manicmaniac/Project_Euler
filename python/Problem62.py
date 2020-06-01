@@ -25,6 +25,6 @@ for i in count():
     current = sort_digits(i)
     cache[i] = current
     if cache.values().count(current) == 5:
-        print min_key(current, cache)
+        print(min_key(current, cache))
         break
 

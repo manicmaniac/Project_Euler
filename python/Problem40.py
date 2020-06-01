@@ -11,5 +11,5 @@ If dn represents the nth digit of the fractional part, find the value of the fol
 d1  d10  d100  d1000  d10000  d100000  d1000000
 """
 
-print reduce(lambda x, y: x * y, [int(''.join(map(str, range(1, 10**6)))[1 * 10**j - 1]) for j in range(7)])
+print(reduce(lambda x, y: x * y, [int(''.join(map(str, range(1, 10**6)))[1 * 10**j - 1]) for j in range(7)]))
 

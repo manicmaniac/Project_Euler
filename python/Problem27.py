@@ -46,5 +46,5 @@ if __name__ == '__main__':
             if max_length < formula.length:
                 max_length = formula.length
                 ans = a * b
-    print ans
+    print(ans)
 

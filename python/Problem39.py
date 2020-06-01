@@ -21,5 +21,5 @@ def solution():
 
 
 if __name__ == '__main__':
-    print max(solution())[1]
+    print(max(solution())[1])
 

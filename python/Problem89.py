@@ -71,8 +71,8 @@ if __name__ == '__main__':
     original_length = len(''.join(i for i in data))
     translated_length = len(''.join(str(Roman.cons(i)) for i in data))
 
-    print original_length - translated_length
+    print(original_length - translated_length)
 
     for i in data:
-        print int(Roman.cons(i)), i, Roman.cons(i)
+        print(int(Roman.cons(i)), i, Roman.cons(i))
 

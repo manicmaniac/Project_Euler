@@ -38,5 +38,5 @@ if __name__ == '__main__':
         if all(isprime(x) for x in list(trunc_l2r(prime)) + list(trunc_r2l(prime))):
             found += 1
             ans += prime
-    print ans
+    print(ans)
 

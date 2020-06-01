@@ -84,5 +84,5 @@ def digits(n):
 
 
 if __name__ == '__main__':
-    print sum(digits(fraction_for_e(99).numerator))
+    print(sum(digits(fraction_for_e(99).numerator)))
 

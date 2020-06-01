@@ -24,5 +24,5 @@ def felm(n):
     return 0
 
 if __name__ == '__main__':
-    print max(range(1000), key=felm)
+    print(max(range(1000), key=felm))
 

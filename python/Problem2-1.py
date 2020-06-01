@@ -21,5 +21,5 @@ def less_than(limit):
 
 
 if __name__ == '__main__':
-    print sum(takewhile(less_than(4e6), imap(fibterm, count(3, 3))))
+    print(sum(takewhile(less_than(4e6), imap(fibterm, count(3, 3)))))
 

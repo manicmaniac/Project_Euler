@@ -20,5 +20,5 @@ Jan 1901 to 31 Dec 2000)?
 from datetime import date
 from itertools import product
 
-print sum(date(y, m, 1).weekday() == 6 for y, m in product(range(1901, 2001), range(1, 13)))
+print(sum(date(y, m, 1).weekday() == 6 for y, m in product(range(1901, 2001), range(1, 13))))
 

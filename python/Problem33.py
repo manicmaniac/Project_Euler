@@ -24,5 +24,5 @@ if __name__ == '__main__':
         d, n = (i * 10 + j, j * 10 + k)
         if d / n == i / k:
             res.append(Fraction(d, n))
-    print Fraction(product(res)).denominator
+    print(Fraction(product(res)).denominator)
 

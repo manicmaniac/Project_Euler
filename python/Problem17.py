@@ -68,4 +68,4 @@ if __name__ == '__main__':
         i = Number(i)
         i.numtoen()
         res += i.en
-    print len(res)
+    print(len(res))

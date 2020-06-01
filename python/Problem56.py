@@ -13,5 +13,5 @@ def find_max(m):
     return res
 
 if __name__ == '__main__':
-    print find_max(100)
+    print(find_max(100))
 

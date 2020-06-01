@@ -37,5 +37,5 @@ def conditional(n):
     
 
 if __name__ == '__main__':
-    print len(filter(conditional, sqrt2(1000)))
+    print(len(filter(conditional, sqrt2(1000))))
 

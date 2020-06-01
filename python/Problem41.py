@@ -18,5 +18,5 @@ if __name__ == '__main__':
         for n in pandigitals(i):
             if isprime(n):
                 ans = n
-    print ans
+    print(ans)
 

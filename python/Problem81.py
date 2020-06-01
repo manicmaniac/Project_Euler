@@ -38,5 +38,5 @@ for y in range(len(data)):
         elif not y:
             data[y][x] += data[y][x - 1]
 
-print data[-1][-1]
+print(data[-1][-1])
 

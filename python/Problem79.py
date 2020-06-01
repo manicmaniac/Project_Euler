@@ -35,5 +35,5 @@ if __name__ == '__main__':
     with open(FILE) as f:
         keylog = [int(i) for i in f.read().splitlines()]
     ks = KeySolver(keylog)
-    print ks.solve()
+    print(ks.solve())
 

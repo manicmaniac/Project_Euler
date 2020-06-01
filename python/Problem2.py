@@ -13,5 +13,5 @@ def fib():
         s, t = t, s + t
         yield s
 
-print sum(i for i in takewhile(lambda x: x < 4e6, fib()) if not i % 2)
+print(sum(i for i in takewhile(lambda x: x < 4e6, fib()) if not i % 2))
 

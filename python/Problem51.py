@@ -34,6 +34,6 @@ def has_replaceable_digit(n):
 
 for prime in sieve:
     if has_replaceable_digit(prime) > 7:
-        print prime
+        print(prime)
         break
 

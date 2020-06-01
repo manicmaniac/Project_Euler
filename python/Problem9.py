@@ -11,5 +11,5 @@ for m in range(23):
     for n in range(m):
         a, b, c = (m ** 2 - n ** 2), (2 * m * n), (m ** 2 + n ** 2)
         if a + b + c == 1000:
-            print a * b * c
+            print(a * b * c)
 

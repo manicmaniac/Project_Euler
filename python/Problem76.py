@@ -23,5 +23,5 @@ def npartitions(n):
     return cache[n]
 
 if __name__ == '__main__':
-    print npartitions(100)
+    print(npartitions(100))
 

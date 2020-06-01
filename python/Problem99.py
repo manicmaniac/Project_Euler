@@ -22,5 +22,5 @@ FILE = "../resources/base_exp.txt"
 if __name__ == '__main__':
     with open(FILE) as f:
         table = (map(int, row) for row in csv.reader(f))
-        print max((math.log(base) * exp, i) for i, (base, exp) in enumerate(table, 1))[1]
+        print(max((math.log(base) * exp, i) for i, (base, exp) in enumerate(table, 1))[1])
 

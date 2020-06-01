@@ -97,5 +97,5 @@ for o[1:] in product(candidates_of_o, repeat=5):
         r = repr_pentagon(i, o)
         if len(r) == 16:
             res.append(r)
-print max(res)
+print(max(res))
 

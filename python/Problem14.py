@@ -35,5 +35,5 @@ def max_cached_collatz(n):
         cache[start] = length
     return longest
 
-print max_cached_collatz(1000000)[0]
+print(max_cached_collatz(1000000)[0])
 

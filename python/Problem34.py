@@ -20,5 +20,5 @@ def is_factorion(n):
     return n == res
 
 if __name__ == '__main__':
-    print sum(i for i in xrange(3, factorials[9] * 7) if is_factorion(i))
+    print(sum(i for i in xrange(3, factorials[9] * 7) if is_factorion(i)))
 

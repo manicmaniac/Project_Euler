@@ -23,6 +23,6 @@ def gen_hexagonal():
 if __name__ == '__main__':
     for i in gen_hexagonal():
         if is_pentagonal(i) and i > 40755:
-            print i
+            print(i)
             break
 

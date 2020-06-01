@@ -18,5 +18,5 @@ if __name__ == '__main__':
     res = 1
     while not has_same_digits(res):
         res += 1
-    print res
+    print(res)
 

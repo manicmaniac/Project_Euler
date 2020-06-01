@@ -15,5 +15,5 @@ def c(a, b):
     return reduce(mul, range(b + 1, a + 1)) / factorial(b)
 
 if __name__ == '__main__':
-    print c(40, 20)
+    print(c(40, 20))
 

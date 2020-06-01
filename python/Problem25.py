@@ -37,6 +37,6 @@ def digits_of_fib(n):
 if __name__ == '__main__':
     for i in itertools.count():
         if digits_of_fib(i) > 999:
-            print i
+            print(i)
             break
 

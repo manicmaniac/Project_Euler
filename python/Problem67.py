@@ -47,5 +47,5 @@ if __name__ == '__main__':
     with open(FILE) as f:
         data = f.read()
     p = Pyramid(data)
-    print p.solution()
+    print(p.solution())
 

@@ -36,5 +36,5 @@ def concat(digits):
     return int(''.join(map(str, digits)))
 
 if __name__ == '__main__':
-    print sum(concat(digits) for digits in pandigital_digits() if has_substr_divisibility(digits))
+    print(sum(concat(digits) for digits in pandigital_digits() if has_substr_divisibility(digits)))
 

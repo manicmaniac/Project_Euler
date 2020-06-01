@@ -223,8 +223,8 @@ if __name__ == '__main__':
         player1.check()
         player2.check()
         if player1.hand > player2.hand:
-            print "o",
+            print("o",)
             res += 1
         else: print "x",
-        print player1.cards, player1.hand, player2.cards, player2.hand
-    print res
+        print(player1.cards, player1.hand, player2.cards, player2.hand)
+    print(res)

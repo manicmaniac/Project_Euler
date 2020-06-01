@@ -18,9 +18,9 @@ from itertools import islice
 def f():
     for i in reversed(range(1, 547)):
         for j in range(1, 549-i):
-            print j, i
+            print(j, i)
             if isprime(sum(islice(sieve, j, i))):
-                print j-i+1
+                print(j-i+1)
                 return sum(islice(sieve, j, i))
 
-print f()
+print(f())

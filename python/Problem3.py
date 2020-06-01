@@ -111,5 +111,5 @@ def factor(n, accuracy=10):
 
 
 if __name__ == '__main__':
-    print max(factor(600851475143))
+    print(max(factor(600851475143)))
 

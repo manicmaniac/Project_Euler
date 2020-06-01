@@ -39,6 +39,6 @@ def divisors(n):
 if __name__ == '__main__':
     for i in triangles():
         if divisors(i) >= 500:
-            print i
+            print(i)
             break
 
