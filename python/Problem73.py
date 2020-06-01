@@ -18,7 +18,10 @@ Note: The upper limit has been changed recently.
 """
 
 from __future__ import division
-from fractions import gcd
+try:
+    from math import gcd
+except ImportError:
+    from fractions import gcd
 
 if __name__ == '__main__':
     res = 0

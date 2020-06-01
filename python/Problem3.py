@@ -4,7 +4,10 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
 """
 import math
-import fractions
+try:
+    from math import gcd
+except ImportError:
+    from fractions import gcd
 import random
 import functools
 
@@ -82,7 +85,7 @@ def pollards_rho(n, c=1):
     while d == 1 and n:
         x = f(x)
         y = f(f(y))
-        d = fractions.gcd(x - y, n)
+        d = gcd(x - y, n)
         if d == n:
             return -1
     return d

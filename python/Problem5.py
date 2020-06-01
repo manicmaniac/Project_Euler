@@ -4,9 +4,15 @@
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 """
 
-from fractions import gcd
+from functools import reduce
+try:
+    from math import gcd
+except ImportError:
+    from fractions import gcd
+
 
 def lcm(x, y):
     return x * y / gcd(x, y)
 
-print(reduce(lcm, range(1, 21)))
+if __name__ == '__main__':
+    print(reduce(lcm, range(1, 21)))
