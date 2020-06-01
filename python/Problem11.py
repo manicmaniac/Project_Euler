@@ -7,7 +7,10 @@ The product of these numbers is 26  63  78  14 = 1788696.
 What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 2020 grid?
 """
 
-rawdata = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+from functools import reduce
+
+
+rawdata = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -29,20 +32,27 @@ rawdata = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
 """
 
-matrix = [map(int, line.split(' ')) for line in rawdata.splitlines()]
+
+matrix = [list(map(int, line.split(' '))) for line in rawdata.splitlines()]
+
 
 def horizonal(mtrx):
     return mtrx
 
+
 def vertical(mtrx):
-    return map(list, zip(*mtrx))
+    return list(map(list, zip(*mtrx)))
+
 
 def diagonal(mtrx):
     tl = vertical(([None] * i) + x for i, x in enumerate(mtrx))
     tr = vertical(([None] * i) + x for i, x in enumerate(reversed(mtrx)))
-    return [filter(lambda x: x is not None, line) for line in tl + tr]
+    return [list(filter(lambda x: x is not None, line)) for line in tl + tr]
+
 
 def find_max_product(arr):
     return max(reduce(lambda x, y: x * y, arr[i:i + 4]) for i, x in enumerate(arr))
 
-print(max(map(find_max_product, horizonal(matrix) + vertical(matrix) + diagonal(matrix))))
+
+if __name__ == '__main__':
+    print(max(map(find_max_product, horizonal(matrix) + vertical(matrix) + diagonal(matrix))))

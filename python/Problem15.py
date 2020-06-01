@@ -8,11 +8,14 @@ backtracking) to the bottom right corner.
 How many routes are there through a 20×20 grid?
 """
 
+from functools import reduce
 from operator import mul
 from math import factorial
 
+
 def c(a, b):
-    return reduce(mul, range(b + 1, a + 1)) / factorial(b)
+    return reduce(mul, range(b + 1, a + 1)) // factorial(b)
+
 
 if __name__ == '__main__':
     print(c(40, 20))

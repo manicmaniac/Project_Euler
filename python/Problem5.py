@@ -12,7 +12,7 @@ except ImportError:
 
 
 def lcm(x, y):
-    return x * y / gcd(x, y)
+    return x * y // gcd(x, y)
 
 if __name__ == '__main__':
     print(reduce(lcm, range(1, 21)))

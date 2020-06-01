@@ -12,13 +12,15 @@ Using words.txt (right click and 'Save Link/Target As...'), a 16K text file cont
 import math
 import csv
 
+
 def is_triangle(x):
     if isinstance(x, int):
         return not ((math.sqrt(8 * x + 1) - 1) / 2) % 1
     elif isinstance(x, str):
         return is_triangle(sum(ord(char) - 64 for char in x))
 
+
 if __name__ == '__main__':
-    with open('../resources/words.txt', 'rb') as f:
+    with open('../resources/words.txt', 'r') as f:
         for row in csv.reader(f):
             print(sum(is_triangle(i) for i in row))

@@ -20,7 +20,7 @@ class KeySolver(object):
         perms = self.key_perms[:]
         for i in self.key_perms:
             for j in self.keylog:
-                if not i.index(j/100) < i.index(j%100/10) < i.index(j%100%10):
+                if not i.index(j//100) < i.index(j%100//10) < i.index(j%100%10):
                     perms.remove(i)
                     break
         return ''.join(str(i) for i in perms[0])

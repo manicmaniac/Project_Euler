@@ -30,6 +30,9 @@ Find the maximum total from top to bottom of the triangle below:
 NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 """
 
+from functools import reduce
+
+
 class Pyramid(object):
     def __init__(self, rows):
         self._rows = rows
@@ -45,7 +48,7 @@ class Pyramid(object):
 
     @classmethod
     def from_string(cls, string):
-        data = [map(int, i.split()) for i in rawdata.splitlines()]
+        data = [list(map(int, i.split())) for i in rawdata.splitlines()]
         return cls(data)
 
 

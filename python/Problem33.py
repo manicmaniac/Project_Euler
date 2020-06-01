@@ -10,6 +10,7 @@ If the product of these four fractions is given in its lowest common terms, find
 """
 from __future__ import division
 from fractions import Fraction
+from functools import reduce
 from itertools import product as cartesian_product
 from operator import mul
 

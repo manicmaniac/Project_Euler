@@ -18,7 +18,11 @@ concatenated product of an integer with (1,2, ... , n) where n > 1?
 """
 
 import math
-import itertools
+from itertools import count
+try:
+    from itertools import imap
+except ImportError:
+    imap = map
 
 
 def is_pandigital(x):
@@ -41,7 +45,7 @@ def concat(x, y):
 
 def concat_to_digits(x, digits):
     res = 0
-    for i in itertools.count():
+    for i in count():
         res = concat(res, x * i)
         if number_of_digits(res) >= digits:
             break
@@ -53,5 +57,5 @@ def concat_to_9_digits(x):
 
 if __name__ == '__main__':
     limit = 9876
-    concats = itertools.imap(concat_to_9_digits, range(1, limit + 1))
+    concats = imap(concat_to_9_digits, range(1, limit + 1))
     print(max(i for i in concats if is_pandigital(i) and number_of_digits(i) == 9))

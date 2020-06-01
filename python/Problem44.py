@@ -10,12 +10,16 @@ Find the pair of pentagonal numbers, Pj and Pk, for which their sum and differen
 """
 
 import collections
-import itertools
+from itertools import count
+try:
+    from itertools import imap
+except ImportError:
+    imap = map
 import math
 
 
 def pentagonal(n):
-    return n * (3 * n - 1) / 2
+    return n * (3 * n - 1) // 2
 
 
 def is_pentagonal(n):
@@ -25,7 +29,7 @@ def is_pentagonal(n):
 if __name__ == '__main__':
     cache = collections.deque()
     try:
-        for i in itertools.imap(pentagonal, itertools.count(1)):
+        for i in imap(pentagonal, count(1)):
             for j in cache:
                 if is_pentagonal(i - j) and is_pentagonal(i + j):
                     raise StopIteration

@@ -14,5 +14,5 @@ What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed 
 """
 
 if __name__ == '__main__':
-    x = 1001 / 2
-    print(2 * (x + 1) * (8 * x * x + 7 * x + 6) / 3 - 3)
+    x = 1001 // 2
+    print(2 * (x + 1) * (8 * x * x + 7 * x + 6) // 3 - 3)

@@ -27,7 +27,7 @@ class Pyramid(object):
         lines = self.rawdata.splitlines()
         for i in range(len(lines)):
             tmp = (lines[i].split())
-            self.lines.append(map(int, tmp))
+            self.lines.append(list(map(int, tmp)))
         self.tmplines = copy.copy(self.lines)
 
     def solution(self):

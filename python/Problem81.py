@@ -25,7 +25,7 @@ FILE = '../resources/matrix.txt'
 with open(FILE) as f:
     rawdata = f.read()
 
-data = [map(int, line.split(',')) for line in rawdata.replace('\r', '').splitlines()]
+data = [list(map(int, line.split(','))) for line in rawdata.replace('\r', '').splitlines()]
 
 for y in range(len(data)):
     for x in range(len(data)):

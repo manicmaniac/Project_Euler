@@ -41,11 +41,11 @@ def fast_xor_decryption(data, key_size, hint=printable):
 
 
 def alphabet_ratio(text):
-    return len(filter(lambda x: x in ascii_lowercase, text)) / float(len(text))
+    return len(list(filter(lambda x: x in ascii_lowercase, text))) / float(len(text))
 
 
 if __name__ == '__main__':
     FILE = '../resources/cipher1.txt'
     with open(FILE) as f:
-        data = map(int, f.read().split(','))
+        data = list(map(int, f.read().split(',')))
     print(sum(map(ord, fast_xor_decryption(data, 3, hint=ascii_lowercase))))
