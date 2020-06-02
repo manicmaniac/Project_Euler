@@ -31,4 +31,5 @@ _main:
     leaq format(%rip), %rdi
     callq _printf
     popq %rbp
+    xorq %rax, %rax
     retq

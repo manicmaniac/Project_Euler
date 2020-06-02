@@ -52,4 +52,5 @@ _main:
     movq %r13, %rsi
     callq _printf
     popq %rbp
+    xorq %rax, %rax
     retq
