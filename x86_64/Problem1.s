@@ -4,11 +4,12 @@
  * Find the sum of all the multiples of 3 or 5 below 1000.
  */
 
-.data
+.const
 format: .asciz "%d\n"
 
 .text
 .globl _main
+
 _main:
     pushq %rbp
     movq %rsp, %rbp

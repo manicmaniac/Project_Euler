@@ -45,6 +45,7 @@ data:
     .byte 2, 2, 5, 6, 9, 8, 3, 1, 5, 5, 2, 0, 0, 0, 5, 5, 9, 3, 5, 7, 2, 9, 7, 2, 5
     .byte 7, 1, 6, 3, 6, 2, 6, 9, 5, 6, 1, 8, 8, 2, 6, 7, 0, 4, 2, 8, 2, 5, 2, 4, 8
     .byte 3, 6, 0, 0, 8, 2, 3, 2, 5, 7, 5, 3, 0, 4, 2, 0, 7, 5, 2, 9, 6, 3, 4, 5, 0
+data_size = . - data
 
 .text
 .globl _main
@@ -53,7 +54,7 @@ _main:
     pushq %rbp
     movq %rsp, %rbp
     leaq data(%rip), %r8
-    movq $995, %rcx
+    movq $(data_size - 5), %rcx
     xorq %rsi, %rsi
 0:
     xorq %rax, %rax
@@ -71,4 +72,5 @@ _main:
     leaq format(%rip), %rdi
     callq _printf
     popq %rbp
+    xorq %rax, %rax
     retq

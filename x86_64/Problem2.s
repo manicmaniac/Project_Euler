@@ -11,6 +11,7 @@ format: .asciz "%ld\n"
 
 .text
 .globl _main
+
 _main:
     pushq %rbp
     movq %rsp, %rbp
