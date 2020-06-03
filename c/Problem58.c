@@ -21,36 +21,31 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 
-int is_prime(int x) {
-    int i;
-    double sqrt_n;
-
+bool is_prime(int x) {
     if (x == 2) {
-        return 1;
+        return true;
     }
     if (x < 2 || x % 2 == 0) {
-        return 0;
+        return false;
     }
-    sqrt_n = sqrt(x);
-    for (i = 3; i <= sqrt_n; i += 2) {
+    double sqrt_n = sqrt(x);
+    for (int i = 3; i <= sqrt_n; i += 2) {
         if (x % i == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 int main(void) {
-    int primes_count;
-    long i, j, x, d;
-
-    primes_count = 0;
-    x = 1;
-    i = 1;
-    for (d = 2; ; d += 2) {
-        for (j = 0; j < 4; i++, j++, x += d) {
+    int primes_count = 0;
+    long x = 1;
+    long i = 1;
+    for (long d = 2; ; d += 2) {
+        for (long j = 0; j < 4; i++, j++, x += d) {
             if (is_prime(x)) {
                 primes_count++;
             }

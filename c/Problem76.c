@@ -11,20 +11,19 @@
  * How many different ways can one hundred be written as a sum of at least two
  * positive integers?
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int npartitions(int n) {
-    int i, j, res;
-    int *cache;
-    cache = (int *)calloc(n + 1, sizeof(int));
+    int *cache = (int *)calloc(n + 1, sizeof(int));
     cache[0] = 1;
-    for (i = 1; i <= n; i++) {
-        for (j = i; j <= n; j++) {
+    for (int i = 1; i <= n; i++) {
+        for (int j = i; j <= n; j++) {
             cache[j] += cache[j - i];
         }
     }
-    res = cache[n];
+    int res = cache[n];
     free(cache);
     return res;
 }

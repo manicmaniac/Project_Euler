@@ -17,19 +17,18 @@
 #include <math.h>
 
 int main(void) {
+    int exit_status = 0;
     static const char path[] = "../resources/base_exp.txt";
-    int exit_status, base, exp, lineno, max_lineno;
-    double value, max_value;
-    FILE *fp;
-
-    exit_status = 0;
-    fp = fopen(path, "r");
+    FILE *fp = fopen(path, "r");
     if (!fp) {
         exit_status = 1;
     }
+    int max_lineno = 0;
+    double max_value = 0;
     if (!exit_status) {
-        for (lineno = 1; fscanf(fp, "%10d,%10d\n", &base, &exp) != EOF; lineno++) {
-            value = log(base) * exp;
+        int base, exp;
+        for (int lineno = 1; fscanf(fp, "%10d,%10d\n", &base, &exp) != EOF; lineno++) {
+            double value = log(base) * exp;
             if (max_value < value) {
                 max_value = value;
                 max_lineno = lineno;

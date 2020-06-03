@@ -19,6 +19,7 @@
  * billion years to check them all. There is an efficient algorithm to solve it. ;
  * o)
  */
+
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,14 +32,13 @@ int triangular(int n) {
 
 int pyramid_route(int *pyramid, int size) {
     for (; size > 1; size--) {
-        int offset = -size;
-        int i;
-        for (i = 1; i <= size; i++) {
+        off_t offset = -size;
+        for (size_t i = 1; i <= size; i++) {
             offset += i;
         }
         int *longer = pyramid + offset;
         int *shorter = longer - size + 1;
-        for (i = 0; i < (size - 1); i++) {
+        for (size_t i = 0; i < (size - 1); i++) {
             shorter[i] += MAX(longer[i], longer[i + 1]);
         }
     }
@@ -47,17 +47,16 @@ int pyramid_route(int *pyramid, int size) {
 
 int main(void) {
     static const char *path = "../resources/triangle.txt";
-    size_t rows_count = 100;
-    size_t size = triangular(rows_count);
-    int *buffer = malloc(size * sizeof(int));
     FILE *fp = fopen(path, "r");
     if (!fp) {
         perror(path);
         return errno;
     }
+    static const size_t rows_count = 100;
+    size_t size = triangular(rows_count);
+    int *buffer = malloc(size * sizeof(int));
     int x;
-    size_t i;
-    for (i = 0; fscanf(fp, "%d", &x) != EOF; i++) {
+    for (size_t i = 0; fscanf(fp, "%d", &x) != EOF; i++) {
         buffer[i] = x;
     }
     if (fclose(fp) == EOF) {

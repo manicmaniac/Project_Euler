@@ -34,14 +34,10 @@
 #include <string.h>
 
 int rtoi(const char *roman) {
-    char previous;
-    int result;
-    size_t roman_len, i;
-
-    previous = '\0';
-    result = 0;
-    roman_len = strlen(roman);
-    for (i = 0; i < roman_len; i++) {
+    char previous = '\0';
+    int result = 0;
+    size_t roman_len = strlen(roman);
+    for (size_t i = 0; i < roman_len; i++) {
         switch (roman[i]) {
             case 'I':
                 result++;
@@ -96,7 +92,6 @@ int rtoi(const char *roman) {
 
 void itor(char *buffer, size_t buffer_len, int x) {
     size_t i;
-
     for (i = 0; x > 0 && i < buffer_len; i++) {
         if (x >= 1000) {
             buffer[i] = 'M';
@@ -169,27 +164,23 @@ void itor(char *buffer, size_t buffer_len, int x) {
 }
 
 int main(void) {
+    int exit_status = 0;
     static const char path[] = "../resources/roman.txt";
-    int exit_status, x;
-    size_t saved_length, line_length;
-    char line[8192], roman[256];
-    FILE *fp;
-
-    exit_status = 0;
-    fp = fopen(path, "r");
+    FILE *fp = fopen(path, "r");
     if (!fp) {
         perror(path);
         exit_status = 1;
     }
+    size_t saved_length = 0;
     if (!exit_status) {
-        saved_length = 0;
+        char line[8192], roman[256];
         while (fgets(line, sizeof(line), fp)) {
-            line_length = strlen(line);
+            size_t line_length = strlen(line);
             if (line[line_length - 1] == '\n') {
                 line_length--;
                 line[line_length] = '\0'; /* strip newline */
             }
-            x = rtoi(line);
+            int x = rtoi(line);
             itor(roman, sizeof(roman), x);
             saved_length += line_length - strlen(roman);
         }

@@ -32,32 +32,30 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 
-int is_prime(int x) {
+bool is_prime(int x) {
     int i, d = 2;
-
     if (x == 2) {
-        return 1;
+        return true;
     }
     if (x < 2 || x % 2 == 0) {
-        return 0;
+        return false;
     }
     while (d <= sqrt(x)) {
         if (x % d == 0) {
-            return 0;
+            return false;
         } else {
             d++;
         }
     }
-    return 1;
+    return true;
 }
 
 int main(void) {
-    int product, i;
-
-    product = 1;
-    for (i = 2; i * product < 1000000; i++) {
+    int product = 1;
+    for (int i = 2; i * product < 1000000; i++) {
         if (is_prime(i)) {
             product *= i;
         }

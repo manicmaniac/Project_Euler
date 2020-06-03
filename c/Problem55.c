@@ -30,6 +30,7 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,16 +41,12 @@ typedef struct {
 } bignum;
 
 bignum *bignum_new(int x) {
-    bignum *a;
-    size_t digits_count, i;
-    div_t dm;
-
-    digits_count = (size_t)log10(x) + 1;
-    a = malloc(sizeof(bignum));
+    size_t digits_count = (size_t)log10(x) + 1;
+    bignum *a = malloc(sizeof(bignum));
     a->digits_count = digits_count;
     a->digits = calloc(digits_count, sizeof(int));
-    dm.quot = x;
-    for (i = 0; i < digits_count; i++) {
+    div_t dm = { .quot = x };
+    for (size_t i = 0; i < digits_count; i++) {
         dm = div(dm.quot, 10);
         a->digits[i] = dm.rem;
     }
@@ -57,9 +54,7 @@ bignum *bignum_new(int x) {
 }
 
 bignum *bignum_copy(const bignum *a) {
-    bignum *b;
-
-    b = malloc(sizeof(bignum));
+    bignum *b = malloc(sizeof(bignum));
     b->digits_count = a->digits_count;
     b->digits = malloc(b->digits_count * sizeof(int));
     memcpy(b->digits, a->digits, b->digits_count * sizeof(int));
@@ -72,17 +67,14 @@ void bignum_delete(bignum *a) {
 }
 
 void bignum_carry(bignum *a) {
-    size_t i;
-    div_t dm;
-
-    for (i = 0; i < a->digits_count; i++) {
+    for (size_t i = 0; i < a->digits_count; i++) {
         if (a->digits[i] > 9) {
             if (a->digits_count < i + 1) {
                 a->digits_count = i + 1;
                 a->digits = realloc(a->digits, a->digits_count * sizeof(int));
                 a->digits[a->digits_count - 1] = 0;
             }
-            dm = div(a->digits[i], 10);
+            div_t dm = div(a->digits[i], 10);
             a->digits[i] = dm.rem;
             a->digits[i + 1] += dm.quot;
         }
@@ -90,10 +82,8 @@ void bignum_carry(bignum *a) {
 }
 
 void bignum_string(const bignum *a, char *buf, size_t len) {
-    size_t limit, i;
-
-    limit = (a->digits_count < len ? a->digits_count : len);
-    for (i = 0; i < limit; i++) {
+    size_t limit = (a->digits_count < len ? a->digits_count : len);
+    for (size_t i = 0; i < limit; i++) {
         buf[i] = a->digits[a->digits_count - i - 1] + '0';
     }
     if (limit > 0) {
@@ -102,10 +92,8 @@ void bignum_string(const bignum *a, char *buf, size_t len) {
 }
 
 static void bignum_remove_leading_zeros(bignum *a) {
-    size_t i, leading_zeros;
-
-    leading_zeros = 0;
-    for (i = 0; i < a->digits_count; i++) {
+    size_t leading_zeros = 0;
+    for (size_t i = 0; i < a->digits_count; i++) {
         if (a->digits[a->digits_count - i - 1] == 0) {
             leading_zeros++;
         } else {
@@ -118,18 +106,16 @@ static void bignum_remove_leading_zeros(bignum *a) {
 
 void bignum_add(bignum *a, const bignum *b) {
     bignum c;
-    size_t i, j;
-
     c.digits_count = 1 + (a->digits_count > b->digits_count ? a->digits_count : b->digits_count);
     c.digits = calloc(c.digits_count, sizeof(int));
     if (a->digits_count > b->digits_count) {
         memcpy(c.digits, a->digits, a->digits_count * sizeof(int));
-        for (i = 0; i < b->digits_count; i++) {
+        for (size_t i = 0; i < b->digits_count; i++) {
             c.digits[i] += b->digits[i];
         }
     } else {
         memcpy(c.digits, b->digits, b->digits_count * sizeof(int));
-        for (i = 0; i < a->digits_count; i++) {
+        for (size_t i = 0; i < a->digits_count; i++) {
             c.digits[i] += a->digits[i];
         }
     }
@@ -140,10 +126,8 @@ void bignum_add(bignum *a, const bignum *b) {
     bignum_remove_leading_zeros(a);
 }
 
-int bignum_is_palindrome(const bignum *a) {
-    size_t i;
-
-    for (i = 0; i < a->digits_count / 2; i++) {
+bool bignum_is_palindrome(const bignum *a) {
+    for (size_t i = 0; i < a->digits_count / 2; i++) {
         if (a->digits[i] != a->digits[a->digits_count - i - 1]) {
             return 0;
         }
@@ -152,11 +136,8 @@ int bignum_is_palindrome(const bignum *a) {
 }
 
 void bignum_reverse_digits(bignum *a) {
-    size_t i;
-    int tmp;
-
-    for (i = 0; i < a->digits_count / 2; i++) {
-        tmp = a->digits[i];
+    for (size_t i = 0; i < a->digits_count / 2; i++) {
+        int tmp = a->digits[i];
         a->digits[i] = a->digits[a->digits_count - i - 1];
         a->digits[a->digits_count - i - 1] = tmp;
     }
@@ -164,12 +145,10 @@ void bignum_reverse_digits(bignum *a) {
 }
 
 int bignum_is_lychrel(const bignum *a, int tries) {
-    bignum *b, *c;
-    int i, result = 1;
-
-    b = bignum_copy(a);
-    for (i = 0; i < tries; i++) {
-        c = bignum_copy(b);
+    int result = 1;
+    bignum *b = bignum_copy(a);
+    for (int i = 0; i < tries; i++) {
+        bignum *c = bignum_copy(b);
         bignum_reverse_digits(b);
         bignum_add(b, c);
         bignum_delete(c);
@@ -183,12 +162,9 @@ int bignum_is_lychrel(const bignum *a, int tries) {
 }
 
 int main(void) {
-    int a, count;
-    bignum *big_a;
-
-    count = 0;
-    for (a = 1; a <= 10000; a++) {
-        big_a = bignum_new(a);
+    int count = 0;
+    for (int a = 1; a <= 10000; a++) {
+        bignum *big_a = bignum_new(a);
         if (bignum_is_lychrel(big_a, 50)) {
             count++;
         }

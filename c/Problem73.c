@@ -24,11 +24,9 @@ int gcd(int x, int y) {
 }
 
 int main(void) {
-    int count, d, n;
-
-    count = 0;
-    for (d = 1; d <= 12000; d++) {
-        for (n = (int)(d / 3.0) + 1; 2 * n < d; n++) {
+    int count = 0;
+    for (int d = 1; d <= 12000; d++) {
+        for (int n = (int)(d / 3.0) + 1; 2 * n < d; n++) {
             if (gcd(d, n) == 1) {
                 count++;
             }

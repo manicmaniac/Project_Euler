@@ -9,11 +9,9 @@
 #include <stdio.h>
 
 int main(void) {
-    int count, a, b;
-
-    count = 0;
-    for (a = 1; a < 10; a++) {
-        for (b = 1; b < 22; b++) {
+    int count = 0;
+    for (int a = 1; a < 10; a++) {
+        for (int b = 1; b < 22; b++) {
             if ((int)(log10(a) * b + 1) == b) {
                 count++;
             }

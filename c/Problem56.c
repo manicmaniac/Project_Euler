@@ -11,22 +11,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+
 typedef struct {
     int *digits;
     size_t digits_count;
 } bignum;
 
 bignum *bignum_new(int x) {
-    bignum *a;
-    size_t digits_count, i;
-    div_t dm;
-
-    digits_count = (size_t)log10(x) + 1;
-    a = malloc(sizeof(bignum));
+    size_t digits_count = (size_t)log10(x) + 1;
+    bignum *a = malloc(sizeof(bignum));
     a->digits_count = digits_count;
     a->digits = calloc(digits_count, sizeof(int));
-    dm.quot = x;
-    for (i = 0; i < digits_count; i++) {
+    div_t dm = { .quot = x };
+    for (size_t i = 0; i < digits_count; i++) {
         dm = div(dm.quot, 10);
         a->digits[i] = dm.rem;
     }
@@ -34,9 +32,7 @@ bignum *bignum_new(int x) {
 }
 
 bignum *bignum_copy(bignum *a) {
-    bignum *b;
-
-    b = malloc(sizeof(bignum));
+    bignum *b = malloc(sizeof(bignum));
     b->digits_count = a->digits_count;
     b->digits = malloc(b->digits_count * sizeof(int));
     memcpy(b->digits, a->digits, b->digits_count * sizeof(int));
@@ -49,17 +45,14 @@ void bignum_delete(bignum *a) {
 }
 
 void bignum_carry(bignum *a) {
-    size_t i;
-    div_t dm;
-
-    for (i = 0; i < a->digits_count; i++) {
+    for (size_t i = 0; i < a->digits_count; i++) {
         if (a->digits[i] > 9) {
             if (a->digits_count < i + 1) {
                 a->digits_count = i + 1;
                 a->digits = realloc(a->digits, a->digits_count * sizeof(int));
                 a->digits[a->digits_count - 1] = 0;
             }
-            dm = div(a->digits[i], 10);
+            div_t dm = div(a->digits[i], 10);
             a->digits[i] = dm.rem;
             a->digits[i + 1] += dm.quot;
         }
@@ -67,10 +60,8 @@ void bignum_carry(bignum *a) {
 }
 
 void bignum_string(const bignum *a, char *buf, size_t len) {
-    size_t limit, i;
-
-    limit = (a->digits_count < len ? a->digits_count : len);
-    for (i = 0; i < limit; i++) {
+    size_t limit = (a->digits_count < len ? a->digits_count : len);
+    for (size_t i = 0; i < limit; i++) {
         buf[i] = a->digits[a->digits_count - i - 1] + '0';
     }
     if (limit > 0) {
@@ -80,12 +71,10 @@ void bignum_string(const bignum *a, char *buf, size_t len) {
 
 void bignum_mul(bignum *a, const bignum *b) {
     bignum c;
-    size_t i, j, leading_zeros;
-
     c.digits_count = a->digits_count + b->digits_count;
     c.digits = calloc(c.digits_count, sizeof(int));
-    for (i = 0; i < a->digits_count; i++) {
-        for (j = 0; j < b->digits_count; j++) {
+    for (size_t i = 0; i < a->digits_count; i++) {
+        for (size_t j = 0; j < b->digits_count; j++) {
             c.digits[i + j] += a->digits[i] * b->digits[j];
         }
     }
@@ -93,8 +82,8 @@ void bignum_mul(bignum *a, const bignum *b) {
     a->digits = c.digits;
     a->digits_count = c.digits_count;
     bignum_carry(a);
-    leading_zeros = 0;
-    for (i = 0; i < a->digits_count; i++) {
+    size_t leading_zeros = 0;
+    for (size_t i = 0; i < a->digits_count; i++) {
         if (a->digits[a->digits_count - i - 1] == 0) {
             leading_zeros++;
         } else {
@@ -106,9 +95,6 @@ void bignum_mul(bignum *a, const bignum *b) {
 }
 
 void bignum_pow(bignum *a, int exp) {
-    bignum *b;
-    int i;
-
     if (exp == 0) {
         a->digits_count = 1;
         a->digits = realloc(a->digits, sizeof(int));
@@ -117,31 +103,25 @@ void bignum_pow(bignum *a, int exp) {
     } else if (exp == 1) {
         return;
     }
-    b = bignum_copy(a);
-    for (i = 1; i < exp; i++) {
+    bignum *b = bignum_copy(a);
+    for (int i = 1; i < exp; i++) {
         bignum_mul(a, b);
     }
     bignum_delete(b);
 }
 
 int main(void) {
-    bignum *big_a;
-    int max_sum, sum;
-    size_t a, b, i;
-
-    max_sum = 0;
-    for (a = 1; a < 100; a++) {
-        for (b = 1; b < 100; b++) {
-            big_a = bignum_new(a);
+    int max_sum = 0;
+    for (size_t a = 1; a < 100; a++) {
+        for (size_t b = 1; b < 100; b++) {
+            bignum *big_a = bignum_new(a);
             bignum_pow(big_a, b);
-            sum = 0;
-            for (i = 0; i < big_a->digits_count; i++) {
+            int sum = 0;
+            for (size_t i = 0; i < big_a->digits_count; i++) {
                 sum += big_a->digits[i];
             }
             bignum_delete(big_a);
-            if (max_sum < sum) {
-                max_sum = sum;
-            }
+            max_sum = MAX(max_sum, sum);
         }
     }
     printf("%d\n", max_sum);

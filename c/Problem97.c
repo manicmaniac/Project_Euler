@@ -12,20 +12,19 @@
 
 #include <stdio.h>
 
-long long llpowmod(long long x, long long y, long long z) {
-    long long t = 1;
-
-    if (!y) {
+long lexp2mod(long x, long y) {
+    if (!x) {
         return 1;
     }
-    while (y--) {
-        t *= x;
-        t %= z;
+    long t = 1;
+    while (x--) {
+        t <<= 1;
+        t %= y;
     }
     return t;
 }
 
 int main(void) {
-    printf("%lld\n", (28433 * llpowmod(2, 7830457, 10000000000) + 1) % 10000000000);
+    printf("%ld\n", (28433 * lexp2mod(7830457, (long)1e10) + 1) % (long)1e10);
     return 0;
 }

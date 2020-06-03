@@ -18,19 +18,17 @@
 #define MIN(a, b)  (a < b ? a : b)
 
 int main(void) {
+    int exit_status = 0;
     static const char path[] = "../resources/matrix.txt";
-    int exit_status, x, y, matrix[80][80];
-    FILE *fp;
-    size_t i;
-
-    exit_status = 0;
-    fp = fopen(path, "r");
+    FILE *fp = fopen(path, "r");
     if (!fp) {
         perror(path);
         exit_status = 1;
     }
+    int matrix[80][80];
     if (!exit_status) {
-        for (i = 0; fscanf(fp, "%d,", &x) > 0; i++) {
+        int x;
+        for (size_t i = 0; fscanf(fp, "%d,", &x) > 0; i++) {
             matrix[i / 80][i % 80] = x;
         }
     }
@@ -41,8 +39,8 @@ int main(void) {
     if (fp) {
         fclose(fp);
     }
-    for (y = 0; y < 80; y++) {
-        for (x = 0; x < 80; x++) {
+    for (int y = 0; y < 80; y++) {
+        for (int x = 0; x < 80; x++) {
             if (x * y) {
                 matrix[y][x] += MIN(matrix[y - 1][x], matrix[y][x - 1]);
             } else if (x + y == 0) {
