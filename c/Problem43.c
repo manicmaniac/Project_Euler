@@ -28,7 +28,8 @@ void swap(int *a, int *b) {
 
 void permutations(int *p, size_t n, void *ctx, void (*callback)(int *, void *)) {
     if (n == 1) {
-        return callback(p, ctx);
+        callback(p, ctx);
+        return;
     }
     for (size_t i = 0; i < n - 1; i++) {
         permutations(p, n - 1, ctx, callback);

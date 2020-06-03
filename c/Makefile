@@ -1,15 +1,11 @@
-CC := clang
-SRCS := $(wildcard Problem*.c)
-EXECUTABLES := $(SRCS:.c=)
-LDFLAGS := -lm
+SRCS = $(wildcard Problem*.c)
+EXECUTABLES = $(SRCS:.c=)
+CFLAGS = -std=c99 -O2 -Wall -Wpedantic
+LDFLAGS = -lm
 
-.PHONY: all build clean
+.PHONY: all clean
 
-all: build
-
-build: $(EXECUTABLES)
+all: $(EXECUTABLES)
 
 clean:
-	rm -f $(EXECUTABLES)
-
-EXECUTABLES: $(SRCS)
+	$(RM) $(EXECUTABLES)

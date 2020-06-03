@@ -36,7 +36,7 @@
 #include <stdio.h>
 
 bool is_prime(int x) {
-    int i, d = 2;
+    int d = 2;
     if (x == 2) {
         return true;
     }

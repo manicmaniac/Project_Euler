@@ -19,7 +19,8 @@ void swap(int *a, int *b) {
 
 void permutations(int *p, size_t n, void (*callback)(int *)) {
     if (n == 1) {
-        return callback(p);
+        callback(p);
+        return;
     }
     for (size_t i = 0; i < n - 1; i++) {
         permutations(p, n - 1, callback);
