@@ -6,7 +6,7 @@
  */
 #import <Foundation/Foundation.h>
 
-int main(int argc, const char *argv[]) {
+int main(void) {
     __block NSUInteger sum = 0;
     @autoreleasepool {
         [[[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1000)] indexesPassingTest:^BOOL (NSUInteger index, BOOL *stop){
@@ -14,7 +14,7 @@ int main(int argc, const char *argv[]) {
         }] enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
             sum += index;
         }];
+        NSLog(@"%lu", sum);
     }
-    NSLog(@"%lu", sum);
-    return 0;
+    return EXIT_SUCCESS;
 }

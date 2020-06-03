@@ -36,10 +36,10 @@
 
 @end
 
-int main(int argc, const char *argv[]) {
-    NSUInteger sum = 0;
+int main(void) {
     @autoreleasepool {
-        PEFibonacciEnumerator *enumerator = [[[PEFibonacciEnumerator alloc] init] autorelease];
+        NSUInteger sum = 0;
+        PEFibonacciEnumerator *enumerator = [[PEFibonacciEnumerator alloc] init];
         for (NSNumber *number in enumerator) {
             NSInteger i = [number integerValue];
             if (i > 4e6) {
@@ -49,7 +49,8 @@ int main(int argc, const char *argv[]) {
                 sum += i;
             }
         }
+        [enumerator release];
+        NSLog(@"%ld", sum);
     }
-    NSLog(@"%ld", sum);
-    return 0;
+    return EXIT_SUCCESS;
 }
