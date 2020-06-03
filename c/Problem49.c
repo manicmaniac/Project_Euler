@@ -11,56 +11,50 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void sieve(char *array, size_t size) {
-    size_t i, j, limit;
-
     array[0] = 1;
     array[1] = 1;
-    limit = (size_t)sqrt((double)size);
-    for (i = 2; i <= limit; i++) {
+    size_t limit = (size_t)sqrt((double)size);
+    for (size_t i = 2; i <= limit; i++) {
         if (!array[i]) {
-            for (j = i * i; j < size; j += i) {
+            for (size_t j = i * i; j < size; j += i) {
                 array[j] = 1;
             }
         }
     }
 }
 
-int is_permuting(int *xs, size_t size) {
-    size_t i;
-    div_t dm;
-    char digits[10], previous_digits[10];
-
-    for (i = 0; i < size; i++) {
-        memset(digits, 0, sizeof(digits));
-        dm.quot = xs[i];
+bool is_permuting(int *xs, size_t size) {
+    char previous_digits[10];
+    for (size_t i = 0; i < size; i++) {
+        char digits[10] = { 0 };
+        div_t dm = { .quot = xs[i] };
         while (dm.quot) {
             dm = div(dm.quot, 10);
             digits[dm.rem]++;
         }
         if (i && memcmp(digits, previous_digits, sizeof(digits))) {
-            return 0;
+            return false;
         }
         memcpy(previous_digits, digits, sizeof(digits));
     }
-    return 1;
+    return true;
 }
 
 int main(void) {
-    char array[10000] = { 0 };
     int triplets[3];
-    size_t i, j;
-
+    char array[10000] = { 0 };
     sieve(array, sizeof(array));
-    for (i = 1000; i < 3334; i++) {
+    for (size_t i = 1000; i < 3334; i++) {
         if (array[i]) {
             continue;
         }
-        for (j = 1000; j < 3334; j += 2) {
+        for (size_t j = 1000; j < 3334; j += 2) {
             if (array[i + j] || array[i + j * 2]) {
                 continue;
             }

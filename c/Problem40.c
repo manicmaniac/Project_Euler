@@ -17,7 +17,6 @@
 
 int digit_at(int x, int n) {
     int ndigits = 1;
-
     if (x > 0) {
         ndigits = (int)(log10(x)) + 1;
     }
@@ -26,7 +25,6 @@ int digit_at(int x, int n) {
 
 int champernowne_at(int n) {
     int ndigits = 1, i;
-
     n--;
     for (i = 1; n >= ndigits; i++) {
         ndigits = (int)(log10(i)) + 1;
@@ -37,7 +35,6 @@ int champernowne_at(int n) {
 
 int main(void) {
     int product = 1;
-
     product *= champernowne_at(1);
     product *= champernowne_at(10);
     product *= champernowne_at(100);

@@ -14,16 +14,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define POW5(x)  (long)(x * x * x * x * x)
+#define POW5(x)  (long)((x) * (x) * (x) * (x) * (x))
 
 int is_armstrong5(long x) {
     static const long pows[] = {
         0L, 1L, POW5(2), POW5(3), POW5(4), POW5(5), POW5(6), POW5(7), POW5(8), POW5(9)
     };
     long result = 0;
-    ldiv_t dm;
-
-    dm.quot = x;
+    ldiv_t dm = { .quot = x };
     while (dm.quot && result <= x) {
         dm = ldiv(dm.quot, 10);
         result += pows[dm.rem];
@@ -32,9 +30,9 @@ int is_armstrong5(long x) {
 }
 
 int main(void) {
-    long result = 0, i;
+    long result = 0;
 
-    for (i = 2; i < 6 * POW5(9); i++) {
+    for (long i = 2; i < 6 * POW5(9); i++) {
         if (is_armstrong5(i)) {
             result += i;
         }

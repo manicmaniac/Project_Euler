@@ -15,14 +15,13 @@
 #include <stdio.h>
 
 int main(void) {
-    int i, j, k, d, n;
     double res_d, res_n;
-
+    int i;
     for (res_d = res_n = i = 1; i <= 9; i++) {
-        for (j = 1; j <= 9; j++) {
-            for (k = 1; k <= 9; k++) {
-                d = i * 10 + j;
-                n = j * 10 + k;
+        for (int j = 1; j <= 9; j++) {
+            for (int k = 1; k <= 9; k++) {
+                int d = i * 10 + j;
+                int n = j * 10 + k;
                 if ((d / (double)n) == (i / (double)k)) {
                     res_d *= d;
                     res_n *= n;

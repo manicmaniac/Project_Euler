@@ -16,20 +16,19 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 int main(void) {
-    int a, b, i, j, is_cached;
-    double tmp, cache[(100 - 2) * (100 - 2)];
-
-    i = 0;
-    for (a = 2; a <= 100; a++) {
-        for (b = 2; b <= 100; b++) {
-            tmp = log2(a) * b;
-            is_cached = 0;
-            for (j = 0; j < i; j++) {
+    double cache[(100 - 2) * (100 - 2)];
+    int i = 0;
+    for (int a = 2; a <= 100; a++) {
+        for (int b = 2; b <= 100; b++) {
+            double tmp = log2(a) * b;
+            bool is_cached = false;
+            for (int j = 0; j < i; j++) {
                 if (cache[j] == tmp) {
-                    is_cached = 1;
+                    is_cached = true;
                     break;
                 }
             }

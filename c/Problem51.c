@@ -12,32 +12,32 @@
  * adjacent digits) with the same digit, is part of an eight prime value family.
  */
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int is_prime(int x) {
-    int i, sqrt_x;
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
 
+bool is_prime(int x) {
     if (x == 2) {
-        return 1;
+        return true;
     }
     if (x < 2 || x % 2 == 0) {
-        return 0;
+        return false;
     }
-    sqrt_x = (int)sqrt(x);
-    for (i = 3; i <= sqrt_x; i += 2) {
+    int sqrt_x = (int)sqrt(x);
+    for (int i = 3; i <= sqrt_x; i += 2) {
         if (x % i == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 int replace_digits(int x, int y, int z) {
-    int digits[10], i, j, result;
-    div_t dm;
-
-    dm.quot = x;
+    int digits[10];
+    int i;
+    div_t dm = { .quot = x };
     for (i = 0; dm.quot > 0; i++) {
         dm = div(dm.quot, 10);
         if (dm.rem == y) {
@@ -46,28 +46,25 @@ int replace_digits(int x, int y, int z) {
             digits[i] = dm.rem;
         }
     }
-    result = 0;
-    for (j = 0; j < i; j++) {
+    int result = 0;
+    for (int j = 0; j < i; j++) {
         result += pow(10, j) * digits[j];
     }
     return result;
 }
 
 int count_max_replaceable_digits(int x) {
-    int count, max_count, i, j, replaced;
-
-    max_count = 0;
-    if (is_prime(x)) {
-        for (i = 0; i < 10; i++) {
-            count = 1;
-            for (j = i; j < 10; j++) {
-                replaced = replace_digits(x, i, j);
-                if (replaced != x && is_prime(replaced)) {
-                    count++;
-                    if (max_count < count) {
-                        max_count = count;
-                    }
-                }
+    if (!is_prime(x)) {
+        return 0;
+    }
+    int max_count = 0;
+    for (int i = 0; i < 10; i++) {
+        int count = 1;
+        for (int j = i; j < 10; j++) {
+            int replaced = replace_digits(x, i, j);
+            if (replaced != x && is_prime(replaced)) {
+                count++;
+                max_count = MAX(max_count, count);
             }
         }
     }
@@ -76,7 +73,6 @@ int count_max_replaceable_digits(int x) {
 
 int main(void) {
     int i;
-
     for (i = 0; count_max_replaceable_digits(i) < 8; i++);
     printf("%d\n", i);
     return 0;

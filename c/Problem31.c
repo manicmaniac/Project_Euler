@@ -22,9 +22,7 @@ int currency(int amount, const int *coins, size_t coins_count) {
 
 int main(void) {
     static const int coins[] = { 200, 100, 50, 20, 10, 5, 2, 1 };
-    int result;
-
-    result = currency(200, coins, sizeof(coins) / sizeof(coins[0]));
+    int result = currency(200, coins, sizeof(coins) / sizeof(coins[0]));
     printf("%d\n", result);
     return 0;
 }

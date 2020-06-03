@@ -14,36 +14,33 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int is_prime(int x) {
-    int i, sqrt_x;
-
+bool is_prime(int x) {
     if (x == 2) {
-        return 1;
+        return true;
     }
     if (x < 2 || x % 2 == 0) {
-        return 0;
+        return false;
     }
-    sqrt_x = (int)sqrt(x);
-    for (i = 3; i <= sqrt_x; i += 2) {
+    int sqrt_x = (int)sqrt(x);
+    for (int i = 3; i <= sqrt_x; i += 2) {
         if (x % i == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 void sieve(char *array, size_t size) {
-    size_t i, j, limit;
-
     array[0] = 1;
     array[1] = 1;
-    limit = (size_t)sqrt((double)size);
-    for (i = 2; i <= limit; i++) {
+    size_t limit = (size_t)sqrt((double)size);
+    for (size_t i = 2; i <= limit; i++) {
         if (!array[i]) {
-            for (j = i * i; j < size; j += i) {
+            for (size_t j = i * i; j < size; j += i) {
                 array[j] = 1;
             }
         }
@@ -51,19 +48,17 @@ void sieve(char *array, size_t size) {
 }
 
 int *create_primes_below(size_t *primes_count, int x) {
-    char *array;
-    int *primes;
-    size_t i, j;
-
-    array = calloc(x, sizeof(char));
+    char *array = calloc(x, sizeof(char));
     sieve(array, x);
-    for (i = j = 0; i < x; i++) {
+    size_t j = 0;
+    for (size_t i = 0; i < x; i++) {
         if (!array[i]) {
             j++;
         }
     }
-    primes = malloc(j * sizeof(int));
-    for (i = j = 0; i < x; i++) {
+    int *primes = malloc(j * sizeof(int));
+    j = 0;
+    for (size_t i = 0; i < x; i++) {
         if (!array[i]) {
             primes[j] = i;
             j++;
@@ -78,29 +73,26 @@ int *create_primes_below(size_t *primes_count, int x) {
 
 int sum_ints(int *array, size_t start, size_t length) {
     int sum = 0;
-    size_t i;
-
-    for (i = start; i < start + length; i++) {
+    for (size_t i = start; i < start + length; i++) {
         sum += array[i];
     }
     return sum;
 }
 
 int main(void) {
-    int sum, i, j, *primes, start, max_sum;
-    size_t primes_count, length, max_length;
-
-    sum = 0;
+    int sum = 0;
+    int i;
     for (i = 0; sum < 1000000; i++) {
         if (is_prime(i)) {
             sum += i;
         }
     }
-    primes = create_primes_below(&primes_count, i);
-    max_sum = 0;
-    max_length = 0;
-    for (start = 0; start < primes_count; start++) {
-        for (length = primes_count - start; length > 0; length--) {
+    size_t primes_count;
+    int *primes = create_primes_below(&primes_count, i);
+    int max_sum = 0;
+    size_t max_length = 0;
+    for (int start = 0; start < primes_count; start++) {
+        for (size_t length = primes_count - start; length > 0; length--) {
             sum = sum_ints(primes, start, length);
             if (is_prime(sum) && max_length < length) {
                 max_length = length;

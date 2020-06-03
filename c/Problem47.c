@@ -19,13 +19,10 @@
 #include <stdlib.h>
 
 int count_distinct_factors(int x) {
-    int d = 2, count = 0;
-    div_t dm = { 0 };
-    unsigned char *cache;
-
-    cache = calloc(x, 1);
-    dm.quot = x;
-    while (x >= d) {
+    int count = 0;
+    unsigned char *cache = calloc(x, 1);
+    div_t dm = { .quot = x };
+    for (int d = 2; x >= d;) {
         dm = div(x, d);
         if (dm.rem) {
             d++;
@@ -42,15 +39,15 @@ int count_distinct_factors(int x) {
 }
 
 int main(void) {
-    int i;
-
-    for (i = 0; ; i++) {
+    int i = 0;
+    while (1) {
         if ((count_distinct_factors(i) == 4) &&
                 count_distinct_factors(i + 1) == 4 &&
                 count_distinct_factors(i + 2) == 4 &&
                 count_distinct_factors(i + 3) == 4) {
             break;
         }
+        i++;
     }
     printf("%d\n", i);
     return 0;

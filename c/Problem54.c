@@ -48,11 +48,14 @@
  * How many hands does Player 1 win?
  */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int bit_count(int x) {
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+
+int bit_count(unsigned int x) {
     x = (x & 0x55555555) + (x >> 1 & 0x55555555);
     x = (x & 0x33333333) + (x >> 2 & 0x33333333);
     x = (x & 0x0f0f0f0f) + (x >> 4 & 0x0f0f0f0f);
@@ -62,18 +65,16 @@ int bit_count(int x) {
 
 static const char rank_symbols[] = { 0, 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
 
-int rank_init(int *rank, char symbol) {
-    int i;
-
-    for (i = 0; i < sizeof(rank_symbols) / sizeof(rank_symbols[0]); i++) {
+bool rank_init(int *rank, char symbol) {
+    for (size_t i = 0; i < sizeof(rank_symbols) / sizeof(rank_symbols[0]); i++) {
         if (symbol == rank_symbols[i]) {
             if (rank) {
                 *rank = i;
             }
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 int rank_compare(int lhs, int rhs) {
@@ -98,18 +99,16 @@ typedef enum {
 
 static const char suit_symbols[] = { 'C', 'D', 'H', 'S' };
 
-int suit_init(suit_t *suit, char symbol) {
-    int i;
-
-    for (i = 0; i < sizeof(suit_symbols) / sizeof(suit_symbols[0]); i++) {
+bool suit_init(suit_t *suit, char symbol) {
+    for (int i = 0; i < sizeof(suit_symbols) / sizeof(suit_symbols[0]); i++) {
         if (symbol == suit_symbols[i]) {
             if (suit) {
                 *suit = i;
             }
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 int suit_compare(suit_t lhs, suit_t rhs) {
@@ -125,31 +124,28 @@ typedef struct {
     int rank;
 } card_t;
 
-int card_init(card_t *card, const char *symbols) {
+bool card_init(card_t *card, const char *symbols) {
     int rank;
-    suit_t suit;
-
     if (!rank_init(&rank, symbols[0])) {
-        return 0;
+        return false;
     }
+    suit_t suit;
     if (!suit_init(&suit, symbols[1])) {
-        return 0;
+        return false;
     }
     if (card) {
         card->rank = rank;
         card->suit = suit;
     }
-    return 1;
+    return true;
 }
 
 int card_compare(const card_t *lhs, const card_t *rhs) {
-    int result;
-
-    result = rank_compare(lhs->rank, rhs->rank);
-    if (!result) {
-        result = suit_compare(lhs->suit, rhs->suit);
+    int result = rank_compare(lhs->rank, rhs->rank);
+    if (result) {
+        return result;
     }
-    return result;
+    return suit_compare(lhs->suit, rhs->suit);
 }
 
 void card_get_symbols(const card_t *card, char *buffer) {
@@ -160,32 +156,29 @@ void card_get_symbols(const card_t *card, char *buffer) {
     }
 }
 
-int cards_count_suits(const card_t *cards, int ncards) {
-    int bits = 0, i;
-
-    for (i = 0; i < ncards; i++) {
+int cards_count_suits(const card_t *cards, size_t ncards) {
+    unsigned int bits = 0;
+    for (size_t i = 0; i < ncards; i++) {
         bits |= 1 << cards[i].suit;
     }
     return bit_count(bits);
 }
 
-int cards_count_ranks(const card_t *cards, int ncards) {
-    int bits = 0, i;
-
-    for (i = 0; i < ncards; i++) {
+int cards_count_ranks(const card_t *cards, size_t ncards) {
+    unsigned int bits = 0;
+    for (size_t i = 0; i < ncards; i++) {
         bits |= 1 << cards[i].rank;
     }
     return bit_count(bits);
 }
 
-int cards_are_sequential(const card_t *cards, int ncards) {
-    int bits = 0, i;
-
-    for (i = 0; i < ncards; i++) {
+bool cards_are_sequential(const card_t *cards, size_t ncards) {
+    unsigned int bits = 0;
+    for (size_t i = 0; i < ncards; i++) {
         bits |= 1 << cards[i].rank;
     }
     if (bits == /* 0b1000000001111 */ 0x100f) {
-        return 1;
+        return true;
     }
     while (!(bits & 1)) {
         bits >>= 1;
@@ -193,14 +186,11 @@ int cards_are_sequential(const card_t *cards, int ncards) {
     return bits == /* 0b11111 */ 0x1f;
 }
 
-int cards_get_max_rank(const card_t *cards, int ncards) {
-    int max, i;
-    const card_t *left, *right;
-
-    max = cards[0].rank;
-    for (i = 0; i < ncards - 1; i++) {
-        left = &(cards[i]);
-        right = &(cards[i + 1]);
+int cards_get_max_rank(const card_t *cards, size_t ncards) {
+    int max = cards[0].rank;
+    for (size_t i = 0; i < ncards - 1; i++) {
+        const card_t *left = &(cards[i]);
+        const card_t *right = &(cards[i + 1]);
         if (rank_compare(left->rank, right->rank) < 0) {
             max = right->rank;
         }
@@ -208,16 +198,14 @@ int cards_get_max_rank(const card_t *cards, int ncards) {
     return max;
 }
 
-int cards_count_most_common_ranks(const card_t *cards, int ncards) {
-    int counter[14] = { 0 }, i, max;
-
-    for (i = 0; i < ncards; i++) {
+int cards_count_most_common_ranks(const card_t *cards, size_t ncards) {
+    int counter[14] = { 0 };
+    for (size_t i = 0; i < ncards; i++) {
         counter[cards[i].rank]++;
     }
-    for (i = 0; i < sizeof(counter) / sizeof(counter[0]); i++) {
-        if (max < counter[i]) {
-            max = counter[i];
-        }
+    int max = 0;
+    for (size_t i = 0; i < sizeof(counter) / sizeof(counter[0]); i++) {
+        max = MAX(max, counter[i]);
     }
     return max;
 }
@@ -245,9 +233,7 @@ typedef struct {
 } card_grouped_by_rank;
 
 int card_grouped_by_rank_compare_by_count(const card_grouped_by_rank *lhs, const card_grouped_by_rank *rhs) {
-    int result;
-
-    result = memcmp(&(lhs->count), &(rhs->count), sizeof(int));
+    int result = memcmp(&(lhs->count), &(rhs->count), sizeof(int));
     if (result) {
         return result;
     }
@@ -255,10 +241,7 @@ int card_grouped_by_rank_compare_by_count(const card_grouped_by_rank *lhs, const
 }
 
 void hand_kind_sort_cards(hand_kind_t kind, card_t *cards) {
-    int i, j;
     card_grouped_by_rank entries[14] = { 0 };
-    card_grouped_by_rank *entry;
-
     switch (kind) {
         case HAND_HIGH_CARD:
         case HAND_STRAIGHT:
@@ -272,14 +255,14 @@ void hand_kind_sort_cards(hand_kind_t kind, card_t *cards) {
         case HAND_THREE_OF_A_KIND:
         case HAND_FULL_HOUSE:
         case HAND_FOUR_OF_A_KIND:
-            for (i = 0; i < 5; i++) {
-                entry = &(entries[cards[i].rank]);
+            for (size_t i = 0; i < 5; i++) {
+                card_grouped_by_rank *entry = &(entries[cards[i].rank]);
                 memcpy(&(entry->cards[entry->count]), &(cards[i]), sizeof(card_t));
                 entry->count++;
             }
             qsort(entries, 14, sizeof(entries[0]), (int (*)(const void *, const void *))card_grouped_by_rank_compare_by_count);
-            for (i = 0; i < 14; i++) {
-                for (j = 0; j < entries[i].count; j++, cards++) {
+            for (size_t i = 0; i < 14; i++) {
+                for (size_t j = 0; j < entries[i].count; j++, cards++) {
                     memcpy(cards, &(entries[i].cards[j]), sizeof(card_t));
                 }
             }
@@ -309,24 +292,13 @@ typedef struct {
     card_t cards[5];
 } hand_t;
 
-int hand_init(hand_t *hand,
-              const card_t *c1,
-              const card_t *c2,
-              const card_t *c3,
-              const card_t *c4,
-              const card_t *c5) {
-    card_t cards[5];
+bool hand_init(hand_t *hand, const card_t cards[static 5]) {
+    card_t copied_cards[5];
+    memcpy(copied_cards, cards, sizeof(copied_cards));
     hand_kind_t kind;
-
-    memcpy(&(cards[0]), c1, sizeof(card_t));
-    memcpy(&(cards[1]), c2, sizeof(card_t));
-    memcpy(&(cards[2]), c3, sizeof(card_t));
-    memcpy(&(cards[3]), c4, sizeof(card_t));
-    memcpy(&(cards[4]), c5, sizeof(card_t));
-
-    if (cards_count_suits(cards, 5) == 1) {
-        if (cards_are_sequential(cards, 5)) {
-            if (cards_get_max_rank(cards, 5) == 1) {
+    if (cards_count_suits(copied_cards, 5) == 1) {
+        if (cards_are_sequential(copied_cards, 5)) {
+            if (cards_get_max_rank(copied_cards, 5) == 1) {
                 kind = HAND_ROYAL_FLUSH;
             } else {
                 kind = HAND_STRAIGHT_FLUSH;
@@ -334,9 +306,9 @@ int hand_init(hand_t *hand,
         } else {
             kind = HAND_FLUSH;
         }
-    } else if (cards_are_sequential(cards, 5)) {
+    } else if (cards_are_sequential(copied_cards, 5)) {
         kind = HAND_STRAIGHT;
-    } else switch (cards_count_ranks(cards, 5)) {
+    } else switch (cards_count_ranks(copied_cards, 5)) {
         case 5:
             kind = HAND_HIGH_CARD;
             break;
@@ -344,33 +316,31 @@ int hand_init(hand_t *hand,
             kind = HAND_ONE_PAIR;
             break;
         case 3:
-            if (cards_count_most_common_ranks(cards, 5) == 3) {
+            if (cards_count_most_common_ranks(copied_cards, 5) == 3) {
                 kind = HAND_THREE_OF_A_KIND;
             } else {
                 kind = HAND_TWO_PAIRS;
             }
             break;
         case 2:
-            if (cards_count_most_common_ranks(cards, 5) == 4) {
+            if (cards_count_most_common_ranks(copied_cards, 5) == 4) {
                 kind = HAND_FOUR_OF_A_KIND;
             } else {
                 kind = HAND_FULL_HOUSE;
             }
             break;
         default:
-            return 0;
+            return false;
     }
-    hand_kind_sort_cards(kind, cards);
+    hand_kind_sort_cards(kind, copied_cards);
     hand->kind = kind;
-    memcpy(&(hand->cards), cards, sizeof(hand->cards));
-    return 1;
+    memcpy(&(hand->cards), copied_cards, sizeof(hand->cards));
+    return true;
 }
 
 int hand_compare(const hand_t *lhs, const hand_t *rhs) {
-    int result, i;
-
-    result = hand_kind_compare(lhs->kind, rhs->kind);
-    for (i = 4; i >= 0 && !result; i--) {
+    int result = hand_kind_compare(lhs->kind, rhs->kind);
+    for (size_t i = 4; i >= 0 && !result; i--) {
         result = card_compare(&(lhs->cards[i]), &(rhs->cards[i]));
     }
     return result;
@@ -379,7 +349,6 @@ int hand_compare(const hand_t *lhs, const hand_t *rhs) {
 char *hand_get_string(const hand_t *hand, char *buffer, int count) {
     char kind_name[20];
     char c[5][3];
-
     hand_kind_get_name(hand->kind, kind_name, 19);
     card_get_symbols(&(hand->cards[0]), c[0]);
     card_get_symbols(&(hand->cards[1]), c[1]);
@@ -392,27 +361,25 @@ char *hand_get_string(const hand_t *hand, char *buffer, int count) {
 
 int main(void) {
     const char *path = "../resources/poker.txt";
-    FILE *fp;
-    int i, read, count;
-    char symbols[3];
-    card_t cards[10];
-    hand_t hand1, hand2;
-
-    fp = fopen(path, "r");
+    FILE *fp = fopen(path, "r");
     if (!fp) {
         perror(path);
         return 1;
     }
-    count = 0;
-    for (i = 0; (read = fscanf(fp, "%3s", symbols)) == 1; i++) {
+    int count = 0;
+    char symbols[3];
+    card_t cards[10];
+    int read;
+    for (int i = 0; (read = fscanf(fp, "%3s", symbols)) == 1; i++) {
         if (!card_init(&(cards[i % 10]), symbols)) {
             goto fail;
         }
         if (i % 10 == 9) {
-            if (!hand_init(&hand1, &(cards[0]), &(cards[1]), &(cards[2]), &(cards[3]), &(cards[4]))) {
+            hand_t hand1, hand2;
+            if (!hand_init(&hand1, cards)) {
                 goto fail;
             }
-            if (!hand_init(&hand2, &(cards[5]), &(cards[6]), &(cards[7]), &(cards[8]), &(cards[9]))) {
+            if (!hand_init(&hand2, &(cards[5]))) {
                 goto fail;
             }
             if (hand_compare(&hand1, &hand2) > 0) {

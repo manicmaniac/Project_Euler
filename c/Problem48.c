@@ -6,12 +6,11 @@
 
 #include <stdio.h>
 
-long long llpowmod(long long x, long long y, long long z) {
-    long long t = 1;
-
+long lpowmod(long x, long y, long z) {
     if (!y) {
         return 1;
     }
+    long t = 1;
     while (y--) {
         t *= x;
         t %= z;
@@ -20,13 +19,11 @@ long long llpowmod(long long x, long long y, long long z) {
 }
 
 int main(void) {
-    long long i, result;
-
-    result = 0;
-    for (i = 1; i <= 1000; i++) {
-        result += llpowmod(i, i, 100000000000);
-        result %= 10000000000;
+    long result = 0;
+    for (long i = 1; i <= 1000; i++) {
+        result += lpowmod(i, i, (long)1e11);
+        result %= (long)1e10;
     }
-    printf("%lld\n", result);
+    printf("%ld\n", result);
     return 0;
 }

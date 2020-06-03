@@ -23,42 +23,37 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-static const char *path = "../resources/triangles.txt";
-
 double cross_product(double complex a, double complex b) {
     return creal(a) * cimag(b) - creal(b) * cimag(a);
 }
 
 bool contains_origin(double complex a, double complex b, double complex c) {
-    double p, q, r;
-
-    p = cross_product(a, b);
-    q = cross_product(b, c);
-    r = cross_product(c, a);
+    double p = cross_product(a, b);
+    double q = cross_product(b, c);
+    double r = cross_product(c, a);
     return (p < 0 && q < 0 && r < 0) || (p >= 0 && q >= 0 && r >= 0);
 }
 
 int main(void) {
-    int ax, ay, bx, by, cx, cy;
-    double complex a, b, c;
-    int count;
-    FILE *fp;
-
-    if (!(fp = fopen(path, "rb"))) {
+    static const char path[] = "../resources/triangles.txt";
+    FILE *fp = fopen(path, "rb");
+    if (!fp) {
         perror(path);
         return errno;
     }
-    count = 0;
-    while (fscanf(fp, "%d,%d,%d,%d,%d,%d\n", &ax, &ay, &bx, &by, &cx, &cy) != EOF) {
-        a = ax + ay * I;
-        b = bx + by * I;
-        c = cx + cy * I;
+    int count = 0;
+    double ax, ay, bx, by, cx, cy;
+    while (fscanf(fp, "%lf,%lf,%lf,%lf,%lf,%lf\n", &ax, &ay, &bx, &by, &cx, &cy) != EOF) {
+        double complex a = ax + ay * I;
+        double complex b = bx + by * I;
+        double complex c = cx + cy * I;
         if (contains_origin(a, b, c)) {
             count++;
         }
     }
     if (ferror(fp)) {
         perror(path);
+        fclose(fp);
         return errno;
     }
     fclose(fp);

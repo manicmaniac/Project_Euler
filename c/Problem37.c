@@ -9,55 +9,51 @@
  *
  * NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
  */
+
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int is_prime(int x) {
+bool is_prime(int x) {
     int i, d = 2;
-
     if (x == 2) {
-        return 1;
+        return true;
     }
     if (x < 2 || x % 2 == 0) {
-        return 0;
+        return false;
     }
     while (d <= sqrt(x)) {
         if (x % d == 0) {
-            return 0;
+            return false;
         } else {
             d++;
         }
     }
-    return 1;
+    return true;
 }
 
-int is_truncatable_prime(int x) {
-    int y, i;
-    div_t dm;
-
-    y = 0;
-    dm.quot = x;
-    for (i = 0; dm.quot > 0; i++) {
+bool is_truncatable_prime(int x) {
+    int y = 0;
+    div_t dm = { .quot = x };
+    for (int i = 0; dm.quot > 0; i++) {
         if (!is_prime(dm.quot)) {
-            return 0;
+            return false;
         }
         dm = div(dm.quot, 10);
         y += dm.rem * pow(10, i);
         if (!is_prime(y)) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 
 int main(void) {
-    int i, count, sum;
-
-    sum = 0;
-    count = 0;
-    for (i = 11; count < 11; i++) {
+    int sum = 0;
+    int count = 0;
+    for (int i = 11; count < 11; i++) {
         if (is_truncatable_prime(i)) {
             sum += i;
             count++;

@@ -1,52 +1,52 @@
+/*
+ * We shall say that an n-digit number is pandigital if it makes use of all the
+ * digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital and is
+ * also prime.
+ * 
+ * What is the largest n-digit pandigital prime that exists?
+ */
+
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 void swap(int *a, int *b) {
-    int c;
-
-    c = *a;
+    int c = *a;
     *a = *b;
     *b = c;
 }
 
 void permutations(int *p, size_t n, void (*callback)(int *)) {
-    size_t i;
-
     if (n == 1) {
         return callback(p);
     }
-    for (i = 0; i < n - 1; i++) {
+    for (size_t i = 0; i < n - 1; i++) {
         permutations(p, n - 1, callback);
         swap(&p[(n & 1 ? 0 : i)], &p[n - 1]);
     }
     permutations(p, n - 1, callback);
 }
 
-int is_prime(int x) {
-    int i;
-    double sqrt_x;
-
+bool is_prime(int x) {
     if (x == 2) {
-        return 1;
+        return true;
     }
     if (x < 2 || !(x & 1)) {
-        return 0;
+        return false;
     }
-    sqrt_x = sqrt(x);
-    for (i = 3; i <= sqrt_x; i++) {
+    double sqrt_x = sqrt(x);
+    for (int i = 3; i <= sqrt_x; i++) {
         if (!(x % i)) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 static void callback(int *p) {
-    size_t i;
-    int x;
-
-    for (x = 7000000 + p[0], i = 5; i > 0; i--) {
+    int x = 7000000 + p[0];
+    for (size_t i = 5; i > 0; i--) {
         x += p[i] * pow(10, i);
     }
     if (is_prime(x)) {
@@ -57,7 +57,6 @@ static void callback(int *p) {
 
 int main(void) {
     int digits[] = {1, 2, 3, 4, 5, 6};
-
-    permutations(digits, 6, callback);
+    permutations(digits, sizeof(digits) / sizeof(digits[0]), callback);
     return 0;
 }

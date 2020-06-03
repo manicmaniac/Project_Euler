@@ -15,8 +15,9 @@
  * How many, not necessarily distinct, values of  ^nC[r], for 1 ≤ n ≤ 100, are
  * greater than one-million?
  */
-#include <stdio.h>
+
 #include <math.h>
+#include <stdio.h>
 
 #define PI 3.14159265359
 #define E 2.71828182846
@@ -30,13 +31,10 @@ double log_ncr(int n, int r) {
 }
 
 int main(void) {
-    int count, n, r;
-    double limit;
-
-    count = 0;
-    limit = log10(1e6) / log10(E);
-    for (n = 1; n <= 100; n++) {
-        for (r = 1; r < n; r++) {
+    int count = 0;
+    double limit = log10(1e6) / log10(E);
+    for (int n = 1; n <= 100; n++) {
+        for (int r = 1; r < n; r++) {
             if (log_ncr(n, r) >= limit) {
                 count++;
             }

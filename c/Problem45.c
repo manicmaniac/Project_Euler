@@ -16,9 +16,7 @@
 #include <stdio.h>
 
 bool is_pentagonal(long x) {
-    double a;
-
-    a = (sqrt(24 * x + 1) + 1) / 6;
+    double a = (sqrt(24 * x + 1) + 1) / 6;
     return a == (long)a;
 }
 
@@ -27,10 +25,8 @@ long hexagonal(int n) {
 }
 
 int main(void) {
-    int i;
-    long x;
-
-    for (i = 0;; i++, x = hexagonal(i)) {
+    for (int i = 0; ; i++) {
+        long x = hexagonal(i);
         if (x > 40755 && is_pentagonal(x)) {
             printf("%ld\n", x);
             break;

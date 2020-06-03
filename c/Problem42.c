@@ -18,36 +18,29 @@
 #include <stdio.h>
 
 int is_triangle(int x) {
-    double result;
-
-    result = (sqrt(8 * x + 1) - 1) / 2;
+    double result = (sqrt(8 * x + 1) - 1) / 2;
     return result == (int)result;
 }
 
 int word_score(const char *word) {
-    int i, result;
-    char c;
-
-    for (result = i = 0; (c = word[i]) != '\0'; i++) {
-        result += c - 64;
+    int result = 0;
+    for (; *word; word++) {
+        result += *word - 'A' + 1;
     }
     return result;
 }
 
 int main(void) {
     static const char path[] = "../resources/words.txt";
-    int exit_status, count;
-    char word[64];
-    FILE *fp;
-
-    exit_status = 0;
-    fp = fopen(path, "r");
+    FILE *fp = fopen(path, "r");
+    int exit_status = 0;
     if (!fp) {
         perror(path);
         exit_status = 1;
     }
+    int count = 0;
     if (!exit_status) {
-        count = 0;
+        char word[64];
         while (fscanf(fp, "\"%64[A-Z]\",", word) != EOF) {
             if (is_triangle(word_score(word))) {
                 count++;

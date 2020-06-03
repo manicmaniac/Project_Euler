@@ -21,20 +21,16 @@
 #include <stdio.h>
 
 void swap(int *a, int *b) {
-    int c;
-
-    c = *a;
+    int c = *a;
     *a = *b;
     *b = c;
 }
 
 void permutations(int *p, size_t n, void *ctx, void (*callback)(int *, void *)) {
-    size_t i;
-
     if (n == 1) {
         return callback(p, ctx);
     }
-    for (i = 0; i < n - 1; i++) {
+    for (size_t i = 0; i < n - 1; i++) {
         permutations(p, n - 1, ctx, callback);
         swap(&p[(n & 1 ? 0 : i)], &p[n - 1]);
     }
@@ -42,8 +38,6 @@ void permutations(int *p, size_t n, void *ctx, void (*callback)(int *, void *)) 
 }
 
 static void callback(int *p, void *ctx) {
-    int i;
-
     if (!(
         !p[0]
         || p[3] & 1
@@ -54,7 +48,7 @@ static void callback(int *p, void *ctx) {
         || (p[6] * 100 + p[7] * 10 + p[8]) % 13
         || (p[7] * 100 + p[8] * 10 + p[9]) % 17
     )) {
-        for (i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             *(long *)ctx += p[i] * pow(10, 9 - i);
         }
     };
@@ -62,9 +56,7 @@ static void callback(int *p, void *ctx) {
 
 int main(void) {
     int digits[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    long result;
-
-    result = 0;
+    long result = 0;
     permutations(digits, 10, &result, callback);
     printf("%ld\n", result);
     return 0;

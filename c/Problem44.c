@@ -22,18 +22,16 @@ int pentagonal(int n) {
 }
 
 bool is_pentagonal(int x) {
-    double a;
-
-    a = ((sqrt(24 * x + 1) + 1) / 6);
+    double a = ((sqrt(24 * x + 1) + 1) / 6);
     return a == (int)a;
 }
 
 int main(void) {
-    int i, j, x, y, *cache;
-
-    cache = NULL;
-    for (i = 0;; i++, x = pentagonal(i)) {
-        for (j = i - 1; j > 0; j--, y = cache[j]) {
+    int *cache = NULL;
+    int x;
+    for (int i = 0; ; i++, x = pentagonal(i)) {
+        int y;
+        for (int j = i - 1; j > 0; j--, y = cache[j]) {
             if (is_pentagonal(x - y) && is_pentagonal(x + y)) {
                 free(cache);
                 printf("%d\n", x - y);

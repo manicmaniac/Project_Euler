@@ -8,16 +8,14 @@
  * leading zeros.)
  */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int is_bin_palindromic(int x) {
-    int reversed_x;
-    int temp;
-
+bool is_bin_palindromic(int x) {
     if (x & 1) {
-        reversed_x = 0;
-        temp = x;
+        int reversed_x = 0;
+        int temp = x;
         while (temp) {
             reversed_x <<= 1;
             reversed_x |= temp & 1;
@@ -25,16 +23,13 @@ int is_bin_palindromic(int x) {
         }
         return x == reversed_x;
     }
-    return 0;
+    return false;
 }
 
-int is_decimal_palindromic(int x) {
-    int reversed_x;
-    div_t dm;
-
+bool is_decimal_palindromic(int x) {
     if (x % 10) {
-        reversed_x = 0;
-        dm.quot = x;
+        int reversed_x = 0;
+        div_t dm = { .quot = x };
         while (dm.quot) {
             reversed_x *= 10;
             dm = div(dm.quot, 10);
@@ -42,14 +37,12 @@ int is_decimal_palindromic(int x) {
         }
         return x == reversed_x;
     }
-    return 0;
+    return false;
 }
 
 int main(void) {
-    int i, result;
-
-    result = 0;
-    for (i = 0; i < 1000000; i++) {
+    int result = 0;
+    for (int i = 0; i < 1000000; i++) {
         if (is_decimal_palindromic(i) && is_bin_palindromic(i)) {
             result += i;
         }

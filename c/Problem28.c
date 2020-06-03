@@ -17,10 +17,8 @@
 #include <stdio.h>
 
 int main(void) {
-    int x;
-
     /* 1 + sum(16x^2 + 4x + 4), 1 <= x <= 1001/2 */
-    x = 1001 / 2;
+    int x = 1001 / 2;
     printf("%d\n", 2 * (x + 1) * (8 * x * x + 7 * x + 6) / 3 - 3);
     return 0;
 }
