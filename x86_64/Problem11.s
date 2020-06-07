@@ -12,7 +12,9 @@
 format: .asciz "%ld\n"
 data:
     .byte  8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8
+row_width = . - data
     .long 0
+row_size = . - data
     .byte 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48,  4, 56, 62,  0
     .long 0
     .byte 81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30,  3, 49, 13, 36, 65
@@ -67,31 +69,31 @@ _product_of_right_4_bytes:
 
 _product_of_bottom_4_bytes:
     movzbq (%rdi), %rax
-    movzbq 24(%rdi), %rdx
+    movzbq row_size(%rdi), %rdx
     mulq %rdx
-    movzbq 48(%rdi), %rdx
+    movzbq 2 * row_size(%rdi), %rdx
     mulq %rdx
-    movzbq 72(%rdi), %rdx
+    movzbq 3 * row_size(%rdi), %rdx
     mulq %rdx
     retq
 
 _product_of_bottom_left_4_bytes:
     movzbq (%rdi), %rax
-    movzbq 23(%rdi), %rdx
+    movzbq (row_size - 1)(%rdi), %rdx
     mulq %rdx
-    movzbq 46(%rdi), %rdx
+    movzbq 2 * (row_size - 1)(%rdi), %rdx
     mulq %rdx
-    movzbq 69(%rdi), %rdx
+    movzbq 3 * (row_size - 1)(%rdi), %rdx
     mulq %rdx
     retq
 
 _product_of_bottom_right_4_bytes:
     movzbq (%rdi), %rax
-    movzbq 25(%rdi), %rdx
+    movzbq (row_size + 1)(%rdi), %rdx
     mulq %rdx
-    movzbq 50(%rdi), %rdx
+    movzbq 2 * (row_size + 1)(%rdi), %rdx
     mulq %rdx
-    movzbq 75(%rdi), %rdx
+    movzbq 3 * (row_size + 1)(%rdi), %rdx
     mulq %rdx
     retq
 
@@ -99,11 +101,13 @@ _main:
     pushq %rbp
     movq %rsp, %rbp
     xorq %r12, %r12
-    movq $19, %r13
+    movq $row_width, %r13
 0:
-    movq $19, %r14
+    decq %r13
+    movq $row_width, %r14
 1:
-    movq $24, %rax
+    decq %r14
+    movq $row_size, %rax
     mulq %r13
     addq %r14, %rax
     leaq data(%rip), %r15
@@ -125,14 +129,10 @@ _main:
     cmpq %r12, %rax
     cmova %rax, %r12
     testq %r14, %r14
-    jz 2f
-    decq %r14
-    jmp 1b
+    jnz 1b
 2:
     testq %r13, %r13
-    jz 3f
-    decq %r13
-    jmp 0b
+    jnz 0b
 3:
     leaq format(%rip), %rdi
     movq %r12, %rsi
