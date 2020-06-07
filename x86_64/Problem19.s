@@ -61,32 +61,31 @@ _weekday:
     incq %rax
     retq
 
+sunday = 7
+
 _main:
     pushq %rbp
     movq %rsp, %rbp
     xorq %r12, %r12
-    movq $1901, %r13
+    movq $1900, %r13
 0:
+    incq %r13
     cmpq $2000, %r13
-    ja 4f
-    movq $1, %r14
+    ja 2f
+    xorq %r14, %r14
 1:
+    incq %r14
     cmpq $12, %r14
-    ja 3f
+    ja 0b
     movq %r13, %rdi
     movq %r14, %rsi
     movq $1, %rdx
     callq _weekday
-    cmpq $7, %rax
-    jne 2f
+    cmpq $sunday, %rax
+    jne 1b
     incq %r12
-2:
-    incq %r14
     jmp 1b
-3:
-    incq %r13
-    jmp 0b
-4:
+2:
     leaq format(%rip), %rdi
     movq %r12, %rsi
     callq _printf
