@@ -19,25 +19,23 @@ _sieve:
     cvtsi2sd %rsi, %xmm0
     sqrtsd %xmm0, %xmm0
     cvtsd2si %xmm0, %r8
-    movq $2, %rcx
+    movq $1, %rcx
 0:
+    incq %rcx
     cmpq %rcx, %r8
-    jbe 3f
+    jbe 2f
     cmpb $0, (%rdi, %rcx)
-    jne 2f
+    jne 0b
     movq %rcx, %rax
     mulq %rcx
     movq %rax, %r9
 1:
     cmpq %r9, %rsi
-    jb 2f
+    jb 0b
     movb $1, (%rdi, %r9)
     addq %rcx, %r9
     jmp 1b
 2:
-    incq %rcx
-    jmp 0b
-3:
     retq
 
 _main:
