@@ -59,14 +59,13 @@ _main:
     movq $(data_size - 5), %rcx
     xorq %rsi, %rsi
 0:
-    xorq %rax, %rax
-    movb (%r8, %rcx), %al
+    movzbq (%r8, %rcx), %rax
     mulb 1(%r8, %rcx)
-    movb 2(%r8, %rcx), %r9b
+    movzbq 2(%r8, %rcx), %r9
     mulq %r9
-    movb 3(%r8, %rcx), %r9b
+    movzbq 3(%r8, %rcx), %r9
     mulq %r9
-    movb 4(%r8, %rcx), %r9b
+    movzbq 4(%r8, %rcx), %r9
     mulq %r9
     cmpq %rax, %rsi
     cmovbq %rax, %rsi

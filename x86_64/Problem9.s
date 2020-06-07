@@ -19,21 +19,20 @@ _main:
     pushq %rbp
     movq %rsp, %rbp
     movq $1, %rdi
-    movq $1, %rsi
+    xorq %rsi, %rsi
 0:
+    incq %rsi
     movq %rdi, %rax
     addq %rsi, %rax
     mulq %rdi
     cmpq $500, %rax
-    je 2f
+    je 1f
     cmpq %rdi, %rsi
-    jb 1f
+    jb 0b
     incq %rdi
     movq $1, %rsi
-1:
-    incq %rsi
     jmp 0b
-2:
+1:
     movq %rdi, %rax
     mulq %rsi
     shlq $1, %rax
