@@ -6,7 +6,7 @@
  * numbers from 1 to 20?
  */
 
-.const
+.cstring
 format: .asciz "%ld\n"
 
 .text

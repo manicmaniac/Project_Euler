@@ -4,7 +4,7 @@
  * What is the 10 001st prime number?
  */
 
-.const
+.cstring
 format: .asciz "%ld\n"
 
 .text

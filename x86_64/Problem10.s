@@ -4,7 +4,7 @@
  * Find the sum of all the primes below two million.
  */
 
-.const
+.cstring
 format: .asciz "%ld\n"
 
 .bss

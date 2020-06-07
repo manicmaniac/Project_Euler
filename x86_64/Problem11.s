@@ -8,8 +8,10 @@
  * (up, down, left, right, or diagonally) in the 20×20 grid?
  */
 
-.const
+.cstring
 format: .asciz "%ld\n"
+
+.const
 data:
     .byte  8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8
 row_width = . - data

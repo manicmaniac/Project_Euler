@@ -9,7 +9,7 @@
  * Find the product abc.
  */
 
-.const
+.cstring
 format: .asciz "%ld\n"
 
 .text

@@ -7,7 +7,7 @@
  * How many routes are there through a 20×20 grid?
  */
 
-.const
+.cstring
 format: .asciz "%.lf\n"
 
 .text

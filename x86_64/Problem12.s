@@ -21,7 +21,7 @@
  * divisors?
  */
 
-.const
+.cstring
 format: .asciz "%ld\n"
 
 .text
