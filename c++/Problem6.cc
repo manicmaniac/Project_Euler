@@ -14,19 +14,14 @@ Find the difference between the sum of the squares of the first one hundred
 natural numbers and the square of the sum.
 */
 
+#include <iomanip>
 #include <iostream>
-using namespace std;
+#include <numeric>
+#include <valarray>
 
-int main(int argc, char const* argv[]) {
-	int ans = 0;
-	int a = 0;
-	int b = 0;
-	for (int i=1; i<=100; i++) {
-		a += i;
-		b += i * i;
-	}
-	ans = a * a - b;
-	cout << ans;
-	return 0;
+int main() {
+    std::valarray<int64_t> numbers(100);
+    std::iota(std::begin(numbers), std::end(numbers), 0);
+    auto result = std::pow(numbers.sum(), 2) - std::pow(numbers, 2).sum();
+    std::cout << std::fixed << std::setprecision(0) << result << std::endl;
 }
-

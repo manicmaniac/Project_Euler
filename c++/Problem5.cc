@@ -7,22 +7,22 @@ numbers from 1 to 20?
 */
 
 #include <iostream>
-using namespace std;
+#include <numeric>
+#include <valarray>
 
-long gcd(long a, long b) {
+template<typename T>
+constexpr T gcd(T a, T b) {
 	return b ? gcd(b, a % b) : a;
 }
 
-long lcm(long a, long b) {
+template<typename T>
+constexpr T lcm(T a, T b) {
 	return a * b / gcd(a, b);
 }
 
-int main(int argc, char const* argv[]) {
-	int x = 1;
-	for (int i=1; i<=20; i++) {
-		x = lcm(x, i);
-	}
-	cout << x;
-	return 0;
+int main() {
+    std::valarray<int64_t> numbers(20);
+    std::iota(std::begin(numbers), std::end(numbers), 1);
+    auto result = std::accumulate(std::begin(numbers), std::end(numbers), 1, lcm<decltype(numbers)::value_type>);
+    std::cout << result << std::endl;
 }
-
