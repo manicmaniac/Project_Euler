@@ -1,16 +1,11 @@
-SRCS := $(wildcard Problem*.cc)
-EXECUTABLES :=$(SRCS:.cc=)
+SRCS = $(wildcard Problem*.cc)
+EXECUTABLES = $(SRCS:.cc=)
+CXXFLAGS = -std=c++11 -O2 -Wall -Wpedantic
+LDFLAGS = -lc++ -lm
 
-CFLAGS: -std=c++0x
+.PHONY: all clean
 
-.PHONY: all build clean
-
-all: build
-
-build: $(EXECUTABLES)
+all: $(EXECUTABLES)
 
 clean:
-	rm -f $(EXECUTABLES)
-
-EXECUTABLES: $(SRCS)
-
+	$(RM) $(EXECUTABLES)

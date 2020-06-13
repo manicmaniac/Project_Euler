@@ -61,7 +61,8 @@ bool is_pandigital(T x) {
         return false;
     }
     uint32_t flags{0x1};
-    lldiv_t dm{ .quot = x };
+    lldiv_t dm;
+    dm.quot = x;
     while (dm.quot) {
         dm = lldiv(dm.quot, 10);
         flags |= 0x1 << dm.rem;
