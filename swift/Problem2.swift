@@ -8,24 +8,9 @@
  * four million, find the sum of the even-valued terms.
  */
 
-func fibonacciGenerator() -> AnyGenerator<Int> {
-    var i = 0
-    var j = 1
-    return AnyGenerator<Int> {
-        let k = i
-        i = j
-        j += k
-        return i
-    }
-}
-
-var sum = 0
-for i in fibonacciGenerator() {
-    guard i < 4000000 else {
-        break
-    }
-    if i % 2 == 0 {
-        sum += i
-    }
-}
-print(sum)
+let fibonacci = sequence(first: (0, 1)) { ($1, $0 + $1) }.lazy.map { $1 }
+let answer = fibonacci
+    .filter { $0.isMultiple(of: 2) }
+    .prefix { $0 < 4_000_000 }
+    .reduce(0, +)
+print(answer)
