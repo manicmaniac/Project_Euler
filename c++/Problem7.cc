@@ -16,7 +16,7 @@ bool is_prime(T x) {
     if (x < 2 || x % 2 == 0) {
         return false;
     }
-    double sqrt_x = sqrt(x);
+    auto sqrt_x = sqrt(x);
     for (T i = 3; i <= sqrt_x; i += 2) {
         if (x % i == 0) {
             return false;
