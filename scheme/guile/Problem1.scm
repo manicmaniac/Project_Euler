@@ -5,10 +5,8 @@
 
 (import (srfi :1))
 
-(display
-  (apply +
-         (filter (lambda (x)
-                   (zero? (* (modulo x 3)
-                             (modulo x 5))))
-                 (iota 1000))))
+(display (apply + (filter (lambda (x)
+                            (zero? (* (modulo x 3)
+                                      (modulo x 5))))
+                          (iota 1000))))
 (newline)

@@ -9,17 +9,12 @@
 (import (srfi :41))
 
 (define fibonaccies
-  (stream-cons 1
-               (stream-cons 1
-                            (stream-map +
-                                        (stream-cdr fibonaccies)
-                                        fibonaccies))))
+  (stream-cons 1 (stream-cons 1 (stream-map +
+                                            (stream-cdr fibonaccies)
+                                            fibonaccies))))
 
 (display
-  (stream-fold +
-               0
-               (stream-filter even?
-                              (stream-take-while (lambda (x)
-                                                   (< x 4e6))
-                                                 fibonaccies))))
+  (stream-fold + 0 (stream-filter even? (stream-take-while (lambda (x)
+                                                              (< x 4e6))
+                                                            fibonaccies))))
 (newline)
