@@ -24,7 +24,7 @@ import csv
 
 
 def cross_product(a, b):
-    return a.real * b.imag - b.real * a.imag
+    return (a.conjugate() * b).imag
 
 
 def contains_origin(a, b, c):

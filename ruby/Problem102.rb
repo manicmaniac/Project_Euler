@@ -25,9 +25,9 @@ answer = CSV.foreach('../resources/triangles.txt').count do |row|
   v1 = Vector[0, row[0], row[1]]
   v2 = Vector[0, row[2], row[3]]
   v3 = Vector[0, row[4], row[5]]
-  a = v1.cross(v2).first
-  b = v2.cross(v3).first
-  c = v3.cross(v1).first
-  (a < 0 && b < 0 && c < 0) || (a >= 0 && b >= 0 && c >= 0)
+  a = v1.cross(v2).first.positive?
+  b = v2.cross(v3).first.positive?
+  c = v3.cross(v1).first.positive?
+  a == b && b == c
 end
 puts answer

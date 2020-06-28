@@ -20,18 +20,19 @@
  */
 #include <complex.h>
 #include <errno.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 
 double cross_product(double complex a, double complex b) {
-    return creal(a) * cimag(b) - creal(b) * cimag(a);
+    return cimag(conj(a) * b);
 }
 
 bool contains_origin(double complex a, double complex b, double complex c) {
-    double p = cross_product(a, b);
-    double q = cross_product(b, c);
-    double r = cross_product(c, a);
-    return (p < 0 && q < 0 && r < 0) || (p >= 0 && q >= 0 && r >= 0);
+    int p = signbit(cross_product(a, b));
+    int q = signbit(cross_product(b, c));
+    int r = signbit(cross_product(c, a));
+    return p == q && q == r;
 }
 
 int main(void) {
