@@ -15,10 +15,10 @@
 ;;; containing one-hundred rows; it cannot be solved by brute force, and requires a
 ;;; clever method! ;o)
 
-(import (ice-9 receive)
+(import (ice-9 match)
         (srfi :1))
 
-(define pyramid
+(define *pyramid*
   '((75)
     (95 64)
     (17 47 82)
@@ -37,14 +37,9 @@
 
 (define (pyramid-route-with-2-rows shorter longer)
   (if (null? shorter)
-    longer
-    (map (lambda (lst)
-           (receive (a b c)
-                    (apply values lst)
-                    (+ a (max b c))))
-         (zip shorter
-              longer
-              (cdr longer)))))
+      longer
+      (map (match-lambda ((a b c) (+ a (max b c))))
+           (zip shorter longer (cdr longer)))))
 
 (define (pyramid-route pyramid)
   (let ((reversed-pyramid (reverse pyramid)))
@@ -52,6 +47,5 @@
                (car reversed-pyramid)
                (cdr reversed-pyramid)))))
 
-(display
-  (pyramid-route pyramid))
+(display (pyramid-route *pyramid*))
 (newline)

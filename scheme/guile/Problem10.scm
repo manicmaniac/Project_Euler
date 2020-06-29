@@ -10,15 +10,13 @@
     (bitvector-set! bv 0 #f)
     (bitvector-set! bv 1 #f)
     (let loop ((i 2))
-      (if (< i sqrt-limit)
-          (begin
-            (if (bitvector-ref bv i)
-                (let loop2 ((j (* i i)))
-                  (if (< j limit)
-                      (begin
-                        (bitvector-set! bv j #f)
-                        (loop2 (+ j i))))))
-            (loop (1+ i)))))
+      (when (< i sqrt-limit)
+        (and (bitvector-ref bv i)
+            (let loop2 ((j (* i i)))
+              (when (< j limit)
+                (bitvector-set! bv j #f)
+                (loop2 (+ j i)))))
+        (loop (1+ i))))
     (map cadr (filter car (zip (bitvector->list bv)
                                (iota limit))))))
 

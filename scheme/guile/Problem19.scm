@@ -14,7 +14,7 @@
 ;;; How many Sundays fell on the first of the month during the twentieth century (1
 ;;; Jan 1901 to 31 Dec 2000)?
 
-(import (ice-9 receive)
+(import (ice-9 match)
         (srfi :1)
         (srfi :19))
 
@@ -29,10 +29,7 @@
               lists))
 
 (display
-  (receive (years months)
-           (unzip2 (cartesian-product (iota 100 1901)
-                                      (iota 12 1)))
-           (count (lambda (year month)
-                    (zero? (date-week-day (make-date 0 0 0 0 1 month year 0))))
-                  years
-                  months)))
+  (count (match-lambda ((year month)
+                        (zero? (date-week-day (make-date 0 0 0 0 1 month year 0)))))
+         (cartesian-product (iota 100 1901)
+                            (iota 12 1))))

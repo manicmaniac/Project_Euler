@@ -9,25 +9,20 @@
 ;;;
 ;;; Evaluate the sum of all the amicable numbers under 10000.
 
-(import (ice-9 receive)
-        (rnrs base)
-        (srfi :1))
+(import (srfi :1))
 
 (define (factor x)
   (let loop ((x x)
              (divisor 2)
              (result '()))
     (if (< x divisor)
-      result
-      (receive (quot rem)
-               (div-and-mod x divisor)
-               (if (zero? (modulo x divisor))
-                 (loop quot
-                       divisor
-                       (cons divisor result))
-                 (loop x
-                       (1+ divisor)
-                       result))))))
+        result
+        (call-with-values (lambda ()
+                            (floor/ x divisor))
+                          (lambda (q r)
+                            (if (zero? r)
+                                (loop q divisor (cons divisor result))
+                                (loop x (1+ divisor) result)))))))
 
 (define (counter lst)
   (fold-right (lambda (x alist)
@@ -47,10 +42,10 @@
                                     (n value)
                                     (result 0))
                            (if (zero? n)
-                             result
-                             (loop x
-                                   (1- n)
-                                   (+ result (expt x n))))))))
+                               result
+                               (loop x
+                                     (1- n)
+                                     (+ result (expt x n))))))))
                  (counter (factor x))))
      x))
 

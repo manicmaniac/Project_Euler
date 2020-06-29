@@ -11,9 +11,7 @@
 ;;; Given that F[k] is the first Fibonacci number for which the first nine digits
 ;;; AND the last nine digits are 1-9 pandigital, find k.
 
-(import (ice-9 receive)
-        (rnrs base)
-        (srfi :1)
+(import (srfi :1)
         (srfi :41))
 
 (define *log10-phi*
@@ -45,15 +43,14 @@
                                         (stream-cdr last-9-digits-of-fibonaccies)))))
 
 (define (digits x)
-  (let loop ((x x)
-             (result '()))
-    (if (zero? x)
-      result
-      (receive (quot rem)
-               (div-and-mod x 10)
-               (loop quot
-                     (cons rem
-                           result))))))
+  (if (zero? x)
+      '(0)
+      (let loop ((x x)
+                 (result '()))
+        (call-with-values (lambda ()
+                            (floor/ x 10))
+                          (lambda (q r)
+                            (loop q (cons r result)))))))
 
 (define (pandigital? x)
   (lset= eqv?
@@ -69,11 +66,11 @@
                              stream)))
 
 (display
-  (1+ (car (stream-find (lambda (index-and-x)
-                          (receive (index x)
-                                   (apply values
-                                          index-and-x)
-                                   (and (pandigital? x)
-                                        (pandigital? (first-9-digits-of-fibonaccies-at index)))))
+  (1+ (car (stream-find (lambda (index+x)
+                          (call-with-values (lambda ()
+                                              (apply values index+x))
+                                            (lambda (index x)
+                                              (and (pandigital? x)
+                                                   (pandigital? (first-9-digits-of-fibonaccies-at index))))))
                         (stream-enumerate last-9-digits-of-fibonaccies 0)))))
 (newline)

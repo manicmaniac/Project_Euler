@@ -4,9 +4,6 @@
 ;;;
 ;;; Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
-(import (ice-9 receive)
-        (rnrs base))
-
 (define (factorial x)
   (if (zero? x)
     1
@@ -19,10 +16,10 @@
                (result '()))
       (if (zero? x)
         result
-        (receive (quot rem)
-                 (div-and-mod x 10)
-                 (loop quot (cons rem
-                                  result)))))))
+        (call-with-values (lambda ()
+                            (floor/ x 10))
+                          (lambda (q r)
+                            (loop q (cons r result))))))))
 
 (define (factorion? x)
   (and (< 3 x)

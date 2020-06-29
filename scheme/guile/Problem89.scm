@@ -73,20 +73,14 @@
   (number->roman
     (roman->number str)))
 
-(define filename
-  "../../resources/roman.txt")
+(define (read-lines port)
+  (let ((line (read-line port)))
+    (if (eof-object? line)
+        '()
+        (cons line (read-lines port)))))
 
-(with-input-from-file filename (lambda ()
-                                 (display
-                                   (fold (lambda (str difference)
-                                           (+ difference
-                                              (- (string-length str)
-                                                 (string-length (roman-shorten str)))))
-                                         0
-                                         (let loop ((line (read-line))
-                                                    (lines '()))
-                                           (if (eof-object? line)
-                                             lines
-                                             (loop (read-line)
-                                                   (cons line lines))))))
-                                 (newline)))
+(display (apply + (map (lambda (s)
+                         (- (string-length s)
+                            (string-length (roman-shorten s))))
+                       (call-with-input-file "../../resources/roman.txt" read-lines))))
+(newline)

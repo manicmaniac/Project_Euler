@@ -3,7 +3,7 @@
 ;;;
 ;;; How many n-digit positive integers exist which are also an nth power?
 
-(import (ice-9 receive)
+(import (ice-9 match)
         (srfi :1))
 
 (define digits-length
@@ -23,10 +23,8 @@
               lists))
 
 (display
-  (count (lambda (x-and-y)
-           (receive (x y)
-                    (apply values x-and-y)
-                    (eqv? y (digits-length (expt x y)))))
+  (count (match-lambda ((x y)
+                        (= y (digits-length (expt x y)))))
          (cartesian-product (iota 9 1)
                             (iota 21 1))))
 (newline)

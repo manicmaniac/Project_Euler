@@ -12,36 +12,28 @@
 ;;; Find the sum of all the numbers that can be written as the sum of fifth powers
 ;;; of their digits.
 
-(import (ice-9 receive)
-        (rnrs base)
-        (srfi :1))
+(import (srfi :1))
 
 (define (digits x)
   (if (zero? x)
-    '(0)
-    (let loop ((x x)
-               (result '()))
-      (if (zero? x)
-        result
-        (receive (quot rem)
-                 (div-and-mod x 10)
-                 (loop quot
-                       (cons rem
-                             result)))))))
+      '(0)
+      (let loop ((x x)
+                 (result '()))
+        (if (zero? x)
+            result
+            (call-with-values (lambda ()
+                                (floor/ x 10))
+                              (lambda (q r)
+                                (loop q (cons r result))))))))
 
 
 (define (armstrong? n x)
-  (eqv? x
-        (apply +
-               (map (lambda (x)
-                      (expt x n))
-                    (digits x)))))
+  (eqv? x (apply + (map (lambda (x)
+                          (expt x n))
+                        (digits x)))))
 
 (display
-  (apply +
-         (filter (lambda (x)
-                   (armstrong? 5 x))
-                 (iota (* 6
-                          (expt 9 5))
-                       2))))
+  (apply + (filter (lambda (x)
+                     (armstrong? 5 x))
+                   (iota (* 6 (expt 9 5)) 2))))
 (newline)

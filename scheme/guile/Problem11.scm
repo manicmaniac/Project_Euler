@@ -4,7 +4,7 @@
 ;;;
 ;;; What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 2020 grid?
 
-(import (ice-9 receive)
+(import (ice-9 match)
         (srfi :1))
 
 (define data
@@ -45,20 +45,18 @@
   (apply zip matrix))
 
 (define (diagonal matrix)
-  (vertical (map (lambda (row)
-                   (receive (index lst)
-                            (apply values row)
-                            (pad-left index
-                                      (pad-right (- (1- (length lst))
-                                                    index)
-                                                 lst))))
+  (vertical (map (match-lambda ((index lst)
+                                (pad-left index
+                                          (pad-right (- (1- (length lst))
+                                                        index)
+                                                     lst))))
                  (enumerate matrix))))
 
 (define (sliding n lst)
   (if (> n (length lst))
-    '()
-    (cons (take lst n)
-          (sliding n (cdr lst)))))
+      '()
+      (cons (take lst n)
+            (sliding n (cdr lst)))))
 
 (display
   (apply max

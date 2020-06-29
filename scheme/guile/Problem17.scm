@@ -10,9 +10,6 @@
 ;;; letters. The use of "and" when writing out numbers is in compliance with
 ;;; British usage.
 
-(import (ice-9 receive)
-        (rnrs base))
-
 (define (number->english x)
   (let ((alist '((0 . "")
                  (1 . "one")
@@ -45,20 +42,22 @@
                  (100 . "hundred")
                  (1000 . "onethousand"))))
     (cond ((<= x 20) (assv-ref alist x))
-          ((< x 100) (receive (quot rem)
-                               (div-and-mod x 10)
-                               (string-append (assv-ref alist (* 10 quot))
-                                              (number->english rem))))
+          ((< x 100) (call-with-values (lambda ()
+                                         (floor/ x 10))
+                                       (lambda (q r)
+                                         (string-append (assv-ref alist (* 10 q))
+                                                        (number->english r)))))
           ((= x 100) (string-append (assv-ref alist 1)
-                                       (assv-ref alist 100)))
-          ((< x 1000) (receive (quot rem)
-                               (div-and-mod x 100)
-                               (string-append (assv-ref alist quot)
-                                              (assv-ref alist 100)
-                                              (if (zero? rem)
-                                                ""
-                                                "and")
-                                              (number->english rem))))
+                                    (assv-ref alist 100)))
+          ((< x 1000) (call-with-values (lambda ()
+                                          (floor/ x 100))
+                                        (lambda (q r)
+                                          (string-append (assv-ref alist q)
+                                                         (assv-ref alist 100)
+                                                         (if (zero? r)
+                                                             ""
+                                                             "and")
+                                                         (number->english r)))))
           ((= x 1000) (assv-ref alist x)))))
 
 (display (apply +

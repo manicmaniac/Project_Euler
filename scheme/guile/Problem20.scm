@@ -5,9 +5,6 @@
 ;;;
 ;;; Find the sum of the digits in the number 100!
 
-(import (ice-9 receive)
-        (rnrs base))
-
 (define (factorial x)
   (if (eqv? x 1)
     1
@@ -20,11 +17,10 @@
                (result '()))
       (if (zero? x)
         result
-        (receive (quot rem)
-                 (div-and-mod x 10)
-                 (loop quot
-                       (cons rem
-                             result)))))))
+        (call-with-values (lambda ()
+                            (floor/ x 10))
+                          (lambda (q r)
+                            (loop q (cons r result))))))))
 
 (display
   (apply +

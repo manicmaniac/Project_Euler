@@ -4,9 +4,5 @@
 ;;; What is the smallest positive number that is evenly divisible by all of the
 ;;; numbers from 1 to 20?
 
-(import (srfi :1))
-
-(display
-  (apply lcm
-         (iota 19 1)))
+(display (apply lcm (map 1+ (iota 20))))
 (newline)
