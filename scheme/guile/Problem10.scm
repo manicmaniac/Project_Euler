@@ -2,23 +2,25 @@
 ;;;
 ;;; Find the sum of all the primes below two million.
 
-(import (srfi :1))
-
 (define (primes-upto limit)
   (let ((bv (make-bitvector limit #t))
-        (sqrt-limit (sqrt limit)))
+        (sqrt-limit (exact-integer-sqrt limit)))
     (bitvector-set! bv 0 #f)
     (bitvector-set! bv 1 #f)
-    (let loop ((i 2))
-      (when (< i sqrt-limit)
-        (and (bitvector-ref bv i)
-            (let loop2 ((j (* i i)))
-              (when (< j limit)
-                (bitvector-set! bv j #f)
-                (loop2 (+ j i)))))
-        (loop (1+ i))))
-    (map cadr (filter car (zip (bitvector->list bv)
-                               (iota limit))))))
+    (do ((i 2 (1+ i)))
+      ((> i sqrt-limit))
+      (and (bitvector-ref bv i)
+           (do ((j (* i i) (+ j i)))
+             ((>= j limit))
+             (bitvector-set! bv j #f))))
+    (let loop ((i (1- limit))
+               (primes '()))
+      (if (negative? i)
+          primes
+          (loop (1- i)
+                (if (bitvector-ref bv i)
+                    (cons i primes)
+                    primes))))))
 
 (display (apply + (primes-upto 2000000)))
 (newline)

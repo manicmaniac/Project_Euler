@@ -6,7 +6,7 @@
 ;;; Find the sum of the digits in the number 100!
 
 (define (factorial x)
-  (if (eqv? x 1)
+  (if (= x 1)
     1
     (* x (factorial (1- x)))))
 

@@ -4,42 +4,29 @@
 ;;;
 ;;; What is the total of all the name scores in the file?
 
-(import (ice-9 iconv)
-        (ice-9 rdelim)
-        (rnrs bytevectors)
-        (srfi :1)
-        (srfi :26))
+(import (ice-9 rdelim))
 
-(define (sum lst)
-  (apply + lst))
+(define (parse-names port)
+  (sort (map (lambda (entry)
+               (string-filter char-alphabetic? entry))
+             (string-split (read-line port) #\,))
+        string<?))
 
-(define (product lst)
-  (apply * lst))
-
-(define (name-score name)
-  (sum (map (cut - <> 64)
-            (bytevector->u8-list (string->bytevector name "ascii")))))
-
-(define (parse-csv-line line)
-  (map name-score
-       (sort (string-split (string-delete (cut eqv? <> #\")
-                                          line)
-                           #\,)
-             string<?)))
-
-(define (zip-index xs)
-  (zip xs
-       (iota (length xs)
-             1)))
-
-(define *filename*
-  "../../resources/names.txt")
+(define (name-score name index)
+  (* (1+ index)
+     (- (apply +
+               (map char->integer
+                    (string->list name)))
+        (* 64
+           (string-length name)))))
 
 (display
-  (with-input-from-file *filename*
-                        (compose sum
-                                 (cut map product <>)
-                                 zip-index
-                                 parse-csv-line
-                                 read-line)))
+  (let loop ((i 0)
+             (sum 0)
+             (names (call-with-input-file "../../resources/names.txt" parse-names)))
+    (if (null? names)
+        sum
+        (loop (1+ i)
+              (+ sum (name-score (car names) i))
+              (cdr names)))))
 (newline)

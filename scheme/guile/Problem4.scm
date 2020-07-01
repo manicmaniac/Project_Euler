@@ -11,7 +11,7 @@
 
 (define (product-of-3digits? x)
   (let loop ((i 100)
-             (sqrt-x (sqrt x)))
+             (sqrt-x (exact-integer-sqrt x)))
     (and (> sqrt-x i)
          (or (and (zero? (modulo x i))
                   (< (/ x i) 1000))

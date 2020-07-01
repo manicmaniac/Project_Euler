@@ -7,10 +7,11 @@
 
 (define (prime? x)
   (and (> x 1)
-       (let loop ((divisor 2))
-         (or (< x (expt divisor 2))
-           (and (not (zero? (modulo x divisor)))
-             (loop (1+ divisor)))))))
+       (let loop ((divisor 2)
+                  (sqrt-x (exact-integer-sqrt x)))
+         (or (< sqrt-x divisor)
+             (and (positive? (modulo x divisor))
+                  (loop (1+ divisor) sqrt-x))))))
 
 (display
   (stream-ref (stream-filter prime?

@@ -51,8 +51,8 @@
 
 (define (has-amicable? x)
   (let ((divisor-x (sum-of-divisors x)))
-    (and (not (eqv? x divisor-x))
-         (eqv? x (sum-of-divisors divisor-x)))))
+    (and (not (= x divisor-x))
+         (= x (sum-of-divisors divisor-x)))))
 
 (display
   (apply +

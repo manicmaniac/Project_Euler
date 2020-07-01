@@ -6,7 +6,7 @@
 ;;; How many such routes are there through a 20×20 grid?
 
 (define (factorial x)
-  (if (eqv? 1 x)
+  (if (= 1 x)
     1
     (* x (factorial (1- x)))))
 
