@@ -3,8 +3,6 @@
 ;;;
 ;;; What is the 10 001st prime number?
 
-(import (srfi :41))
-
 (define (prime? x)
   (and (> x 1)
        (let loop ((divisor 2)
@@ -14,7 +12,11 @@
                   (loop (1+ divisor) sqrt-x))))))
 
 (display
-  (stream-ref (stream-filter prime?
-                             (stream-from 2))
-              10000))
+  (let loop ((i 2)
+             (n 0))
+    (if (prime? i)
+        (if (>= n 10000)
+            i
+            (loop (1+ i) (1+ n)))
+        (loop (1+ i) n))))
 (newline)

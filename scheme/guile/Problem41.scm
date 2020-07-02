@@ -4,20 +4,15 @@
 ;;; 
 ;;; What is the largest n-digit pandigital prime that exists?
 
-(define (insert l n e)
-  (if (zero? n)
-      (cons e l)
-      (cons (car l) 
-            (insert (cdr l) (1- n) e))))
-
 (define (permute l)
-  (if (null? l)
-      '(())
-      (apply append (map (lambda (p)
-                           (map (lambda (n)
-                                  (insert p n (car l)))
-                                (iota (1+ (length p)))))
-                         (permute (cdr l))))))
+  (let loop ((l l)
+             (tail '()))
+    (if (null? l)
+        (list tail)
+        (apply append (map (lambda (x)
+                             (loop (delq x l)
+                                   (cons x tail)))
+                           l)))))
 
 (define (prime? x)
   (cond ((< x 2) #f)

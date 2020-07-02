@@ -13,15 +13,17 @@
 
 (define (pentagonal? x)
   (integer? (/ (1+ (sqrt (1+ (* 24 x))))
-                6)))
+               6)))
 
-(define hexagonals
-  (stream-of (* x
-                (1- (* 2 x)))
-             (x in (stream-from 1))))
+(define (hexagonal-at n)
+  (* n (+ n n -1)))
+
+(define-stream (hexagonal-stream)
+               (stream-map hexagonal-at
+                           (stream-from 0)))
 
 (display
   (stream-ref (stream-filter pentagonal?
-                             hexagonals)
+                             (hexagonal-stream))
               2))
 (newline)

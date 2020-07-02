@@ -30,8 +30,10 @@
             (loop (/ x d) y (1+ i) d)
             (loop x (* y i) 1 (1+ d))))))
 
-(let loop ((i 1)
-           (j 2))
-  (if (> (count-factors i) 500)
-      (display i)
-      (loop (+ i j) (1+ j))))
+(display
+  (let loop ((i 1)
+             (j 2))
+    (if (> (count-factors i) 500)
+        i
+        (loop (+ i j) (1+ j)))))
+(newline)

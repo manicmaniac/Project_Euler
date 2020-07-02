@@ -8,8 +8,8 @@
 ;;; Find the product abc.
 
 (define (make-pythagorean-triplet x y)
-  (let ((x^2 (expt x 2))
-        (y^2 (expt y 2)))
+  (let ((x^2 (* x x))
+        (y^2 (* y y)))
     (values (- x^2 y^2)
             (* 2 x y)
             (+ x^2 y^2))))

@@ -1,11 +1,10 @@
 ;;; Find the greatest product of five consecutive digits in the 1000-digit number.
 
-(import (srfi :1))
-
 (define data
   (map (compose string->number
                 string)
-       (append-map (compose string->list
+       (apply append
+              (map (compose string->list
                             number->string)
                    '(73167176531330624919225119674426574742355349194934
                      96983520312774506326239578318016984801869478851843
@@ -26,13 +25,13 @@
                      07198403850962455444362981230987879927244284909188
                      84580156166097919133875499200524063689912560717606
                      05886116467109405077541002256983155200055935729725
-                     71636269561882670428252483600823257530420752963450))))
+                     71636269561882670428252483600823257530420752963450)))))
 
 (define (sliding n lst)
   (if (> n (length lst))
-    '()
-    (cons (take lst n)
-          (sliding n (cdr lst)))))
+      '()
+      (cons (list-head lst n)
+            (sliding n (cdr lst)))))
 
 (display
   (apply max

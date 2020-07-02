@@ -13,22 +13,20 @@
 #include <stdlib.h>
 
 bool is_abundant(int x) {
-    char *array = calloc(x, sizeof(array[0]));
+    if (x < 12) {
+        return false;
+    }
     int limit = (int)sqrt(x);
-    for (size_t i = 2; i <= limit; i++) {
+    int sum = 1;
+    for (int i = 2; i <= limit; i++) {
         div_t dm = div(x, i);
         if (!dm.rem) {
-            array[i] = 1;
-            array[dm.quot] = 1;
-        }
-    }
-    int sum = 0;
-    for (size_t i = 0; i < x; i++) {
-        if (array[i]) {
             sum += i;
+            if (i != dm.quot) {
+                sum += dm.quot;
+            }
         }
     }
-    free(array);
     return sum > x;
 }
 
