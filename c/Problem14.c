@@ -23,7 +23,7 @@ int longest_collatz(int limit) {
     int longest_start = 0, longest_length = 0;
 
     int *cache = calloc(limit, sizeof(int));
-    for (int start = 1; start < limit; start += 2) {
+    for (int start = limit / 2 + 1; start < limit; start++) {
         int length = 1;
         for (long i = start; i > 1; length++) {
             i = (i % 2 ? 3 * i + 1 : i / 2);

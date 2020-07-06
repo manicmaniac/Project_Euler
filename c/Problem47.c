@@ -20,35 +20,30 @@
 
 int count_distinct_factors(int x) {
     int count = 0;
-    unsigned char *cache = calloc(x, 1);
-    div_t dm = { .quot = x };
     for (int d = 2; x >= d;) {
-        dm = div(x, d);
+        div_t dm = div(x, d);
         if (dm.rem) {
             d++;
         } else {
-            if (!cache[d]) {
-                cache[d] = 1;
-                count++;
-            }
-            x = dm.quot;
+            do {
+                x = dm.quot;
+                dm = div(x, d);
+            } while (dm.rem == 0);
+            count++;
         }
     }
-    free(cache);
     return count;
 }
 
 int main(void) {
     int i = 0;
-    while (1) {
-        if ((count_distinct_factors(i) == 4) &&
-                count_distinct_factors(i + 1) == 4 &&
-                count_distinct_factors(i + 2) == 4 &&
-                count_distinct_factors(i + 3) == 4) {
-            break;
+    for (int counter = 0; counter < 4; i++) {
+        if (count_distinct_factors(i) == 4) {
+            counter++;
+        } else {
+            counter = 0;
         }
-        i++;
     }
-    printf("%d\n", i);
+    printf("%d\n", i - 4);
     return 0;
 }

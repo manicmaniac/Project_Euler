@@ -16,18 +16,16 @@
 #include <stdlib.h>
 
 bool is_prime(int x) {
-    int d = 2;
     if (x == 2) {
         return true;
     }
     if (x < 2 || x % 2 == 0) {
         return false;
     }
-    while (d <= sqrt(x)) {
+    int limit = (int)sqrt(x);
+    for (int d = 2; d <= limit; d++) {
         if (x % d == 0) {
             return false;
-        } else {
-            d++;
         }
     }
     return true;
