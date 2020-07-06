@@ -14,10 +14,31 @@ The first three consecutive numbers to have three distinct prime factors are:
 Find the first four consecutive integers to have four distinct primes factors. What is the first of these numbers?
 """
 
-from sympy import factorint
-from itertools import count
+def count_distinct_factors(x):
+    count = 0
+    d = 2
+    while x >= d:
+        q, r = divmod(x, d)
+        if r == 0:
+            x = q
+            while r == 0:
+                q, r = divmod(x, d)
+                x = q
+            count += 1
+        else:
+            d += 1
+    return count
 
-for i in count(1):
-    if all(len(factorint(j)) == 4 for j in range(i, i + 4)):
-        print(i)
-        break
+
+if __name__ == '__main__':
+    i = 1
+    counter = 0
+    while True:
+        if count_distinct_factors(i) == 4:
+            counter += 1
+        else:
+            counter = 0
+        if counter == 4:
+            break
+        i += 1
+    print(i - 3)

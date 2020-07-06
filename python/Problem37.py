@@ -11,31 +11,45 @@ right and right to left.
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 """
 
-from sympy import *
-
-def trunc_l2r(n):
-    s = str(n)
-    l = len(s)
-    for i in range(l):
-        yield int(s[i:])
+import math
 
 
-def trunc_r2l(n):
-    s = str(n)
-    l = len(s)
-    for i in range(l):
-        yield int(s[:l - i])
+def is_prime(x):
+    if x == 2:
+        return True
+    if x < 2 or x % 2 == 0:
+        return False
+    limit = math.sqrt(x)
+    d = 2
+    while d <= limit:
+        if x % d == 0:
+            return False
+        d += 1
+    return True
+
+
+def is_truncatable_prime(x):
+    y = 0
+    q, r = x, 0
+    i = 0
+    while q:
+        if not is_prime(q):
+            return False
+        q, r = divmod(q, 10)
+        y += r * (10 ** i)
+        if not is_prime(y):
+            return False
+        i += 1
+    return True
 
 
 if __name__ == '__main__':
-    primes = iter(sieve)
-    found = 0
-    ans = 0
-    while found < 11:
-        prime = primes.next()
-        if prime < 9:
-            continue
-        if all(isprime(x) for x in list(trunc_l2r(prime)) + list(trunc_r2l(prime))):
-            found += 1
-            ans += prime
-    print(ans)
+    sum = 0
+    count = 0
+    i = 11
+    while count < 11:
+        if is_truncatable_prime(i):
+            sum += i
+            count += 1
+        i += 1
+    print(sum)
