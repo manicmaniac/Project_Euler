@@ -21,8 +21,9 @@
 format: .asciz "%ld\n"
 
 .bss
-limit = 1000000
-.lcomm cache, limit * 2
+range_end = 1000000
+range_start = range_end / 2 + 1
+.lcomm cache, range_end * 2
 
 .text
 .globl _main
@@ -52,16 +53,16 @@ _find_longest_collatz:
     leaq cache(%rip), %rbx
     movq $1, %r12
 0:
-    cmpq $limit, %r12
+    cmpq $range_end, %r12
     ja 5f
     movw $1, %r13w
     movq %r12, %rdi
 1:
-    cmpq $1, %rdi
+    cmpq $range_start, %rdi
     jbe 3f
     callq _next_collatz
     movq %rax, %rdi
-    cmpq $limit, %rdi
+    cmpq $range_end, %rdi
     ja 2f
     movw (%rbx, %rdi, 2), %ax
     testw %ax, %ax

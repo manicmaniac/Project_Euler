@@ -22,22 +22,32 @@ What is the value of the first triangle number to have over five hundred
 divisors?
 """
 
-from operator import mul
-from itertools import count
-from sympy import factorint
+import itertools
 
-def triangles():
-    for i in count():
-        yield i * (i + 1) / 2
+def triangulars():
+    x = 0
+    for i in itertools.count(0):
+        x += i
+        yield x
 
-def divisors(n):
-    if n <= 1:
-        return 0
-    return reduce(mul, (i + 1 for i in factorint(n).values()))
+def count_divisors(x):
+    result = 1
+    i = 1
+    d = 2
+    while x >= d:
+        if x % d:
+            result *= i
+            i = 1
+            d += 1
+        else:
+            x /= d
+            i += 1
+    result *= i
+    return result
 
 
 if __name__ == '__main__':
-    for i in triangles():
-        if divisors(i) >= 500:
-            print(i)
+    for i in triangulars():
+        if count_divisors(i) > 500:
             break
+    print(i)

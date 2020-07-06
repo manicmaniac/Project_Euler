@@ -5,6 +5,7 @@
  * Find the largest palindrome made from the product of two 3-digit numbers.
  */
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,7 +20,7 @@ int make_palindrome(int x) {
     return palindrome;
 }
 
-int is_product_of_ndigits(int x, int n) {
+bool is_product_of_ndigits(int x, int n) {
     int min = pow(10, n - 1);
     int max = min * 10 - 1;
     for (int i = max; i >= min; i--) {
@@ -28,7 +29,7 @@ int is_product_of_ndigits(int x, int n) {
             return dm.quot >= min && dm.quot <= max;
         }
     }
-    return 0;
+    return false;
 }
 
 int main(void) {
