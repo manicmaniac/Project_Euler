@@ -11,18 +11,14 @@ If the product of these four fractions is given in its lowest common terms, find
 from __future__ import division
 from fractions import Fraction
 from functools import reduce
-from itertools import product as cartesian_product
+from itertools import product
 from operator import mul
-
-
-def product(xs):
-    return reduce(mul, xs)
 
 
 if __name__ == '__main__':
     res = []
-    for i, j, k in cartesian_product(range(1, 10), repeat=3):
+    for i, j, k in product(range(1, 10), repeat=3):
         d, n = (i * 10 + j, j * 10 + k)
         if d / n == i / k:
             res.append(Fraction(d, n))
-    print(Fraction(product(res)).denominator)
+    print(Fraction(reduce(mul, res)).denominator)

@@ -20,21 +20,17 @@ In the first one-thousand expansions, how many fractions contain a numerator
 with more digits than denominator?
 """
 
-from __future__ import division
-from sympy import Rational
+from fractions import Fraction
+import math
+
 
 def sqrt2(n):
-    res = [Rational(3, 2)]
+    res = [Fraction(3, 2)]
     while n > 1:
-        res.append(1 + Rational(1, 1 + res[-1]))
+        res.append(1 + Fraction(1, 1 + res[-1]))
         n -= 1
     return res
 
-def conditional(n):
-    p = n.p
-    q = n.q
-    return len(str(p)) > len(str(q))
-    
 
 if __name__ == '__main__':
-    print(len(filter(conditional, sqrt2(1000))))
+    print(len([i for i in sqrt2(1000) if int(math.log10(i.numerator)) > int(math.log10(i.denominator))]))
