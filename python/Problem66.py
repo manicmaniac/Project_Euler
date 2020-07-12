@@ -28,14 +28,6 @@ value of x is obtained.
 import math
 
 
-def continued_fraction(x):
-    f, i = math.modf(x)
-    yield int(i)
-    if f:
-        for j in continued_fraction(1.0 / f):
-            yield j
-
-
 def continued_fraction_sqrt(x):
     r = int(math.sqrt(x))
     yield r
