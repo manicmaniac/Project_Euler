@@ -3,12 +3,14 @@
 \ 
 \ Find the sum of all the multiples of 3 or 5 below 1000.
 
-:noname ( -- answer )
-  0 1000 0 do
-    I 3 mod
-    I 5 mod
+:noname ( -- n )
+  0
+  1000 0 do
+    i 3 mod
+    i 5 mod
     * 0= if
-      I +
+      i +
     then
   loop ;
+
 execute .

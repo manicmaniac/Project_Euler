@@ -2,19 +2,17 @@
 \ 
 \ What is the largest prime factor of the number 600851475143 ?
 
-: max-factor ( x -- biggest factor of x )
+: max-factor ( n1 -- n2)
   2
   begin
-    2dup /mod swap
-    if
+    2dup /mod swap if
       drop
       1+
     else
-      rot drop swap
+      -rot nip
     then
     2dup <
   until
   nip ;
-
 
 600851475143 max-factor .

@@ -6,14 +6,21 @@
 \ By considering the terms in the Fibonacci sequence whose values do not exceed
 \ four million, find the sum of the even-valued terms.
 
-:noname
-  0 0 1
+: generate-fibonacci ( "<space>name" -- )
+  create 0 1 2, does>
+    dup 2@ tuck + over >r rot 2! r> ;
+
+: even? ( n -- f )
+  2 mod 0= ;
+
+generate-fibonacci fib
+:noname ( -- n )
+  0
   begin
-    tuck +
-    dup 2 mod 0= if
-      rot over + -rot
+    fib dup even? if
+      dup under+
     then
-      dup 4000000 >
-  until
-  2drop ;
+    4000000 >
+  until ;
+
 execute .
