@@ -46,7 +46,7 @@ static bool is_composite(int x, void *context) {
 }
 
 int main(void) {
-    char is_composites_by_n[1000000] = { 0 };
+    static char is_composites_by_n[1000000] = { 0 };
     int count = 0;
     sieve(is_composites_by_n, sizeof(is_composites_by_n) / sizeof(is_composites_by_n[0]));
     for (size_t i = 0; i < sizeof(is_composites_by_n) / sizeof(is_composites_by_n[0]); i++) {

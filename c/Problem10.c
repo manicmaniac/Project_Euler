@@ -20,10 +20,10 @@ void sieve(char *array, size_t size) {
 }
 
 int main(void) {
-    char array[2000000] = { 0 };
-    sieve(array, sizeof(array) / sizeof(array[0]));
+    static char array[2000000] = { 0 };
+    sieve(array, sizeof(array));
     long sum = 0;
-    for (size_t i = 0; i < sizeof(array) / sizeof(array[0]); i++) {
+    for (size_t i = 0; i < sizeof(array); i++) {
         if (!array[i]) {
             sum += i;
         }

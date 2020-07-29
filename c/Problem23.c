@@ -43,8 +43,8 @@ void sieve_abundants(char *array, size_t limit) {
 #define LIMIT 28123
 
 int main(void) {
-    char array[LIMIT] = { 0 };
-    int abundants[LIMIT], sum_of_2_abundants[LIMIT];
+    static char array[LIMIT] = { 0 };
+    static int abundants[LIMIT], sum_of_2_abundants[LIMIT];
     sieve_abundants(array, LIMIT);
     size_t abundants_count = 0;
     for (size_t i = 0; i < LIMIT; i++) {

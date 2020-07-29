@@ -48,7 +48,7 @@ bool is_permuting(int *xs, size_t size) {
 
 int main(void) {
     int triplets[3];
-    char array[10000] = { 0 };
+    static char array[10000] = { 0 };
     sieve(array, sizeof(array));
     for (size_t i = 1000; i < 3334; i++) {
         if (array[i]) {
