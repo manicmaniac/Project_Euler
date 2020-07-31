@@ -17,16 +17,14 @@
  * NOTE: Once the chain starts the terms are allowed to go above one million.
  */
 #include <stdio.h>
-#include <stdlib.h>
 
-int longest_collatz(int limit) {
+int longest_collatz(int limit, int *cache) {
     int longest_start = 0, longest_length = 0;
 
-    int *cache = calloc(limit, sizeof(int));
     for (int start = limit / 2 + 1; start < limit; start++) {
         int length = 1;
         for (long i = start; i > 1; length++) {
-            i = (i % 2 ? 3 * i + 1 : i / 2);
+            i = (i & 1 ? (i << 1) + i + 1 : i >> 1);
             if (i <= limit && cache[i]) {
                 length += cache[i];
                 break;
@@ -38,11 +36,12 @@ int longest_collatz(int limit) {
         }
         cache[start] = length;
     }
-    free(cache);
     return longest_start;
 }
 
 int main(void) {
-    printf("%d\n", longest_collatz(1000000));
+#define N 1000000
+    int cache[N] = { 0 };
+    printf("%d\n", longest_collatz(N, cache));
     return 0;
 }

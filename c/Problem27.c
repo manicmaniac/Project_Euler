@@ -26,7 +26,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 
 bool is_prime(int n) {
@@ -45,29 +44,17 @@ bool is_prime(int n) {
     return true;
 }
 
-int *sieve(int limit, size_t *size) {
-    if (limit < 2) {
-        return NULL;
-    }
-    int *search = calloc(limit, sizeof(int));
-    int *result = malloc(limit * sizeof(int));
-    search[0] = 1;
-    search[1] = 1;
-    double sqrt_limit = sqrt(limit);
-    *size = 0;
+void sieve(char *array, size_t size) {
+    array[0] = 1;
+    array[1] = 1;
+    size_t limit = (size_t)sqrt((double)size);
     for (size_t i = 2; i <= limit; i++) {
-        if (!search[i]) {
-            if (i <= sqrt_limit) {
-                for (size_t j = i << 1; j < limit; j += i) {
-                    search[j] = 1;
-                }
+        if (!array[i]) {
+            for (size_t j = i * i; j < size; j += i) {
+                array[j] = 1;
             }
-            result[*size] = i;
-            *size += 1;
         }
     }
-    free(search);
-    return realloc(result, *size * sizeof(int));
 }
 
 int count_quadratic_primes(int a, int b) {
@@ -86,19 +73,20 @@ int count_quadratic_primes(int a, int b) {
 int main(void) {
     int longest_product = 0;
     size_t size = 0;
-    int *primes = sieve(1000, &size);
+    static char array[1000] = { 0 };
+    sieve(array, sizeof(array));
     int longest = 0;
     for (int a = -999; a < 1000; a += 2) {
-        for (size_t i = 0; i < size; i++) {
-            int b = primes[i];
-            int current = count_quadratic_primes(a, b);
-            if (longest < current) {
-                longest = current;
-                longest_product = a * b;
+        for (size_t b = 0; b < sizeof(array); b++) {
+            if (!array[b]) {
+                int current = count_quadratic_primes(a, b);
+                if (longest < current) {
+                    longest = current;
+                    longest_product = a * b;
+                }
             }
         }
     }
-    free(primes);
     printf("%d\n", longest_product);
     return 0;
 }

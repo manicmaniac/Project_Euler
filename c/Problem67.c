@@ -22,13 +22,9 @@
 
 #include <errno.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAX(x, y) (x > y ? x : y)
-
-int triangular(int n) {
-    return (n * (n + 1)) / 2;
-}
+#define TRIANGULAR(n) (((n) * ((n) + 1)) / 2)
 
 int pyramid_route(int *pyramid, int size) {
     for (; size > 1; size--) {
@@ -46,15 +42,14 @@ int pyramid_route(int *pyramid, int size) {
 }
 
 int main(void) {
+#define ROW_COUNT 100
     static const char *path = "../resources/triangle.txt";
     FILE *fp = fopen(path, "r");
     if (!fp) {
         perror(path);
         return errno;
     }
-    static const size_t rows_count = 100;
-    size_t size = triangular(rows_count);
-    int *buffer = malloc(size * sizeof(int));
+    static int buffer[TRIANGULAR(ROW_COUNT)];
     int x;
     for (size_t i = 0; fscanf(fp, "%d", &x) != EOF; i++) {
         buffer[i] = x;
@@ -63,7 +58,6 @@ int main(void) {
         perror(path);
         return errno;
     }
-    printf("%d\n", pyramid_route(buffer, rows_count));
-    free(buffer);
+    printf("%d\n", pyramid_route(buffer, ROW_COUNT));
     return 0;
 }
