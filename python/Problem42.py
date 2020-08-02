@@ -9,13 +9,12 @@ By converting each letter in a word to a number corresponding to its alphabetica
 Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words, how many are triangle words?
 """
 
-import math
 import csv
 
 
 def is_triangle(x):
     if isinstance(x, int):
-        return not ((math.sqrt(8 * x + 1) - 1) / 2) % 1
+        return not (((8 * x + 1) ** 0.5 - 1) / 2) % 1
     elif isinstance(x, str):
         return is_triangle(sum(ord(char) - 64 for char in x))
 

@@ -15,7 +15,6 @@ try:
     from itertools import imap
 except ImportError:
     imap = map
-import math
 
 
 def pentagonal(n):
@@ -23,7 +22,7 @@ def pentagonal(n):
 
 
 def is_pentagonal(n):
-    return ((math.sqrt(24 * n + 1) + 1) / 6).is_integer()
+    return (((24 * n + 1) ** 0.5 + 1) / 6).is_integer()
 
 
 if __name__ == '__main__':

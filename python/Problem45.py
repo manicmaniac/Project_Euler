@@ -10,15 +10,17 @@ It can be verified that T285 = P165 = H143 = 40755.
 Find the next triangle number that is also pentagonal and hexagonal.
 """
 
-from math import sqrt
 from itertools import count
 
+
 def is_pentagonal(n):
-    return ((sqrt(24 * n + 1) + 1) / 6).is_integer()
+    return (((24 * n + 1) ** 0.5 + 1) / 6).is_integer()
+
 
 def gen_hexagonal():
     for i in count():
         yield i * (2 * i - 1)
+
 
 if __name__ == '__main__':
     for i in gen_hexagonal():

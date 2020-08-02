@@ -3,7 +3,7 @@
 The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
 """
-import math
+
 try:
     from math import gcd
 except ImportError:
@@ -66,7 +66,7 @@ def trial_division(n):
     find the smallest divisor of the integer `n` with Trial Division method.
     returns -1 if it is a prime.
     """
-    limit = int(math.sqrt(n) + 1)
+    limit = int((n ** 0.5) + 1)
     for i in range(2, limit):
         if not n % i:
             return i

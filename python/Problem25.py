@@ -27,7 +27,7 @@ What is the first term in the Fibonacci sequence to contain 1000 digits?
 import itertools
 import math
 
-LOG10_PHI = math.log10((1 + math.sqrt(5)) / 2)
+LOG10_PHI = math.log10((1 + 5 ** 0.5) / 2)
 LOG10_SQRT5 = math.log10(5) / 2
 
 def digits_of_fib(n):

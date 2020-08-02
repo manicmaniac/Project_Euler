@@ -19,7 +19,7 @@ def is_prime(x):
         return True
     if x < 2 or x % 2 == 0:
         return False
-    limit = math.sqrt(x)
+    limit = x ** 0.5
     d = 2
     while d <= limit:
         if x % d == 0:

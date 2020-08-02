@@ -20,26 +20,25 @@ def count_distinct_factors(x):
     d = 2
     while x >= d:
         q, r = divmod(x, d)
-        if r == 0:
-            x = q
-            while r == 0:
-                q, r = divmod(x, d)
-                x = q
-            count += 1
-        else:
+        if r:
             d += 1
+        else:
+            while True:
+                x = q
+                q, r = divmod(x, d)
+                if r:
+                    break
+            count += 1
     return count
 
 
 if __name__ == '__main__':
     i = 1
     counter = 0
-    while True:
+    while counter < 4:
         if count_distinct_factors(i) == 4:
             counter += 1
         else:
             counter = 0
-        if counter == 4:
-            break
         i += 1
     print(i - 3)

@@ -15,14 +15,14 @@ What is the smallest odd composite that cannot be written as the sum of a prime 
 """
 
 import itertools
-import math
+
 
 def is_prime(x):
     if x == 2:
         return True
     if x < 2 or x % 2 == 0:
         return False
-    limit = math.sqrt(x)
+    limit = x ** 0.5
     d = 2
     while d <= limit:
         if x % d == 0:
@@ -35,7 +35,7 @@ def sieve(limit):
     search = bytearray([1] * limit)
     search[0] = 0
     search[1] = 0
-    sqrt_limit = int(math.sqrt(limit))
+    sqrt_limit = int(limit ** 0.5)
     for i in range(2, sqrt_limit):
         if search[i]:
             for j in range(i ** 2, limit, i):

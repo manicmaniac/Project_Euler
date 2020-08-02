@@ -12,7 +12,6 @@ of the first one hundred decimal digits for all the irrational square roots.
 """
 
 import decimal
-import math
 
 
 def sum_digits(x):
@@ -26,6 +25,6 @@ if __name__ == '__main__':
         result = 0
         _1e99 = 10 ** 99
         for i in range(100):
-            if not math.sqrt(i).is_integer():
+            if not (i ** 0.5).is_integer():
                 result += sum_digits((context.sqrt(i) * _1e99).to_integral())
         print(result)

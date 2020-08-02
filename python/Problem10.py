@@ -6,14 +6,13 @@ Find the sum of all the primes below two million.
 """
 
 import itertools
-import math
 
 
 def sieve(limit):
     search = bytearray([1] * limit)
     search[0] = 0
     search[1] = 0
-    sqrt_limit = int(math.sqrt(limit))
+    sqrt_limit = int(limit ** 0.5)
     for i in range(2, sqrt_limit):
         if search[i]:
             for j in range(i ** 2, limit, i):

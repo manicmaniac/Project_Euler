@@ -26,7 +26,6 @@ starting with $n = 0$.
 """
 
 import itertools
-import math
 
 
 def is_prime(x):
@@ -34,7 +33,7 @@ def is_prime(x):
         return True
     if x < 2 or x % 2 == 0:
         return False
-    limit = int(math.sqrt(x)) + 1
+    limit = int(x ** 0.5) + 1
     for i in range(3, limit):
         if x % i == 0:
             return False
@@ -45,7 +44,7 @@ def sieve(limit):
     search = bytearray([1] * limit)
     search[0] = 0
     search[1] = 0
-    sqrt_limit = int(math.sqrt(limit))
+    sqrt_limit = int(limit ** 0.5)
     for i in range(2, sqrt_limit):
         if search[i]:
             for j in range(i << 1, limit, i):

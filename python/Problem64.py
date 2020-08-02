@@ -58,11 +58,8 @@ Exactly four continued fractions, for $N \le 13$, have an odd period.
 How many continued fractions for $N \le 10\,000$ have an odd period?
 """
 
-import math
-
-
 def continued_fraction_sqrt(x):
-    r = int(math.sqrt(x))
+    r = int(x ** 0.5)
     yield r
     if r * r == x:
         return

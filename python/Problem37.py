@@ -11,15 +11,12 @@ right and right to left.
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 """
 
-import math
-
-
 def is_prime(x):
     if x == 2:
         return True
     if x < 2 or x % 2 == 0:
         return False
-    limit = math.sqrt(x)
+    limit = x ** 0.5
     d = 2
     while d <= limit:
         if x % d == 0:

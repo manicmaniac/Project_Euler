@@ -25,11 +25,8 @@ Find the value of D ≤ 1000 in minimal solutions of x for which the largest
 value of x is obtained.
 """
 
-import math
-
-
 def continued_fraction_sqrt(x):
-    r = int(math.sqrt(x))
+    r = int(x ** 0.5)
     yield r
     if r * r == x:
         return

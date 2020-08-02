@@ -16,10 +16,10 @@ AND the last nine digits are 1-9 pandigital, find k.
 
 import math
 
-
 # constants
-LOG10_PHI = math.log10((1 + math.sqrt(5)) / 2)
+LOG10_PHI = math.log10((1 + 5 ** 0.5) / 2)
 LOG10_SQRT5 = math.log10(5) / 2
+
 
 def upper_fib(n):
     ''' estimate first 9 digits of the `n` term of fibonacci sequence '''
