@@ -13,26 +13,24 @@
 # Given that F[k] is the first Fibonacci number for which the first nine digits
 # AND the last nine digits are 1-9 pandigital, find k.
 
-LOG10_PHI = Math.log10((1 + Math.sqrt(5)) / 2)
+LOG10_PHI = Math.log10((1 + 5 ** 0.5) / 2)
 LOG10_SQRT5 = Math.log10(5) / 2
 
 def upper_fib(n)
-  l = LOG10_PHI * n.succ - LOG10_SQRT5
-  _, l = l.divmod(1)
+  l = (LOG10_PHI * (n + 1) - LOG10_SQRT5) % 1
   (10 ** l * 1e8).round
 end
 
 def lower_fibs
-  n, i, j = 0, 0, 1
-  loop do
+  i, j = 0, 1
+  0.upto(Float::INFINITY) do |n|
     i, j = j, (i + j) % 1_000_000_000
     yield n, i
-    n += 1
   end
 end
 
 def is_pandigital(x)
-  return false unless (x % 9).zero?
+  return false if x % 9 > 0
   flags = 0b0000000001
   until x.zero?
     x, d = x.divmod(10)
@@ -42,7 +40,7 @@ def is_pandigital(x)
 end
 
 result = lower_fibs do |i, lower_fib|
-  break i.succ if is_pandigital(lower_fib) && is_pandigital(upper_fib(i))
+  break i + 1 if is_pandigital(lower_fib) && is_pandigital(upper_fib(i))
 end
 
 puts(result)

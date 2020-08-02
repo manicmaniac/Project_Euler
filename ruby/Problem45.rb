@@ -10,7 +10,7 @@
 # Find the next triangle number that is also pentagonal and hexagonal.
 
 def pentagonal?(x)
-  ((Math.sqrt(24 * x + 1) + 1) / 6) % 1 == 0
+  (((24 * x + 1) ** 0.5 + 1) / 6) % 1 == 0
 end
 
 def generate_hexagonals

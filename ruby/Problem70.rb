@@ -24,4 +24,4 @@ answer = Prime.each(limit).flat_map do |i|
   end.compact
 end.min_by(&:last).first
 
-puts answer
+puts(answer)
