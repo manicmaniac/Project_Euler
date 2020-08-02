@@ -10,28 +10,35 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-int sum_of_divisors(int x) {
-    int result = 0;
-    for (int i = 1; i < (x / 2 + 1); i++) {
-        if (x % i == 0) {
-            result += i;
+void sieve_sum_of_proper_divisors(int *zeros, size_t size) {
+    for (int i = 1; i < size; i++) {
+        for (int j = i * 2; j < size; j += i) {
+            zeros[j] += i;
         }
     }
-    return result;
 }
 
-bool has_amicable(int x) {
-    int sum = sum_of_divisors(x);
-    return sum != x && sum_of_divisors(sum) == x;
+bool has_amicable_pair(int x, int *sum_of_proper_divisors, size_t size) {
+    if (x >= size) {
+        return false;
+    }
+    int y = sum_of_proper_divisors[x];
+    if (y >= size || x == y) {
+        return false;
+    }
+    return x == sum_of_proper_divisors[y];
 }
 
 int main(void) {
-    int result = 0;
-    for (int i = 2; i < 10000; i++) {
-        if (has_amicable(i)) {
-            result += i;
+#define N 10000
+    int numbers[N] = { 0 };
+    sieve_sum_of_proper_divisors(numbers, N);
+    int sum = 0;
+    for (int i = 0; i < N; i++) {
+        if (has_amicable_pair(i, numbers, N)) {
+            sum += i;
         }
     }
-    printf("%d\n", result);
+    printf("%d\n", sum);
     return 0;
 }

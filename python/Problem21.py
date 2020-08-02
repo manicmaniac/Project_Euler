@@ -8,18 +8,15 @@ For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 a
 Evaluate the sum of all the amicable numbers under 10000.
 """
 
-def divisors(n):
-    res = [1]
-    for i in range(2, int(n ** 0.5) + 1):
-        if not n % i:
-            res += [i, n / i]
-    return sorted(res)
-
-
-def has_amicable(n):
-    s = sum(divisors(n))
-    return s != n and sum(divisors(s)) == n
+def amicables(limit):
+    numbers = [0] * limit
+    for i in range(1, limit):
+        for j in range(i * 2, limit, i):
+            numbers[j] += i
+    for i, j in enumerate(numbers):
+        if j < limit and i == numbers[j] != j:
+            yield i
 
 
 if __name__ == '__main__':
-    print(sum(filter(has_amicable, range(2, 10000))))
+    print(sum(amicables(10000)))
