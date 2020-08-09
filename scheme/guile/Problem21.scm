@@ -9,53 +9,23 @@
 ;;;
 ;;; Evaluate the sum of all the amicable numbers under 10000.
 
-(import (srfi :1))
-
-(define (factor x)
-  (let loop ((x x)
-             (divisor 2)
-             (result '()))
-    (if (< x divisor)
-        result
-        (call-with-values (lambda ()
-                            (floor/ x divisor))
-                          (lambda (q r)
-                            (if (zero? r)
-                                (loop q divisor (cons divisor result))
-                                (loop x (1+ divisor) result)))))))
-
-(define (counter lst)
-  (fold-right (lambda (x alist)
-                (assv-set! alist
-                           x
-                           (1+ (or (assv-ref alist x)
-                                   0))))
-              '()
-              lst))
-
-(define (sum-of-divisors x)
-  (- (apply *
-            (map (lambda (key-and-value)
-                   (let ((key (car key-and-value))
-                         (value (cdr key-and-value)))
-                     (1+ (let loop ((x key)
-                                    (n value)
-                                    (result 0))
-                           (if (zero? n)
-                               result
-                               (loop x
-                                     (1- n)
-                                     (+ result (expt x n))))))))
-                 (counter (factor x))))
-     x))
-
-(define (has-amicable? x)
-  (let ((divisor-x (sum-of-divisors x)))
-    (and (not (= x divisor-x))
-         (= x (sum-of-divisors divisor-x)))))
+(define (amicables limit)
+  (let ((numbers (make-vector limit 0)))
+    (do ((i 1 (1+ i)))
+      ((>= i limit))
+      (do ((j (* i 2) (+ i j)))
+        ((>= j limit))
+        (vector-set! numbers j (+ i (vector-ref numbers j)))))
+    (let loop ((i 0))
+      (if (>= i limit)
+          '()
+          (let ((j (vector-ref numbers i)))
+            (if (and (< j limit)
+                     (= i (vector-ref numbers j))
+                     (not (= i j)))
+                (cons i (loop (1+ i)))
+                (loop (1+ i))))))))
 
 (display
-  (apply +
-         (filter has-amicable?
-                 (iota 9998 2))))
+  (apply + (amicables 10000)))
 (newline)
