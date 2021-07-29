@@ -7,18 +7,11 @@ and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 Find the sum of the digits in the number 100!
 */
 
-var Bigint = require('bigint');
-var _ = require('underscore');
+function factorial(x) {
+  return x < 2n ? 1n : factorial(x - 1n) * x
+}
 
-var factorial = function(n) {
-  return n < 2 ? 1 : _.range(1, n + 1).reduce(Bigint.mul);
-};
-
-var digits = function(n) {
-  return String(n).split('').map(Number);
-};
-
-console.log((digits(factorial(100))).reduce(function(x, y) {
-  return x + y;
-}));
-
+const answer = Array
+  .from(String(factorial(100n)), Number)
+  .reduce((x, y) => x + y)
+console.log(answer)

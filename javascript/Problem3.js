@@ -1,22 +1,22 @@
 /*
-The prime factors of 13195 are 5, 7, 13 and 29.
-
-What is the largest prime factor of the number 600851475143 ?
-*/
+ * The prime factors of 13195 are 5, 7, 13 and 29.
+ * 
+ * What is the largest prime factor of the number 600851475143 ?
+ */
 
 /**
  * find the greatest common divisor amongst `x` and `y`.
  * each of the arguments must be a natural number.
  */
 function gcd(x, y) {
-  return y ? gcd(y, x % y) : x;
+  return y ? gcd(y, x % y) : x
 }
 
 /**
  * pseudorandom number generator (known as Linear Congruential Generator).
  */
 function lcg(c, n, x) {
-  return (x * x + c) % n;
+  return (x * x + c) % n
 }
 
 /**
@@ -25,14 +25,14 @@ function lcg(c, n, x) {
  */
 function trialDivision(n) {
   if (n > 2) {
-    var limit = Math.sqrt(n) + 1;
-    for (var i = 2; i < limit; i++) {
+    const limit = n ** 0.5
+    for (let i = 2; i <= limit; i++) {
       if (n % i === 0) {
-        return i;
+        return i
       }
     }
   }
-  return -1;
+  return -1
 }
 
 /**
@@ -41,32 +41,33 @@ function trialDivision(n) {
  * warning: less reliable for small numbers.
  */
 function pollardsRho(n) {
-  var x = 2;
-  var y = 2;
-  var c = 1;
-  var d = 1;
+  let x = 2
+  let y = 2
+  let c = 1
+  let d = 1
   // partial application
-  var f = lcg.bind(null, c, n);
+  let f = lcg.bind(null, c, n)
   while (d === 1 && n) {
-    x = f(x);
-    y = f(f(y));
-    d = gcd(Math.abs(x - y), n);
+    x = f(x)
+    y = f(f(y))
+    d = gcd(Math.abs(x - y), n)
     if (d === n) {
-      return -1;
+      return -1
     }
   }
-  return d;
+  return d
 }
 
 /**
  * a wrapper function to memoize a expensive function.
  * to change the context for function call, bind `this` to the context.
  */
-function memoize(func) {
-  var cache = {};
-  return function(/* args ... */) {
-    var args = Array.prototype.slice.call(arguments);
-    return cache[args] ? cache[args] : cache[args] = func.apply(this, args);
+function memoize(func, cache = new Map()) {
+  return (...args) => {
+    if (!cache.has(args)) {
+      cache.set(args, func(...args))
+    }
+    return cache.get(args)
   }
 }
 
@@ -76,16 +77,14 @@ function memoize(func) {
  */
 function factor(n) {
   // fallbacks to trial division for a small integer
-  var divisor = (n < 100) ? trialDivision(n) : pollardsRho(n);
+  const divisor = (n < 100) ? trialDivision(n) : pollardsRho(n)
   if (divisor === -1) {
-    return [n];
+    return [n]
   }
-  return factor(n / divisor).concat(factor(divisor));
+  return factor(n / divisor).concat(factor(divisor))
 }
 // memoize results
-factor = memoize.call(this, factor);
-
+factor = memoize.call(null, factor)
 
 // main entry point
-console.log(Math.max.apply(null, factor(600851475143)));
-
+console.log(Math.max(...factor(600851475143)))

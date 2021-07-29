@@ -33,22 +33,23 @@
 
 function isPrime(x) {
   if (x == 2) {
-    return true;
+    return true
   } else if (x < 2 || x % 2 == 0) {
-    return false;
+    return false
   }
-  for (var d = 2; d <= Math.sqrt(x); d++) {
+  const limit = x ** 0.5
+  for (let d = 2; d <= limit; d++) {
     if (x % d == 0) {
-      return false;
+      return false
     }
   }
-  return true;
+  return true
 }
 
-var product = 1;
-for (var i = 0; product * i < 1000000; i++) {
+let product = 1
+for (let i = 0; product * i < 1000000; i++) {
   if (isPrime(i)) {
-    product *= i;
+    product *= i
   }
 }
-console.log(product);
+console.log(product)

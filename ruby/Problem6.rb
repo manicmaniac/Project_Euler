@@ -12,8 +12,8 @@
 # Find the difference between the sum of the squares of the first one hundred
 # natural numbers and the square of the sum.
 
-square_of_sum = (1..100).inject(:+) ** 2
-sum_of_square = (1..100).map{|x| x ** 2}.inject(:+)
+def square(x)
+  x * x
+end
 
-puts square_of_sum - sum_of_square
-
+p square((1..100).sum) - (1..100).sum(&method(:square))

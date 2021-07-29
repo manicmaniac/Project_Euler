@@ -5,5 +5,4 @@
 # 
 # Find the sum of the digits in the number 100!
 
-puts 100.downto(1).inject(:*).to_s.split('').collect(&:to_i).inject(:+)
-
+p (1..100).inject(:*).digits.sum

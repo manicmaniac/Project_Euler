@@ -3,5 +3,4 @@
 
 require 'prime'
 
-puts Prime.instance.each(2e6).inject :+
-
+p Prime.each(2e6).sum

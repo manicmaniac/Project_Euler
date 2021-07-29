@@ -4,5 +4,7 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
-console.log((function Y(n) { return n && !(n % 3 * n % 5) * n + Y(--n); }(999)));
-
+const answer = Array
+  .from({ length: 1000 }, (_, i) => i % 3 * i % 5 ? 0 : i)
+  .reduce((accumulator, x) => accumulator + x)
+console.log(answer)

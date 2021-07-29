@@ -3,5 +3,4 @@
 
 require 'prime'
 
-puts Prime.prime_division(600851475143).last.first
-
+p 600851475143.prime_division.to_h.keys.max

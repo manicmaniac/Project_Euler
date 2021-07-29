@@ -9,9 +9,4 @@
 # 
 # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
-result = (2..9 ** 5 * 6).select do |i|
-    i == i.to_s.split('').map(&:to_i).collect{|x| x ** 5}.inject(:+)
-end
-
-puts result.inject :+
-
+p (2..9 ** 5 * 6).select { |i| i == i.digits.sum { |x| x ** 5 } }.sum

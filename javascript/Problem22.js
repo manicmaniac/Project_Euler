@@ -12,27 +12,13 @@ obtain a score of 938 × 53 = 49714.
 What is the total of all the name scores in the file?
 */
 
-var fs = require('fs');
+const { readFileSync } = require('fs')
 
-var FILE = '../resources/names.txt';
+function nameScore(name) {
+  return Array.from(name, c => c.charCodeAt() - 64).reduce((x, y) => x + y)
+}
 
-var nameScore = function(name) {
-  var res = 0, i;
-  for(i=0; i<name.length; i++) {
-    res += name[i].charCodeAt() - 64;
-  }
-  return res;
-};
-
-fs.readFile(FILE, 'ascii', function(err, data) {
-  var nameList = data.replace(/"/g, '').split(',').sort();
-  var res = 0;
-  nameList.reduce(function(x, y, i) {
-    if (i === 1) {
-      res = nameScore(x);
-    }
-    res += nameScore(y) * (i + 1);
-  });
-  console.log(res);
-});
-
+const data = readFileSync('../resources/names.txt', 'ascii')
+const names = data.replace(/"/g, '').split(',').sort()
+const answer = names.reduce((x, y, i) => (x + nameScore(y) * (i + 1)), 1)
+console.log(answer)

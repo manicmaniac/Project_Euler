@@ -5,5 +5,4 @@
 
 require 'prime'
 
-puts Prime.instance.take(10001).last
-
+p Prime.take(10001).last

@@ -20,11 +20,8 @@
 require 'csv'
 require 'matrix'
 
-answer = CSV.foreach('../resources/triangles.txt').count do |row|
-  row = row.map(&:to_i)
-  v1 = Vector[0, row[0], row[1]]
-  v2 = Vector[0, row[2], row[3]]
-  v3 = Vector[0, row[4], row[5]]
+answer = CSV.read('../resources/triangles.txt', converters: :numeric).count do |row|
+  v1, v2, v3 = row.each_slice(2).map { |a, b| Vector[0, a, b] }
   a = v1.cross(v2).first.positive?
   b = v2.cross(v3).first.positive?
   c = v3.cross(v1).first.positive?

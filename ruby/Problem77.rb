@@ -16,12 +16,13 @@ def count_partitions_by_primes(amount)
   cache = {0 => 1}
   cache.default = 0
   Prime.each(amount) do |prime|
-    prime.upto(amount) do |i|
+    (prime..amount).each do |i|
       cache[i] += cache[i - prime]
     end
   end
   cache[amount]
 end
 
-puts (1..Float::INFINITY).lazy
-  .find {|x| count_partitions_by_primes(x) > 5000}
+p (1..Float::INFINITY)
+  .lazy
+  .detect {|x| count_partitions_by_primes(x) > 5000}

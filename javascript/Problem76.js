@@ -13,15 +13,14 @@
  */
 
 function npartitions(n) {
-  var cache = new Uint32Array(n + 1);
-  cache[0] = 1;
-  for (var i = 1; i <= n; i++) {
-    for (var j = i; j <= n; j++) {
-      cache[j] += cache[j - i];
+  const cache = new Uint32Array(n + 1)
+  cache[0] = 1
+  for (let i = 1; i <= n; i++) {
+    for (let j = i; j <= n; j++) {
+      cache[j] += cache[j - i]
     }
   }
-  return cache[n];
+  return cache[n]
 }
 
-console.log(npartitions(100));
-
+console.log(npartitions(100))

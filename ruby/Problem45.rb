@@ -13,17 +13,15 @@ def pentagonal?(x)
   (((24 * x + 1) ** 0.5 + 1) / 6) % 1 == 0
 end
 
-def generate_hexagonals
+hexagonals = Enumerator.new do |yielder|
   i = 0
   loop do
-    yield i * (i * 2 - 1)
+    yielder << i * (i * 2 - 1)
     i += 1
   end
 end
 
-generate_hexagonals do |x|
-  if pentagonal?(x) && x > 40755
-    puts(x)
-    break
-  end
-end
+p hexagonals
+  .lazy
+  .drop_while { |x| x <= 40755 }
+  .detect(&method(:pentagonal?))

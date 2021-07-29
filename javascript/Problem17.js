@@ -1,20 +1,18 @@
 /*
-If the numbers 1 to 5 are written out in words: one, two, three, four, five,
-then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+ * If the numbers 1 to 5 are written out in words: one, two, three, four, five,
+ * then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+ * 
+ * If all the numbers from 1 to 1000 (one thousand) inclusive were written out in
+ * words, how many letters would be used?
+ * 
+ * 
+ * NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and
+ * forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20
+ * letters. The use of "and" when writing out numbers is in compliance with
+ * British usage.
+ */
 
-If all the numbers from 1 to 1000 (one thousand) inclusive were written out in
-words, how many letters would be used?
-
-
-NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and
-forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20
-letters. The use of "and" when writing out numbers is in compliance with
-British usage.
-*/
-
-var _ = require('underscore');
-
-var dic = {
+const dic = {
   0: '',
   1: 'one',
   2: 'two',
@@ -45,30 +43,30 @@ var dic = {
   90: 'ninety',
   100: 'handred',
   1000: 'onethousand'
-};
+}
 
-numToEn = function(n) {
+function numToEn(n) {
   return (function loop(n, res) {
     if(n === 0) {
-      return res;
+      return res
     }
     if(n === 1000) {
-      return dic[n];
+      return dic[n]
     }
     if(n % 100 === 0) {
-      return res + dic[n/100] + dic[100];
+      return res + dic[n/100] + dic[100]
     }
     if(n <= 20) {
-      return res + dic[n];
+      return res + dic[n]
     }
     if(n > 20 && n < 100) {
-      return loop(n%10, res + dic[n-n%10]);
+      return loop(n%10, res + dic[n-n%10])
     }
     if(n >= 100) {
-      return loop(n%100, res + dic[Math.floor(n/100)] + dic[100] + 'and');
+      return loop(n%100, res + dic[Math.floor(n/100)] + dic[100] + 'and')
     }
-  }(n, ''));
-};
+  }(n, ''))
+}
 
-console.log(_.range(1, 1e3 + 1).map(numToEn).join('').length);
-
+const answer = Array.from({ length: 1000 }, (_, i) => i + 1).map(numToEn).join('').length
+console.log(answer)

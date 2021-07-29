@@ -6,18 +6,16 @@
 # 1Â£1 + 150p + 220p + 15p + 12p + 31p
 # How many different ways can Â£2 be made using any number of coins?
 
-coins = 200, 100, 50, 20, 10, 5, 2, 1
-
 def currency(amount, coins)
-    cache = {0 => 1}
-    cache.default = 0
-    coins.each do |coin|
-        coin.upto(amount) do |i|
-            cache[i] = cache[i] + cache[i - coin]
-        end
+  cache = {0 => 1}
+  cache.default = 0
+  coins.each do |coin|
+    (coin..amount).each do |i|
+      cache[i] = cache[i] + cache[i - coin]
     end
-    cache[amount]
+  end
+  cache[amount]
 end
 
-puts currency(200, coins)
-
+coins = [200, 100, 50, 20, 10, 5, 2, 1]
+p currency(200, coins)

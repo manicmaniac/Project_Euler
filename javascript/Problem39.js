@@ -1,30 +1,32 @@
 /*
-If p is the perimeter of a right angle triangle with integral length sides, {a,
-b,c}, there are exactly three solutions for p = 120.
+ * If p is the perimeter of a right angle triangle with integral length sides, {a,
+ * b,c}, there are exactly three solutions for p = 120.
+ * 
+ * {20,48,52}, {24,45,51}, {30,40,50}
+ * 
+ * For which value of p ≤ 1000, is the number of solutions maximised?
+ */
 
-{20,48,52}, {24,45,51}, {30,40,50}
-
-For which value of p ≤ 1000, is the number of solutions maximised?
-*/
-
-var _ = require('underscore');
-
-var findPythagorean = function(p) {
-	var res = [], a, b, c;
-	_.range(1, p + 1).forEach(function(a) {
-		_.range(1, a + 1).forEach(function(b) {
-			c = Math.sqrt(a * a + b * b);
+function countPythagoreans(p) {
+  let count = 0
+  for (let a = 1; a <= p; a++) {
+    for (let b = 1; b <= a; b++) {
+			const c = Math.hypot(a, b)
 			if (a + b + c === p) {
-				res.push([a, b, c]);
+        count++
 			}
-		});
-	});
-	return res;
-};
+		}
+	}
+	return count
+}
 
-console.log((function() {
-	return _(_.range(12, 1001, 12)).max(function(x) {
-		return findPythagorean(x).length;
-	});
-}()));
+const max = { i: 0, count: 0 }
+for (let i = 12; i <= 1000; i += 12) {
+  const count = countPythagoreans(i)
+  if (max.count < count) {
+    max.count = count
+    max.i = i
+  }
+}
 
+console.log(max.i)

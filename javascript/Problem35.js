@@ -1,70 +1,58 @@
 /*
-The number, 197, is called a circular prime because all rotations of the
-digits: 197, 971, and 719, are themselves prime.
-
-There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71,
-73, 79, and 97.
-
-How many circular primes are there below one million?
-*/
+ * The number, 197, is called a circular prime because all rotations of the
+ * digits: 197, 971, and 719, are themselves prime.
+ * 
+ * There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71,
+ * 73, 79, and 97.
+ * 
+ * How many circular primes are there below one million?
+ */
 
 function sieve(limit) {
   if (limit < 2) {
-    return [];
+    return []
   }
 
-  var UNKNOWN  = 0,
-      NONPRIME = 1;
+  const UNKNOWN  = 0
+  const NONPRIME = 1
 
-  var search = new Uint8Array(limit);
+  const search = new Uint8Array(limit)
 
-  search[0] = NONPRIME;
-  search[1] = NONPRIME;
+  search[0] = NONPRIME
+  search[1] = NONPRIME
 
-  var sqrt_limit = Math.sqrt(limit);
-  for (var current=2; current<=sqrt_limit; current++) {
-    for (var i=current*2; i<limit; i+=current) {
-      search[i] = NONPRIME;
+  const sqrtLimit = limit ** 0.5
+  for (let current = 2; current <= sqrtLimit; current++) {
+    for (let i = current * 2; i < limit; i += current) {
+      search[i] = NONPRIME
     }
   }
 
-  var res = [];
-  for (i=0; i<limit; i++) {
+  const result = []
+  for (let i = 0; i < limit; i++) {
     if (search[i] === UNKNOWN) {
-      res.push(i);
+      result.push(i)
     }
   }
-  return res;
+  return result
 }
 
-function digits(n) {
-  return n.toString().split('').map(Number);
+function digits(x) {
+  return Array.from(String(x), Number)
 }
 
 function circular(n) {
-  var res = [];
-  var d = digits(n);
-  for (var i = 0; i < d.length; i++) {
-    res.push(Number(d.join('')))
-    d.push(d.shift());
+  const result = []
+  const d = digits(n)
+  for (let i = 0; i < d.length; i++) {
+    result.push(Number(d.join('')))
+    d.push(d.shift())
   }
-  return res;
+  return result
 }
 
-function isOdd(n) {
-  return n & 1;
-}
-
-var candidates = sieve(1e6).filter(function (x) {
-  if (x == 2) {
-    return true;
-  }
-  return digits(x).every(isOdd);
-});
-var answer = candidates.filter(function(x) {
-  return circular(x).every(function(y) {
-    return candidates.indexOf(y) > -1;
-  });
-}).length;
-console.log(answer);
-
+const candidates = sieve(1e6).filter(x => x === 2 || digits(x).every(x => x & 1))
+const answer = candidates
+  .filter(x => circular(x).every(y => candidates.includes(y)))
+  .length
+console.log(answer)

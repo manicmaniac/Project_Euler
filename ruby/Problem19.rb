@@ -16,4 +16,4 @@
 
 require 'date'
 
-puts (1901..2000).to_a.product((1..12).to_a).select { |y, m| Date.new(y, m).sunday? }.count
+puts (1901..2000).to_a.product((1..12).to_a).count { |y, m| Date.new(y, m).sunday? }

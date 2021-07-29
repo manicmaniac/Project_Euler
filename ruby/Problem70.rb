@@ -13,7 +13,7 @@
 
 require 'prime'
 
-limit = Integer.sqrt(1e7) * 2
+limit = 1e7 ** 0.5 * 2
 answer = Prime.each(limit).flat_map do |i|
   Prime.each(i).map do |j|
     n = i * j
@@ -24,4 +24,4 @@ answer = Prime.each(limit).flat_map do |i|
   end.compact
 end.min_by(&:last).first
 
-puts(answer)
+p answer

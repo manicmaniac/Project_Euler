@@ -4,13 +4,12 @@
 # 
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
-def factorial(n)
-    n.downto(1).inject(:*) or 0
+def factorial(x)
+  (1..x).inject(:*) || 1
 end
 
-def curious?(n)
-    n > 2 and n == n.to_s.split('').collect(&:to_i).collect(Proc.new factorial).inject(:+)
+def factorion?(n)
+  n == n.digits.map(&method(:factorial)).sum
 end
 
-curious? 3
-
+p (3..(factorial(9) * 7)).select(&method(:factorion?)).sum

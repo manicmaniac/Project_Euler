@@ -19,18 +19,25 @@ Find the value of d < 1000 for which ^1/[d] contains the longest recurring
 cycle in its decimal fraction part.
 */
 
-var Bigint = require('bigint');
-var _ = require('underscore');
+function felm(d) {
+  if (d % 2) {
+    d = BigInt(d)
+    for (let i = 1n; i <= d; i++) {
+      if (10n ** i % d === 1n) {
+        return Number(i)
+      }
+    }
+  }
+	return 0
+}
 
-var felm = function(d) {
-	var i;
-	for (i=1; i<=d; i++) {
-		if (Bigint.pow(10, i).mod(d).eq(1)) {
-			return i;
-		}
-	}
-	return 0;
-};
-
-console.log(_(_.range(1, 1e3)).max(felm));
-
+const numbers = Array.from(Array(999), (_, i) => i + 1)
+const max = { x: 0, i: 0 }
+for (let i = 1; i < 1000; i++) {
+  const x = felm(i)
+  if (max.x < x) {
+    max.x = x
+    max.i = i
+  }
+}
+console.log(max.i)

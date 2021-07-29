@@ -29,4 +29,4 @@ Prime.each(limit) do |i|
   end
 end
 
-puts totients.reduce(:+)
+p totients.sum

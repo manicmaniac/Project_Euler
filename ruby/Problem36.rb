@@ -4,11 +4,17 @@
 # 
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
-result = (0..1000000).select do |x|
-    s = x.to_s
-    b = x.to_s(base=2)
-    s == s.reverse and b == b.reverse
+def parindromic?(x)
+  s = x.to_s
+  s == s.reverse
 end
 
-puts result.inject :+
+def binary_parindromic?(x)
+  s = x.to_s(2)
+  s == s.reverse
+end
 
+p (0..1000000)
+  .select(&method(:parindromic?))
+  .select(&method(:binary_parindromic?))
+  .sum

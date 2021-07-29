@@ -12,16 +12,15 @@
  */
 
 function currency(amount, coins) {
-  var cache = new Uint32Array(amount + 1);
-  cache[0] = 1;
-  coins.forEach(function(coin) {
-    for (var i = coin; i <= amount; i++) {
-      cache[i] += cache[i - coin];
+  const cache = new Uint32Array(amount + 1)
+  cache[0] = 1
+  for (const coin of coins) {
+    for (let i = coin; i <= amount; i++) {
+      cache[i] += cache[i - coin]
     }
-  });
-  return cache[amount];
+  }
+  return cache[amount]
 }
 
-var coins = [200, 100, 50, 20, 10, 5, 2, 1];
-console.log(currency(200, coins));
-
+const coins = [200, 100, 50, 20, 10, 5, 2, 1]
+console.log(currency(200, coins))

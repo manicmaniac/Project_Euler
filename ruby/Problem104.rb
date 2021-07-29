@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # The Fibonacci sequence is defined by the recurrence relation:
 #
 #     F[n] = F[n−1] + F[n−2], where F[1] = 1 and F[2] = 1.
@@ -21,26 +19,20 @@ def upper_fib(n)
   (10 ** l * 1e8).round
 end
 
-def lower_fibs
+lower_fibs = Enumerator.new do |yielder|
   i, j = 0, 1
-  0.upto(Float::INFINITY) do |n|
-    i, j = j, (i + j) % 1_000_000_000
-    yield n, i
+  loop do
+    i, j = j, (i + j) % 1e9.to_i
+    yielder << i
   end
 end
 
-def is_pandigital(x)
-  return false if x % 9 > 0
-  flags = 0b0000000001
-  until x.zero?
-    x, d = x.divmod(10)
-    flags |= 1 << d
-  end
-  flags == 0b1111111111
+def pandigital?(x)
+  x % 9 == 0 && (x.digits << 0).uniq.size == 10
 end
 
-result = lower_fibs do |i, lower_fib|
-  break i + 1 if is_pandigital(lower_fib) && is_pandigital(upper_fib(i))
-end
-
-puts(result)
+p lower_fibs
+  .each_with_index
+  .find { |lower_fib, i| pandigital?(lower_fib) && pandigital?(upper_fib(i)) }
+  .last
+  .succ

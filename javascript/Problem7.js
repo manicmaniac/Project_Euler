@@ -4,30 +4,29 @@ By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
 What is the 10 001st prime number?
 */
 
-var isPrime = function(n) {
+function isPrime(n) {
   if (n === 2) {
-    return true;
+    return true
   }
   if (n < 2 || n % 2 === 0) {
-    return false;
+    return false
   }
-  var i;
-  for (i=3; i<=Math.sqrt(n); i+=2) {
+  const limit = n ** 0.5
+  for (let i = 3; i <= limit; i += 2) {
     if (n % i === 0) {
-      return false;
+      return false
     }
   }
-  return true;
-};
+  return true
+}
 
-console.log((function() {
-  var count = 0, i = 0;
-  while (count < 1e4 + 1) {
-    i ++;
-    if (isPrime(i)) {
-      count ++;
-    }
+let i = 2
+for (let count = 0;; i++) {
+  if (isPrime(i)) {
+    count++
   }
-  return i;
-}()));
-
+  if (count > 10000) {
+    break
+  }
+}
+console.log(i)
