@@ -3,4 +3,4 @@
 # 
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-[range(1000) | select(. % 3 * . % 5 == 0)] | add
+[3, 5] | map(range(0; 1000; .)) | unique | add

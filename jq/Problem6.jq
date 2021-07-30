@@ -12,4 +12,4 @@
 # Find the difference between the sum of the squares of the first one hundred
 # natural numbers and the square of the sum.
 
-[range(101)] as $xs | ($xs | add | . * .) - ($xs | map(. * .) | add)
+[[range(101)] | (add | . * .), (map(. * .) | add)] | first - last
