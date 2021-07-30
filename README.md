@@ -2,4 +2,4 @@
 
 ---
 ## What is this?
-Answers of mathmatical problems in [Project Euler](http://projecteuler.net).
+Answers of mathematical problems in [Project Euler](http://projecteuler.net).
